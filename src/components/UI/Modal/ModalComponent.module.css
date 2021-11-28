@@ -1,0 +1,30 @@
+.gpa__modal_wrapper{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    border-radius: 4px;
+    box-shadow: 4;
+    padding: 40px 50px 10px 30px;
+}
+.gpa__modal_action_wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.gpa__modal_close_button_wrapper{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.gpa__call_help_center_modal_btn{
+    text-decoration: none;
+}
+@media screen and (max-width: 768px) {
+    .gpa__modal_wrapper{
+        width: 90%;
+        padding: 30px 30px 10px 20px;
+    }
+}
