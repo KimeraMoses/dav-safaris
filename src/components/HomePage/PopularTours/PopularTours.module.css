@@ -1,0 +1,31 @@
+
+.dav__popular_tours_wrapper{
+    padding: 40px 30px;
+    min-height: 500px;
+    /* background: url('../../../assets/dave-safaris-Home-Uganda.jpg') center center no-repeat; */
+    margin: 30px 0;
+    background-color: #fafafa;
+    /* position: relative;
+    left: -89.5px;
+    box-sizing: border-box;
+    width: 1349px;
+    padding-left: 89.5px;
+    padding-right: 89.5px; */
+}
+
+.dav__popular_tours_row_wrapper{
+    padding: 20px 50px;
+}
+
+@media screen and (max-width: 689px){
+    .dav__popular_tours_wrapper{
+        padding:30px 10px;
+        margin: 0;
+    }
+    .dav__popular_tours_row_wrapper{
+        padding: 20px 10px;
+    }
+    .dav__popular_tour_card_wrapper{
+        margin: 30px 0;
+    }
+}

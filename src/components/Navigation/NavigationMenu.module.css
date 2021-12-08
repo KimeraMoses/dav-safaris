@@ -19,7 +19,8 @@
   position: relative;
 }
 
-.nav_link.active {
+.nav_link.active,
+.nav_link:hover {
   color: var(--dav__secondary_color);
 }
 

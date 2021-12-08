@@ -15,6 +15,17 @@ import BackToTop from "./BackToTop/BackToTop";
 import AppBar from "./AppBar/AppBar";
 import Theme from "./UI/Theme/Theme";
 import "./App.css";
+import Footer from "./Footer/Footer";
+import LoginForm from "./Membership/LoginForm/LoginForm";
+import RegisterForm from "./Membership/RegisterForm/RegisterForm";
+import ResetPassword from "./Membership/PasswordReset/PasswordReset";
+import ChangePassword from "./Membership/PasswordReset/ChangePassword";
+import Uganda from "./CountryTours/Uganda";
+import Kenya from "./CountryTours/Kenya";
+import Rwanda from "./CountryTours/Rwanda";
+import Tanzania from "./CountryTours/Tanzania";
+import Contact from "./CountryTours/Contact";
+import SingleTour from "./Tours/SingleTour/SingleTour";
 
 
 const App = (props) => {
@@ -29,9 +40,19 @@ const App = (props) => {
             <AppBar />
             <Routes>
               <Route path="/" exact element={<Home />} />
-
+              <Route path="/login" exact element={<LoginForm />} />
+              <Route path="/register" exact element={<RegisterForm/>}/>
+              <Route path="/password-reset" exact element={<ResetPassword/>}/>
+              <Route path="/change-password" exact element={<ChangePassword/>}/>
+              <Route path="/uganda-safaris" exact element={<Uganda/>}/>
+              <Route path="/kenya-safaris" exact element={<Kenya/>}/>
+              <Route path="/rwanda-safaris" exact element={<Rwanda/>}/>
+              <Route path="/tanzania-safaris" exact element={<Tanzania/>}/>
+              <Route path="/contact-us" exact element={<Contact/>}/>
+              <Route path="/tours/:countryName/:tourTitle" exact element={<SingleTour/>}/>
             </Routes>
             <BackToTop />
+            <Footer/>
           </Paper>
       </Router>
      </Theme>

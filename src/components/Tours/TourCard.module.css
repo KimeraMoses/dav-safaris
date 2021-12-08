@@ -1,0 +1,130 @@
+.tour_card_wrapper {
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 9%);
+}
+
+.tour_card_header {
+  position: relative;
+}
+.tour_card_header img {
+  width: 100%;
+  max-height: 220px;
+  height: 220px;
+}
+.tour_card_header a:hover {
+  color: #555;
+}
+.tour__discount {
+  position: absolute;
+  top: 20px;
+  left: -5px;
+  display: inline-block;
+  background: #f15d30;
+  padding: 4px 5px 4px 15px;
+  border-radius: 0 20px 20px 0px;
+  color: #fff;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.tour__discount:after {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 5px 5px;
+  border-color: transparent transparent #c7390d transparent;
+}
+.tour_card_wrapper:hover .tour__discount{
+    padding-left: 24px;
+
+}
+.tour_card_body {
+  padding: 14px;
+}
+.tour_card_body h4 {
+  margin-top: 0;
+  font-size: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.tour_card_body h4 a {
+  color: #333;
+}
+.tour_card_body h4 a:hover {
+  color: var(--dav__primary_color);
+}
+
+.tour__date {
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 10px;
+  display: block;
+  text-align: left;
+}
+.tour__description p {
+  margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.tour__footer {
+  height: 40px;
+  /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+}
+.tour_ratings {
+  float: left;
+  width: 45%;
+  padding: 5px 10px 0 5px;
+  position: relative;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+.tour__read_more a {
+  float: right;
+  color: #fff;
+  width: 55%;
+  text-align: center;
+  line-height: 41px;
+  padding: 0 0 0 20px;
+  background: #26bdf7;
+  position: relative;
+  font-weight: 700;
+  font-size: 12px;
+  margin-top: 0;
+  margin-right: -1px;
+  margin-bottom: -1px;
+  border-radius: 0;
+  text-transform: uppercase;
+  background-color: var(--dav__primary_color);
+}
+.tour__read_more a:hover {
+  background-color: var(--dav__secondary_color);
+  color: #fff;
+}
+.tour__read_more a::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-left: 20px solid #fff;
+  border-bottom: 20px solid transparent;
+}

@@ -1,0 +1,19 @@
+.dav__country_tour_section_wrapper{
+    padding: 30px 40px;
+}
+.dav__country_tour_section_row{
+    padding:20px 30px
+
+}
+
+@media screen and (max-width: 689px){
+    .dav__country_tour_section_wrapper{
+        padding:30px 10px;
+    }
+    .dav__country_tour_section_row{
+        padding: 20px 10px;
+    }
+    .dav__country_tour_card_wrapper{
+        margin: 15px 0;
+    }
+}
