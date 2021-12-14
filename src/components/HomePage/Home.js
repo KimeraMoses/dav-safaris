@@ -8,6 +8,7 @@ import Benefits from "./Benefits";
 import AboutUs from "./AboutUs";
 import PopularTours from "./PopularTours/PopularTours";
 import CountyToursSection from "./CountryTours/CountyToursSection";
+import SectionTitle from "./SectionTitle/SectionTitle";
 
 const Home = () => {
   return (
@@ -16,6 +17,10 @@ const Home = () => {
       <HeroBooking/>
       <AboutUs/>
       <Benefits/>
+      <SectionTitle
+        subTitle="Take a look at our"
+        Title ="Most popular tours"
+    />
       <PopularTours/>
       <CountyToursSection/>
     </Wrapper>

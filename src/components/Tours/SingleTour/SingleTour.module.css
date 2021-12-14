@@ -21,6 +21,7 @@
   margin: 0 auto;
   color: #fff;
   text-shadow: 0 0 20px #000;
+  font-weight: 600;
 }
 
 /* ====JUMP TO NAVIGATION==== */
@@ -118,19 +119,20 @@
   font-weight: 700;
 }
 
-@media screen and (min-width: 959px) {
-  .dav__single_tour_highlights_wrapper {
-    padding: 20px 100px;
-  }
-}
 
 @media screen and (max-width: 637px) {
+  /* ====SINGLE TOUR HERO==== */
+
   .dav__single_tour_hero {
     height: 300px;
   }
+
+  /* ====JUMP TO NAVIGATION==== */
   .dav__single_tour_jump_to_navigation {
     padding: 20px;
   }
+
+  /* ====TOUR HIGHLIGHTS==== */
   .dav__single_tour_highlights_wrapper {
     flex-direction: column;
   }
@@ -143,8 +145,14 @@
   .dav__tour_points_header h2 {
     margin: 0 0 1em;
   }
-  .dav__tour_price_includes{
-      background-color: #fff;
-      padding: 1px 10px;
+  .dav__tour_price_includes {
+    background-color: #fff;
+    padding: 1px 10px;
+  }
+}
+
+@media screen and (min-width: 959px) {
+  .dav__single_tour_highlights_wrapper {
+    padding: 20px 100px;
   }
 }

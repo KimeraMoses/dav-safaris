@@ -1,0 +1,48 @@
+.dav__country_header_section {
+  background-color: #edf2f2;
+  padding: 40px;
+  text-align: center;
+}
+.dav__section__hdr h2 {
+  color: #343434;
+  font-family: "Merriweather", serif;
+  font-style: italic;
+  line-height: 1.4;
+}
+.dav__section__hdr p {
+  margin-bottom: 20px;
+}
+.dav__country_safaris_category{
+    display: flex;
+    justify-content: center;
+}
+.dav__category_card {
+  position: relative;
+  display: block;
+  background: #fff;
+  padding: 8px;
+  border-radius: 15px;
+  transition: box-shadow 0.2s ease-in-out;
+  width: 200px;
+  margin: 10px;
+
+}
+.dav__category_card img {
+  width: 100%;
+  border-radius: 15px;
+  height: 130px;
+}
+.dav__category_card h5 {
+  font-size: 16px;
+  color: #323637;
+  margin: 0;
+  padding: 16px 16px 8px;
+}
+
+.dav__category_card:hover{
+    box-shadow: 0 4px 8px rgb(3 54 63 / 16%), 0 2px 4px rgb(3 54 63 / 8%),
+    0 1px 2px rgb(3 54 63 / 16%), 0 -1px 2px rgb(3 54 63 / 4%);
+}
+.dav__category_card:hover h5{
+    color: var(--dav__primary_color);
+}

@@ -11,10 +11,6 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 const PopularTours = () => {
   return (
     <Container fluid className={classes.dav__popular_tours_wrapper}>
-    <SectionTitle
-        subTitle="Take a look at our"
-        Title ="Most popular tours"
-    />
       <Row className={classes.dav__popular_tours_row_wrapper}>
         <Col lg={3} sm={12} className={classes.dav__popular_tour_card_wrapper}>
           <TourCard

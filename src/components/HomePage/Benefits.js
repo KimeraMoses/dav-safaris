@@ -9,7 +9,7 @@ import {
 import { Button } from "@material-ui/core";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Image4 from "../../assets/Image7.jpg";
+import Image4 from "../../assets/image-1.jpg";
 
 import "./Benefits.css";
 

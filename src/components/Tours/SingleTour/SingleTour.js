@@ -7,6 +7,7 @@ import { Button } from "@material-ui/core";
 const SingleTour = () => {
   const { tourTitle } = useParams();
   useEffect(()=>{window.scrollTo(0, 0)},[])
+
   return (
     <div className={classes.dav__single_tour_page_wrapper}>
       <div
@@ -23,7 +24,7 @@ const SingleTour = () => {
         <ul className={classes.dav__single_tour_jump_to_links_wrapper}>
           <li>
             <span className={classes.dav__single_tour_jump_label}>
-              Jump to:{" "}
+              Jump to:
             </span>
           </li>
           <li>

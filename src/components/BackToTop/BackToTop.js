@@ -37,7 +37,7 @@ const ScrollTop=(props)=> {
       <Box
         onClick={handleClick}
         role="Scroll back to top"
-        sx={{ position: 'fixed', bottom: 16, right: 16, zIndex:30 }}
+        sx={{ position: 'fixed', bottom: 16, left: 16, zIndex:30 }}
       >
         {children}
       </Box>

@@ -1,0 +1,51 @@
+.dav__country_tours_overall_wrapper{
+    padding: 30px 100px!important;
+}
+
+.dav__contact_country_expert{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.dav__contact_country_expert h2{
+    color: #343434;
+    font-family: "Merriweather", serif;
+    font-style: italic;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.dav__contact_country_expert img {
+    flex-shrink: 0;
+    width: 70px;
+    margin-right: 16px;
+    padding: 0;
+    border-radius: 50%;
+    background-size: 40px;
+    height: 70px;
+}
+.specialist__text{
+    display: flex;
+}
+.dav__about_country_section p{
+    text-align: justify;
+}
+.dav__contact_country_expert_card{
+    padding: 20px;
+    
+}
+
+.dav__contact_country_expert_contact{
+    text-align: center;
+    list-style-type: none;
+}
+.dav__contact_country_expert_contact li{
+    padding: 10px 0;
+}
+
+@media screen and (max-width: 689px) {
+    .dav__country_tours_overall_wrapper{
+        padding: 30px!important;
+    }
+}

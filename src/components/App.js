@@ -20,12 +20,10 @@ import LoginForm from "./Membership/LoginForm/LoginForm";
 import RegisterForm from "./Membership/RegisterForm/RegisterForm";
 import ResetPassword from "./Membership/PasswordReset/PasswordReset";
 import ChangePassword from "./Membership/PasswordReset/ChangePassword";
-import Uganda from "./CountryTours/Uganda";
-import Kenya from "./CountryTours/Kenya";
-import Rwanda from "./CountryTours/Rwanda";
-import Tanzania from "./CountryTours/Tanzania";
 import Contact from "./CountryTours/Contact";
 import SingleTour from "./Tours/SingleTour/SingleTour";
+import CountrySingle from "./CountryTours/CountrySingle";
+import SendMessage from "./SendMessage/SendMessage";
 
 
 const App = (props) => {
@@ -44,13 +42,11 @@ const App = (props) => {
               <Route path="/register" exact element={<RegisterForm/>}/>
               <Route path="/password-reset" exact element={<ResetPassword/>}/>
               <Route path="/change-password" exact element={<ChangePassword/>}/>
-              <Route path="/uganda-safaris" exact element={<Uganda/>}/>
-              <Route path="/kenya-safaris" exact element={<Kenya/>}/>
-              <Route path="/rwanda-safaris" exact element={<Rwanda/>}/>
-              <Route path="/tanzania-safaris" exact element={<Tanzania/>}/>
               <Route path="/contact-us" exact element={<Contact/>}/>
+              <Route path="/tours/:countryName" exact element={<CountrySingle/>}/>
               <Route path="/tours/:countryName/:tourTitle" exact element={<SingleTour/>}/>
             </Routes>
+            <SendMessage/>
             <BackToTop />
             <Footer/>
           </Paper>
