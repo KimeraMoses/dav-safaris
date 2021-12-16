@@ -65,6 +65,9 @@
     padding: 12px 18px;
     font-size: 20px;
   }
+  .Btn--fullWidth{
+    width: 100%;
+  }
   
   .Btn--large:hover,
   .Btn--medium:hover {

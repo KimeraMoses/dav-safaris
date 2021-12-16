@@ -1,0 +1,71 @@
+/* ====BOOK TOUR==== */
+
+.dav__book_tour_form_wrapper {
+  width: 350px;
+  padding: 0 20px 10px;
+  position: relative;
+  position: sticky;
+  top: 100px;
+}
+.dav__booking_form_field {
+  margin-bottom: 20px !important;
+}
+.dav__booking_form_field_last {
+  margin-bottom: 10px;
+}
+.dav__book_tour_form_wrapper::before,
+.dav__book_tour_form_wrapper::after {
+  position: absolute;
+  top: 0;
+  content: "";
+  display: block;
+  z-index: 1;
+  width: 0;
+  height: 0;
+  border-top: 30px solid var(--dav__primary_color);
+  border-bottom: 30px solid transparent;
+}
+.dav__book_tour_form_wrapper::before {
+  left: 0;
+  border-left: 30px solid var(--dav__primary_color);
+  border-right: 30px solid transparent;
+}
+.dav__book_tour_form_wrapper::after {
+  right: 0;
+  border-right: 30px solid var(--dav__primary_color);
+  border-left: 30px solid transparent;
+}
+
+.dav__book_tour_title {
+  text-align: center;
+  padding: 10px 0;
+  margin-bottom: 16px;
+}
+.dav__book_tour_travel_plans,
+.dav__book_tour_title h2 {
+  font-family: "Merriweather", serif;
+  font-style: italic;
+}
+
+.dav__book_tour_travel_plans {
+  padding: 10px;
+}
+
+.dav__book_tour_account_creation_prompt {
+  text-align: justify;
+  font-size: 12px !important;
+}
+
+
+@media screen and (max-width: 637px) {
+  .dav__book_tour_form_wrapper {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 959px) {
+  .dav__book_tour_form_wrapper {
+    margin-top: -40px;
+    z-index: 9;
+  }
+}

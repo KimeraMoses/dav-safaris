@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const STYLES = ['Btn--primary', 'Btn--outline', 'Btn--test'];
 
-const SIZES = ['Btn--medium', 'Btn--large'];
+const SIZES = ['Btn--medium', 'Btn--large', 'Btn--fullWidth'];
 
 export const Button = ({
   children,
