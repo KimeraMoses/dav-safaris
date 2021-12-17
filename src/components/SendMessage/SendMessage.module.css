@@ -1,0 +1,40 @@
+.dav__message_count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--dav__primary_color);
+  padding: 5px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.dav__message_count::before,
+.dav__message_count::after {
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  content: "";
+  animation: ripple 3s linear infinite;
+  animation-delay: 1s;
+}
+.dav__message_count::after {
+  animation-delay: 2s;
+}
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 0 0.35rem rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 4rem rgba(255, 255, 255, 0);
+  }
+}

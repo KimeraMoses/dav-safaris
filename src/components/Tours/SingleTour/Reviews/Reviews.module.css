@@ -1,0 +1,82 @@
+.dav__tour_reviews{
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 30px 50px;
+    display: flex;
+    align-items: flex-start;
+    
+}
+.dav__tour_reviews_wrapper{
+    padding: 10px 30px;
+    width: 70%;
+    margin: 20px;
+}
+.dav__rate_tour_wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: 20px;
+    text-align: center;
+}
+
+.dav__inquire_about_tour{
+   width: 100%;
+   padding: 30px 20px;
+   margin-bottom: 10px;
+}
+.dav__inquire_about_tour button{
+    margin: 20px;
+}
+.dav__tour_reviews_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+.dav__reviews{
+    margin-top: -120px;
+}
+
+.dav__reviews_inner_wrapper{
+    display: flex;
+    padding: 10px 0;
+}
+.dav__review_count_wrapper{
+    width: 30%;
+}
+.dav__reviews_list{
+    width: 70%;
+    margin-left: 10px;
+}
+.dav__reviews_list h5{
+    font-family: "Merriweather", serif;
+    font-style: italic;
+    color: #343434;
+}
+
+
+@media screen and (max-width: 678px) {
+    .dav__tour_reviews{
+        flex-direction: column;
+        padding: 30px 10px;
+    }
+    
+    .dav__rate_tour_wrapper,
+    .dav__tour_reviews_wrapper{
+        width: 100%;
+        margin: 10px 0;
+        padding: 10px;
+    }
+    .dav__reviews{
+        margin-top: 0px;
+    }
+    .dav__reviews_inner_wrapper{
+        flex-direction: column;
+    }
+    .dav__review_count_wrapper,
+    .dav__reviews_list{
+        width: 100%;
+        margin: 10px 0;
+    }
+}

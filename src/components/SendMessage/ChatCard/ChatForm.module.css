@@ -1,0 +1,17 @@
+.dav__booking_form_field{
+    margin-bottom: 10px;
+}
+.dav__chat_send_btn_wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dav__message_count_wrapper{
+    background-color: var(--dav__primary_color)!important;
+    color: #fff;
+}
+.dav__message_count_wrapper:hover{
+    background-color: var(--dav__secondary_color)!important;
+}

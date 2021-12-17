@@ -12,7 +12,7 @@ const CountryCard = (props) => {
         <img src={countryImage} alt={countryTitle} />
         <div className={classes.dav__country_title_wrapper}>
           <h3 className={classes.dav__country_name}>{countryTitle}</h3>
-          <span>{numTours} Tours</span>
+          {/* <span>{numTours} Tours</span> */}
         </div>
         <div className={classes.dav__country_content}>
           <p>

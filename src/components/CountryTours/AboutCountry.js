@@ -49,7 +49,7 @@ const AboutCountry = () => {
                 <img src={Expert}/>
 
                 <p>
-                  Start planning your tailor-made trip by contacting one of our{" "}
+                  Start planning your trip by contacting one of our{" "}
                   <span>{countryName}</span> specialists
                 </p>
               </div>

@@ -1,0 +1,19 @@
+.dav__review_card_wrapper{
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding: 8px 0;
+}
+.dav__user_rating p{
+    margin-bottom: 0;
+}
+.dav__user_review_meta span{
+    font-family: "Merriweather", serif;
+    font-style: italic;
+    color: #343434;
+    text-transform: capitalize;
+}
+.dav__user_review_meta p{
+    margin-bottom: 0;
+}

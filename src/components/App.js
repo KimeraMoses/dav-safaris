@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //===MUI IMPORTS===
 import { Paper } from "@material-ui/core";
 
@@ -23,35 +19,38 @@ import ChangePassword from "./Membership/PasswordReset/ChangePassword";
 import Contact from "./CountryTours/Contact";
 import SingleTour from "./Tours/SingleTour/SingleTour";
 import CountrySingle from "./CountryTours/CountrySingle";
-import SendMessage from "./SendMessage/SendMessage";
-
+import ChatNow from "./SendMessage/ChatNow/ChatNow";
 
 const App = (props) => {
-
   return (
     <Theme>
       <Router>
-          <Paper
-            elevation={0}
-            square
-          >
-            <AppBar />
-            <Routes>
-              <Route path="/" exact element={<Home />} />
-              <Route path="/login" exact element={<LoginForm />} />
-              <Route path="/register" exact element={<RegisterForm/>}/>
-              <Route path="/password-reset" exact element={<ResetPassword/>}/>
-              <Route path="/change-password" exact element={<ChangePassword/>}/>
-              <Route path="/contact-us" exact element={<Contact/>}/>
-              <Route path="/tours/:countryName" exact element={<CountrySingle/>}/>
-              <Route path="/tours/:countryName/:tourTitle" exact element={<SingleTour/>}/>
-            </Routes>
-            <SendMessage/>
-            <BackToTop />
-            <Footer/>
-          </Paper>
+        <Paper elevation={0} square>
+          <AppBar />
+          <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/login" exact element={<LoginForm />} />
+            <Route path="/register" exact element={<RegisterForm />} />
+            <Route path="/password-reset" exact element={<ResetPassword />} />
+            <Route path="/change-password" exact element={<ChangePassword />} />
+            <Route path="/contact-us" exact element={<Contact />} />
+            <Route
+              path="/tours/:countryName"
+              exact
+              element={<CountrySingle />}
+            />
+            <Route
+              path="/tours/:countryName/:tourTitle"
+              exact
+              element={<SingleTour />}
+            />
+          </Routes>
+          <ChatNow />
+          <BackToTop />
+          <Footer />
+        </Paper>
       </Router>
-     </Theme>
+    </Theme>
   );
 };
 

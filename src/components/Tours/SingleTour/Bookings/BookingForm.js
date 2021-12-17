@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
-import { Button } from "../../UI/Button/Button";
+import { Button } from "../../../UI/Button/Button";
 import { Checkbox, FormControlLabel, Paper, TextField } from '@material-ui/core';
 import classes from "./BookingForm.module.css"
 

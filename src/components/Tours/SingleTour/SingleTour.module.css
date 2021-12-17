@@ -72,43 +72,11 @@
 .dav__tour_highlights_list p {
   display: inline;
 }
-.dav__tour_points_header {
-  border-radius: 5px 5px 0 0;
-  padding: 5px 15px;
-}
-.dav__tour_points_header h5 {
+
+.dav__itinary_header h2 {
   font-family: "Merriweather", serif;
   font-style: italic;
   margin-bottom: 0;
-}
-.dav__tour_price_includes {
-  background-color: #edf2f2;
-  padding: 10px 15px;
-}
-.dav__tour_price_includes_list {
-  margin: 0;
-  padding: 0;
-  margin-bottom: 1em;
-  text-align: left;
-  list-style-type: none;
-}
-.dav__tour_price_includes_list li {
-  position: relative;
-  padding-left: 15px;
-}
-.dav__tour_price_includes_list li::before {
-  content: "✓";
-  color: var(--dav__tertiary_color);
-  margin-right: 10px;
-  font-size: 18px;
-  font-weight: 700;
-}
-.dav__tour_price_includes_list.dav__price_excludes li::before{
-  content: "X";
-  color: red;
-}
-.dav__btn_wrapper{
-  text-align: center;
 }
 
 /* ====BOOK TOUR==== */
@@ -193,19 +161,6 @@
     flex-direction: column;
     padding: 20px 10px;
 
-  }
-  .dav__tour_points_header {
-    padding: 0;
-    border-radius: unset;
-    background: 0 0;
-    color: initial;
-  }
-  .dav__tour_points_header h2 {
-    margin: 0 0 1em;
-  }
-  .dav__tour_price_includes {
-    background-color: #fff;
-    padding: 1px 10px;
   }
 
   .dav__tour_bookings_section {

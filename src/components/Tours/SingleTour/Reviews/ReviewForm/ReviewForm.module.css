@@ -1,0 +1,19 @@
+.dav__rate_tour_form_wrapper{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.dav__review_form{
+    text-align: left;
+    padding: 0 10px 10px;
+}
+.dav__review_form h5{
+    font-family: "Merriweather", serif;
+    font-style: italic;
+    color: #343434;
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+.dav__booking_form_field{
+    margin-bottom: 10px!important;
+}
