@@ -19,7 +19,7 @@ import Reviews from "./Reviews/Reviews";
 import PriceQuote from "./PriceQuote/PriceQuote";
 import RelatedTours from "./RelatedTour/RelatedTours";
 
-const itinaries = [
+export const itinaries = [
   {
     id: 0,
     title: "travel to murchison falls national park via ziwa rhino sanctuary",

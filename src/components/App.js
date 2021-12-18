@@ -20,6 +20,9 @@ import SingleTour from "./Tours/SingleTour/SingleTour";
 import CountrySingle from "./CountryTours/CountrySingle";
 import ChatNow from "./SendMessage/ChatNow/ChatNow";
 import ContactUs from "./ContactUs/ContactUs";
+import DashBoard from "./DashBoard/DashBoard";
+import DashBoardItem from "./DashBoard/DashboardMenuItems/DashBoardItem";
+import ManageTours from "./DashBoard/ManageTours/ManageTours";
 
 const App = (props) => {
   return (
@@ -29,6 +32,13 @@ const App = (props) => {
           <AppBar />
           <Routes>
             <Route path="/" exact element={<Home />} />
+            <Route
+                path="/dashboard/*"
+                element={<DashBoard/>}
+              >
+                <Route path="user" element={<DashBoardItem />} />
+                <Route path="manage-tours" element={<ManageTours />} />
+            </Route>
             <Route path="/login" exact element={<LoginForm />} />
             <Route path="/register" exact element={<RegisterForm />} />
             <Route path="/password-reset" exact element={<ResetPassword />} />
