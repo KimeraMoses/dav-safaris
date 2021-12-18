@@ -16,10 +16,10 @@ import LoginForm from "./Membership/LoginForm/LoginForm";
 import RegisterForm from "./Membership/RegisterForm/RegisterForm";
 import ResetPassword from "./Membership/PasswordReset/PasswordReset";
 import ChangePassword from "./Membership/PasswordReset/ChangePassword";
-import Contact from "./CountryTours/Contact";
 import SingleTour from "./Tours/SingleTour/SingleTour";
 import CountrySingle from "./CountryTours/CountrySingle";
 import ChatNow from "./SendMessage/ChatNow/ChatNow";
+import ContactUs from "./ContactUs/ContactUs";
 
 const App = (props) => {
   return (
@@ -33,7 +33,7 @@ const App = (props) => {
             <Route path="/register" exact element={<RegisterForm />} />
             <Route path="/password-reset" exact element={<ResetPassword />} />
             <Route path="/change-password" exact element={<ChangePassword />} />
-            <Route path="/contact-us" exact element={<Contact />} />
+            <Route path="/contact-us" exact element={<ContactUs />} />
             <Route
               path="/tours/:countryName"
               exact

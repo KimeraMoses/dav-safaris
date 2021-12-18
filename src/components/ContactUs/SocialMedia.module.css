@@ -1,0 +1,36 @@
+.dav__social_icons_wrapper{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+.dav__social_icon_link{
+    background-color: var(--dav__primary_color);
+    cursor: pointer;
+    display: inline-flex;
+    padding: 8px;
+    align-items: center;
+    border-radius: 40px;
+    margin: 8px 4px;
+    color: #fff;
+    
+}
+
+
+.dav__social_icon_link:hover, 
+.dav__social_icon_link:focus {
+    color: #fff;
+    background-color: var(--dav__tertiary_color)
+} 
+
+.dav__social_icon_link svg{
+    font-size: 24px;
+}
+
+@media screen and (max-width: 599px) {
+    .dav__social_icon_link{
+        margin: 10px;
+        padding: 12px;
+        
+    }
+    
+}
