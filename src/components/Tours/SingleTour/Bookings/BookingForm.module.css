@@ -1,5 +1,5 @@
 /* ====BOOK TOUR==== */
-
+.dav__contact_us_form_wrapper,
 .dav__book_tour_form_wrapper {
   width: 350px;
   padding: 0 20px 10px;
@@ -7,12 +7,18 @@
   position: sticky;
   top: 100px;
 }
+.dav__contact_us_form_wrapper{
+  margin-top: -40px;
+    z-index: 9;
+}
 .dav__booking_form_field {
   margin-bottom: 20px !important;
 }
 .dav__booking_form_field_last {
   margin-bottom: 10px;
 }
+.dav__contact_us_form_wrapper::before,
+.dav__contact_us_form_wrapper::after,
 .dav__book_tour_form_wrapper::before,
 .dav__book_tour_form_wrapper::after {
   position: absolute;
@@ -25,11 +31,13 @@
   border-top: 30px solid var(--dav__primary_color);
   border-bottom: 30px solid transparent;
 }
+.dav__contact_us_form_wrapper::before,
 .dav__book_tour_form_wrapper::before {
   left: 0;
   border-left: 30px solid var(--dav__primary_color);
   border-right: 30px solid transparent;
 }
+.dav__contact_us_form_wrapper::after,
 .dav__book_tour_form_wrapper::after {
   right: 0;
   border-right: 30px solid var(--dav__primary_color);
@@ -58,10 +66,12 @@
 
 
 @media screen and (max-width: 637px) {
+  .dav__contact_us_form_wrapper,
   .dav__book_tour_form_wrapper {
     width: 100%;
   }
 }
+
 
 @media screen and (min-width: 959px) {
   .dav__book_tour_form_wrapper {

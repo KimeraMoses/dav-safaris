@@ -46,12 +46,12 @@ const ChatForm = () => {
           <FormControlLabel
             fullWidth
             control={<Checkbox defaultChecked color="primary" />}
-            label="Subscribe to our newletters"
+            label="Subscribe to our newsletters"
             className={classes.dav__book_tour_account_creation_prompt}
           />
         </div>
         <Fab className={classes.dav__message_count_wrapper} type="submit">
-          <SendIcon className={classes.dav__back_to_top_icon} />
+          <SendIcon className={classes.dav__send_icon} />
         </Fab>
       </div>
     </Form>

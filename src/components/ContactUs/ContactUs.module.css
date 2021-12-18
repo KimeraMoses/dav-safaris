@@ -98,20 +98,41 @@
 /* ==== SEND MESSAGE-OFFICE LOCATION DETAILS==== */
 
 .dav__contact_us_form,
-.dav__contact_details {
+.dav__connect_wrapper {
   margin: 10px;
-  padding: 20px;
+  
 }
 .dav__contact_us_form {
   width: 70%;
   display: flex;
+  padding: 20px;
 }
-.dav__contact_details {
+.dav__connect_wrapper {
   width: 30%;
+  display: flex;
+  flex-direction: column;
 }
-.dav__contact_details h3{
+.dav__newsletter_wrapper,
+.dav__contact_details{
+  padding: 20px;
+  margin-bottom: 10px;
+
+}
+.dav__newsletter_wrapper h5,
+.dav__contact_details h5{
     font-family: "Merriweather", serif;
     font-style: italic;
+}
+
+.dav__newsletter_form_wrapper{
+  text-align: center;
+}
+.dav__newsletter_form_wrapper button{
+  margin: 10px 0;
+}
+.dav__subscribe_form_field{
+  margin: 20px 0;
+  
 }
 
 /* ====OFFICE LOCATION AND CONTACTS==== */
@@ -154,7 +175,7 @@
     flex-direction: column;
   }
   .dav__contact_us_form,
-  .dav__contact_details,
+  .dav__connect_wrapper,
   .dav__safaries_contact_details,
   .dav__office_arrangements_wrapper {
     width: 100%;

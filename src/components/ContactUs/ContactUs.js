@@ -3,10 +3,11 @@ import React from "react";
 import Image from "../../assets/background.webp";
 import RoomIcon from "@material-ui/icons/Room";
 import PhoneIcon from "@material-ui/icons/Phone";
-import { Button, Paper } from "@material-ui/core";
+import { Button, Paper, TextField } from "@material-ui/core";
 import ContactUsForm from "../Tours/SingleTour/Bookings/ContactUsForm";
 import { EmailOutlined } from "@material-ui/icons";
 import SocialMedia from "./SocialMedia";
+import { Form } from "react-bootstrap";
 
 const ContactUs = () => {
   return (
@@ -138,12 +139,33 @@ const ContactUs = () => {
             </div>
           </div>
         </Paper>
-        <Paper className={classes.dav__contact_details}>
-          <h3>Our Social Media Links</h3>
-          <div className={classes.dav__social_media_btn_wrapper}>
-              <SocialMedia/>
-          </div>
-        </Paper>
+        <div className={classes.dav__connect_wrapper}>
+          <Paper className={classes.dav__contact_details}>
+            <h5>Our Social Media Links</h5>
+            <div className={classes.dav__social_media_btn_wrapper}>
+              <SocialMedia />
+            </div>
+          </Paper>
+          <Paper className={classes.dav__newsletter_wrapper}>
+            <h5>Subscribe to our Newsletters</h5>
+            <div className={classes.dav__newsletter_form_wrapper}>
+              <Form>
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  fullWidth
+                  type="email"
+                  required
+                  placeholder="Email"
+                  className={classes.dav__subscribe_form_field}
+                />
+                <Button variant="outlined" color="primary" type="submit">
+                  Subscribe
+                </Button>
+              </Form>
+            </div>
+          </Paper>
+        </div>
       </div>
     </div>
   );

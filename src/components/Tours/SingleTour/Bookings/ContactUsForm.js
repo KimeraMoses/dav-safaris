@@ -11,7 +11,7 @@ import classes from "./BookingForm.module.css";
 
 const ContactForm = (props) => {
   return (
-    <Paper className={classes.dav__book_tour_form_wrapper}>
+    <Paper className={classes.dav__contact_us_form_wrapper}>
       <div className={classes.dav__book_tour_title}>
         <h2>Let's Talk</h2>
       </div>
