@@ -20,10 +20,10 @@ const DashTourCard = (props) => {
         elevation={2}
       >
         <Col
-          lg={3}
-          md={3}
-          sm={3}
-          xs={3}
+          lg={2}
+          md={2}
+          sm={2}
+          xs={2}
           className={classes.gpa__university_card_univ_logo_wrapper}
         >
           <Avatar
@@ -36,14 +36,14 @@ const DashTourCard = (props) => {
           </Avatar>
         </Col>
         <Col
-          lg={9}
-          md={9}
-          sm={9}
-          xs={9}
+          lg={10}
+          md={10}
+          sm={10}
+          xs={10}
           className={classes.gpa__university_card_univ_title_wrapper}
         >
           <h5> {TourName}</h5>
-          <IconButton className={classes.dav__edit_icon} color="secondary">
+          <IconButton className={classes.dav__edit_icon} color="secondary" size="small">
             <EditOutlined />
           </IconButton>
         </Col>

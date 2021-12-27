@@ -44,6 +44,7 @@ export const login = (email, password) => {
     });
     if (!response.ok) {
       const error = await response.json();
+      console.log(error)
       let message = ""
       if(error.message === 'invalid credentials'){
         message = "User not found, Please double check your credentials and try again"
@@ -55,6 +56,7 @@ export const login = (email, password) => {
       dispatch(authenticationFail(message));
     }
     const data = await response.json();
+    console.log(data)
     dispatch(
       authenticationSuccess({
         data,
@@ -68,28 +70,18 @@ export const login = (email, password) => {
 };
 
 export const signup = (
-  course,
   email,
-  first_name,
-  last_name,
-  phone_number,
-  university,
+  username,
   password,
-  role
 ) => {
   return async (dispatch) => {
     dispatch(UserRegistrationPending());
     const response = await fetch(`${baseUrl}/api/v1/users/signup`, {
       method: "POST",
       body: JSON.stringify({
-        course,
         email,
-        first_name,
-        last_name,
-        phone_number,
-        university,
+        username,
         password,
-        role,
       }),
       headers: new Headers({
         "Content-type": "application/json",
@@ -99,15 +91,17 @@ export const signup = (
     if (!response.ok) {
       const error = await response.json();
       let message = ""
-      if(error.message === 'Email already in use'){
+      if(error.message === 'Email already exists'){
         message = "Account with the same email already exits"
       }else{
         message = "Failed to create account, Please check your connection and try again"
       }
       dispatch(UserRegistrationFail(message));
+      console.log(error)
     }
     const data = await response.json();
     dispatch(UserRegistrationSuccess(data.status));
+    console.log(data)
   };
 };
 

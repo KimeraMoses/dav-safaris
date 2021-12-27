@@ -9,8 +9,8 @@ const ManageTours = () => {
   const RenderedList = itinaries.map((tour) => {
     return (
       <Col
-        lg={4}
-        md={4}
+        lg={6}
+        md={6}
         sm={6}
         xs={12}
         className={classes.gpa__university_card_wrapper}

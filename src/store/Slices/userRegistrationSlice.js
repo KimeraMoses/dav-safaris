@@ -18,7 +18,6 @@ const initialState = {
       },
       UserRegistrationFail: (state, { payload }) => {
         state.isLoading = false;
-        state.status = payload.status;
         state.message = payload
       },
       

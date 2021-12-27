@@ -1,53 +1,47 @@
-import {
-  fetchUniversitiesLoading,
-  fetchUniversitiesSuccess,
-  fetchUniversitiesFail,
-} from "../Slices/universitiesSlice";
-
-import {
-  fetchUniversitypending, fetchUniversitySuccess, fetchUniversityFail
-} from "../Slices/universitySlice";
-
-import {
-  NewUnversityPending,
-  NewUnversitySuccess,
-  NewUnversityFail,
-} from "../Slices/newUniversitySlice";
-import {
-  EditUnversityPending, EditUnversitySuccess, EditUnversityFail
-} from "../Slices/editUniversitySlice";
 
 import { baseUrl } from "..";
+import { fetchTourFail, fetchTourPending, fetchTourSuccess } from "../Slices/tourSlice";
+import { fetchToursPending } from "../Slices/toursSlice";
 
-export const fetchAllUniversities = () => async (dispatch) => {
-  dispatch(fetchUniversitiesLoading());
+export const fetchAllTours = () => async (dispatch) => {
+  dispatch(fetchToursPending());
   try {
-    const response = await fetch(`${baseUrl}/api/v1/universities/getAll`);
-    const fetchedUniversities = await response.json();
-    dispatch(fetchUniversitiesSuccess(fetchedUniversities.universities));
+    const response = await fetch(`${baseUrl}/api/v1/tours/getAllTours`);
+    const fetchedTours = await response.json();
+    dispatch(fetchToursSuccess(fetchedTours.tours));
   } catch (error) {
-    dispatch(fetchUniversitiesFail(error.message));
+    dispatch(fetchToursFail(error.message));
   }
 };
 
-export const fetchUniversityDetail = (uni_id) => async (dispatch) => {
-  dispatch(fetchUniversitypending());
+export const fetchAllCountryTours = () => async (dispatch) => {
+  dispatch(fetchToursPending());
+  try {
+    const response = await fetch(`${baseUrl}/api/v1/tours/getAllTours`);
+    const fetchedTours = await response.json();
+    dispatch(fetchToursSuccess(fetchedTours.tours));
+  } catch (error) {
+    dispatch(fetchToursFail(error.message));
+  }
+};
+
+export const fetchTourDetails = (tour_id) => async (dispatch) => {
+  dispatch(fetchTourPending());
   try {
     const response = await fetch(
-      `${baseUrl}/api/v1/universities/${uni_id}`
+      `${baseUrl}/api/v1/tours/${tour_id}`
     );
-    const fetchedUniversity = await response.json();
-    dispatch(fetchUniversitySuccess(fetchedUniversity));
+    const fetchedTours = await response.json();
+    dispatch(fetchTourSuccess(fetchedTours));
 
   } catch (error) {
-    dispatch(fetchUniversityFail(error.message));
+    dispatch(fetchTourFail(error.message));
   }
 };
 
 
-export const creatNewUniversity = (
+export const creatNewTour = (
   name,
-  code,
   description,
   logo,
   courseCategories,
@@ -79,7 +73,7 @@ export const creatNewUniversity = (
   };
 };
 
-export const EdituniversityDetails = (
+export const EditTourDetails = (
   id,
   name,
   code,

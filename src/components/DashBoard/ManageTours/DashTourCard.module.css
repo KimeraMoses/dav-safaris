@@ -1,22 +1,23 @@
 .gpa__university_card_wrapper_paper{
     padding: 10px;
     display: flex;
-    position: relative;
 }
 
 .gpa__university_card_wrapper_paper:hover{
     background-color: var(--dav__primary_color);
     color: #fff;
 }
-
+.gpa__university_card_univ_title_wrapper{
+    position: relative;
+}
 .gpa__university_card_univ_title_wrapper h5{
     text-transform: capitalize;
     font-size: 16px;
     font-weight: 400;
 }
 .dav__edit_icon{
-    position: absolute;
-    bottom: 0;
+    position: absolute!important;
+    top: 0;
     right: 0;
 }
  

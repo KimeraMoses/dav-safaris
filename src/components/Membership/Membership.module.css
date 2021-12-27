@@ -37,6 +37,10 @@
 .dav__membership_submit_button{
     margin: 10px 0 20px!important;
 }
+.dav__membership_form_error_wrapper{
+    width: 100%!important;
+    text-align: left;
+}
 @media screen and (max-width: 569px) {
     .dav__membership_row{
         flex-direction: column;

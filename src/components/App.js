@@ -1,5 +1,6 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import {Navigate,BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 //===MUI IMPORTS===
 import { Paper } from "@material-ui/core";
 
@@ -23,8 +24,16 @@ import ContactUs from "./ContactUs/ContactUs";
 import DashBoard from "./DashBoard/DashBoard";
 import DashBoardItem from "./DashBoard/DashboardMenuItems/DashBoardItem";
 import ManageTours from "./DashBoard/ManageTours/ManageTours";
+import { AutoAuthenticate } from "../store/Actions/AuthActions";
 
 const App = (props) => {
+  const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    AutoAuthenticate(dispatch);
+  }, [dispatch]);
+
   return (
     <Theme>
       <Router>
@@ -33,13 +42,15 @@ const App = (props) => {
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route
-                path="/dashboard/*"
-                element={<DashBoard/>}
-              >
-                <Route path="user" element={<DashBoardItem />} />
-                <Route path="manage-tours" element={<ManageTours />} />
+              path="/dashboard/*"
+              element={
+                isAuthenticated ? <DashBoard /> : <Navigate to="/login" />
+              }
+            >
+              <Route path="user" element={<DashBoardItem />} />
+              <Route path="manage-tours" element={<ManageTours />} />
             </Route>
-            <Route path="/login" exact element={<LoginForm />} />
+            <Route path="/login" exact element={isAuthenticated ? <Navigate to="/dashboard/user" /> : <LoginForm />} />
             <Route path="/register" exact element={<RegisterForm />} />
             <Route path="/password-reset" exact element={<ResetPassword />} />
             <Route path="/change-password" exact element={<ChangePassword />} />
