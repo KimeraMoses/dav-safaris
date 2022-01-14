@@ -1,0 +1,131 @@
+.gpa__registration_section {
+    position: relative;
+    padding-top: 23px;
+  }
+  .gpa__registration_section:last-child {
+    padding-bottom: 10px;
+  }
+  .gpa__membership_section_title {
+    text-align: center;
+    color: #4e657e;
+  }
+  .gpa__dark_mode.gpa__membership_section_title {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .gpa__register_wrapper {
+    border-radius: 3px;
+    text-align: center;
+    /* margin: 30px auto 0; */
+  }
+  .gpa__register_wrapper_inner {
+    padding: 30px 15px 0;
+  }
+  .gpa__register_wrapper_register_new {
+    /* max-width: 750px; */
+  }
+  .gpa__register_form_right_wrapper {
+    border-left: 1px solid #e6e9ec;
+  }
+  .gpa__form_input_field {
+    margin-bottom: 10px !important;
+    text-align: left;
+  }
+  .gpa__half_input_field_wrapper {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  
+  .gpa__register_submit_button {
+    width: auto;
+    margin: 20px 0 !important;
+  }
+  .gpa__dark_mode.gpa__register_submit_button {
+    background-color: var(--gpa__button_bg_dark);
+  }
+  .gpa__dark_mode.gpa__register_submit_button:hover {
+    background-color: var(--gpa__bg_color_hover_dark);
+  }
+  
+  .gpa__register_form_footer {
+    display: flex;
+    margin-top: 0;
+    background-color: transparent;
+    justify-content: center;
+    padding: 10px;
+    background-color: #eaeaea;
+    width: 100%;
+  }
+  .gpa__register_form_footer a {
+    text-decoration: none;
+  }
+  .gpa__dark_mode.gpa__register_form_footer {
+    background-color: var(--gpa__highlighted_section_bg_dark);
+  }
+  .gpa__dark_mode.gpa__register_form_footer a {
+    color: var(--gpa__secondary_color);
+  }
+  
+  @media (min-width: 576px) {
+    .gpa__form_input_field.gpa__form_input_field_last {
+      margin-bottom: 0 !important;
+    }
+    .gpa__half_input_field_wrapper_left {
+      padding-right: 10px !important;
+    }
+  }
+  
+  @media screen and (max-width: 575px) {
+    .gpa__register_form_right_wrapper {
+      border: none;
+    }
+    .gpa__category_input_wrapper {
+      margin-bottom: 10px;
+    }
+  }
+  
+
+.gpa__category_input_wrapper{
+    padding: 8px 5px;
+    margin-top: 10px;
+    color: rgba(0, 0, 0, 0.54);
+    background-color: rgba(0, 0, 0, 0.09);
+    transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+}
+.gpa__dark_mode.gpa__category_input_wrapper{
+    background-color: rgba(255, 255, 255, 0.09);
+    color: rgba(255, 255, 255, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+}
+.gpa__logo_upload_button{
+    box-shadow: none!important;
+    color: rgba(0, 0, 0, 0.54);
+    background-color: rgba(0, 0, 0, 0.09);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42)!important;
+    transition: background-color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+    border-radius: 0!important;
+    border-top-left-radius: 4px!important;
+    border-top-right-radius: 4px!important;
+    text-align: left;
+}
+.gpa__logo_upload_button:hover{
+    box-shadow: none;
+}
+.gpa__dark_mode.gpa__logo_upload_button:hover{
+    background-color: rgba(255, 255, 255, 0.19)!important;
+}
+.gpa__dark_mode.gpa__logo_upload_button{
+    background-color: rgba(255, 255, 255, 0.09);
+    color: rgba(255, 255, 255, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7)!important;
+}
+
+
+@media screen and (max-width: 575px) {
+    .gpa__category_input_wrapper{
+        margin-bottom: 10px;
+    }
+    
+}

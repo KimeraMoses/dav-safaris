@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
-import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 import { Hidden, IconButton, Button } from "@material-ui/core";
 
 //===COMPONENT IMPORTS===
 import classes from "./AppBar.module.css";
 import DavLogo from "./DavLogo";
 import NavigationMenu from "../Navigation/NavigationMenu";
+import { Link } from "react-router-dom";
 
 const AppBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,27 +29,27 @@ const AppBar = () => {
           <Hidden xsDown>
             <div className={classes.dav__action_btn_wrapper}>
               <NavigationMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-              <a href="https://wa.link/iyj0rg" target="_blank" rel="noreferrer">
+              <Link to="/login">
               <Button
                 color="primary"
                 variant="contained"
-                endIcon={<WhatsAppIcon />}
+                endIcon={<LockOpenIcon />}
                 size="small"
               >
                 
-                Book Tours
+                Login
               </Button>
-              </a>
+              </Link>
             </div>
           </Hidden>
 
           <Hidden smUp>
             <div className={classes.mobile_header_menu}>
-            <a href="https://wa.link/iyj0rg" target="_blank" rel="noreferrer">
+            <Link to="/login">
               <Button variant="contained" color="primary" size="small">
-                <WhatsAppIcon />
+                <LockOpenIcon />
               </Button>
-              </a>
+              </Link>
               <IconButton
                 size="large"
                 onClick={() => setMenuOpen(!menuOpen)}

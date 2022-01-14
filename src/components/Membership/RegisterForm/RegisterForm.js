@@ -19,14 +19,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Alert } from "@material-ui/lab";
 
 const RegisterForm = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const isLoading = useSelector(state=>state.registration.isLoading);
   const message = useSelector(state=>state.registration.message);
   const navigate = useNavigate()
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+
   const [values, setValues] = useState({
     email: "",
     username: "",

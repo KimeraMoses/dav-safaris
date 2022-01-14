@@ -44,6 +44,46 @@ export const itinaries = [
     Meal_plan: "Breakfast, Lunch and Dinner",
     Accommodation: "Kibale Forest Camp or Equivalent",
   },
+  {
+    id: 3,
+    title: "Transfer to Kibale Forest via Fort Portal City.",
+    description:
+      "Wake up early in the morning and have breakfast, then checkout from the lodge and have a game drive through the park to Kibale Forest National park via Fort portal. The Park is one of Africa’s most beautiful rain forests and habitat to 13 primates and the most common ones are Chimpanzees, it also give a great birding experience place with over 325 bird species. Along the way you be spotting stunning landscapes, forests and the remote of the country side. Upon arrival at the park have a nature walk in the evening before continuing to the lodge for dinner and overnight.",
+    Meal_plan: "Breakfast, Lunch and Dinner",
+    Accommodation: "Kibale Forest Camp or Equivalent",
+  },
+  {
+    id: 4,
+    title: "Transfer to Kibale Forest via Fort Portal City.",
+    description:
+      "Wake up early in the morning and have breakfast, then checkout from the lodge and have a game drive through the park to Kibale Forest National park via Fort portal. The Park is one of Africa’s most beautiful rain forests and habitat to 13 primates and the most common ones are Chimpanzees, it also give a great birding experience place with over 325 bird species. Along the way you be spotting stunning landscapes, forests and the remote of the country side. Upon arrival at the park have a nature walk in the evening before continuing to the lodge for dinner and overnight.",
+    Meal_plan: "Breakfast, Lunch and Dinner",
+    Accommodation: "Kibale Forest Camp or Equivalent",
+  },
+  {
+    id: 5,
+    title: "Transfer to Kibale Forest via Fort Portal City.",
+    description:
+      "Wake up early in the morning and have breakfast, then checkout from the lodge and have a game drive through the park to Kibale Forest National park via Fort portal. The Park is one of Africa’s most beautiful rain forests and habitat to 13 primates and the most common ones are Chimpanzees, it also give a great birding experience place with over 325 bird species. Along the way you be spotting stunning landscapes, forests and the remote of the country side. Upon arrival at the park have a nature walk in the evening before continuing to the lodge for dinner and overnight.",
+    Meal_plan: "Breakfast, Lunch and Dinner",
+    Accommodation: "Kibale Forest Camp or Equivalent",
+  },
+  {
+    id: 6,
+    title: "Transfer to Kibale Forest via Fort Portal City.",
+    description:
+      "Wake up early in the morning and have breakfast, then checkout from the lodge and have a game drive through the park to Kibale Forest National park via Fort portal. The Park is one of Africa’s most beautiful rain forests and habitat to 13 primates and the most common ones are Chimpanzees, it also give a great birding experience place with over 325 bird species. Along the way you be spotting stunning landscapes, forests and the remote of the country side. Upon arrival at the park have a nature walk in the evening before continuing to the lodge for dinner and overnight.",
+    Meal_plan: "Breakfast, Lunch and Dinner",
+    Accommodation: "Kibale Forest Camp or Equivalent",
+  },
+  {
+    id: 7,
+    title: "Transfer to Kibale Forest via Fort Portal City.",
+    description:
+      "Wake up early in the morning and have breakfast, then checkout from the lodge and have a game drive through the park to Kibale Forest National park via Fort portal. The Park is one of Africa’s most beautiful rain forests and habitat to 13 primates and the most common ones are Chimpanzees, it also give a great birding experience place with over 325 bird species. Along the way you be spotting stunning landscapes, forests and the remote of the country side. Upon arrival at the park have a nature walk in the evening before continuing to the lodge for dinner and overnight.",
+    Meal_plan: "Breakfast, Lunch and Dinner",
+    Accommodation: "Kibale Forest Camp or Equivalent",
+  },
 ];
 
 const SingleTour = () => {

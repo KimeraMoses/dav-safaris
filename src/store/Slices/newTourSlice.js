@@ -5,19 +5,19 @@ const initialState = {
     status: '',
     message: '',
   };
-  const newUniversitySlice = createSlice({
-    name: "newUniversity",
+  const newTourSlice = createSlice({
+    name: "newTour",
     initialState,
     reducers: {
-      NewUnversityPending: (state) => {
+      NewTourPending: (state) => {
         state.isLoading = true;
       },
-      NewUnversitySuccess: (state, { payload }) => {
+      NewTourSuccess: (state, { payload }) => {
         state.isLoading = false;
         state.status = payload.status;
         state.message=payload.message;
       },
-      NewUnversityFail: (state, { payload }) => {
+      NewTourFail: (state, { payload }) => {
         state.isLoading = false;
         state.status = payload.status;
         state.message =payload.message;
@@ -26,7 +26,7 @@ const initialState = {
     },
   });
   
-  const { reducer, actions } = newUniversitySlice;
+  const { reducer, actions } = newTourSlice;
   
-  export const { NewUnversityPending, NewUnversitySuccess, NewUnversityFail } = actions;
+  export const { NewTourPending, NewTourSuccess, NewTourFail } = actions;
   export default reducer;

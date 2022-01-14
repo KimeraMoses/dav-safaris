@@ -8,18 +8,11 @@ import { useSelector } from "react-redux";
 import { Divider } from "@material-ui/core";
 import ClearIcon from "@material-ui/icons/Clear";
 import classes from "./Search.module.css";
+import { itinaries } from "../../Tours/SingleTour/SingleTour";
 
 const Search = (props) => {
-  const DarkMode = useSelector((state) => state.theme.darkMode);
-  const universityList = useSelector(
-    (state) => state.universities.universityList
-  );
-  const courseList = useSelector((state) => state.courses.courseList);
-  const courseUnitList = useSelector(
-    (state) => state.courseUnits.courseUnitList
-  );
-
-  const searchObj = universityList.concat(courseList).concat(courseUnitList);
+  const DarkMode = false;
+  const searchObj = itinaries;
 
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -32,7 +25,6 @@ const Search = (props) => {
       const Results = searchObj.filter((Result) => {
         return Object.values(Result)
           .join(" ")
-          .replaceAll('-',' ')
           .toLowerCase()
           .includes(searchTerm.toLowerCase());
       });
@@ -137,26 +129,7 @@ const Search = (props) => {
                           className={classes.gpa__custom_search_result_inner}
                         >
                           <div className={classes.gpa__result_title}>
-                            {resultType === "university"
-                              ? `${result.name.replaceAll(
-                                  "-",
-                                  " "
-                                )} ~ ${result.code.toUpperCase()}`
-                              : resultType === "course_unit"
-                              ? `${result.code.toUpperCase()}-${result.name.replaceAll(
-                                  "-",
-                                  " "
-                                )} ~ ${result.courses_attached_to[0].university.name.replaceAll(
-                                  "-",
-                                  " "
-                                )}`
-                              : `${result.name.replaceAll(
-                                  "-",
-                                  " "
-                                )} ~ ${result.university && result.university.name.replaceAll(
-                                  "-",
-                                  " "
-                                )}`}
+                            {result.title}
                           </div>
                           <div className={classes.gpa__result_url}>
                             {`https://gpaelevator.com/${resultLink}`}

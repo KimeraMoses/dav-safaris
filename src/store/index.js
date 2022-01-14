@@ -4,7 +4,8 @@ import userReducer from "../store/Slices/userSlice";
 import userRegistrationReducer from "../store/Slices/userRegistrationSlice";
 import authReducer from "./Slices/authSlice";
 import passwordReducer from "./Slices/passwordSlice";
-import tourReducer from "./Slices/tourSlice";
+import tourReducer from "./Slices/newTourSlice";
+// import tourReducer from "./Slices/tourSlice";
 import toursReducer from "./Slices/toursSlice";
 
 const store = configureStore({

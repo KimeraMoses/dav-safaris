@@ -1,4 +1,4 @@
-import { Paper } from "@material-ui/core";
+import { Fab, Hidden, Paper } from "@material-ui/core";
 import React from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import classes from "./DashBoard.module.css";
@@ -7,8 +7,11 @@ import DashboardIcon from "@material-ui/icons/Speed";
 import AddLocationIcon from "@material-ui/icons/AddLocationOutlined";
 import GroupAddOutlinedIcon from "@material-ui/icons/GroupAddOutlined";
 import BookOutlinedIcon from "@material-ui/icons/BookOutlined";
+import AddIcon from "@material-ui/icons/Add";
+import RefreshIcon from "@material-ui/icons/Refresh";
 
 const DashBoard = () => {
+  const isLoading = false;
   const location = useLocation();
   const DashMenuTitle = location.pathname.substring(
     location.pathname.lastIndexOf("/") + 1
@@ -90,7 +93,9 @@ const DashBoard = () => {
           </ul>
         </div>
         <div className={classes.dav__dashboard_selected_menu_item}>
-          <h3>{menuTitle}</h3>
+          <div className={classes.dav__dashboard_selected_menu_title}>
+            <h3>{menuTitle}</h3>
+          </div>
 
           <div className={classes.dav__dashboard_selected_display_wrapper}>
             <Outlet />
