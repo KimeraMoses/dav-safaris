@@ -1,19 +1,34 @@
 
 import { baseUrl } from "..";
+import { fetchCountriesFail, fetchCountriesPending, fetchCountriesSuccess } from "../Slices/countrySlice";
 import { NewTourFail, NewTourPending, NewTourSuccess } from "../Slices/newTourSlice";
 import { fetchTourFail, fetchTourPending, fetchTourSuccess } from "../Slices/tourSlice";
-import { fetchToursPending } from "../Slices/toursSlice";
+import { fetchToursFail, fetchToursPending, fetchToursSuccess } from "../Slices/toursSlice";
 
-// export const fetchAllTours = () => async (dispatch) => {
-//   dispatch(fetchToursPending());
-//   try {
-//     const response = await fetch(`${baseUrl}/api/v1/tours/getAllTours`);
-//     const fetchedTours = await response.json();
-//     dispatch(fetchToursSuccess(fetchedTours.tours));
-//   } catch (error) {
-//     dispatch(fetchToursFail(error.message));
-//   }
-// };
+export const fetchAllTours = () => async (dispatch) => {
+  dispatch(fetchToursPending());
+  try {
+    const response = await fetch(`${baseUrl}/api/v1/tours/getAllTours`);
+    const fetchedTours = await response.json();
+    dispatch(fetchToursSuccess(fetchedTours.tours));
+    console.log(fetchedTours)
+  } catch (error) {
+    dispatch(fetchToursFail(error.message));
+    console.log(error)
+  }
+};
+export const fetchAllCountries = () => async (dispatch) => {
+  dispatch(fetchCountriesPending());
+  try {
+    const response = await fetch(`https://restcountries.com/v2/all`);
+    const fetchedCountries = await response.json();
+    dispatch(fetchCountriesSuccess(fetchedCountries));
+    // console.log(fetchedCountries)
+  } catch (error) {
+    dispatch(fetchCountriesFail(error.message));
+    // console.log(error)
+  }
+};
 
 // export const fetchAllCountryTours = () => async (dispatch) => {
 //   dispatch(fetchToursPending());

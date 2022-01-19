@@ -6,7 +6,8 @@ const ReviewsList = () => {
     <>
       <ReviewCard
         userRating={2}
-        userReview="This was an awesome experience, i loved it all"
+        userReview="We really enjoyed our safari in Uganda, it was fun to trek the gorillas for the first time, all hotels were incredible and our guide made sure that we don't miss anything about Uganda.
+        I recommend Dav Safaris"
         UserName="kimera Moses"
         ReviewDate={`12-10-2020`}
       />

@@ -15,7 +15,20 @@
     color: #545454;
     position: relative;
   }
-
+  .MuiListItemText-secondary{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box!important;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+  }
+  .MuiListItemText-primary{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box!important;
+    -webkit-line-clamp: 1; 
+    -webkit-box-orient: vertical;
+  }
 
   a{
     text-decoration: none!important;
@@ -36,5 +49,36 @@
     border-radius: 100px;
   
   }
+
+   
+  /****************************
+  COURSE UNIT CAROUSEL
+  ****************************/
+  
+  .rec-carousel-wrapper {
+    position: relative !important;
+  }
+  .rec-arrow {
+    position: absolute !important;
+    top: 0;
+    z-index: 9;
+    box-shadow: none !important;
+    background-color: var(--dav__primary_color) !important;
+    color: #fff!important;
+
+  }
+  
+  .rec-arrow:hover:enabled,
+  .rec-arrow:focus:enabled {
+    color: #fff;
+    background-color: var(--dav__primary_color) !important;
+  }
+  .rec-arrow-left {
+    left: 0;
+  }
+  .rec-arrow-right {
+    right: 0;
+  }
+  
   
   

@@ -7,6 +7,7 @@
     text-align: left;
     padding: 0 10px 10px;
 }
+.dav__form_titles_inner,
 .dav__review_form h5{
     font-family: "Merriweather", serif;
     font-style: italic;
@@ -14,6 +15,16 @@
     padding-bottom: 10px;
     font-weight: 600;
 }
+.dav__form_titles_inner{
+    font-size: 12px;
+}
 .dav__booking_form_field{
     margin-bottom: 10px!important;
+}
+
+.dav__user_rating_wrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: flex-start;
 }

@@ -5,15 +5,22 @@
     align-items: left;
     padding: 8px 0;
 }
+.dav__review_user_wrapper{
+    display: flex;
+}
 .dav__user_rating p{
     margin-bottom: 0;
 }
+.dav__review_user_name,
 .dav__user_review_meta span{
     font-family: "Merriweather", serif;
     font-style: italic;
     color: #343434;
     text-transform: capitalize;
+    margin-left: 10px;
 }
-.dav__user_review_meta p{
-    margin-bottom: 0;
+.dav__review__person__visit_date,
+.dav__review__person__reviewed{
+    font-size: 12px;
+
 }

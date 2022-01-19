@@ -6,11 +6,11 @@ import { Timer, Watch } from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
 
 const TourCard = (props) => {
-  const { TourImage, TourTitle, NumDays, NumNights, TourDescription } = props;
+  const { TourImage, TourTitle, NumDays, NumNights, TourDescription,TourRating } = props;
   return (
     <div className={classes.tour_card_wrapper}>
       <div className={classes.tour_card_header}>
-        <Link to={`/tours/uganda/${TourTitle.replace(/ /g, '-')}`}>
+        <Link to={`/tours/${TourTitle}`}>
           <img src={TourImage} alt="Tour" />
           <span className={classes.tour__discount}>20% off</span>
         </Link>
@@ -18,7 +18,7 @@ const TourCard = (props) => {
       <div className={classes.tour_card_body}>
         <div className={classes.tour_title}>
           <h4 title={`View ${TourTitle}`}>
-            <Link to={`/tours/uganda/${TourTitle.replace(/ /g, '-')}`}>
+            <Link to={`/tours/${TourTitle}`}>
               {TourTitle}{" "}
             </Link>
           </h4>
@@ -32,7 +32,7 @@ const TourCard = (props) => {
       </div>
       <div className={classes.tour__footer}>
         <div className={classes.tour_ratings}>
-          <Rating name="read-only" value={3} readOnly />
+          <Rating name="read-only" value={TourRating} readOnly precision={0.5}/>
         </div>
         <div className={classes.tour__read_more}>
           <a href="#">Book Tour</a>

@@ -28,27 +28,17 @@ import NewItinary from "./NewItinary";
 import ImageUpload from "./ImageUpload";
 import { useEffect } from "react";
 import { creatNewTour } from "../../store/Actions/TourActions";
+import {
+  TourCategories_Kenya,
+  TourCategories_Rwanda,
+  TourCategories_Tanzania,
+  TourCategories_Uganda,
+} from "./TourCategories";
 
-//====NEW TOUR DATA STRUCTURE FIELDS====//
-
-//Title
-//Description
-//Includes
-//item name
-//Excludes
-//item name
-//highlights
-//item name
-//country
-//list of countries
-//Cover Image
-//Itinaries[]
-//itinary{}
-//key value pairs
 
 let dayActivityDescription = [];
 
-console.log("Outside", dayActivityDescription);
+// console.log("Outside", dayActivityDescription);
 
 const NewTour = () => {
   const DarkMode = false;
@@ -60,6 +50,7 @@ const NewTour = () => {
   const [file, setFile] = useState(false);
   const [category, setCategory] = useState([]);
   const [itinaries, setItinaries] = useState([]);
+  const [TourCategories, setTourCategories] = useState([]);
   const [values, setValues] = useState({
     name: "",
     description: "",
@@ -72,13 +63,32 @@ const NewTour = () => {
     price: "",
     includes: "",
     excludes: "",
-
     day: "",
     itinaryTitle: "",
     itinaryDesc: "",
     meal_plan: "",
     accomodation_plan: "",
   });
+  
+  useEffect(() => {
+    switch (values.country) {
+      case "uganda":
+        setTourCategories(TourCategories_Uganda);
+        break;
+      case "kenya":
+        setTourCategories(TourCategories_Kenya);
+        break;
+      case "rwanda":
+        setTourCategories(TourCategories_Rwanda);
+        break;
+      case "tanzania":
+        setTourCategories(TourCategories_Tanzania);
+        break;
+      default:
+        break;
+    }
+  }, [values.country]);
+
 
   //====FORMATING THE TOUR HIGHLIGHTS====//
   let tourActivities = [];
@@ -105,9 +115,6 @@ const NewTour = () => {
         priceExcludes.push(item);
       });
   }
-
-  // console.log("Includes", priceIncludes);
-  // console.log("Excludes", priceExcludes);
 
   const packageDetails = {
     price_inludes: priceIncludes,
@@ -162,29 +169,12 @@ const NewTour = () => {
     });
   };
 
-  // console.log("Itinary out 1", dayActivityDescription);
 
   const RegisterFormSubmitHandler = async (e) => {
     e.preventDefault();
     if (values.itinaryTitle.length > 0) {
       ItinaryHandler();
     }
-    console.log("Tour activities", tourActivities);
-    console.log("daily activities", dayActivityDescription);
-    console.log("packageDetails", packageDetails);
-    console.log(values);
-    console.log(
-      values.name,
-      values.description,
-      tourActivities,
-      dayActivityDescription,
-      values.duration,
-      values.price,
-      values.selectedImage,
-      packageDetails,
-      values.category,
-      values.country
-    );
     if (values.name.length < 1) {
       return setError("Tour title is required");
     }
@@ -192,9 +182,9 @@ const NewTour = () => {
       return setError("Tour price is required");
     }
 
-    // if (values.logo.length < 1) {
-    //   return setError("University logo required");
-    // }
+    if (values.selectedImage.length < 1) {
+      return setError("Tour cover image required");
+    }
     if (values.description.length < 1) {
       return setError("University Description required");
     }
@@ -215,6 +205,7 @@ const NewTour = () => {
         )
       );
       setMessage(`${values.name} Created Successfully`);
+      setTourCategories([])
       setValues({
         name: "",
         description: "",
@@ -233,15 +224,16 @@ const NewTour = () => {
         meal_plan: "",
         accomodation_plan: "",
       });
-      dayActivityDescription = []
-      tourActivities = []
+      dayActivityDescription = [];
+      tourActivities = [];
       priceIncludes = [];
       priceExcludes = [];
-      
     } catch (error) {
       setError("Tour Registration Failed");
     }
   };
+
+
 
   return (
     <Container fluid>
@@ -359,7 +351,25 @@ const NewTour = () => {
                       name="category"
                       onChange={onChangeHandler}
                     >
-                      <MenuItem value="gorilla-wildlife-safaris">
+                      {TourCategories.length > 0 ? (
+                        TourCategories.map((category, index) => {
+                          return (
+                            <MenuItem
+                              key={index}
+                              value={category.value}
+                            >
+                              {category.name}
+                            </MenuItem>
+                          );
+                        })
+                      ) : (
+                        <MenuItem>
+                          <Alert severity="error">
+                            Please choose a country first!
+                          </Alert>
+                        </MenuItem>
+                      )}
+                      {/* <MenuItem value="gorilla-wildlife-safaris">
                         Gorilla and Wildlife Safaris
                       </MenuItem>
                       <MenuItem value="uganda-birding-safaris">
@@ -368,7 +378,7 @@ const NewTour = () => {
                       <MenuItem value="uganda-cultural-tours">
                         Uganda Cultural Tours
                       </MenuItem>
-                      <MenuItem value="mountaineering">Mountaineering</MenuItem>
+                      <MenuItem value="mountaineering">Mountaineering</MenuItem> */}
                     </Select>
                   </FormControl>
                 </div>

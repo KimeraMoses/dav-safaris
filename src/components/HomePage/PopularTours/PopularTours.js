@@ -7,9 +7,13 @@ import Image2 from "../../../assets/Image6.jpg";
 import Image3 from "../../../assets/Image8.jpg";
 import Image4 from "../../../assets/Image18.jpg";
 import SectionTitle from "../SectionTitle/SectionTitle";
+import { useSelector } from "react-redux";
+import CardCarousel from "../../CardCarousel/CardCarousel";
 
 const PopularTours = () => {
+  const PopularTours = useSelector(state=>state.tours.toursList);
   return (
+      // <CardCarousel/>
     <Container fluid className={classes.dav__popular_tours_wrapper}>
       <Row className={classes.dav__popular_tours_row_wrapper}>
         <Col lg={3} sm={12} className={classes.dav__popular_tour_card_wrapper}>

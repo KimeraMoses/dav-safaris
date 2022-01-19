@@ -1,6 +1,7 @@
 .tour_card_wrapper {
   background-color: #fff;
   box-shadow: 0 1px 3px rgb(0 0 0 / 9%);
+  margin: 10px;
 }
 
 .tour_card_header {
@@ -98,7 +99,7 @@
 .tour__read_more a {
   float: right;
   color: #fff;
-  width: 55%;
+  width: 45%;
   text-align: center;
   line-height: 41px;
   padding: 0 0 0 20px;

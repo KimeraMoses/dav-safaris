@@ -23,7 +23,7 @@ export default function HoverRating(props) {
 
   return (
  
-          <Tooltip title={labels[hover !== -1 ? hover : value]} placement="top" >
+          <Tooltip title={labels[hover !== -1 ? hover : value]} placement="top" arrow>
           <Rating
           name="hover-feedback"
           

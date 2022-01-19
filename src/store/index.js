@@ -6,6 +6,7 @@ import authReducer from "./Slices/authSlice";
 import passwordReducer from "./Slices/passwordSlice";
 import tourReducer from "./Slices/newTourSlice";
 // import tourReducer from "./Slices/tourSlice";
+import countrySlice from "./Slices/countrySlice";
 import toursReducer from "./Slices/toursSlice";
 
 const store = configureStore({
@@ -17,6 +18,7 @@ const store = configureStore({
     registration: userRegistrationReducer,
     tours: toursReducer,
     tour: tourReducer,
+    countries: countrySlice,
   },
 });
 

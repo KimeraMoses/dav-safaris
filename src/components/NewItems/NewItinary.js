@@ -23,14 +23,20 @@ const NewItinary = (props) => {
     setValues({ ...values, [name]: value });
   };
 
+  let filteredItinaries = dayActivity
+  const onEditClick = (id)=>{
+    console.log("id", id)
+    filteredItinaries = dayActivity.filter((item, index)=>id !== index)
+  }
+
   return (
     <div className={classes.dav__new_itinary_wrapper}>
       <h5>
-        Itinaries{dayActivity.length > 0 ? `(${dayActivity.length})` : ""}
+        Itinaries{filteredItinaries.length > 0 ? `(${filteredItinaries.length})` : ""}
       </h5>
 
       <Row>
-        {dayActivity.slice(0, 4).map((day) => {
+        {filteredItinaries.slice(0, 8).map((day, index) => {
           return (
             <Col
               lg={6}
@@ -47,6 +53,8 @@ const NewItinary = (props) => {
                   description={day.description}
                   meal_plan={day.meal_plan}
                   accomodation={day.accomodation}
+                  id ={index}
+                  onEditClick={onEditClick}
                 />
               </List>
             </Col>

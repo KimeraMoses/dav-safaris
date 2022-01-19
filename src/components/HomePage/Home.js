@@ -9,6 +9,7 @@ import AboutUs from "./AboutUs";
 import PopularTours from "./PopularTours/PopularTours";
 import CountyToursSection from "./CountryTours/CountyToursSection";
 import SectionTitle from "./SectionTitle/SectionTitle";
+import CardCarousel from "../CardCarousel/CardCarousel";
 
 const Home = () => {
   return (
@@ -21,7 +22,8 @@ const Home = () => {
         subTitle="Take a look at our"
         Title ="Most popular tours"
     />
-      <PopularTours/>
+      {/* <PopularTours/> */}
+      <CardCarousel/>
       <CountyToursSection/>
     </Wrapper>
   );
