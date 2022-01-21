@@ -19,7 +19,7 @@
 .dav__single_tour_hero h1 {
   max-width: 75%;
   margin: 0 auto;
-  color: #fff;
+  /* color: #fff; */
   text-shadow: 0 0 20px #000;
   font-weight: 600;
 }

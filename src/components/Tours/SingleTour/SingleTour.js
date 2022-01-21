@@ -18,6 +18,8 @@ import BookingForm from "./Bookings/BookingForm";
 import Reviews from "./Reviews/Reviews";
 import PriceQuote from "./PriceQuote/PriceQuote";
 import RelatedTours from "./RelatedTour/RelatedTours";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTourName } from "../../../store/Actions/TourActions";
 
 export const itinaries = [
   {
@@ -87,23 +89,26 @@ export const itinaries = [
 ];
 
 const SingleTour = () => {
+  const dispatch = useDispatch()
   const { tourTitle } = useParams();
   useEffect(() => {
     window.scrollTo(0, 0);
+    dispatch(fetchTourName(tourTitle))
   }, [tourTitle]);
   const [show, setShow] = useState(false);
+  const Tour = useSelector((state) => state.tour.tourDetails);
 
   return (
     <div className={classes.dav__single_tour_page_wrapper}>
       <div
         className={classes.dav__single_tour_hero}
         style={{
-          backgroundImage: `url(${singleImage})`,
+          backgroundImage: `url(${Tour && Tour.imageCover})`,
           backgroundSize: "cover",
           backgroundPosition: "center center",
         }}
       >
-        <h1>{tourTitle.replaceAll("-", " ")}</h1>
+        <h1>{Tour && Tour.name}</h1>
       </div>
       <JumpNavigation />
 

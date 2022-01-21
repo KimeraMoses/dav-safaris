@@ -9,34 +9,38 @@ import {
   TextField,
 } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import styles from "./NewTour.module.css";
 import classes from "./NewItinary.module.css";
 import Itinary from "./Itinary";
+import { useSelector } from "react-redux";
 
 const NewItinary = (props) => {
-  const { values, setValues, ItinaryHandler, dayActivity, days } = props;
+  const {
+    values,
+    setValues,
+    ItinaryHandler,
+    dayActivity,
+    days,
+    onEditClick,
+    isEdit,
+  } = props;
+  const DayActivities = useSelector((state) => state.newTour.days);
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   };
-
-  let filteredItinaries = dayActivity
-  const onEditClick = (id)=>{
-    console.log("id", id)
-    filteredItinaries = dayActivity.filter((item, index)=>id !== index)
-  }
-
+  console.log(dayActivity)
   return (
     <div className={classes.dav__new_itinary_wrapper}>
       <h5>
-        Itinaries{filteredItinaries.length > 0 ? `(${filteredItinaries.length})` : ""}
+        Itinaries{dayActivity.length > 0 ? `(${dayActivity.length})` : ""}
       </h5>
 
       <Row>
-        {filteredItinaries.slice(0, 8).map((day, index) => {
+        {dayActivity.map((day, index) => {
           return (
             <Col
               lg={6}
@@ -53,7 +57,7 @@ const NewItinary = (props) => {
                   description={day.description}
                   meal_plan={day.meal_plan}
                   accomodation={day.accomodation}
-                  id ={index}
+                  id={index}
                   onEditClick={onEditClick}
                 />
               </List>
@@ -61,86 +65,89 @@ const NewItinary = (props) => {
           );
         })}
       </Row>
+      {!isEdit && (
+        <>
+          <div className="row">
+            <div className="col-xs-2 col-sm-2">
+              <TextField
+                fullWidth
+                label="Day"
+                variant="filled"
+                size="small"
+                name="day"
+                value={values.day}
+                onChange={onChangeHandler}
+                className={styles.gpa__form_input_field}
+              />
+            </div>
 
-      <div className="row">
-        <div className="col-xs-2 col-sm-2">
-          <TextField
-            fullWidth
-            label="Day"
-            variant="filled"
-            size="small"
-            name="day"
-            value={values.day}
-            onChange={onChangeHandler}
-            className={styles.gpa__form_input_field}
-          />
-        </div>
+            <div
+              className={`col-xs-10 col-sm-10 ${styles.gpa__register_form_right_wrapper}`}
+            >
+              <TextField
+                fullWidth
+                label="Itinary Title"
+                name="itinaryTitle"
+                value={values.itinaryTitle}
+                onChange={onChangeHandler}
+                size="small"
+                variant="filled"
+                className={styles.gpa__form_input_field}
+              />
+            </div>
+          </div>
 
-        <div
-          className={`col-xs-10 col-sm-10 ${styles.gpa__register_form_right_wrapper}`}
-        >
           <TextField
             fullWidth
-            label="Itinary Title"
-            name="itinaryTitle"
-            value={values.itinaryTitle}
-            onChange={onChangeHandler}
+            label="Itinary Description"
+            multiline
             size="small"
+            rows={4}
             variant="filled"
-            className={styles.gpa__form_input_field}
-          />
-        </div>
-      </div>
-
-      <TextField
-        fullWidth
-        label="Itinary Description"
-        multiline
-        size="small"
-        rows={4}
-        variant="filled"
-        name="itinaryDesc"
-        value={values.itinaryDesc}
-        onChange={onChangeHandler}
-        className={styles.gpa__form_input_field}
-      />
-      <div className={`row ${classes.dav__itinary_submit_button_wrapper}`}>
-        <div className="col-xs-12 col-sm-5">
-          <TextField
-            fullWidth
-            label="Meal Plan"
-            variant="filled"
-            name="meal_plan"
-            value={values.meal_plan}
-            size="small"
+            name="itinaryDesc"
+            value={values.itinaryDesc}
             onChange={onChangeHandler}
             className={styles.gpa__form_input_field}
           />
-        </div>
-        <div className="col-xs-12 col-sm-5">
-          <TextField
-            fullWidth
-            label="Accomodation Plan"
-            name="accomodation_plan"
-            value={values.accomodation_plan}
-            onChange={onChangeHandler}
-            variant="filled"
-            size="small"
-            className={styles.gpa__form_input_field}
-          />
-        </div>
-        <div className="col-xs-2 col-sm-2">
-          <Button
-            //   disabled={isLoading || isEdditing}
-            variant="contained"
-            color="primary"
-            size="small"
-            onClick={ItinaryHandler}
-          >
-            {dayActivity.length === days - 1 ? "Finish" : "Add New Itinary"}
-          </Button>
-        </div>
-      </div>
+          <div className={`row ${classes.dav__itinary_submit_button_wrapper}`}>
+            <div className="col-xs-12 col-sm-5">
+              <TextField
+                fullWidth
+                label="Meal Plan"
+                variant="filled"
+                name="meal_plan"
+                value={values.meal_plan}
+                size="small"
+                onChange={onChangeHandler}
+                className={styles.gpa__form_input_field}
+              />
+            </div>
+            <div className="col-xs-12 col-sm-5">
+              <TextField
+                fullWidth
+                label="Accomodation Plan"
+                name="accomodation_plan"
+                value={values.accomodation_plan}
+                onChange={onChangeHandler}
+                variant="filled"
+                size="small"
+                className={styles.gpa__form_input_field}
+              />
+            </div>
+            <div className="col-xs-2 col-sm-2">
+              <Button
+                //   disabled={isLoading || isEdditing}
+                variant="contained"
+                color="primary"
+                size="small"
+                onClick={ItinaryHandler}
+              >
+                {dayActivity.length === days - 1 ? "Finish" : "Add New Itinary"}
+              </Button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

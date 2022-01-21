@@ -1,6 +1,8 @@
 
 import { baseUrl } from "..";
 import { fetchCountriesFail, fetchCountriesPending, fetchCountriesSuccess } from "../Slices/countrySlice";
+import { deleteTourFail, deleteTourPending, deleteTourSuccess } from "../Slices/deleteTourSlice";
+import { EditTourFail, EditTourPending, EditTourSuccess } from "../Slices/editTourSlice";
 import { NewTourFail, NewTourPending, NewTourSuccess } from "../Slices/newTourSlice";
 import { fetchTourFail, fetchTourPending, fetchTourSuccess } from "../Slices/tourSlice";
 import { fetchToursFail, fetchToursPending, fetchToursSuccess } from "../Slices/toursSlice";
@@ -11,10 +13,8 @@ export const fetchAllTours = () => async (dispatch) => {
     const response = await fetch(`${baseUrl}/api/v1/tours/getAllTours`);
     const fetchedTours = await response.json();
     dispatch(fetchToursSuccess(fetchedTours.tours));
-    console.log(fetchedTours)
   } catch (error) {
     dispatch(fetchToursFail(error.message));
-    console.log(error)
   }
 };
 export const fetchAllCountries = () => async (dispatch) => {
@@ -41,19 +41,37 @@ export const fetchAllCountries = () => async (dispatch) => {
 //   }
 // };
 
-// export const fetchTourDetails = (tour_id) => async (dispatch) => {
-//   dispatch(fetchTourPending());
-//   try {
-//     const response = await fetch(
-//       `${baseUrl}/api/v1/tours/${tour_id}`
-//     );
-//     const fetchedTours = await response.json();
-//     dispatch(fetchTourSuccess(fetchedTours));
+export const fetchTourDetails = (tour_id) => async (dispatch) => {
+  dispatch(fetchTourPending());
+  try {
+    const response = await fetch(
+      `${baseUrl}/api/v1/tours/${tour_id}`
+    );
+    const fetchedTour = await response.json();
+    dispatch(fetchTourSuccess(fetchedTour.tour));
+    console.log(fetchedTour)
 
-//   } catch (error) {
-//     dispatch(fetchTourFail(error.message));
-//   }
-// };
+  } catch (error) {
+    dispatch(fetchTourFail(error.message));
+    console.log(error)
+  }
+};
+
+export const fetchTourName = (tour_slug) => async (dispatch) => {
+  dispatch(fetchTourPending());
+  try {
+    const response = await fetch(
+      `${baseUrl}/api/v1/tours/getTourByName/${tour_slug}`
+    );
+    const fetchedTour = await response.json();
+    dispatch(fetchTourSuccess(fetchedTour.tour));
+    console.log(fetchedTour)
+
+  } catch (error) {
+    dispatch(fetchTourFail(error.message));
+    console.log(error)
+  }
+};
 
 
 //====CREATING NEW TOUR====//
@@ -107,39 +125,71 @@ export const creatNewTour = (
 };
 //====END====//
 
-// export const EditTourDetails = (
-//   id,
-//   name,
-//   code,
-//   description,
-//   logo,
-//   courseCategories,
-//   links
-// ) => {
-//   return async (dispatch) => {
-//       dispatch(EditUnversityPending());
-//       const response = await fetch(
-//         `${baseUrl}/api/v1/universities/edit/${id}`,
-//         {
-//           method: "PUT",
-//           body: JSON.stringify({
-//             name,
-//             code,
-//             description,
-//             logo,
-//             courseCategories,
-//             links,
-//           }),
-//           headers: new Headers({
-//             "Content-type": "application/json",
-//           }),
-//         }
-//       );
-//       if (!response.ok) {
-//         const error = await response.json();
-//         dispatch(EditUnversityFail(error.message));
-//       }
-//       const data = await response.json();
-//       dispatch(EditUnversitySuccess(data.status));
-//     };
-// };
+//====EDITING TOUR DETAILS====//
+export const editTourDetails = (
+  name,
+  description,
+  tourActivities,
+  dayActivityDescription,
+  duration,
+  price,
+  file,
+  packageDetails,
+  category,
+  country,
+  tourId
+) => {
+  return async (dispatch) => {
+    dispatch(EditTourPending());
+    const data = new FormData();
+    data.append("file", file);
+    data.append("category", category);
+    data.append("name", name);
+    data.append("description", description);
+    data.append("tourActivities", tourActivities);
+    data.append("packageDetails", packageDetails);
+    data.append("country", country);
+    data.append("price", price);
+    data.append("duration", duration);
+    data.append("dayActivityDescription", dayActivityDescription);
+    // data.append("maxGroupSize", maxGroupSize);
+    // data.append("summary", summary);
+
+    // console.log("Tour activities", tourActivities)
+    // console.log("day", dayActivityDescription)
+    // console.log("package", packageDetails)
+
+    const response = await fetch(`${baseUrl}/api/v1/tours/updateTour/${tourId}`, {
+      method: "PATCH",
+      body: data,
+
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      dispatch(EditTourFail(error));
+      console.log("Tour Edit", error)
+    }
+    const res = await response.json();
+    dispatch(EditTourSuccess(res));
+    console.log("Tour Edit Succ", res)
+  };
+};
+//====END====//
+
+
+//====DELETE TOUR FROM DB====//
+export const DeleteTour = (tourId) => async (dispatch) => {
+  dispatch(deleteTourPending());
+  try {
+    const response = await fetch(`${baseUrl}/api/v1/tours/deleteTour/${tourId}`, {
+      method: "DELETE"
+    });
+    const Tour = await response.json();
+    dispatch(deleteTourSuccess(Tour));
+  } catch (error) {
+    dispatch(deleteTourFail(error));
+  }
+};
+//====END====//
+

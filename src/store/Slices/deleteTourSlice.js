@@ -5,19 +5,19 @@ const initialState = {
   status: "",
   message: "",
 };
-const deleteDocumentSlice = createSlice({
-  name: "deleteDocument",
+const deleteTourSlice = createSlice({
+  name: "deleteTour",
   initialState,
   reducers: {
-    deleteDocumentPending: (state) => {
+    deleteTourPending: (state) => {
       state.isLoading = true;
     },
-    deleteDocumentSuccess: (state, {payload}) => {
+    deleteTourSuccess: (state, {payload}) => {
       state.message = payload.message;
       state.status = payload.status;
       state.isLoading = false;
     },
-    deleteDocumentFail: (state, { payload }) => {
+    deleteTourFail: (state, { payload }) => {
       state.status = payload.status;
       state.message = payload.message;
       state.isLoading = false;
@@ -25,8 +25,8 @@ const deleteDocumentSlice = createSlice({
   },
 });
 
-const { reducer, actions } = deleteDocumentSlice;
+const { reducer, actions } = deleteTourSlice;
 
-export const { deleteDocumentPending, deleteDocumentSuccess, deleteDocumentFail } =
+export const { deleteTourPending, deleteTourSuccess, deleteTourFail } =
   actions;
 export default reducer;

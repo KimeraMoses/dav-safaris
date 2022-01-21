@@ -27,23 +27,26 @@ import styles from "./NewTour.module.css";
 import NewItinary from "./NewItinary";
 import ImageUpload from "./ImageUpload";
 import { useEffect } from "react";
-import { creatNewTour } from "../../store/Actions/TourActions";
+import { creatNewTour, editTourDetails } from "../../store/Actions/TourActions";
 import {
   TourCategories_Kenya,
   TourCategories_Rwanda,
   TourCategories_Tanzania,
   TourCategories_Uganda,
 } from "./TourCategories";
-
+import { AddDays, DeleteDay } from "../../store/Slices/newTourSlice";
 
 let dayActivityDescription = [];
 
-// console.log("Outside", dayActivityDescription);
+console.log("Outside", dayActivityDescription);
 
-const NewTour = () => {
+const NewTour = (props) => {
   const DarkMode = false;
-  const isLoading = useSelector((state) => state.tour.isLoading);
-
+  const isEditing = useSelector((state) => state.editTour.isLoading);
+  const isLoading = useSelector((state) => state.newTour.isLoading);
+  const Tour = useSelector((state) => state.tour.tourDetails);
+  const DayActivities = useSelector((state) => state.newTour.days);
+  const { isEdit,setIsEdit } = props;
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -51,25 +54,48 @@ const NewTour = () => {
   const [category, setCategory] = useState([]);
   const [itinaries, setItinaries] = useState([]);
   const [TourCategories, setTourCategories] = useState([]);
+
+  let tourHighLights = "";
+  Tour &&
+    Tour.tourActivities.map((el) => {
+      tourHighLights += el + "\n";
+    });
+  let tourIncludes = "";
+  Tour &&
+    Tour.packageDetails &&
+    Tour.packageDetails.price_inludes &&
+    Tour.packageDetails.price_inludes.map((el) => {
+      tourIncludes += el + "\n";
+    });
+  let tourExclude = "";
+  Tour &&
+    Tour.packageDetails &&
+    Tour.packageDetails.price_excludes &&
+    Tour.packageDetails.price_excludes.map((el) => {
+      tourExclude += el + "\n";
+    });
+
   const [values, setValues] = useState({
-    name: "",
-    description: "",
-    tourActivities: "",
+    name: Tour.name,
+    description: Tour.description,
+    tourActivities: tourHighLights,
     cover_image: "",
     selectedImage: "",
-    country: "",
-    category: "",
-    duration: "",
-    price: "",
-    includes: "",
-    excludes: "",
+    country: Tour.country,
+    category: Tour.category,
+    duration: Tour.duration,
+    price: Tour.price,
+
+    includes: tourIncludes,
+    excludes: tourExclude,
     day: "",
     itinaryTitle: "",
     itinaryDesc: "",
     meal_plan: "",
     accomodation_plan: "",
   });
-  
+  useEffect(() => {}, [values]);
+
   useEffect(() => {
     switch (values.country) {
       case "uganda":
@@ -88,7 +114,6 @@ const NewTour = () => {
         break;
     }
   }, [values.country]);
-
 
   //====FORMATING THE TOUR HIGHLIGHTS====//
   let tourActivities = [];
@@ -159,6 +184,8 @@ const NewTour = () => {
     };
 
     dayActivityDescription.push(itinary);
+    dispatch(AddDays(itinary));
+
     setValues({
       ...values,
       day: "",
@@ -169,6 +196,7 @@ const NewTour = () => {
     });
   };
 
+  console.log("Inside", dayActivityDescription);
 
   const RegisterFormSubmitHandler = async (e) => {
     e.preventDefault();
@@ -182,7 +210,7 @@ const NewTour = () => {
       return setError("Tour price is required");
     }
 
-    if (values.selectedImage.length < 1) {
+    if (!isEdit && values.selectedImage.length < 1) {
       return setError("Tour cover image required");
     }
     if (values.description.length < 1) {
@@ -191,21 +219,39 @@ const NewTour = () => {
 
     try {
       await dispatch(
-        creatNewTour(
-          values.name,
-          values.description,
-          JSON.stringify(tourActivities),
-          JSON.stringify(dayActivityDescription),
-          values.duration,
-          values.price,
-          values.selectedImage,
-          JSON.stringify(packageDetails),
-          values.category,
-          values.country
-        )
+        isEdit
+          ? editTourDetails(
+              values.name,
+              values.description,
+              JSON.stringify(tourActivities),
+              JSON.stringify(dayActivityDescription),
+              values.duration,
+              values.price,
+              values.selectedImage,
+              JSON.stringify(packageDetails),
+              values.category,
+              values.country,
+              Tour.id
+            )
+          : creatNewTour(
+              values.name,
+              values.description,
+              JSON.stringify(tourActivities),
+              JSON.stringify(dayActivityDescription),
+              values.duration,
+              values.price,
+              values.selectedImage,
+              JSON.stringify(packageDetails),
+              values.category,
+              values.country
+            )
       );
-      setMessage(`${values.name} Created Successfully`);
-      setTourCategories([])
+      setMessage(
+        `${isEdit ? "Changes to " : ""} ${Tour.name} ${
+          isEdit ? "saved" : "Created"
+        } Successfully`
+      );
+      setTourCategories([]);
       setValues({
         name: "",
         description: "",
@@ -228,12 +274,19 @@ const NewTour = () => {
       tourActivities = [];
       priceIncludes = [];
       priceExcludes = [];
+      setIsEdit(false)
     } catch (error) {
       setError("Tour Registration Failed");
     }
   };
+  let filteredItinaries = DayActivities;
 
-
+  const onEditClick = (id) => {
+    console.log("id", id);
+    filteredItinaries = DayActivities.filter((item, index) => id !== index);
+    console.log("Inside", filteredItinaries);
+    dispatch(DeleteDay(id));
+  };
 
   return (
     <Container fluid>
@@ -312,6 +365,7 @@ const NewTour = () => {
                 >
                   <ImageUpload
                     tourImage={values.cover_image}
+                    Image={Tour.imageCover}
                     uploaded={true}
                     tourImageHandler={tourImageHandler}
                   />
@@ -354,10 +408,7 @@ const NewTour = () => {
                       {TourCategories.length > 0 ? (
                         TourCategories.map((category, index) => {
                           return (
-                            <MenuItem
-                              key={index}
-                              value={category.value}
-                            >
+                            <MenuItem key={index} value={category.value}>
                               {category.name}
                             </MenuItem>
                           );
@@ -369,16 +420,6 @@ const NewTour = () => {
                           </Alert>
                         </MenuItem>
                       )}
-                      {/* <MenuItem value="gorilla-wildlife-safaris">
-                        Gorilla and Wildlife Safaris
-                      </MenuItem>
-                      <MenuItem value="uganda-birding-safaris">
-                        Uganda Birding Safaris
-                      </MenuItem>
-                      <MenuItem value="uganda-cultural-tours">
-                        Uganda Cultural Tours
-                      </MenuItem>
-                      <MenuItem value="mountaineering">Mountaineering</MenuItem> */}
                     </Select>
                   </FormControl>
                 </div>
@@ -443,8 +484,10 @@ const NewTour = () => {
                 values={values}
                 setValues={setValues}
                 ItinaryHandler={ItinaryHandler}
-                dayActivity={dayActivityDescription}
+                dayActivity={Tour.dayActivityDescription}
                 days={values.duration}
+                onEditClick={onEditClick}
+                isEdit={isEdit}
               />
 
               <Row>
@@ -458,8 +501,24 @@ const NewTour = () => {
                       DarkMode ? styles.gpa__dark_mode : ""
                     }`}
                   >
-                    {isLoading ? "Creating Tour..." : "Create Tour"}
+                    {/* {isEditing || isLoading
+                      ? "Creating Tour..."
+                      : "Create Tour"}
                     {isLoading ? (
+                      <Spinner
+                        thickness={2}
+                        size={20}
+                        style={{ marginLeft: 5 }}
+                      />
+                    ) : null} */}
+                    {isEdit
+                      ? isEditing
+                        ? "Saving changes..."
+                        : "Save changes"
+                      : isLoading
+                      ? "Creating Tour..."
+                      : "Create Tour"}
+                    {isLoading | isEditing ? (
                       <Spinner
                         thickness={2}
                         size={20}

@@ -9,7 +9,8 @@ const convertBytesToKB = (bytes) => Math.round(bytes / KILO_BYTES_PER_BYTE);
 
 const ImageUpload = ({
   tourImageHandler,
-  tourImage
+  tourImage,
+  Image
 }) => {
   const TourImageHandler = () => {
     const fileInput = document.getElementById("tour_image_input_change");
@@ -22,7 +23,7 @@ const ImageUpload = ({
       className={classes.dav__cover_image}
       onClick={TourImageHandler}
       style={{
-        backgroundImage: `url(${tourImage})`,
+        backgroundImage: `url(${tourImage.length> 0? tourImage: Image})`,
         backgroundSize: "cover",
         backgroundPosition: "center center",
         backgroundRepeat: "no-repeat",

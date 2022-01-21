@@ -44,6 +44,7 @@ const CardCarousel = () => {
           <TourCard
             TourImage={tour.imageCover}
             TourTitle={tour.name}
+            TourSlug={tour.slug}
             NumDays={tour.duration}
             NumNights={tour.duration - 1}
             TourDescription={tour.description}
