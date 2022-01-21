@@ -33,6 +33,17 @@ const tourSlice = createSlice({
       state.isBooking = false;
       state.message = payload;
     },
+    reviewTourPending: (state, { payload }) => {
+      state.isBooking = true;
+    },
+    reviewTourSuccess: (state, { payload }) => {
+      state.isBooking = false;
+      state.message = payload;
+    },
+    reviewTourFail: (state, { payload }) => {
+      state.isBooking = false;
+      state.message = payload;
+    },
   },
 });
 
@@ -45,5 +56,8 @@ export const {
   bookTourPending,
   bookTourSuccess,
   bookTourFail,
+  reviewTourPending,
+  reviewTourSuccess,
+  reviewTourFail
 } = actions;
 export default reducer;

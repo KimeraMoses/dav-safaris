@@ -4,7 +4,7 @@ import { fetchCountriesFail, fetchCountriesPending, fetchCountriesSuccess } from
 import { deleteTourFail, deleteTourPending, deleteTourSuccess } from "../Slices/deleteTourSlice";
 import { EditTourFail, EditTourPending, EditTourSuccess } from "../Slices/editTourSlice";
 import { NewTourFail, NewTourPending, NewTourSuccess } from "../Slices/newTourSlice";
-import { bookTourFail, bookTourPending, bookTourSuccess, fetchTourFail, fetchTourPending, fetchTourSuccess } from "../Slices/tourSlice";
+import { bookTourFail, bookTourPending, bookTourSuccess, fetchTourFail, fetchTourPending, fetchTourSuccess, reviewTourFail, reviewTourPending, reviewTourSuccess } from "../Slices/tourSlice";
 import { fetchToursFail, fetchToursPending, fetchToursSuccess } from "../Slices/toursSlice";
 
 export const fetchAllTours = () => async (dispatch) => {
@@ -232,5 +232,52 @@ export const BookTour = (
     let message = "Booking sent successfully, Our travel agent will get back to you shortly";
     dispatch(bookTourSuccess(message));
     console.loog(data)
+  };
+};
+
+export const ReviewTour = (
+  tour,
+  review,
+  rating,
+  user_name,
+  country_of_residence,
+  visit_month,
+  visit_year,
+  email
+) => {
+  return async (dispatch) => {
+    dispatch(reviewTourPending());
+    const response = await fetch(`${baseUrl}/api/v1/reviews/create`, {
+      method: "POST",
+      body: JSON.stringify({
+        tour,
+        review,
+        rating,
+        user_name,
+        country_of_residence,
+        visit_month,
+        visit_year
+      }),
+      headers: new Headers({
+        "Content-type": "application/json",
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      let message = "";
+      if (error.message === "Email already in use") {
+        message = "Account with the same email already exits";
+      } else {
+        message =
+          "Booking Failed!, Please check your connection and try again";
+      }
+      dispatch(reviewTourFail(message));
+      console.log("Review Failed",error)
+    }
+    const data = await response.json();
+    let message = "Thank you for reviewing this tour.";
+    dispatch(reviewTourSuccess(message));
+    console.loog("Review Sent",data)
   };
 };
