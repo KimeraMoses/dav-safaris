@@ -4,7 +4,7 @@ import { fetchCountriesFail, fetchCountriesPending, fetchCountriesSuccess } from
 import { deleteTourFail, deleteTourPending, deleteTourSuccess } from "../Slices/deleteTourSlice";
 import { EditTourFail, EditTourPending, EditTourSuccess } from "../Slices/editTourSlice";
 import { NewTourFail, NewTourPending, NewTourSuccess } from "../Slices/newTourSlice";
-import { fetchTourFail, fetchTourPending, fetchTourSuccess } from "../Slices/tourSlice";
+import { bookTourFail, bookTourPending, bookTourSuccess, fetchTourFail, fetchTourPending, fetchTourSuccess } from "../Slices/tourSlice";
 import { fetchToursFail, fetchToursPending, fetchToursSuccess } from "../Slices/toursSlice";
 
 export const fetchAllTours = () => async (dispatch) => {
@@ -191,3 +191,46 @@ export const DeleteTour = (tourId) => async (dispatch) => {
 };
 //====END====//
 
+export const BookTour = (
+  tour,
+  user_name,
+  country_of_residence,
+  phone,
+  email,
+  travel_plans
+) => {
+  return async (dispatch) => {
+    dispatch(bookTourPending());
+    const response = await fetch(`${baseUrl}/api/v1/bookings/create`, {
+      method: "POST",
+      body: JSON.stringify({
+        tour,
+        user_name,
+        country_of_residence,
+        phone,
+        email,
+        travel_plans
+      }),
+      headers: new Headers({
+        "Content-type": "application/json",
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      let message = "";
+      if (error.message === "Email already in use") {
+        message = "Account with the same email already exits";
+      } else {
+        message =
+          "Booking Failed!, Please check your connection and try again";
+      }
+      dispatch(bookTourFail(message));
+      console.log(error)
+    }
+    const data = await response.json();
+    let message = "Booking sent successfully, Our travel agent will get back to you shortly";
+    dispatch(bookTourSuccess(message));
+    console.loog(data)
+  };
+};

@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   tourDetails: {},
   isLoading: false,
+  isBooking: false,
+  message: "",
   error: "",
 };
 const tourSlice = createSlice({
@@ -20,11 +22,28 @@ const tourSlice = createSlice({
       state.error = payload;
       state.isLoading = false;
     },
-    
+    bookTourPending: (state, { payload }) => {
+      state.isBooking = true;
+    },
+    bookTourSuccess: (state, { payload }) => {
+      state.isBooking = false;
+      state.message = payload;
+    },
+    bookTourFail: (state, { payload }) => {
+      state.isBooking = false;
+      state.message = payload;
+    },
   },
 });
 
 const { reducer, actions } = tourSlice;
 
-export const { fetchTourPending, fetchTourSuccess, fetchTourFail } = actions;
+export const {
+  fetchTourPending,
+  fetchTourSuccess,
+  fetchTourFail,
+  bookTourPending,
+  bookTourSuccess,
+  bookTourFail,
+} = actions;
 export default reducer;

@@ -100,7 +100,7 @@ const ReviewForm = () => {
                 variant="filled"
                 fullWidth
                 size="small"
-                className={classes.gpa__form_input_field}
+                className={classes.dav__booking_form_field}
               >
                 <InputLabel>Month</InputLabel>
                 <Select
@@ -128,7 +128,7 @@ const ReviewForm = () => {
                 variant="filled"
                 fullWidth
                 size="small"
-                className={classes.gpa__form_input_field}
+                className={classes.dav__booking_form_field}
               >
                 <InputLabel>Year</InputLabel>
                 <Select

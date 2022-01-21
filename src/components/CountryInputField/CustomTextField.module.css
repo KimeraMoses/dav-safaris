@@ -1,114 +1,84 @@
-.gpa__document_upload_button {
-    box-shadow: none !important;
-    color: rgba(0, 0, 0, 0.54);
-    background-color: rgba(0, 0, 0, 0.09);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.42) !important;
-    transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
-    border-radius: 0 !important;
-    border-top-left-radius: 4px !important;
-    border-top-right-radius: 4px !important;
-    text-align: left;
-    padding: 16px !important;
-    overflow: hidden;
-  }
-  .gpa__uploaded_document_name_wrapper {
-    white-space: nowrap;
-    text-transform: capitalize;
-    width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .gpa__document_upload_button:hover {
-    box-shadow: none;
-  }
-  .gpa__dark_mode.gpa__document_upload_button:hover {
-    background-color: rgba(255, 255, 255, 0.19) !important;
-  }
-  .gpa__dark_mode.gpa__document_upload_button {
-    background-color: rgba(255, 255, 255, 0.09);
-    color: rgba(255, 255, 255, 0.7);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.7) !important;
-  }
-  
-  .gpa__custom_text_field_input_area {
-    outline: none;
-    border: 0;
-    border-radius: 3px;
-    background-color: transparent;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    line-height: 100%;
-  }
-  .gpa__custom_text_field_result_dropdown {
-    position: relative;
-    width: 100%;
-    text-align: left;
-  }
-  .gpa__no_search_found_wrapper {
-    overflow: hidden;
-    position: absolute;
-    top: 0px;
-    right: 0;
-    left: 0;
-    margin: 0;
-    border: 0;
-    background-color: #eaeaea;
-    list-style: none;
-    z-index: 2;
-    border-radius: 4px;
-    padding: 10px 15px 12px;
-    box-shadow: 0 3px 8px 0 rgb(0 0 0 / 20%), 0 0 0 1px rgb(0 0 0 / 8%);
-  }
-  
-  .gpa__dark_mode.gpa__no_search_found_wrapper {
-    background-color: var(--dav__App_bg_dark);
-  }
-  .gpa__selected_course_unit_wrapper {
-    text-align: left;
-    padding: 5px 15px 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-transform: capitalize;
-  }
-  .gpa__selected_course_unit_wrapper button {
-    text-transform: capitalize;
-    float: right;
-  }
-  .gpa__selected_course_unit_wrapper p {
-    margin-bottom: 0;
-    font-weight: 500;
-  }
-  .gpa__custom_text_field_results {
-    position: absolute;
-    top: 0px;
-    right: 0;
-    left: 0;
-    margin: 0;
-    border: 0;
-    background-color: #eaeaea;
-    list-style: none;
-    padding-left: 0;
-    z-index: 2;
-    border-radius: 4px;
-    box-shadow: 0 3px 8px 0 rgb(0 0 0 / 20%), 0 0 0 1px rgb(0 0 0 / 8%);
-  }
-  .gpa__dark_mode.gpa__custom_text_field_results {
-    background-color: var(--dav__App_bg_dark);
-  }
-  .gpa__course_unit_code {
-    text-transform: uppercase;
-  }
-  .gpa__custom_text_field_results li {
-    padding: 5px 15px;
-    border-bottom: 1px solid rgba(95, 94, 94, 0.336);
-    cursor: pointer;
-    text-transform: capitalize;
-  }
-  .gpa__custom_text_field_results li:hover {
-    background-color: var(--dav__secondary_color);
-    color: #fff;
-  }
+.gpa__custom_text_field_wrapper {
+  /* margin-bottom: 10px; */
+}
 
-  
+.gpa__custom_text_field_input_area {
+  outline: none;
+  border: 0;
+  border-radius: 3px;
+  background-color: transparent;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  line-height: 100%;
+}
+.gpa__custom_text_field_result_dropdown {
+  position: relative;
+  width: 100%;
+  text-align: left;
+}
+.gpa__no_search_found_wrapper {
+  overflow: hidden;
+  position: absolute;
+  top: 0px;
+  right: 0;
+  left: 0;
+  margin: 0;
+  border: 0;
+  background-color: #eaeaea;
+  list-style: none;
+  z-index: 2;
+  border-radius: 4px;
+  padding: 10px 15px 12px;
+  box-shadow: 0 3px 8px 0 rgb(0 0 0 / 20%), 0 0 0 1px rgb(0 0 0 / 8%);
+}
+
+.gpa__dark_mode.gpa__no_search_found_wrapper {
+  background-color: var(--dav__App_bg_dark);
+}
+.gpa__selected_course_unit_wrapper {
+  text-align: left;
+  padding: 5px 15px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: capitalize;
+}
+.gpa__selected_course_unit_wrapper button {
+  text-transform: capitalize;
+  float: right;
+}
+.gpa__selected_course_unit_wrapper p {
+  margin-bottom: 0;
+  font-weight: 500;
+}
+.gpa__custom_text_field_results {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  left: 0;
+  margin: 0;
+  border: 0;
+  background-color: #eaeaea;
+  list-style: none;
+  padding-left: 0;
+  z-index: 2;
+  border-radius: 4px;
+  box-shadow: 0 3px 8px 0 rgb(0 0 0 / 20%), 0 0 0 1px rgb(0 0 0 / 8%);
+}
+.gpa__dark_mode.gpa__custom_text_field_results {
+  background-color: var(--dav__App_bg_dark);
+}
+.gpa__course_unit_code {
+  text-transform: uppercase;
+}
+.gpa__custom_text_field_results li {
+  padding: 5px 15px;
+  border-bottom: 1px solid rgba(95, 94, 94, 0.336);
+  cursor: pointer;
+  text-transform: capitalize;
+}
+.gpa__custom_text_field_results li:hover {
+  background-color: var(--dav__secondary_color);
+  color: #fff;
+}
