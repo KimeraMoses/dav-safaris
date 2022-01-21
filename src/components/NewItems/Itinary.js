@@ -28,7 +28,7 @@ const Itinary = ({ id,day, title, description, meal_plan, accomodation,onEditCli
           <IconButton
             edge="end"
             aria-label="edit"
-            // onClick={() => onEditClick(tour.id)}
+            onClick={() => onEditClick(id)}
           >
             <EditIcon fontSize="small" />
           </IconButton>

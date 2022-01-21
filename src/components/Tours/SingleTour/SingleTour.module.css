@@ -26,14 +26,21 @@
 
 /* ====TOUR HIGHLIGHTS==== */
 .dav__single_tour_package_wrapper {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 10px 20px;
+  background-color: #edf2f2;
+  /* width: 100%; */
 }
 .dav__single_tour_highlights_wrapper {
   display: flex;
   justify-content: space-between;
   padding: 20px 30px;
+}
+.dav__tour_highlights{
+  width: 100%;
+  padding-right: 30px;
 }
 .dav__tour_highlights:target::before {
   content: "";
@@ -43,9 +50,10 @@
   margin: -130px 0 0;
 }
 .dav__tour_highlights h2 {
-  margin-bottom: 16px;
+  margin: 16px 0;
   font-family: "Merriweather", serif;
   font-style: italic;
+  
 }
 .dav__tour_highlights_list ul {
   margin-left: 0;
@@ -77,6 +85,7 @@
   font-family: "Merriweather", serif;
   font-style: italic;
   margin-bottom: 0;
+  
 }
 
 /* ====BOOK TOUR==== */
@@ -150,6 +159,9 @@
 }
 
 @media screen and (max-width: 637px) {
+  .dav__tour_highlights{
+    padding-right: 0px;
+  }
   /* ====SINGLE TOUR HERO==== */
 
   .dav__single_tour_hero {

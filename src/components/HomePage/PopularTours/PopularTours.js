@@ -11,11 +11,31 @@ import { useSelector } from "react-redux";
 import CardCarousel from "../../CardCarousel/CardCarousel";
 
 const PopularTours = () => {
-  const PopularTours = useSelector(state=>state.tours.toursList);
+  const PopularTours = useSelector((state) => state.tours.toursList);
   return (
-      // <CardCarousel/>
     <Container fluid className={classes.dav__popular_tours_wrapper}>
       <Row className={classes.dav__popular_tours_row_wrapper}>
+        {PopularTours &&
+          PopularTours.map((tour) => {
+            return (
+              <Col
+                key={tour.id}
+                lg={3}
+                sm={12}
+                className={classes.dav__popular_tour_card_wrapper}
+              >
+                <TourCard
+                  TourImage={tour.imageCover}
+                  TourTitle={tour.name}
+                  TourSlug={tour.slug}
+                  NumDays={tour.duration}
+                  NumNights={tour.duration - 1}
+                  TourDescription={tour.description}
+                  TourRating={tour.ratingsAverage}
+                />
+              </Col>
+            );
+          })}
         <Col lg={3} sm={12} className={classes.dav__popular_tour_card_wrapper}>
           <TourCard
             TourImage={Image1}
@@ -26,7 +46,7 @@ const PopularTours = () => {
           />
         </Col>
         <Col lg={3} sm={12} className={classes.dav__popular_tour_card_wrapper}>
-        <TourCard
+          <TourCard
             TourImage={Image2}
             TourTitle="9 Days Best of the Uganda Safari with Gorillas"
             NumDays={9}
@@ -35,7 +55,7 @@ const PopularTours = () => {
           />
         </Col>
         <Col lg={3} sm={12} className={classes.dav__popular_tour_card_wrapper}>
-        <TourCard
+          <TourCard
             TourImage={Image3}
             TourTitle="10 days Uganda Safari Gorilla, Wildlife and Chimpanzees"
             NumDays={10}

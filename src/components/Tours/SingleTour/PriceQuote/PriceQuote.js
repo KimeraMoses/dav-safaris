@@ -1,8 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import classes from "./PriceQuote.module.css";
 
 const PriceQuote = (props) => {
-  const { type } = props;
+  const { type, Items } = props;
 
   const Pincludes = type === "includes" ? true : false;
   return (
@@ -12,18 +13,18 @@ const PriceQuote = (props) => {
       </div>
       <div className={classes.dav__tour_price_includes}>
         <ul
-          className={`${classes.dav__tour_price_includes_list} ${Pincludes? '': classes.dav__price_excludes}`}
+          className={`${classes.dav__tour_price_includes_list} ${
+            Pincludes ? "" : classes.dav__price_excludes
+          }`}
         >
-          <li>
-            <span>Scheduled international flights</span>
-          </li>
-          <li>
-            <span>Fully insured vehicle hire</span>
-          </li>
-          <li>
-            <span>All accommodation</span>
-          </li>
-          <li>24-hour support while you travel</li>
+          {Items &&
+            Items.map((item, index) => {
+              return (
+                <li key={index}>
+                  <span>{item}</span>
+                </li>
+              );
+            })}
         </ul>
       </div>
     </div>

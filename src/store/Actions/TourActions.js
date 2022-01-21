@@ -50,7 +50,6 @@ export const fetchTourDetails = (tour_id) => async (dispatch) => {
     const fetchedTour = await response.json();
     dispatch(fetchTourSuccess(fetchedTour.tour));
     console.log(fetchedTour)
-
   } catch (error) {
     dispatch(fetchTourFail(error.message));
     console.log(error)
@@ -66,7 +65,6 @@ export const fetchTourName = (tour_slug) => async (dispatch) => {
     const fetchedTour = await response.json();
     dispatch(fetchTourSuccess(fetchedTour.tour));
     console.log(fetchedTour)
-
   } catch (error) {
     dispatch(fetchTourFail(error.message));
     console.log(error)

@@ -97,7 +97,7 @@ const SingleTour = () => {
   }, [tourTitle]);
   const [show, setShow] = useState(false);
   const Tour = useSelector((state) => state.tour.tourDetails);
-
+  console.log("Single Tour",Tour)
   return (
     <div className={classes.dav__single_tour_page_wrapper}>
       <div
@@ -112,57 +112,27 @@ const SingleTour = () => {
       </div>
       <JumpNavigation />
 
-      <div className={classes.dav__single_tour_highlights_wrapper}>
+      <div className={classes.dav__single_tour_highlights_wrapper} >
         <div className={classes.dav__tour_highlights} id="description">
+        <div className={classes.dav__single_tour_description}>
+          {Tour.description}
+        </div>
           <h2>Tour highlights</h2>
           <div className={classes.dav__tour_highlights_list}>
             <ul>
-              <li>
-                <p>Birding Mabamba Wetland</p>
-              </li>
-              <li>
-                <p>
-                  Birding the Northern Bank of Murchison Falls National Park
-                </p>
-              </li>
-              <li>
-                <p>
-                  Chimpanzee and Primates Trekking in Kibale Forest National
-                  Park.
-                </p>
-              </li>
-              <li>
-                <p>
-                  Birding Buhoma Nkuringo Trail In Bwindi Impenetrable National
-                  Park
-                </p>
-              </li>
-              <li>
-                <p>
-                  Birding Buniga Nobe Forest in Bwindi Impenetrable National
-                  Park
-                </p>
-              </li>
-              <li>
-                <p>
-                  Mountain Gorilla Trekking in Bwindi Impenetrable National Park
-                </p>
-              </li>
-              <li>
-                <p>Equator Line Expedition in Uganda</p>
-              </li>
-              <li>
-                <p>Birding in Lake Mburo National Park</p>
-              </li>
-              <li>
-                <p>Birding Kihigami Wetland Trail in Semiliki National Park</p>
-              </li>
+              {Tour && Tour.tourActivities && Tour.tourActivities.map((item, index)=>{
+                return(
+                  <li key={index}>
+                  <p>{item}</p>
+                </li>
+                )
+              })}
             </ul>
           </div>
 
           <div className={classes.dav__single_tour_package_wrapper}>
-            <PriceQuote type="includes" />
-            <PriceQuote type="excludes" />
+            <PriceQuote type="includes" Items={Tour && Tour.packageDetails && Tour.packageDetails.price_inludes}/>
+            <PriceQuote type="excludes" Items={Tour && Tour.packageDetails && Tour.packageDetails.price_excludes} />
           </div>
 
           <div className={classes.dav__intinary_details} id="itinerary">
@@ -171,15 +141,15 @@ const SingleTour = () => {
             </div>
 
             <ul className={classes.dav__intinary_list_wrapper}>
-              {itinaries.map((itinary, index) => {
+              {Tour && Tour.dayActivityDescription && Tour.dayActivityDescription.map((itinary, index) => {
                 return (
                   <Itinary
-                    key={itinary.id}
-                    day={index + 1}
+                    key={index}
+                    day={itinary.day}
                     itinTitle={itinary.title}
                     itinDescription={itinary.description}
-                    meal_plan={itinary.Meal_plan}
-                    accomodation={itinary.Accommodation}
+                    meal_plan={itinary.meal_plan}
+                    accomodation={itinary.accomodation}
                   />
                 );
               })}

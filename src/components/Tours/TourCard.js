@@ -7,6 +7,7 @@ import { Rating } from "@material-ui/lab";
 
 const TourCard = (props) => {
   const { TourImage, TourTitle, NumDays, NumNights, TourDescription,TourRating,TourSlug } = props;
+  console.log(TourRating)
   return (
     <div className={classes.tour_card_wrapper}>
       <div className={classes.tour_card_header}>
@@ -32,10 +33,10 @@ const TourCard = (props) => {
       </div>
       <div className={classes.tour__footer}>
         <div className={classes.tour_ratings}>
-          <Rating name="read-only" value={TourRating} readOnly precision={0.5}/>
+          <Rating name="read-only" readOnly precision={0.5} value={TourRating} />
         </div>
         <div className={classes.tour__read_more}>
-          <a href="#">Book Tour</a>
+          <Link to={`/tours/${TourSlug}`}>Book Tour</Link>
         </div>
       </div>
     </div>

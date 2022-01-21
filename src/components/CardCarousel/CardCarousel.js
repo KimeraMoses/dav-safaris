@@ -19,11 +19,8 @@ const breakpoints = [
 
 const CardCarousel = () => {
   const isLoading = useSelector((state) => state.tours.isLoading);
-  const [selectedId, setSelectedId] = useState("");
   const dispatch = useDispatch();
   const tourList = useSelector((state) => state.tours.toursList);
-  console.log(tourList)
-
 
   let FilteredTours = tourList;
 

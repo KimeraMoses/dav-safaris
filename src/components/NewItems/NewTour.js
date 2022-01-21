@@ -279,13 +279,12 @@ const NewTour = (props) => {
       setError("Tour Registration Failed");
     }
   };
-  let filteredItinaries = DayActivities;
+  let filteredItinaries = Tour.dayActivityDescription;
 
   const onEditClick = (id) => {
     console.log("id", id);
-    filteredItinaries = DayActivities.filter((item, index) => id !== index);
+    filteredItinaries = Tour.dayActivityDescription.filter((item, index) => id !== index);
     console.log("Inside", filteredItinaries);
-    dispatch(DeleteDay(id));
   };
 
   return (
