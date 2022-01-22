@@ -24,6 +24,7 @@ const NavigationMenu = (props) => {
     <div className={`${classes.dav__navbar_wrapper} ${menuOpen? classes.menuOpen: ''}`}>
       <ul className={`${classes.nav_menu} ${menuOpen ? classes.active : ""}`}>
         <NavMenuItem itemTitle="Home" itemLink="/" />
+        <NavMenuItem itemTitle="About Us" itemLink="/" />
         <NavMenuItem itemTitle="Uganda" itemLink="/uganda-safaris" />
         <NavMenuItem itemTitle="Kenya" itemLink="/kenya-safaris" />
         <NavMenuItem itemTitle="Rwanda" itemLink="/rwanda-safaris" />

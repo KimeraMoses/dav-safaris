@@ -6,20 +6,15 @@ const AboutUs = () => {
     <div className={classes.home__about__section}>
       <h2>DAV SAFARIS UGANDA</h2>
       <p>
-        Tours and Travel Agency based in Uganda rendering mountain gorilla
-        Trekking experience, birding and wildlife safaris doubled with a range
-        of services including mountaineering , white water rafting and culture
-        and community tours among others in Uganda and the entire East African
-        Countries offering tailor made services suiting all travel budgets. We
-        pride ourselves in ensuring convenient safaris based on our guest
-        requests in terms of budget, time and travel needs to enjoy your African
-        safari. Mountain Gorilla trekking in Uganda and Rwanda, wild beast
-        Migration in Tanzania and Kenya, Rwenzori and Kirimanjaro Mountain
-        Hiking experiences and white water rafting adventure along the Nile
-        River. Our excellent team of Safari guides is capable to make your
-        safari a lifetime experience accompanied by the great and mechanically
-        sounding fleet. All our services are available throughout the year with
-        the best time being December to January and June to August.
+        Dav Safari was established in 2018 by a group of native youth in Uganda,
+        this came after gathering competent skills and experience to run safaris
+        and holidays, our idea is to offer Tours and travel services to our
+        esteemed customers throughout the region of East Africa. Dav safaris is
+        a fully legally licensed company with operational offices in Kampala
+        Uganda. We offer a variety of services ranging from Tours and travel,
+        hotel booking, chimpanzee and Gorilla Trekking safaris, Beach holidays,
+        flight tickets booking, Transport services majorly in Uganda, Kenya,
+        Tanzania, Zanzibar, and Rwanda.
       </p>
     </div>
   );
