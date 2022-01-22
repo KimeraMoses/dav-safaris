@@ -4,6 +4,8 @@ const initialState = {
   tourDetails: {},
   isLoading: false,
   isBooking: false,
+  isReviewing: false,
+  ReviewStatus: "",
   message: "",
   error: "",
 };
@@ -34,15 +36,15 @@ const tourSlice = createSlice({
       state.message = payload;
     },
     reviewTourPending: (state, { payload }) => {
-      state.isBooking = true;
+      state.isReviewing = true;
     },
     reviewTourSuccess: (state, { payload }) => {
-      state.isBooking = false;
-      state.message = payload;
+      state.isReviewing = false;
+      state.ReviewStatus = payload;
     },
     reviewTourFail: (state, { payload }) => {
-      state.isBooking = false;
-      state.message = payload;
+      state.isReviewing = false;
+      state.ReviewStatus = payload;
     },
   },
 });

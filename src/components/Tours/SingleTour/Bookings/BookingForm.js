@@ -43,8 +43,6 @@ const BookingForm = (props) => {
     setShow(false);
     const { value } = e.target;
     setSearchTerm(value);
-    // setError("");
-    // setMessage("");
 
     if (searchTerm !== "") {
       const Results = countryList.filter((Result) => {

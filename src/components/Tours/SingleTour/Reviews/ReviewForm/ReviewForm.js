@@ -37,8 +37,8 @@ const labels = {
 
 const ReviewForm = () => {
   const countryList = useSelector((state) => state.countries.countryList);
-  const isLoading = useSelector((state) => state.tour.isBooking);
-  const message = useSelector((state) => state.tour.message);
+  const isLoading = useSelector((state) => state.tour.isReviewing);
+  const message = useSelector((state) => state.tour.ReviewStatus);
   const Tour = useSelector((state) => state.tour.tourDetails);
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
