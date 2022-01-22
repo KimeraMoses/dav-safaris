@@ -114,6 +114,12 @@
   text-transform: uppercase;
   background-color: var(--dav__primary_color);
 }
+.tour__read_more.btn__disabled a{
+  cursor: default;
+  pointer-events: none;        
+  text-decoration: none;
+  color: grey;
+}
 .tour__read_more a:hover {
   background-color: var(--dav__secondary_color);
   color: #fff;

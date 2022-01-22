@@ -7,7 +7,6 @@ import { Rating } from "@material-ui/lab";
 
 const TourCard = (props) => {
   const { TourImage, TourTitle, NumDays, NumNights, TourDescription,TourRating,TourSlug } = props;
-  console.log(TourRating)
   return (
     <div className={classes.tour_card_wrapper}>
       <div className={classes.tour_card_header}>

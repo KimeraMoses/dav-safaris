@@ -79,6 +79,8 @@
   .rec-arrow-right {
     right: 0;
   }
-  
+  .MuiSkeleton-text{
+    transform: none!important;
+  }
   
   

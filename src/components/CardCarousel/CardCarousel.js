@@ -9,6 +9,7 @@ import Carousel from "react-elastic-carousel";
 //===COMPONENTS IMPORTS
 import styles from "./CourseUnitCarousel.module.css";
 import TourCard from "../Tours/TourCard";
+import TourCardSkeleton from "../Tours/TourCardSkeleton";
 
 const breakpoints = [
   { width: 1, itemsToShow: 1.2 },
@@ -33,7 +34,7 @@ const CardCarousel = () => {
       tiltEasing="ease"
     >
       {isLoading ? [...Array(8).keys()].map((index)=>{
-        return <TourCard/>
+        return <TourCardSkeleton type="slider"/>
       }):
       FilteredTours.slice(0,20).map((tour) => {
   

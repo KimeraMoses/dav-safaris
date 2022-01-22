@@ -283,7 +283,9 @@ const NewTour = (props) => {
 
   const onEditClick = (id) => {
     console.log("id", id);
-    filteredItinaries = Tour.dayActivityDescription.filter((item, index) => id !== index);
+    // filteredItinaries = Tour.dayActivityDescription.filter((item, index) => id !== index);
+    const Activity  = Tour.dayActivityDescription[id];
+  
     console.log("Inside", filteredItinaries);
   };
 

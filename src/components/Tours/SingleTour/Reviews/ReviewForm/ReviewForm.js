@@ -143,7 +143,6 @@ const ReviewForm = () => {
         visit_year: "",
         email: "",
       });
-      setValues({...values, user_name: ""})
       setCountry("");
     } catch (error) {
       if (!navigator.onLine) {
