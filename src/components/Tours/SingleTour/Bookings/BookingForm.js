@@ -192,7 +192,6 @@ const BookingForm = (props) => {
         >
           <InputLabel>Travel Budget</InputLabel>
           <Select
-            id="gpa__level_select_input"
             value={values.budget}
             name="budget"
             onChange={handleOnChange}

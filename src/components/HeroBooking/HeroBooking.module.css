@@ -1,6 +1,6 @@
 .herobooking__wrapper {
   background-color: #fff;
-  display: flex;
+  /* display: flex; */
   padding: 20px;
   margin: 10px 20px 70px;
   margin-top: -40px;
@@ -11,7 +11,10 @@
   justify-content: space-between;
   width: 100%;
 }
-
+.herobooking__input_wrapper{
+  width: 100%;
+  margin: 0 10px;
+}
 .hero__booking__title {
   font-weight: 400;
   font-size: 14px;
@@ -22,7 +25,10 @@
 .hero__booking__budget_input_wrapper {
   margin-bottom: 10px!important;
 }
-
+.dav__seaarch_results_error_wrapper{
+  padding-left:10px;
+  color: red;
+}
 @media screen and (min-width: 668px) {
   .herobooking__wrapper {
     margin: 10px 30px 70px;
@@ -31,7 +37,9 @@
   .hero__booking__submit_btn_wrapper {
       display: flex;
       align-items: center;
-      padding-top: 30px;
+      justify-content: center;
+      padding-top: 35px;
+      width: 100%;
   }
 }
 

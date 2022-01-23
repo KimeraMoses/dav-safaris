@@ -1,13 +1,18 @@
 
 .dav__popular_tours_wrapper{
     padding: 40px 30px;
-    min-height: 500px;
     margin: 30px 0;
     background-color: #fafafa;
 }
 
 .dav__popular_tours_row_wrapper{
     padding: 20px 50px;
+}
+.dav__no_results_found_error_wrapper{
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media screen and (max-width: 689px){

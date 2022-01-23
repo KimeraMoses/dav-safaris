@@ -31,6 +31,7 @@ import DashBoardItem from "./DashBoard/DashboardMenuItems/DashBoardItem";
 import ManageTours from "./DashBoard/ManageTours/ManageTours";
 import { AutoAuthenticate } from "../store/Actions/AuthActions";
 import { fetchAllTours } from "../store/Actions/TourActions";
+import Tours from "./Tours/AllTours/Tours";
 
 const App = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -72,6 +73,7 @@ const App = (props) => {
             <Route path="/password-reset" exact element={<ResetPassword />} />
             <Route path="/change-password" exact element={<ChangePassword />} />
             <Route path="/contact-us" exact element={<ContactUs />} />
+            <Route path="/tours" exact element={<Tours />} />
             <Route
               path="/:countryName"
               exact

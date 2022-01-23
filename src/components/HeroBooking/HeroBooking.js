@@ -1,49 +1,86 @@
-import { FormControl, MenuItem, Select, TextField } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  TextField,
+  InputLabel,
+} from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 import { Button } from "../UI/Button/Button";
 import classes from "./HeroBooking.module.css";
+import { Alert } from "react-bootstrap";
+import { useEffect } from "react";
 
-const HeroBooking = () => {
+const HeroBooking = (props) => {
+  const {values, handleOnChange,TourSearchHandler,error } = props
+
   return (
     <div className={classes.herobooking__wrapper}>
-      <form className={classes.herobooking__form}>
+      {error && (
+        <div className={classes.dav__seaarch_results_error_wrapper}>
+          {error}
+        </div>
+      )}
+      <form className={classes.herobooking__form} onSubmit={TourSearchHandler}>
         <div className={classes.herobooking__input_wrapper}>
           <div className={classes.hero__booking__title}>DESTINATION</div>
-          <TextField
-            required
-            type="search"
+          <FormControl
             variant="filled"
-            fullWidth
             size="small"
-            placeholder="Bwindi national park"
-          />
+            fullWidth
+            className={`${classes.gpa__form_input_field}`}
+          >
+            <InputLabel>Destination</InputLabel>
+            <Select
+              value={values.destination}
+              name="destination"
+              onChange={handleOnChange}
+            >
+              <MenuItem value="uganda">Uganda</MenuItem>
+              <MenuItem value="kenya">Kenya</MenuItem>
+              <MenuItem value="tanzania">Tanzania</MenuItem>
+              <MenuItem value="rwanda">Rwanda</MenuItem>
+            </Select>
+          </FormControl>
         </div>
-        <div className={classes.herobooking__input_wrapper}>
-          <div className={classes.hero__booking__title}>CHECK IN</div>
-          <TextField type="date" variant="filled" fullWidth size="small" />
-        </div>
-        <div className={classes.herobooking__input_wrapper}>
-          <div className={classes.hero__booking__title}>CHECK OUT</div>
-          <TextField type="date" variant="filled" fullWidth size="small" />
-        </div>
-
         <div className={classes.herobooking__input_wrapper}>
           <div className={classes.hero__booking__title}>
-            BUDGET (per person)
+            Travel Duration
           </div>
           <FormControl
             variant="filled"
-            fullWidth
             size="small"
-            className={classes.hero__booking__budget_input_wrapper}
+            fullWidth
+            className={`${classes.gpa__form_input_field}`}
           >
-            <Select name="budget" variant="filled" fullWidth>
-              <MenuItem value="1000">Bellow USD 1000</MenuItem>
-              <MenuItem value="2000">USD 1000 to 2000</MenuItem>
-              <MenuItem value="3000">USD 2000 to 3000</MenuItem>
-              <MenuItem value="3001">Above USD 3000</MenuItem>
+            <InputLabel>Travel Duration</InputLabel>
+            <Select
+              value={values.duration}
+              name="duration"
+              onChange={handleOnChange}
+            >
+              {Array.from(Array(27).keys()).map((num, index) => {
+                return (
+                  <MenuItem key={index} value={num + 1}>
+                    {num + 1}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
+        </div>
+        <div className={classes.herobooking__input_wrapper}>
+          <div className={classes.hero__booking__title}>Departure</div>
+          <TextField
+            type="date"
+            variant="filled"
+            fullWidth
+            size="small"
+            name="departure"
+            value={values.departure}
+            onChange={handleOnChange}
+          />
         </div>
         <div className={classes.hero__booking__submit_btn_wrapper}>
           <Button
@@ -52,7 +89,8 @@ const HeroBooking = () => {
             buttonStyle="btn--primary"
             buttonSize="btn--large"
           >
-            SEARCH...
+            <SearchIcon />
+            SEARCH TOUR
           </Button>
         </div>
       </form>

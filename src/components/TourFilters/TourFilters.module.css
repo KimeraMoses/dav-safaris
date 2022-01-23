@@ -1,0 +1,24 @@
+.dav__tours_filters {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  background-color: #fff;
+}
+.dav__tour_filter_input_filter {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.dav__tour_search_filter_wrapper,
+.dav__tour_select_filters_wrapper {
+  display: flex;
+  padding: 10px;
+}
+
+.dav__search_filter_input_field,
+.dav__duration_filter_input_field {
+  margin-right: 5px !important;
+}
+.dav__country_filter_input_field,
+.dav__category_filter_input_field {
+  margin-left: 5px !important;
+}

@@ -12,6 +12,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Image4 from "../../assets/image-1.jpg";
 
 import "./Benefits.css";
+import { Link } from "react-router-dom";
 
 const Benefits = () => {
   return (
@@ -98,6 +99,8 @@ const Benefits = () => {
                 color="primary"
                 type="submit"
                 className="dav__membership_submit_button"
+                component={Link}
+                to="/tours"
               >
                 Read More
               </Button>

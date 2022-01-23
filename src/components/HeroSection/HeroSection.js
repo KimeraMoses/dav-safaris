@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../App.css";
 import HeroBooking from "../HeroBooking/HeroBooking";
 import { Button } from "../UI/Button/Button";
@@ -13,15 +14,9 @@ function HeroSection() {
       <p>
         Travel to the any corner of the world, without going around in circles
       </p>
-      
-        <div className="hero-btns">
-          <Button
-            className="btns"
-            buttonStyle="Btn--outline"
-            buttonSize="Btn--large"
-          >
-            GET STARTED
-          </Button>
+
+      <div className="hero-btns">
+        <Link to="/tours">
           <Button
             className="btns"
             buttonStyle="Btn--primary"
@@ -29,7 +24,8 @@ function HeroSection() {
           >
             VIEW TOURS
           </Button>
-        </div>
+        </Link>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,9 @@
+/* .dav__search_results_home{
+    
+} */
+.dav__search_results_home .dav__search_results_home_title{
+    margin: 16px 0;
+    font-family: "Merriweather", serif;
+    font-style: italic;
+    padding: 0 30px;
+}
