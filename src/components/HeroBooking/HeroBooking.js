@@ -31,7 +31,7 @@ const HeroBooking = (props) => {
             fullWidth
             className={`${classes.gpa__form_input_field}`}
           >
-            <InputLabel>Destination</InputLabel>
+            <InputLabel>Destination country</InputLabel>
             <Select
               value={values.destination}
               name="destination"
@@ -54,7 +54,7 @@ const HeroBooking = (props) => {
             fullWidth
             className={`${classes.gpa__form_input_field}`}
           >
-            <InputLabel>Travel Duration</InputLabel>
+            <InputLabel>Number of days to travel</InputLabel>
             <Select
               value={values.duration}
               name="duration"
