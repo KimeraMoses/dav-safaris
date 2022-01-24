@@ -1,6 +1,6 @@
 .dav__tours_filters {
   display: flex;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap;
   background-color: #fff;
 }
 .dav__tour_filter_input_filter {
