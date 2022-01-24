@@ -33,7 +33,7 @@ import {
   TourCategories_Rwanda,
   TourCategories_Tanzania,
   TourCategories_Uganda,
-} from "./TourCategories";
+} from "../../containers/Countries/TourCategories";
 import { AddDays, DeleteDay } from "../../store/Slices/newTourSlice";
 
 let dayActivityDescription = [];

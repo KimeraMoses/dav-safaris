@@ -25,7 +25,7 @@ const toursSlice = createSlice({
       state.isLoading = true;
     },
     fetchCountryToursSuccess: (state, action) => {
-      state.CountryTours = action.payload;
+      state.countryTours = action.payload;
       state.isLoading = false;
     },
     fetchCountryToursFail: (state, { payload }) => {

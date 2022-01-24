@@ -11,7 +11,7 @@ const Partners = () => {
       <div className={classes.dav__partners_wrapper}>
         <h4>Our Partners</h4>
         <div className={classes.dav__partners_wrapper_inner}>
-          <a href='https://operators.safaribookings.com/reviews/widget/i/d06466472' target="_blank" ><img src={safariBooking} /></a>
+          <a href='https://www.safaribookings.com/profile/p4664' target="_blank" ><img src={safariBooking} /></a>
           <a href='https://utb.go.ug/' target="_blank" ><img className={classes.dav__partners_utb} src={utb} /></a>
           <a href='https://www.tripadvisor.com/Attraction_Review-g293841-d20284280-Reviews-Dav_Safaris-Kampala_Central_Region.html' target="_blank" ><img src={TripAdvisor} /></a>
           <a href='https://www.touristlink.com/user/davsafaris.html?sereferer=036B5792' target="_blank" ><img src={touristlink} /></a>

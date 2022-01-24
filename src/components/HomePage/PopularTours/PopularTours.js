@@ -11,8 +11,9 @@ import { useSelector } from "react-redux";
 import CardCarousel from "../../CardCarousel/CardCarousel";
 import TourCardSkeleton from "../../Tours/TourCardSkeleton";
 
-const PopularTours = () => {
+const PopularTours = (props) => {
   const PopularTours = useSelector((state) => state.tours.toursList);
+  const { Tours } = props
   const isLoading = useSelector((state) => state.tours.isLoading);
   return (
     <Container fluid className={classes.dav__popular_tours_wrapper}>
@@ -30,8 +31,8 @@ const PopularTours = () => {
                 </Col>
               );
             })
-          : PopularTours &&
-            PopularTours.map((tour) => {
+          : Tours &&
+            Tours.map((tour) => {
               return (
                 <Col
                   key={tour.id}

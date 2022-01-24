@@ -22,7 +22,7 @@ import {
   TourCategories_Rwanda,
   TourCategories_Tanzania,
   TourCategories_Uganda,
-} from "../NewItems/TourCategories";
+} from "../../containers/Countries/TourCategories";
 
 const SearchFilter = (props) => {
   const { userSearchHandler, searchTerm, isLoading } = props;
@@ -83,11 +83,7 @@ const TourDurationFilter = (props) => {
       className={`${classes.dav__tour_filter_input_filter} ${classes.dav__duration_filter_input_field}`}
     >
       <InputLabel>Filter by Duration</InputLabel>
-      <Select
-        value={duration}
-        name="duration"
-        onChange={durationChangeHandler}
-      >
+      <Select value={duration} name="duration" onChange={durationChangeHandler}>
         {Array.from(Array(27).keys()).map((num, index) => {
           return (
             <MenuItem key={index} value={num + 1}>

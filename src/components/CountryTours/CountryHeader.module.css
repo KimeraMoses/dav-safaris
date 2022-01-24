@@ -27,6 +27,7 @@
   padding: 8px;
   border-radius: 15px;
   transition: box-shadow 0.2s ease-in-out;
+  min-width: 200px;
   width: 200px;
   margin: 10px;
 }
@@ -36,11 +37,16 @@
   height: 130px;
 }
 .dav__category_card h5 {
-  font-size: 16px;
+  font-size: 15px;
   color: #323637;
   margin: 0;
-  padding: 16px 16px 8px;
+  padding: 16px 0px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .dav__category_card:hover {

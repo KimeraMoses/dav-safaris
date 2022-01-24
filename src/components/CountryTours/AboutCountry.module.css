@@ -18,12 +18,14 @@
 
 .dav__contact_country_expert img {
     flex-shrink: 0;
-    width: 70px;
-    margin-right: 16px;
+    width: 80px;
+    margin-right: 10px;
     padding: 0;
     border-radius: 50%;
     background-size: 40px;
-    height: 70px;
+    height: 80px;
+    box-sizing: border-box;
+    border: 5px solid #fff;
 }
 .specialist__text{
     display: flex;
@@ -42,6 +44,12 @@
 }
 .dav__contact_country_expert_contact li{
     padding: 10px 0;
+}
+.dav__contact_country_expert_contact a{
+    color: #343434;
+}
+.dav__contact_country_expert_contact a:hover{
+    color: var(--dav__primary_color);
 }
 
 @media screen and (max-width: 689px) {

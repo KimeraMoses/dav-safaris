@@ -2,7 +2,7 @@
 .dav__single_tour_hero {
     position: relative;
     width: 100%;
-    height: 400px;
+    height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,4 +17,5 @@
     color: #fff;
     text-shadow: 0 0 20px #000;
     font-weight: 600;
+    text-transform: capitalize;
   }

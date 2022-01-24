@@ -32,6 +32,7 @@ import ManageTours from "./DashBoard/ManageTours/ManageTours";
 import { AutoAuthenticate } from "../store/Actions/AuthActions";
 import { fetchAllTours } from "../store/Actions/TourActions";
 import Tours from "./Tours/AllTours/Tours";
+import Category from "./CountryTours/Category/Category";
 
 const App = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -79,6 +80,11 @@ const App = (props) => {
               path="/:countryName"
               exact
               element={<CountrySingle />}
+            />
+            <Route
+              path="/:countryName/:tourCategory"
+              exact
+              element={<Category />}
             />
             <Route
               path="/tours/:tourTitle"

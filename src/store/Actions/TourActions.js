@@ -5,7 +5,7 @@ import { deleteTourFail, deleteTourPending, deleteTourSuccess } from "../Slices/
 import { EditTourFail, EditTourPending, EditTourSuccess } from "../Slices/editTourSlice";
 import { NewTourFail, NewTourPending, NewTourSuccess } from "../Slices/newTourSlice";
 import { bookTourFail, bookTourPending, bookTourSuccess, fetchTourFail, fetchTourPending, fetchTourSuccess, reviewTourFail, reviewTourPending, reviewTourSuccess } from "../Slices/tourSlice";
-import { fetchToursFail, fetchToursPending, fetchToursSuccess } from "../Slices/toursSlice";
+import { fetchCountryToursFail, fetchCountryToursPending, fetchCountryToursSuccess, fetchToursFail, fetchToursPending, fetchToursSuccess } from "../Slices/toursSlice";
 
 export const fetchAllTours = () => async (dispatch) => {
   dispatch(fetchToursPending());
@@ -30,16 +30,19 @@ export const fetchAllCountries = () => async (dispatch) => {
   }
 };
 
-// export const fetchAllCountryTours = () => async (dispatch) => {
-//   dispatch(fetchToursPending());
-//   try {
-//     const response = await fetch(`${baseUrl}/api/v1/tours/getAllTours`);
-//     const fetchedTours = await response.json();
-//     dispatch(fetchToursSuccess(fetchedTours.tours));
-//   } catch (error) {
-//     dispatch(fetchToursFail(error.message));
-//   }
-// };
+export const fetchAllCountryTours = (country) => async (dispatch) => {
+  console.log("Reached")
+  dispatch(fetchCountryToursPending());
+  try {
+    const response = await fetch(`${baseUrl}/api/v1/tours/getAllTours/${country}`);
+    const fetchedTours = await response.json();
+    dispatch(fetchCountryToursSuccess(fetchedTours.tours));
+    console.log("Country Ts",fetchedTours)
+  } catch (error) {
+    dispatch(fetchCountryToursFail(error.message));
+    console.log("Country T err", error)
+  }
+};
 
 export const fetchTourDetails = (tour_id) => async (dispatch) => {
   dispatch(fetchTourPending());
