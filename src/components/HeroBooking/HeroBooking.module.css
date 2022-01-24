@@ -29,6 +29,7 @@
   padding-left:10px;
   color: red;
 }
+
 @media screen and (min-width: 668px) {
   .herobooking__wrapper {
     margin: 10px 30px 70px;
@@ -46,5 +47,11 @@
 @media screen and (max-width: 668px) {
   .herobooking__form {
     flex-direction: column;
+  }
+  .herobooking__input_wrapper{
+    margin: 0;
+  }
+  .gpa__form_input_field{
+   margin-bottom: 10px!important;
   }
 }

@@ -80,6 +80,7 @@ const HeroBooking = (props) => {
             name="departure"
             value={values.departure}
             onChange={handleOnChange}
+            className={`${classes.gpa__form_input_field}`}
           />
         </div>
         <div className={classes.hero__booking__submit_btn_wrapper}>

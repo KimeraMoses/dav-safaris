@@ -10,6 +10,7 @@ import { Button } from "@material-ui/core";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Image4 from "../../assets/image-1.jpg";
+import Image2 from "../../assets/Image21.jpg";
 
 import "./Benefits.css";
 import { Link } from "react-router-dom";
@@ -87,7 +88,10 @@ const Benefits = () => {
           <div className="col-lg-6">
             <div className="benefit__pic_wrapper">
               <div className="benefit__pic_top">
-                <img src={Image4} alt="" />
+                <img className="image__big" src={Image4} alt="" />
+                <div className="benefit__pic_bottom">
+                  <img src={Image2} alt="" />
+                </div>
               </div>
             </div>
           </div>
