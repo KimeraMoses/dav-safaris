@@ -18,7 +18,7 @@ export const CountriesData = [
   {
     name: "Kenya",
     slug: "kenya-safaris",
-    description:"Kenya Description",
+    description:"Kenya, breathtaking landscapes, cultures, and wildlife.Located in East Africa with a shoreline flanking the Indian Ocean, Kenya encompasses many landscapes – savannahs, lakelands, the dramatic Great Rift Valley and mountain highlands too. It is home to the populous thriving animal populations, inclusive of lions, elephants and rhinos mostly viewed to Masai Mara Reserve (recognized for its annual wildebeest migrations) and Amboseli National Park (which gives breathtaking perspectives of Tanzania\'s 5,895 m Mt. Kilimanjaro).The reality that it straddles the equator with negligible seasonal temperature variance, makes Kenya the suitable year-spherical vacation spot for a mixture safari-and-seashore holiday. Seen because the sacred land of safari, Kenya has a unique enchantment from July to October. It is presently that the scene is about for one of the world’s maximum epic herbal wonders whilst nearly million wildebeest, zebra and gazelle go away the southern Serengeti, to Masai Mara from overdue June. The Masai Mara, collectively with Amboseli and Tsavo National Parks and the Chyulu Hills, gives notable year-spherical sport viewing inclusive of the legendary ‘Big Five’.",
     summary: "Kenya Summary",
     imageCover: KeCover,
     country_specialist: "+256701412430",
@@ -27,7 +27,7 @@ export const CountriesData = [
   {
     name: "Tanzania",
     slug: "tanzania-safaris",
-    description:"Tanzania description",
+    description:"Located in East Africa alongside the nice and cozy waters of the Indian Ocean, Tanzania boasts 3 of Africa’s best-recognized lakes – Lake Victoria in the north; Lake Tanganyika in the west; and Lake Nyasa in the south. Tanzania is thought of for its good-sized wilderness area such as the plains of the Serengeti National Park (a safari Mecca populated by the African Big 5 and Kilimanjaro National Park (Africa’s tallest mountain). Tropical islands are any other of Tanzania’s appeals. The island of Mafia has a marine park with whale sharks and coral reefs, which make it one of all Africa’s most reliable traveler destinations. Known because the Spice Island, the lovely Arabic-stimulated Zanzibar has a wealthy lifestyle and history, coupled with idyllic white seashores hailed as a number of the world’s best.",
     summary: "Tanzania Summary",
     imageCover: TzCover,
     country_specialist: "+256701412430",

@@ -10,11 +10,11 @@ import { useDispatch,useSelector } from "react-redux";
 
 //===COMPONENT IMPORTS===
 import classes from "./Dropdown.module.css";
-import { itinaries } from "../../Tours/SingleTour/SingleTour";
 
 const Dropdown = (props) => {
   const { selected, setSelected, setSelectedCode, fetchItems } = props;
   const userToken = useSelector((state) => state.auth.token);
+  const Tours = useSelector(state=>state.tours.tourList)
   const DarkMode = false;
   const [isActive, setIsActive] = useState(false);
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const Dropdown = (props) => {
             DarkMode ? classes.gpa__dark_mode : ""
           }`}
         >
-          {itinaries.map((option) => {
+          {Tours.map((option) => {
             return (
               <div
                 key={option.id}
@@ -53,7 +53,7 @@ const Dropdown = (props) => {
                 }`}
                 onClick={(e) => selectedItemHandler(option.title, option.id)}
               >
-                {option.title.replaceAll("-", " ")}
+                {option.name.replaceAll("-", " ")}
               </div>
             );
           })}

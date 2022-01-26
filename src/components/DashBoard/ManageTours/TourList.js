@@ -37,19 +37,16 @@ import { itinaries } from "../../Tours/SingleTour/SingleTour";
 
 const CourseList = (props) => {
   const isLoading = false;
+  const Tours = useSelector(state=>state.tours.toursList);
   const { onAddClick, onEditClick, isEdit } = props;
   const dispatch = useDispatch();
   const UserList = useSelector((state) => state.auth.user);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  let FilteredTours = itinaries;
+  let FilteredTours = Tours;
 
   const [selected, setSelected] = useState("makerere-university");
   const [selectedCode, setSelectedCode] = useState("muk");
-
-  //   FilteredTours = itinaries.filter(
-  //     (course) => course.university && course.university.name === selected
-  //   );
 
   const SearchHandler = (e) => {
     const { name, value } = e.target;
@@ -82,7 +79,7 @@ const CourseList = (props) => {
 
   let CoursesRenderedList;
 
-  if (itinaries && itinaries.length > 0) {
+  if (Tours && Tours.length > 0) {
     CoursesRenderedList = (
       searchResults.length > 0 ? searchResults : FilteredTours
     ).map((tour) => {

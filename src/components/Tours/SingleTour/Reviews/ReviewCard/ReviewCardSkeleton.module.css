@@ -6,10 +6,20 @@
   padding: 8px 0;
 }
 .dav__review_user_wrapper {
+  width: 100%;
   display: flex;
+  align-items: center;
+}
+.dav__user_rating {
+  margin-left: 5px;
+  width: 100%;
 }
 .dav__user_rating p {
   margin-bottom: 0;
+}
+.dav__user_review_meta {
+  display: flex;
+  margin-top: 5px;
 }
 .dav__review_user_name,
 .dav__user_review_meta span {
@@ -22,6 +32,8 @@
 .dav__review__person__visit_date,
 .dav__review__person__reviewed {
   font-size: 12px;
+  display: flex;
+  width: 50%;
 }
 .dav__user_review {
   overflow: hidden;

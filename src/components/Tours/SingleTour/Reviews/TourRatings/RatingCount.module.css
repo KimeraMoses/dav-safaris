@@ -1,12 +1,13 @@
 .dav__rating_count_wrapper{
     width: 100%;
-    background-color: #f5f5f5;
     display: flex;
     flex-direction: column;
     min-height: 100px;
     align-items: center;
     justify-content: center;
     padding: 10px 0;
+    background: url('../../../../../assets/planshadow.png') no-repeat center bottom;
+    background-color: #f5f5f5;
 }
 .dav__rating_overall,
 .dav__ratings_title{
@@ -16,8 +17,11 @@
 }
 .dav__rating_overall{
     margin-bottom: 5px;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .dav__rating_number{
     padding: 10px 0;

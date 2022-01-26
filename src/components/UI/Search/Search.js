@@ -8,11 +8,10 @@ import { useSelector } from "react-redux";
 import { Divider } from "@material-ui/core";
 import ClearIcon from "@material-ui/icons/Clear";
 import classes from "./Search.module.css";
-import { itinaries } from "../../Tours/SingleTour/SingleTour";
 
 const Search = (props) => {
   const DarkMode = false;
-  const searchObj = itinaries;
+  const searchObj = useSelector(state=>state.tours.toursList);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);

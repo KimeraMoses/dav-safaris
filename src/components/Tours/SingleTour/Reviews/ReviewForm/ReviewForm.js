@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {
   fetchAllCountries,
+  fetchTourReviews,
   ReviewTour,
 } from "../../../../../store/Actions/TourActions";
 import CustomTextField from "../../../../CountryInputField/CustomTextField";
@@ -35,7 +36,7 @@ const labels = {
   5: "Excellent+",
 };
 
-const ReviewForm = () => {
+const ReviewForm = (props) => {
   const countryList = useSelector((state) => state.countries.countryList);
   const isLoading = useSelector((state) => state.tour.isReviewing);
   const message = useSelector((state) => state.tour.ReviewStatus);
@@ -134,6 +135,7 @@ const ReviewForm = () => {
         values.visit_year,
         values.email,
       ));
+      dispatch(fetchTourReviews(Tour.id))
       setValues({
         user_name: "",
         country_of_residence: "",
@@ -167,6 +169,7 @@ const ReviewForm = () => {
         )}
         <Form onSubmit={ReviewFormSubmitHandler}>
           <TextField
+            inputRef={props.userNameRef}
             size="small"
             variant="filled"
             fullWidth

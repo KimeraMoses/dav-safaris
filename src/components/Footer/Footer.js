@@ -6,9 +6,10 @@ import {
   RoomOutlined,
   Twitter,
 } from "@material-ui/icons";
-import MenuIcon from '@material-ui/icons/ArrowForward';
+import MenuIcon from "@material-ui/icons/ArrowForward";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import classes from "./Footer.module.css";
 export const Fb = createSvgIcon(
@@ -17,6 +18,7 @@ export const Fb = createSvgIcon(
 );
 
 const Footer = () => {
+  const Tours = useSelector((state) => state.tours.toursList);
   let getCurrentYear = new Date().getFullYear();
   return (
     <Container fluid className={classes.dav__footer}>
@@ -27,16 +29,13 @@ const Footer = () => {
           sm={6}
           className={classes.dav__footer_section_col_wrapper}
         >
-          <div
-            className={`${classes.dav__footer_section_title_wrapper}`}
-          >
+          <div className={`${classes.dav__footer_section_title_wrapper}`}>
             <h5>About Us</h5>
 
             <p>
               Tours and Travel Agency based in Uganda rendering mountain gorilla
               Trekking experience, birding and wildlife safaris
             </p>
-            
           </div>
         </Col>
         <Col
@@ -45,9 +44,7 @@ const Footer = () => {
           sm={6}
           className={classes.dav__footer_section_col_wrapper}
         >
-          <div
-            className={`${classes.dav__footer_section_title_wrapper}`}
-          >
+          <div className={`${classes.dav__footer_section_title_wrapper}`}>
             <h5>Short Uganda Safaris</h5>
 
             <p>
@@ -62,15 +59,31 @@ const Footer = () => {
           sm={6}
           className={classes.dav__footer_section_col_wrapper}
         >
-          <div
-            className={`${classes.dav__footer_section_title_wrapper}`}
-          >
-            <h5>Wildlife Safaris</h5>
+          <div className={`${classes.dav__footer_section_title_wrapper}`}>
+            <h5>Popular Safaris</h5>
 
             <ul className={classes.dav__footer_safaris}>
-                <li><a href="/"><MenuIcon/>2 Day Jinja Tour and White Water Rafting Uganda</a></li>
-                <li><a href="/"><MenuIcon/>3 days fly to Queen Elizabeth National Park Safari.a</a></li>
-                <li><a href="/"><MenuIcon/>3 Days Fly Tour Murchison National Park Safari</a></li>
+              {Tours &&
+                Tours.slice(0,3).map((tour) => {
+                  return (
+                    <li>
+                      <Link to={`/tours/${tour.slug}`}>
+                        <MenuIcon />{tour.name}
+                      </Link>
+                    </li>
+                  );
+                })}
+              {/* <li>
+                <a href="/">
+                  <MenuIcon />3 days fly to Queen Elizabeth National Park
+                  Safari.a
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <MenuIcon />3 Days Fly Tour Murchison National Park Safari
+                </a>
+              </li> */}
             </ul>
           </div>
         </Col>
@@ -80,9 +93,7 @@ const Footer = () => {
           sm={6}
           className={classes.dav__footer_section_col_wrapper}
         >
-          <div
-            className={`${classes.dav__footer_section_title_wrapper}`}
-          >
+          <div className={`${classes.dav__footer_section_title_wrapper}`}>
             <h5>Contact info</h5>
 
             <ul className={classes.dav__contact_info}>
@@ -105,10 +116,7 @@ const Footer = () => {
         <Row>
           <Col lg={6} md={6} sm={12}>
             <div>
-              <p>
-                © {getCurrentYear} Dav Safaris. All Rights
-                Reserved.
-              </p>
+              <p>© {getCurrentYear} Dav Safaris. All Rights Reserved.</p>
             </div>
           </Col>
           <Col
