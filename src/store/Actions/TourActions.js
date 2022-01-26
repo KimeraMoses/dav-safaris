@@ -1,12 +1,53 @@
-
 import { baseUrl } from "..";
-import { fetchCountriesFail, fetchCountriesPending, fetchCountriesSuccess } from "../Slices/countrySlice";
-import { deleteTourFail, deleteTourPending, deleteTourSuccess } from "../Slices/deleteTourSlice";
-import { EditTourFail, EditTourPending, EditTourSuccess } from "../Slices/editTourSlice";
-import { NewTourFail, NewTourPending, NewTourSuccess } from "../Slices/newTourSlice";
-import { fetchTourReviewsFail, fetchTourReviewsPending, fetchTourReviewsSuccess } from "../Slices/reviewSlice";
-import { bookTourFail, bookTourPending, bookTourSuccess, fetchTourFail, fetchTourPending, fetchTourSuccess, reviewTourFail, reviewTourPending, reviewTourSuccess } from "../Slices/tourSlice";
-import { fetchCountryToursFail, fetchCountryToursPending, fetchCountryToursSuccess, fetchToursFail, fetchToursPending, fetchToursSuccess } from "../Slices/toursSlice";
+import {
+  fetchCountriesFail,
+  fetchCountriesPending,
+  fetchCountriesSuccess,
+} from "../Slices/countrySlice";
+import {
+  deleteTourFail,
+  deleteTourPending,
+  deleteTourSuccess,
+} from "../Slices/deleteTourSlice";
+import {
+  EditTourFail,
+  EditTourPending,
+  EditTourSuccess,
+} from "../Slices/editTourSlice";
+import {
+  SendMessageFail,
+  SendMessagePending,
+  SendMessageSuccess,
+} from "../Slices/messageSlice";
+import {
+  NewTourFail,
+  NewTourPending,
+  NewTourSuccess,
+} from "../Slices/newTourSlice";
+import {
+  fetchTourReviewsFail,
+  fetchTourReviewsPending,
+  fetchTourReviewsSuccess,
+} from "../Slices/reviewSlice";
+import {
+  bookTourFail,
+  bookTourPending,
+  bookTourSuccess,
+  fetchTourFail,
+  fetchTourPending,
+  fetchTourSuccess,
+  reviewTourFail,
+  reviewTourPending,
+  reviewTourSuccess,
+} from "../Slices/tourSlice";
+import {
+  fetchCountryToursFail,
+  fetchCountryToursPending,
+  fetchCountryToursSuccess,
+  fetchToursFail,
+  fetchToursPending,
+  fetchToursSuccess,
+} from "../Slices/toursSlice";
 
 export const fetchAllTours = () => async (dispatch) => {
   dispatch(fetchToursPending());
@@ -32,42 +73,43 @@ export const fetchAllCountries = () => async (dispatch) => {
 };
 
 export const fetchAllCountryTours = (country) => async (dispatch) => {
-  console.log("Reached")
+  console.log("Reached");
   dispatch(fetchCountryToursPending());
   try {
-    const response = await fetch(`${baseUrl}/api/v1/tours/getAllTours/${country}`);
+    const response = await fetch(
+      `${baseUrl}/api/v1/tours/getAllTours/${country}`
+    );
     const fetchedTours = await response.json();
     dispatch(fetchCountryToursSuccess(fetchedTours.tours));
-    console.log("Country Ts",fetchedTours)
+    console.log("Country Ts", fetchedTours);
   } catch (error) {
     dispatch(fetchCountryToursFail(error.message));
-    console.log("Country T err", error)
+    console.log("Country T err", error);
   }
 };
 
 export const fetchTourDetails = (tour_id) => async (dispatch) => {
   dispatch(fetchTourPending());
   try {
-    const response = await fetch(
-      `${baseUrl}/api/v1/tours/${tour_id}`
-    );
+    const response = await fetch(`${baseUrl}/api/v1/tours/${tour_id}`);
     const fetchedTour = await response.json();
     dispatch(fetchTourSuccess(fetchedTour.tour));
-    console.log(fetchedTour)
+    console.log(fetchedTour);
   } catch (error) {
     dispatch(fetchTourFail(error.message));
-    console.log(error)
+    console.log(error);
   }
 };
 
 export const fetchTourReviews = (tour_id) => async (dispatch) => {
+  console.log("Started fetching Reviews for ", tour_id);
   dispatch(fetchTourReviewsPending());
   try {
     const response = await fetch(
       `${baseUrl}/api/v1/tours/${tour_id}/reviews/getAllReviews`
     );
     const fetchedReviews = await response.json();
-    dispatch(fetchTourReviewsSuccess(fetchedReviews.reviews));
+    dispatch(fetchTourReviewsSuccess(fetchedReviews));
   } catch (error) {
     dispatch(fetchTourReviewsFail(error.message));
   }
@@ -81,13 +123,10 @@ export const fetchTourName = (tour_slug) => async (dispatch) => {
     );
     const fetchedTour = await response.json();
     dispatch(fetchTourSuccess(fetchedTour.tour));
-    console.log(fetchedTour)
   } catch (error) {
     dispatch(fetchTourFail(error.message));
-    console.log(error)
   }
 };
-
 
 //====CREATING NEW TOUR====//
 export const creatNewTour = (
@@ -100,7 +139,7 @@ export const creatNewTour = (
   file,
   packageDetails,
   category,
-  country,
+  country
   // maxGroupSize,
   // summary,
 ) => {
@@ -119,15 +158,9 @@ export const creatNewTour = (
     data.append("dayActivityDescription", dayActivityDescription);
     // data.append("maxGroupSize", maxGroupSize);
     // data.append("summary", summary);
-
-    // console.log("Tour activities", tourActivities)
-    // console.log("day", dayActivityDescription)
-    // console.log("package", packageDetails)
-
     const response = await fetch(`${baseUrl}/api/v1/tours/create`, {
       method: "POST",
       body: data,
-
     });
 
     if (!response.ok) {
@@ -174,32 +207,34 @@ export const editTourDetails = (
     // console.log("day", dayActivityDescription)
     // console.log("package", packageDetails)
 
-    const response = await fetch(`${baseUrl}/api/v1/tours/updateTour/${tourId}`, {
-      method: "PATCH",
-      body: data,
-
-    });
+    const response = await fetch(
+      `${baseUrl}/api/v1/tours/updateTour/${tourId}`,
+      {
+        method: "PATCH",
+        body: data,
+      }
+    );
 
     if (!response.ok) {
       const error = await response.json();
       dispatch(EditTourFail(error));
-      console.log("Tour Edit", error)
     }
     const res = await response.json();
     dispatch(EditTourSuccess(res));
-    console.log("Tour Edit Succ", res)
   };
 };
 //====END====//
-
 
 //====DELETE TOUR FROM DB====//
 export const DeleteTour = (tourId) => async (dispatch) => {
   dispatch(deleteTourPending());
   try {
-    const response = await fetch(`${baseUrl}/api/v1/tours/deleteTour/${tourId}`, {
-      method: "DELETE"
-    });
+    const response = await fetch(
+      `${baseUrl}/api/v1/tours/deleteTour/${tourId}`,
+      {
+        method: "DELETE",
+      }
+    );
     const Tour = await response.json();
     dispatch(deleteTourSuccess(Tour));
   } catch (error) {
@@ -226,7 +261,7 @@ export const BookTour = (
         country_of_residence,
         phone,
         email,
-        travel_plans
+        travel_plans,
       }),
       headers: new Headers({
         "Content-type": "application/json",
@@ -235,20 +270,12 @@ export const BookTour = (
 
     if (!response.ok) {
       const error = await response.json();
-      let message = "";
-      if (error.message === "Email already in use") {
-        message = "Account with the same email already exits";
-      } else {
-        message =
-          "Booking Failed!, Please check your connection and try again";
-      }
-      dispatch(bookTourFail(message));
-      console.log(error)
+
+      dispatch(bookTourFail(error));
+      console.log(error);
     }
     const data = await response.json();
-    let message = "Booking sent successfully, Our travel agent will get back to you shortly";
-    dispatch(bookTourSuccess(message));
-    console.loog(data)
+    dispatch(bookTourSuccess(data));
   };
 };
 
@@ -273,7 +300,7 @@ export const ReviewTour = (
         user_name,
         country_of_residence,
         visit_month,
-        visit_year
+        visit_year,
       }),
       headers: new Headers({
         "Content-type": "application/json",
@@ -282,19 +309,42 @@ export const ReviewTour = (
 
     if (!response.ok) {
       const error = await response.json();
-      let message = "";
-      if (error.message === "Email already in use") {
-        message = "Account with the same email already exits";
-      } else {
-        message =
-          "Booking Failed!, Please check your connection and try again";
-      }
-      dispatch(reviewTourFail(message));
-      console.log("Review Failed",error)
+
+      dispatch(reviewTourFail(error));
     }
     const data = await response.json();
-    let message = "Thank you for reviewing this tour.";
-    dispatch(reviewTourSuccess(message));
-    console.loog("Review Sent",data)
+    dispatch(reviewTourSuccess(data));
+  };
+};
+
+export const SendMessage = (
+  name,
+  email,
+  phone,
+  message,
+  is_add_to_news_letter
+) => {
+  return async (dispatch) => {
+    dispatch(SendMessagePending());
+    const response = await fetch(`${baseUrl}/api/v1/subscribers/create`, {
+      method: "POST",
+      body: JSON.stringify({
+        name,
+        email,
+        phone,
+        message,
+        is_add_to_news_letter,
+      }),
+      headers: new Headers({
+        "Content-type": "application/json",
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      dispatch(SendMessageFail(message));
+    }
+    const data = await response.json();
+    dispatch(SendMessageSuccess(data));
   };
 };

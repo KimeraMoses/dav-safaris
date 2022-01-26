@@ -8,12 +8,12 @@
   justify-content: space-between;
 }
 
-.dav__message_count_wrapper {
+/* .dav__message_count_wrapper {
   background-color: var(--dav__primary_color) !important;
-}
+} */
 .dav__send_icon {
   color: #fff;
 }
-.dav__message_count_wrapper:hover {
+/* .dav__message_count_wrapper:hover {
   background-color: var(--dav__secondary_color) !important;
-}
+} */

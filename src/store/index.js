@@ -10,6 +10,7 @@ import countrySlice from "./Slices/countrySlice";
 import toursReducer from "./Slices/toursSlice";
 import reviewReducer from "./Slices/reviewSlice";
 import editTourReducer from "./Slices/editTourSlice";
+import messageReducer from "./Slices/messageSlice";
 
 const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ const store = configureStore({
     newTour: newTourReducer,
     editTour: editTourReducer,
     countries: countrySlice,
+    message: messageReducer
   },
 });
 

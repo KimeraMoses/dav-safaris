@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   FormControl,
   InputLabel,
@@ -8,8 +9,6 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import { Alert, Rating } from "@material-ui/lab";
-import React, { useEffect } from "react";
-import { useState } from "react";
 import { Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -22,6 +21,7 @@ import CustomTextField from "../../../../CountryInputField/CustomTextField";
 import HoverRating from "../../../../Rating/Rating";
 import { Button } from "../../../../UI/Button/Button";
 import classes from "./ReviewForm.module.css";
+import { useParams } from "react-router";
 
 const labels = {
   0.5: "Useless",
@@ -37,22 +37,24 @@ const labels = {
 };
 
 const ReviewForm = (props) => {
+  const {tourTitle } = useParams()
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchAllCountries());
+  }, []);
   const countryList = useSelector((state) => state.countries.countryList);
   const isLoading = useSelector((state) => state.tour.isReviewing);
-  const message = useSelector((state) => state.tour.ReviewStatus);
   const Tour = useSelector((state) => state.tour.tourDetails);
-  const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [hover, setHover] = React.useState(-1);
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const [country, setCountry] = useState({
     name: "",
     flag: "",
   });
-  useEffect(() => {
-    dispatch(fetchAllCountries());
-  }, []);
+
   const [show, setShow] = useState(false);
   const [values, setValues] = useState({
     user_name: "",
@@ -63,6 +65,7 @@ const ReviewForm = (props) => {
     visit_year: "",
     email: "",
   });
+  useEffect(()=>{},[tourTitle])
 
   const keyWordHandler = (e) => {
     setShow(false);
@@ -123,19 +126,19 @@ const ReviewForm = (props) => {
       }
     }
     try {
-      setError("");
       await dispatch(
-      ReviewTour(
-        Tour.id,
-        values.review,
-        values.rating,
-        values.user_name,
-        values.country_of_residence,
-        values.visit_month,
-        values.visit_year,
-        values.email,
-      ));
-      dispatch(fetchTourReviews(Tour.id))
+        ReviewTour(
+          Tour.id,
+          values.review,
+          values.rating,
+          values.user_name,
+          values.country_of_residence,
+          values.visit_month,
+          values.visit_year,
+          values.email
+        )
+      );
+
       setValues({
         user_name: "",
         country_of_residence: "",
@@ -145,11 +148,16 @@ const ReviewForm = (props) => {
         visit_year: "",
         email: "",
       });
-      setCountry("");
+      setCountry({
+        name: "",
+      });
+      setSearchTerm("");
+      setMessage("Review successfully sent. Thank you");
+      dispatch(fetchTourReviews(Tour.id));
     } catch (error) {
-      if (!navigator.onLine) {
-        return setError("Please connect to the internet to register");
-      }
+      return setError(
+        "Failed to send your review now, please check your connection and try again later"
+      );
     }
   };
 
@@ -291,7 +299,7 @@ const ReviewForm = (props) => {
             buttonStyle="btn--primary"
             buttonSize="Btn--fullWidth"
           >
-            {isLoading? "Sending Review..." : "Rate Tour"}
+            {isLoading ? "Sending Review..." : "Rate Tour"}
           </Button>
         </Form>
       </div>

@@ -20,15 +20,15 @@ import { Alert } from "@material-ui/lab";
 const BookingForm = (props) => {
   const countryList = useSelector((state) => state.countries.countryList);
   const isLoading = useSelector((state) => state.tour.isBooking);
-  const message = useSelector((state) => state.tour.message);
   const Tour = useSelector((state) => state.tour.tourDetails);
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [country, setCountry] = useState({
     name: "",
-    flag: "",
+    flag: ""
   });
   const dispatch = useDispatch();
   const [values, setValues] = useState({
@@ -37,8 +37,9 @@ const BookingForm = (props) => {
     phone: "",
     email: "",
     travel_plans: "",
+    budget: ""
   });
-  const [open, setOpen] = useState(false);
+
   const keyWordHandler = (e) => {
     setShow(false);
     const { value } = e.target;
@@ -57,7 +58,7 @@ const BookingForm = (props) => {
   };
 
   const countryNameHandler = (result) => {
-    setCountry({ name: result.name, flag: result.flags.png });
+    setCountry({ name: result.name, flag: result.flags.png});
     setValues({ ...values, country_of_residence: result.name });
     setSearchTerm("");
     setShow(true);
@@ -67,6 +68,7 @@ const BookingForm = (props) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: event.target.value });
     setError("");
+    setMessage("")
   };
 
   const BookingFormSubmitHandler = async (e) => {
@@ -109,7 +111,8 @@ const BookingForm = (props) => {
           values.country_of_residence,
           values.phone,
           values.email,
-          values.travel_plans
+          values.travel_plans,
+          values.budget
         )
       );
       setValues({
@@ -118,12 +121,17 @@ const BookingForm = (props) => {
         phone: "",
         email: "",
         travel_plans: "",
+        budget: ""
       });
-      setCountry("");
+      setCountry({
+        name: "",
+        flag: ""
+      });
+      setSearchTerm("");
+      setMessage("Booking sent successfully, Our travel agent will get back to you shortly")
     } catch (error) {
-      if (!navigator.onLine) {
-        return setError("Please connect to the internet to register");
-      }
+        return setError("Failed to book tour, try again later");
+    
     }
   };
 
@@ -162,7 +170,6 @@ const BookingForm = (props) => {
           name="email"
           onChange={handleOnChange}
           value={values.email}
-          required
           label="email"
           className={classes.dav__booking_form_field}
         />
@@ -216,12 +223,12 @@ const BookingForm = (props) => {
           placeholder="Tell us about the Number of traveller, duration,travel dates,overall budget, level of acomodation, etc(it's ok to be detailed)"
           className={classes.dav__booking_form_field}
         />
-        <FormControlLabel
+        {/* <FormControlLabel
           fullWidth
           control={<Checkbox defaultChecked color="primary" />}
           label="Easily monitor booking status"
           className={classes.dav__book_tour_account_creation_prompt}
-        />
+        /> */}
 
         <Button
           className="btns"

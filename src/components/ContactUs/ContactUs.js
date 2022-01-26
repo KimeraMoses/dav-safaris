@@ -1,5 +1,5 @@
 import classes from "./ContactUs.module.css";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "../../assets/background.webp";
 import RoomIcon from "@material-ui/icons/Room";
 import PhoneIcon from "@material-ui/icons/Phone";
@@ -10,6 +10,10 @@ import SocialMedia from "./SocialMedia";
 import { Form } from "react-bootstrap";
 
 const ContactUs = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className={classes.dav__contact_us_page_wrapper}>
       <div

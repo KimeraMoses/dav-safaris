@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./TourCard.module.css";
 import tourImg from "../../assets/background.webp";
 import { Link } from "react-router-dom";
@@ -7,6 +7,10 @@ import { Rating } from "@material-ui/lab";
 
 const TourCard = (props) => {
   const { TourImage, TourTitle, NumDays, NumNights, TourDescription,TourRating,TourSlug } = props;
+  const [average, setAverage] =useState(0)
+  useEffect(()=>{
+    setAverage(TourRating && TourRating)
+  },[TourRating]);
   return (
     <div className={classes.tour_card_wrapper}>
       <div className={classes.tour_card_header}>

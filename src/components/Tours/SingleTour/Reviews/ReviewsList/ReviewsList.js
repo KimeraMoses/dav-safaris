@@ -9,14 +9,17 @@ const ReviewsList = (props) => {
   const { isLoading, Reviews } = useSelector((state) => state.reviews);
   useEffect(() => {}, [Reviews]);
   const { ReviewTour} = props
+  const ReviewsList = Reviews && Reviews.reviews;
+  // const ratingAverage = ReviewsObj && ReviewsObj.tour.ratingsAverage
+  // const ratingsQuantity = ReviewsObj && ReviewsObj.tour.ratingsQuantity
   return (
     <>
       {isLoading
         ? [...Array(4).keys()].map((index) => {
             return <ReviewCardSkeleton />;
           })
-        : Reviews && Reviews.length>0 ?
-          Reviews.map((review) => {
+        : ReviewsList && ReviewsList.length>0 ?
+          ReviewsList.map((review) => {
             return (
               <ReviewCard
                 userRating={review.rating}
