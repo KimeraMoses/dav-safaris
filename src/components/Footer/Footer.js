@@ -128,10 +128,10 @@ const Footer = () => {
             <div className={classes.dav__footer__menu}>
               <ul>
                 <li>
-                  <Link to="/login">Login/Register</Link>
+                  <Link to="/terms-of-services">Terms of Services</Link>
                 </li>
                 <li>
-                  <Link to="/privacy">Privacy</Link>
+                  <Link to="/privacy-policies">Privacy</Link>
                 </li>
               </ul>
             </div>
