@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import imageCover from "../../assets/Image14.jpg";
 import classes from "./Terms.module.css";
 
 const Terms = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className={classes.dav__policies_wrapper}>
       <div
@@ -110,8 +113,8 @@ const Terms = () => {
           they have sufficient coverage with travel insurance.
         </p>
         <p>
-          <b>Health:</b> It is the responsibility of the client to ensure that proper
-          medical precautions (immunizations and so on) have been taken.
+          <b>Health:</b> It is the responsibility of the client to ensure that
+          proper medical precautions (immunizations and so on) have been taken.
         </p>
       </div>
     </div>

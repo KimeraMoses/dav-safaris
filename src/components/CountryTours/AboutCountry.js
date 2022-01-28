@@ -38,6 +38,7 @@ const AboutCountry = (props) => {
                 <strong>
                   <span className={classes.dav__contact_country_expert_contact}>
                     <a href="tel:+256701412430">{Country && Country.country_specialist}</a>
+                    <a href="tel:+256757795781">+256757795781</a>
                   </span>
                 </strong>
               </li>

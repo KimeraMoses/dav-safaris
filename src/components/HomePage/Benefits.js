@@ -38,9 +38,7 @@ const Benefits = () => {
                       Personal Schedule
                     </h4>
                     <p>
-                      Dav safaris gives you freedom to schedule your own tours
-                      in any east african country at the time of your
-                      convinience
+                      Tell us where you want to go, we will take you there
                     </p>
                   </div>
                 </div>
@@ -77,8 +75,8 @@ const Benefits = () => {
                       Professional Crew
                     </h4>
                     <p>
-                      Tours and Travel Agency based in Uganda rendering mountain
-                      gorilla Trekking experience, birding and wildlife safaris.
+                      Our travel experts, Safari Guides and the friendly local
+                      people ensures a lifetime experience away from home
                     </p>
                   </div>
                 </div>

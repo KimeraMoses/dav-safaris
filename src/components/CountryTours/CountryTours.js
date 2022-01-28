@@ -9,8 +9,11 @@ const CountryTours = (props) => {
 
   return (
     <div className={classes.dav__country_tours_wrapper}>
-      <SectionTitle subTitle="Take a look at our" Title="Popular tours in uganda" />
-        <PopularTours Tours = {Tours}/>
+      <SectionTitle
+        subTitle="Take a look at our"
+        Title={`Popular tours in ${props.Country}`}
+      />
+      <PopularTours Tours={Tours} />
     </div>
   );
 };

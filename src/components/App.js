@@ -35,6 +35,8 @@ import Tours from "./Tours/AllTours/Tours";
 import Category from "./CountryTours/Category/Category";
 import Terms from "../containers/PrivacyPolicies/Terms";
 import Policies from "../containers/PrivacyPolicies/Policies";
+import Updates from "./SafariUpdates/Updates";
+import NewsLetterForm from "./ContactUs/NewsLetterForm";
 
 const App = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -80,6 +82,7 @@ const App = (props) => {
             <Route path="/terms-of-services" exact element={<Terms />} />
             <Route path="/privacy-policies" exact element={<Policies />} />
             <Route path="/tours" exact element={<Tours />} />
+            <Route path="/updates" exact element={<Updates />} />
             <Route
               path="/:countryName"
               exact
@@ -98,6 +101,7 @@ const App = (props) => {
           </Routes>
           <ChatNow />
           <BackToTop />
+          <NewsLetterForm/>
           <Footer />
         </Paper>
       </Router>

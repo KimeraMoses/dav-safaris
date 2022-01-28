@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import imageCover from "../../assets/Image15.jpg";
 import classes from "./Terms.module.css";
 
 const Policies = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className={classes.dav__policies_wrapper}>
       <div
@@ -76,8 +79,7 @@ const Policies = () => {
         <p>
           You can contact us at any time if you have questions, concerns,
           comments, requests or complaints regarding our privacy policy or your
-          personal information.
-          Please email us at{" "}
+          personal information. Please email us at{" "}
           <a href="mailto:info@davsafaris.com">info@davsafaris.com</a>
         </p>
         <p>
@@ -91,7 +93,6 @@ const Policies = () => {
           to it. If we do this, we’ll always highlight it on our website and,
           where appropriate, let you know by email.
         </p>
-        
       </div>
     </div>
   );

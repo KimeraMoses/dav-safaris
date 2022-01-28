@@ -10,7 +10,7 @@ function HeroSection() {
   return (
     <div className="hero-container">
       <video src="/videos/video-1.mp4" autoPlay loop muted />
-      <h1>Discover Your Favorite Place with Us</h1>
+      <h1>Book Gorilla trekking tours and wildlife Safaris in Africa</h1>
       <p>
         Travel to the any corner of the world, without going around in circles
       </p>

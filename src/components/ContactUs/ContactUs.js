@@ -8,6 +8,7 @@ import ContactUsForm from "../Tours/SingleTour/Bookings/ContactUsForm";
 import { EmailOutlined } from "@material-ui/icons";
 import SocialMedia from "./SocialMedia";
 import { Form } from "react-bootstrap";
+import NewsLetterForm from "./NewsLetterForm";
 
 const ContactUs = () => {
   useEffect(() => {
@@ -59,12 +60,12 @@ const ContactUs = () => {
             </div>
             <ul className={classes.dav__contact_country_expert_contact}>
               <li>
-                <a href="tel:+256778451024">
+                <a href="tel:+256757795781">
                   <strong>
                     <span
                       className={classes.dav__contact_country_expert_contact}
                     >
-                      +256759130054
+                      +256757795781
                     </span>
                   </strong>
                 </a>
@@ -118,8 +119,8 @@ const ContactUs = () => {
               </div>
               <div className={classes.dav__phone_contacts_content}>
                 <ul>
-                  <li>Phone: +256 786 559 593</li>
-                  <li>WhatsApp: +256 701 412 430</li>
+                  <li>Phone: +256757795781</li>
+                  <li>WhatsApp: +256701412430</li>
                 </ul>
               </div>
             </div>
@@ -151,6 +152,7 @@ const ContactUs = () => {
             </div>
           </Paper>
           <Paper className={classes.dav__newsletter_wrapper}>
+            {/* <NewsLetterForm/> */}
             <h5>Subscribe to our Newsletters</h5>
             <div className={classes.dav__newsletter_form_wrapper}>
               <Form>

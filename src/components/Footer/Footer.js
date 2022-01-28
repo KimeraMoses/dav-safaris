@@ -11,6 +11,8 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import NewsLetterForm from "../ContactUs/NewsLetterForm";
+import SocialMedia from "../ContactUs/SocialMedia";
 import classes from "./Footer.module.css";
 export const Fb = createSvgIcon(
   <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z" />,
@@ -38,21 +40,7 @@ const Footer = () => {
             </p>
           </div>
         </Col>
-        <Col
-          lg={3}
-          md={6}
-          sm={6}
-          className={classes.dav__footer_section_col_wrapper}
-        >
-          <div className={`${classes.dav__footer_section_title_wrapper}`}>
-            <h5>Short Uganda Safaris</h5>
 
-            <p>
-              Dav safaris gives you freedom to schedule your own tours in any
-              east african country at the time of your convinience
-            </p>
-          </div>
-        </Col>
         <Col
           lg={3}
           md={6}
@@ -64,27 +52,29 @@ const Footer = () => {
 
             <ul className={classes.dav__footer_safaris}>
               {Tours &&
-                Tours.slice(0,3).map((tour) => {
+                Tours.slice(0, 3).map((tour) => {
                   return (
                     <li>
                       <Link to={`/tours/${tour.slug}`}>
-                        <MenuIcon />{tour.name}
+                        <MenuIcon />
+                        {tour.name}
                       </Link>
                     </li>
                   );
                 })}
-              {/* <li>
-                <a href="/">
-                  <MenuIcon />3 days fly to Queen Elizabeth National Park
-                  Safari.a
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <MenuIcon />3 Days Fly Tour Murchison National Park Safari
-                </a>
-              </li> */}
             </ul>
+          </div>
+        </Col>
+        <Col
+          lg={3}
+          md={6}
+          sm={6}
+          className={classes.dav__footer_section_col_wrapper}
+        >
+          <div className={`${classes.dav__footer_section_title_wrapper}`}>
+            <h5>Follow Us</h5>
+
+           <SocialMedia/>
           </div>
         </Col>
         <Col
@@ -107,6 +97,10 @@ const Footer = () => {
               <li>
                 <EmailOutlined />
                 <a href="mailto:info@davsafaris.com">info@davsafaris.com</a>
+              </li>
+              <li>
+                <EmailOutlined />
+                <a href="mailto:davsafaris@gmail.com">davsafaris@gmail.com</a>
               </li>
             </ul>
           </div>
