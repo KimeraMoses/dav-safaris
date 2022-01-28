@@ -1,6 +1,7 @@
 import classes from "./ContactUs.module.css";
 import React, { useEffect } from "react";
 import Image from "../../assets/background.webp";
+import Operator from "../../assets/davLogo.png";
 import RoomIcon from "@material-ui/icons/Room";
 import PhoneIcon from "@material-ui/icons/Phone";
 import { Button, Paper, TextField } from "@material-ui/core";
@@ -51,7 +52,7 @@ const ContactUs = () => {
             </h3>
 
             <div className={classes.specialist__text}>
-              <img src={Image} />
+              <img src={Operator} />
 
               <p>
                 Start planning your trip by contacting one of our specialists in
@@ -82,12 +83,8 @@ const ContactUs = () => {
               </li>
 
               <li>
-                <strong>Saturday: </strong>
+                <strong>Saturday - Sunday: </strong>
                 <span>9:30am to 4:30pm</span>
-              </li>
-              <li>
-                <strong>Sunday: </strong>
-                <span>Closed</span>
               </li>
             </ul>
           </div>
@@ -119,8 +116,12 @@ const ContactUs = () => {
               </div>
               <div className={classes.dav__phone_contacts_content}>
                 <ul>
-                  <li>Phone: +256757795781</li>
-                  <li>WhatsApp: +256701412430</li>
+                  <li>
+                    Phone: <a href="tel:+256757795781">+256757795781</a>
+                  </li>
+                  <li>
+                    WhatsApp: <a href="https://wa.link/barf5j">+256701412430</a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -152,7 +153,6 @@ const ContactUs = () => {
             </div>
           </Paper>
           <Paper className={classes.dav__newsletter_wrapper}>
-            {/* <NewsLetterForm/> */}
             <h5>Subscribe to our Newsletters</h5>
             <div className={classes.dav__newsletter_form_wrapper}>
               <Form>

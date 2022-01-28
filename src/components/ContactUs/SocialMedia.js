@@ -5,6 +5,7 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import YouTubeIcon from '@material-ui/icons/YouTube';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
 import classes from "./SocialMedia.module.css";
 
@@ -20,11 +21,12 @@ const SocialMedia = () => {
 
   return (
     <div className={classes.dav__social_icons_wrapper}>
-      <SocialIcon socialLink="https://facebook.com/gpaelevator" socialIcon={<Fb />} />
-      <SocialIcon socialLink="https://instagram.com/gpaelevator" socialIcon={<InstagramIcon  />} />
-      <SocialIcon socialLink="https://wa.link/iyj0rg" socialIcon={<WhatsAppIcon  />} />
-      <SocialIcon socialLink="https://twitter.com/gpaelevator" socialIcon={<TwitterIcon  />} />
-      <SocialIcon socialLink="https://www.youtube.com/channel/UCSqV7GFR-Ppx_f1uIV9M9tg" socialIcon={<YouTubeIcon  />} />
+      <SocialIcon socialLink="https://www.instagram.com/davsafaris/?hl=en" socialIcon={<InstagramIcon  />} />
+      <SocialIcon socialLink="https://ug.linkedin.com/in/david-mukasa-78a38a1a3" socialIcon={<LinkedInIcon  />} />
+      <SocialIcon socialLink="https://www.facebook.com/klaebb/" socialIcon={<Fb />} />
+      <SocialIcon socialLink="https://wa.link/barf5j" socialIcon={<WhatsAppIcon  />} />
+      <SocialIcon socialLink="https://mobile.twitter.com/davsafaris" socialIcon={<TwitterIcon  />} />
+      <SocialIcon socialLink="https://www.youtube.com/channel/UCYZIcOaxLXheJ5ejwNUz7Ug" socialIcon={<YouTubeIcon  />} />
     </div>
   );
 };

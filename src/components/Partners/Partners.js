@@ -5,6 +5,7 @@ import TripAdvisor from "../../assets/TripAdvisor.png";
 import touristlink from "../../assets/touristlink.png";
 import utb from "../../assets/utb.png";
 import uwa from "../../assets/UWA.png";
+import AutoLogo from "../../assets/autologo.png"
 
 const Partners = () => {
   return (
@@ -15,6 +16,7 @@ const Partners = () => {
           <a href='https://utb.go.ug/' target="_blank" ><img className={classes.dav__partners_utb} src={utb} /></a>
           <a href='https://www.tripadvisor.com/Attraction_Review-g293841-d20284280-Reviews-Dav_Safaris-Kampala_Central_Region.html' target="_blank" ><img src={TripAdvisor} /></a>
           <a href='https://www.touristlink.com/user/davsafaris.html?sereferer=036B5792' target="_blank" ><img src={touristlink} /></a>
+          <a href='https://ugandatouroperators.org/' target="_blank" ><img className={classes.dav__partners_uwa} src={AutoLogo} /></a>
           <a href='https://ugandawildlife.org/' target="_blank" ><img className={classes.dav__partners_uwa} src={uwa} /></a>
           </div>
       </div>

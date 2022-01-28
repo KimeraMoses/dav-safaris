@@ -37,21 +37,19 @@ const Benefits = () => {
                       <CalendarTodayOutlined fontSize="large" />
                       Personal Schedule
                     </h4>
-                    <p>
-                      Tell us where you want to go, we will take you there
-                    </p>
+                    <p>Tell us where you want to go, we will take you there</p>
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-6">
                   <div className="benefit__item">
                     <h4>
                       <HomeWorkOutlined fontSize="large" />
-                      Luxury Interiors
+                      Imaginable products
                     </h4>
                     <p>
-                      Dav safaris gives you freedom to schedule your own tours
-                      in any east african country at the time of your
-                      convinience
+                      Best itineraries with expert insights about the lesser
+                      know safari destinations and exclusive customerised and
+                      personalised value adds
                     </p>
                   </div>
                 </div>

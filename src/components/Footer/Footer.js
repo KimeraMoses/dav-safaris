@@ -6,6 +6,8 @@ import {
   RoomOutlined,
   Twitter,
 } from "@material-ui/icons";
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import MenuIcon from "@material-ui/icons/ArrowForward";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
@@ -91,8 +93,12 @@ const Footer = () => {
                 <RoomOutlined /> Freedom City Shopping Mall Entebbe Road
               </li>
               <li>
+                <WhatsAppIcon />
+                <a href="https://wa.link/barf5j">+256701412430</a>{" "}
+              </li>
+              <li>
                 <PhoneOutlined />
-                <a href="tel:+256701412430">+256701412430</a>{" "}
+                <a href="tel:+256757795781">+256757795781</a>{" "}
               </li>
               <li>
                 <EmailOutlined />
@@ -130,14 +136,14 @@ const Footer = () => {
               </ul>
             </div>
             <div className={classes.dav__footer_socials}>
-              <a href="#">
-                <Fb />
-              </a>
-              <a href="#">
-                <Twitter />
-              </a>
-              <a href="#">
+              <a href="https://www.instagram.com/davsafaris/?hl=en" target="_blank">
                 <Instagram />
+              </a>
+              <a href="https://ug.linkedin.com/in/david-mukasa-78a38a1a3" target="_blank">
+                <LinkedInIcon />
+              </a>
+              <a href="https://www.facebook.com/klaebb/" target="_blank">
+                <Fb />
               </a>
             </div>
           </Col>
