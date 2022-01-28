@@ -71,6 +71,13 @@ const DashBoard = () => {
             </li>
             <li>
               <DashBoardMenuItem
+                menuItemLink="manage-safari-updates"
+                menuItemTitle="Manage Safari Updates"
+                menuItemIcon={<AddLocationIcon />}
+              />
+            </li>
+            <li>
+              <DashBoardMenuItem
                 menuItemLink="manage-bookings"
                 menuItemTitle="Manage Bookings"
                 menuItemIcon={<BookOutlinedIcon />}

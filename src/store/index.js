@@ -11,6 +11,7 @@ import toursReducer from "./Slices/toursSlice";
 import reviewReducer from "./Slices/reviewSlice";
 import editTourReducer from "./Slices/editTourSlice";
 import messageReducer from "./Slices/messageSlice";
+import postReducer from "./Slices/postSlice";
 
 const store = configureStore({
   reducer: {
@@ -25,7 +26,8 @@ const store = configureStore({
     newTour: newTourReducer,
     editTour: editTourReducer,
     countries: countrySlice,
-    message: messageReducer
+    message: messageReducer,
+    post: postReducer,
   },
 });
 

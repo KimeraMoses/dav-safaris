@@ -40,13 +40,13 @@ let dayActivityDescription = [];
 
 console.log("Outside", dayActivityDescription);
 
-const NewTour = (props) => {
+const EditTour = (props) => {
   const DarkMode = false;
   const isEditing = useSelector((state) => state.editTour.isLoading);
   const isLoading = useSelector((state) => state.newTour.isLoading);
   const Tour = useSelector((state) => state.tour.tourDetails);
   const DayActivities = useSelector((state) => state.newTour.days);
-  const { isEdit, setIsEdit } = props;
+  const { isEdit,setIsEdit } = props;
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -55,19 +55,39 @@ const NewTour = (props) => {
   const [itinaries, setItinaries] = useState([]);
   const [TourCategories, setTourCategories] = useState([]);
 
+  let tourHighLights = "";
+  Tour &&
+    Tour.tourActivities.map((el) => {
+      tourHighLights += el + "\n";
+    });
+  let tourIncludes = "";
+  Tour &&
+    Tour.packageDetails &&
+    Tour.packageDetails.price_inludes &&
+    Tour.packageDetails.price_inludes.map((el) => {
+      tourIncludes += el + "\n";
+    });
+  let tourExclude = "";
+  Tour &&
+    Tour.packageDetails &&
+    Tour.packageDetails.price_excludes &&
+    Tour.packageDetails.price_excludes.map((el) => {
+      tourExclude += el + "\n";
+    });
+
   const [values, setValues] = useState({
-    name: "",
-    description: "",
-    tourActivities: "",
+    name: Tour.name,
+    description: Tour.description,
+    tourActivities: tourHighLights,
     cover_image: "",
     selectedImage: "",
-    country: "",
-    category: "",
-    duration: "",
-    price: "",
+    country: Tour.country,
+    category: Tour.category,
+    duration: Tour.duration,
+    price: Tour.price,
 
-    includes: "",
-    excludes: "",
+    includes: tourIncludes,
+    excludes: tourExclude,
     day: "",
     itinaryTitle: "",
     itinaryDesc: "",
@@ -176,6 +196,8 @@ const NewTour = (props) => {
     });
   };
 
+  console.log("Inside", dayActivityDescription);
+
   const RegisterFormSubmitHandler = async (e) => {
     e.preventDefault();
     if (values.itinaryTitle.length > 0) {
@@ -192,25 +214,43 @@ const NewTour = (props) => {
       return setError("Tour cover image required");
     }
     if (values.description.length < 1) {
-      return setError("Tour Description required");
+      return setError("University Description required");
     }
 
     try {
       await dispatch(
-        creatNewTour(
-          values.name,
-          values.description,
-          JSON.stringify(tourActivities),
-          JSON.stringify(dayActivityDescription),
-          values.duration,
-          values.price,
-          values.selectedImage,
-          JSON.stringify(packageDetails),
-          values.category,
-          values.country
-        )
+        isEdit
+          ? editTourDetails(
+              values.name,
+              values.description,
+              JSON.stringify(tourActivities),
+              JSON.stringify(dayActivityDescription),
+              values.duration,
+              values.price,
+              values.selectedImage,
+              JSON.stringify(packageDetails),
+              values.category,
+              values.country,
+              Tour.id
+            )
+          : creatNewTour(
+              values.name,
+              values.description,
+              JSON.stringify(tourActivities),
+              JSON.stringify(dayActivityDescription),
+              values.duration,
+              values.price,
+              values.selectedImage,
+              JSON.stringify(packageDetails),
+              values.category,
+              values.country
+            )
       );
-      setMessage(`${values.name} Created Successfully`);
+      setMessage(
+        `${isEdit ? "Changes to " : ""} ${Tour.name} ${
+          isEdit ? "saved" : "Created"
+        } Successfully`
+      );
       setTourCategories([]);
       setValues({
         name: "",
@@ -234,9 +274,19 @@ const NewTour = (props) => {
       tourActivities = [];
       priceIncludes = [];
       priceExcludes = [];
+      setIsEdit(false)
     } catch (error) {
       setError("Tour Registration Failed");
     }
+  };
+  let filteredItinaries = Tour.dayActivityDescription;
+
+  const onEditClick = (id) => {
+    console.log("id", id);
+    // filteredItinaries = Tour.dayActivityDescription.filter((item, index) => id !== index);
+    const Activity  = Tour.dayActivityDescription[id];
+  
+    console.log("Inside", filteredItinaries);
   };
 
   return (
@@ -265,6 +315,15 @@ const NewTour = (props) => {
             )}
 
             <Form onSubmit={RegisterFormSubmitHandler}>
+              {/* {values.code.split("\n").map((item, index) => {
+                pricesIncludes.push(item);
+                // console.log("Included", pricesIncludes);
+                return (
+                  <>
+                    <li key={index}>{item}</li>
+                  </>
+                );
+              })} */}
               <TextField
                 fullWidth
                 label="Tour Title"
@@ -322,6 +381,7 @@ const NewTour = (props) => {
                   >
                     <InputLabel>Country</InputLabel>
                     <Select
+                      id="gpa__level_select_input"
                       value={values.country}
                       name="country"
                       onChange={onChangeHandler}
@@ -341,6 +401,7 @@ const NewTour = (props) => {
                   >
                     <InputLabel>Tour Category</InputLabel>
                     <Select
+                      id="gpa__level_select_input"
                       value={values.category}
                       name="category"
                       onChange={onChangeHandler}
@@ -424,20 +485,33 @@ const NewTour = (props) => {
                 values={values}
                 setValues={setValues}
                 ItinaryHandler={ItinaryHandler}
-                dayActivity={dayActivityDescription}
+                dayActivity={Tour.dayActivityDescription}
                 days={values.duration}
-                // onEditClick={onEditClick}
-                // isEdit={isEdit}
+                onEditClick={onEditClick}
+                isEdit={isEdit}
               />
 
               <Row>
                 <Col xs={{ span: 8, offset: 2 }}>
                   <Button
+                    // disabled={isLoading || values.logo.length < 1}
                     variant="contained"
                     color="primary"
                     type="submit"
-                    className={styles.gpa__register_submit_button}
+                    className={`${styles.gpa__register_submit_button} ${
+                      DarkMode ? styles.gpa__dark_mode : ""
+                    }`}
                   >
+                    {/* {isEditing || isLoading
+                      ? "Creating Tour..."
+                      : "Create Tour"}
+                    {isLoading ? (
+                      <Spinner
+                        thickness={2}
+                        size={20}
+                        style={{ marginLeft: 5 }}
+                      />
+                    ) : null} */}
                     {isEdit
                       ? isEditing
                         ? "Saving changes..."
@@ -463,4 +537,4 @@ const NewTour = (props) => {
   );
 };
 
-export default NewTour;
+export default EditTour;

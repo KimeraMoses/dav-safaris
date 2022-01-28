@@ -10,7 +10,8 @@ const convertBytesToKB = (bytes) => Math.round(bytes / KILO_BYTES_PER_BYTE);
 const ImageUpload = ({
   tourImageHandler,
   tourImage,
-  Image
+  Image,
+  isPost
 }) => {
   const TourImageHandler = () => {
     const fileInput = document.getElementById("tour_image_input_change");
@@ -31,7 +32,7 @@ const ImageUpload = ({
     >
       <div className={tourImage.length>0?classes.dav__cover_image_content: ""}>
       <UploadIcon />
-      <p>{tourImage.length>0?"Change tour cover image":"Upload tour cover image"}</p>
+      <p>{tourImage.length>0?`Change ${isPost? "post": "tour"} cover image`:`Upload ${isPost? "post": "tour"} cover image`}</p>
       <input
         type="file"
         hidden="hidden"

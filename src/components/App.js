@@ -37,6 +37,7 @@ import Terms from "../containers/PrivacyPolicies/Terms";
 import Policies from "../containers/PrivacyPolicies/Policies";
 import Updates from "./SafariUpdates/Updates";
 import NewsLetterForm from "./ContactUs/NewsLetterForm";
+import ManageUpdates from "./DashBoard/ManageUpdates/ManageUpdates";
 
 const App = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -63,6 +64,7 @@ const App = (props) => {
             >
               <Route path="user" element={<DashBoardItem />} />
               <Route path="manage-tours" element={<ManageTours />} />
+              <Route path="manage-safari-updates" element={<ManageUpdates />} />
             </Route>
             <Route
               path="/login"

@@ -5,30 +5,36 @@ import Search from "../../UI/Search/Search";
 import classes from "./TourFilters.module.css";
 import AddIcon from "@material-ui/icons/Add";
 import RefreshIcon from "@material-ui/icons/Refresh";
-import BackIcon from '@material-ui/icons/Reply';
+import BackIcon from "@material-ui/icons/Reply";
 import { useDispatch } from "react-redux";
 import { fetchAllTours } from "../../../store/Actions/TourActions";
 import { useSelector } from "react-redux";
 
 const TourFilters = (props) => {
-  const dispatch = useDispatch()
-  const { addNew,setAddNew} = props
-  const isLoading = useSelector(state=>state.tours.isLoading);
-  const RefreshHandler = ()=>{
-    dispatch(fetchAllTours())
-  }
+  const dispatch = useDispatch();
+  const { addNew, setAddNew, Country, setCountry, searchTerm, SearchHandler } =
+    props;
+  const isLoading = useSelector((state) => state.tours.isLoading);
+  const RefreshHandler = () => {
+    dispatch(fetchAllTours());
+  };
 
   return (
     <div className={classes.dav__tour_filters_wrapper}>
       <div className={classes.dav__tour_filter_item_wrapper}>
-        <span className={classes.dav__add_new_tour_icon} >
-          {addNew? <BackIcon onClick={()=>setAddNew(false)}/>: <div onClick={()=>setAddNew(true)}>
-          <AddIcon />
-          <Hidden xsDown>Add new</Hidden></div>}
+        <span className={classes.dav__add_new_tour_icon}>
+          {addNew ? (
+            <BackIcon onClick={() => setAddNew(false)} />
+          ) : (
+            <div onClick={() => setAddNew(true)}>
+              <AddIcon />
+              <Hidden xsDown>Add new</Hidden>
+            </div>
+          )}
         </span>
 
         <div className={classes.dav__country_dropdown_wrapper}>
-          <Dropdown selected="Filter by country" />
+          <Dropdown selected={Country} setSelected={setCountry} />
         </div>
       </div>
       <div className={classes.dav__tour_filter_item_wrapper}>
@@ -38,12 +44,12 @@ const TourFilters = (props) => {
             type="search"
             name="search"
             autoComplete="off"
-            //   value={searchTerm}
+            value={searchTerm}
             className={classes.gpa__dashboard_search_field}
             fullWidth
             variant="filled"
             size="small"
-            //   onChange={SearchHandler}
+            onChange={SearchHandler}
           />
         </div>
         <Fab

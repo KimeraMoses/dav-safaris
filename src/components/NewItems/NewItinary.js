@@ -26,44 +26,46 @@ const NewItinary = (props) => {
     onEditClick,
     isEdit,
   } = props;
-  const DayActivities = useSelector((state) => state.newTour.days);
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   };
-  console.log(dayActivity)
   return (
     <div className={classes.dav__new_itinary_wrapper}>
       <h5>
-        Itinaries{dayActivity.length > 0 ? `(${dayActivity.length})` : ""}
+        Itinaries
+        {dayActivity && dayActivity.length > 0
+          ? `(${dayActivity && dayActivity.length})`
+          : ""}
       </h5>
 
       <Row>
-        {dayActivity.map((day, index) => {
-          return (
-            <Col
-              lg={6}
-              md={6}
-              sm={6}
-              xs={12}
-              className={classes.gpa__university_card_wrapper}
-              key={day.day}
-            >
-              <List className={classes.gpa__dashboard_menu_list_item} dense>
-                <Itinary
-                  day={day.day}
-                  title={day.title}
-                  description={day.description}
-                  meal_plan={day.meal_plan}
-                  accomodation={day.accomodation}
-                  id={index}
-                  onEditClick={onEditClick}
-                />
-              </List>
-            </Col>
-          );
-        })}
+        {dayActivity &&
+          dayActivity.map((day, index) => {
+            return (
+              <Col
+                lg={6}
+                md={6}
+                sm={6}
+                xs={12}
+                className={classes.gpa__university_card_wrapper}
+                key={day.day}
+              >
+                <List className={classes.gpa__dashboard_menu_list_item} dense>
+                  <Itinary
+                    day={day.day}
+                    title={day.title}
+                    description={day.description}
+                    meal_plan={day.meal_plan}
+                    accomodation={day.accomodation}
+                    id={index}
+                    onEditClick={onEditClick}
+                  />
+                </List>
+              </Col>
+            );
+          })}
       </Row>
       {!isEdit && (
         <>
@@ -142,7 +144,9 @@ const NewItinary = (props) => {
                 size="small"
                 onClick={ItinaryHandler}
               >
-                {dayActivity.length === days - 1 ? "Finish" : "Add New Itinary"}
+                {dayActivity && dayActivity.length === days - 1
+                  ? "Finish"
+                  : "Add New Itinary"}
               </Button>
             </div>
           </div>
