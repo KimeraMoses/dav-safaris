@@ -1,21 +1,22 @@
-.dav__popular_tours_wrapper {
-  padding: 40px 30px;
+.dav__updates_wrapper {
+  padding: 10px 30px 40px;
   margin: 30px 0;
   background-color: #edf2f2;
 }
-.dav__popular_tour_card_wrapper {
+.dav__updates_card_wrapper {
   margin: 20px 0;
 }
-.dav__update_card_description,
-.dav__update_card_title {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
+
+.dav__updates_row_wrapper{
+  margin-top: 20px!important;
 }
-.dav__update_card_title {
-  -webkit-line-clamp: 3;
+.dav__more_updates_btn_wrapper{
+  margin: 20px 0 0;
+  text-align: center;
 }
-.dav__update_card_description {
-  -webkit-line-clamp: 4;
+
+@media screen and (max-width: 689px) {
+  .dav__updates_wrapper{
+    padding: 10px 10px 40px!important;
+  }
 }

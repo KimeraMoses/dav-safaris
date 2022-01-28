@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import BookingSearchResults from "../HeroBooking/BookingSearchResults";
 import Partners from "../Partners/Partners";
+import Updates from "../SafariUpdates/Updates";
 
 const Home = () => {
   const Tours = useSelector((state) => state.tours.toursList);
@@ -78,6 +79,7 @@ const Home = () => {
       <SectionTitle subTitle="Take a look at our" Title="Most popular tours" />
       <CardCarousel />
       <CountyToursSection />
+      <Updates/>
       <Partners/>
     </Wrapper>
   );
