@@ -1,0 +1,16 @@
+.dav__post_image_wrapper{
+    height: 140px;
+}
+.dav__update_card_description,
+.dav__update_card_title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+.dav__update_card_title {
+  -webkit-line-clamp: 2;
+}
+.dav__update_card_description {
+  -webkit-line-clamp: 4;
+}
