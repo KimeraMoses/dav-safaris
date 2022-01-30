@@ -9,7 +9,7 @@ import {
   fetchAllTours,
   fetchTourDetails,
 } from "../../../store/Actions/TourActions";
-import NewUpdate from "../../NewItems/NewUpdate";
+import NewPost from "../../NewItems/NewPost";
 
 const ManageUpdates = () => {
   const isLoading = useSelector((state) => state.tour.isLoading);
@@ -101,7 +101,7 @@ const ManageUpdates = () => {
       {/* {addNew ? ( */}
         <div className={classes.dav__new_tour_form_wrapper}>
 
-            <NewUpdate isEdit={isEdit} setIsEdit={setIsEdit} />
+            <NewPost isEdit={isEdit} setIsEdit={setIsEdit} />
 
         </div>
 

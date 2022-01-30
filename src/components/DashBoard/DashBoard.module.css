@@ -29,6 +29,7 @@
 }
 .dav__dashboard_menu_items ul li a {
   color: #466b66;
+  user-select: none;
 }
 .dav__dashboard_menu_items .dav__selected_menu_item {
   color: var(--dav__primary_color);

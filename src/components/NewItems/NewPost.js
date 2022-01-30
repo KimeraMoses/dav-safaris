@@ -27,34 +27,29 @@ import styles from "./NewTour.module.css";
 import ImageUpload from "./ImageUpload";
 import { useEffect } from "react";
 import { creatNewPost } from "../../store/Actions/PostActions";
+import PostBlock from "./PostBlock";
 
+let postBlocks = [];
 
-
-const NewUpdate = (props) => {
+const NewPost = (props) => {
   const isLoading = useSelector((state) => state.post.isLoading);
+
   const { isEdit, setIsEdit } = props;
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+  const [file, setFile] = useState(false);
 
   const [values, setValues] = useState({
     name: "",
     description: "",
-    tourActivities: "",
     cover_image: "",
     selectedImage: "",
+    blockTitle: "",
+    blockDesc: "",
   });
+  useEffect(() => {}, [values]);
 
-
-  //====FORMATING THE TOUR HIGHLIGHTS====//
-  let tourActivities = [];
-  {
-    values.tourActivities &&
-      values.tourActivities.split("\n").map((item, index) => {
-        tourActivities.push(item);
-      });
-  }
- 
   //====TOUR COVER IMAGE HANDLER====//
   const tourImageHandler = async (e) => {
     const file = e.target.files[0];
@@ -83,49 +78,65 @@ const NewUpdate = (props) => {
     setError("");
   };
 
+  const PostBlockHandler = () => {
+    const postblock = {
+      title: values.blockTitle,
+      description: values.blockDesc,
+    };
+
+    postBlocks.push(postblock);
+
+    setValues({
+      ...values,
+      blockTitle: "",
+      blockDesc: "",
+    });
+  };
 
   const RegisterFormSubmitHandler = async (e) => {
+    console.log(values, postBlocks)
     e.preventDefault();
+    if (values.blockTitle.length > 0) {
+      PostBlockHandler();
+    }
     if (values.name.length < 1) {
-      return setError("Tour title is required");
+      return setError("Post title is required");
     }
 
     if (!isEdit && values.selectedImage.length < 1) {
-      return setError("Tour cover image required");
+      return setError("Post cover image required");
     }
     if (values.description.length < 1) {
       return setError("Post Description required");
     }
-
     try {
       await dispatch(
         creatNewPost(
           values.name,
           values.description,
-          JSON.stringify(tourActivities),
-          values.selectedImage,
+          JSON.stringify(postBlocks),
+          values.selectedImage
         )
       );
       setMessage(`${values.name} Created Successfully`);
       setValues({
         name: "",
         description: "",
-        tourActivities: "",
         cover_image: "",
         selectedImage: "",
+        blockTitle: "",
+        blockDesc: "",
       });
-  
+      postBlocks = [];
     } catch (error) {
-      setError("Post Creation Failed");
+      setError("Post Registration Failed");
     }
   };
 
   return (
     <Container fluid>
       <section className={styles.gpa__registration_section}>
-        <h1
-          className={styles.gpa__membership_section_title}
-        >
+        <h1 className={styles.gpa__membership_section_title}>
           Create New Safari Update
         </h1>
         <Paper
@@ -154,26 +165,15 @@ const NewUpdate = (props) => {
                 onChange={onChangeHandler}
                 className={styles.gpa__form_input_field}
               />
-              <TextField
-                className={styles.gpa__form_input_field}
-                label="Post Description"
-                multiline
-                value={values.description}
-                name="description"
-                onChange={onChangeHandler}
-                rows={6}
-                fullWidth
-                variant="filled"
-              />
               <div className="row">
                 <div className="col-xs-12 col-sm-9">
                   <TextField
                     className={styles.gpa__form_input_field}
-                    label="Post Highlights"
+                    label="Post Description"
                     placeholder="Write each highlight on a new line"
                     multiline
-                    value={values.tourActivities}
-                    name="tourActivities"
+                    value={values.description}
+                    name="description"
                     onChange={onChangeHandler}
                     rows={4}
                     fullWidth
@@ -187,12 +187,19 @@ const NewUpdate = (props) => {
                   <ImageUpload
                     isPost={true}
                     tourImage={values.cover_image}
-                    Image={values.selectedImage}
+                    // Image={Tour.imageCover}
                     uploaded={true}
                     tourImageHandler={tourImageHandler}
                   />
                 </div>
               </div>
+
+              <PostBlock
+                values={values}
+                setValues={setValues}
+                BlockHandler={PostBlockHandler}
+                Blocks={postBlocks}
+              />
 
               <Row>
                 <Col xs={{ span: 8, offset: 2 }}>
@@ -202,10 +209,8 @@ const NewUpdate = (props) => {
                     type="submit"
                     className={styles.gpa__register_submit_button}
                   >
-                    { isLoading
-                      ? "Creating Updates..."
-                      : "Post Update"}
-                    {isLoading? (
+                    {isLoading ? "Creating Updates..." : "Post Update"}
+                    {isLoading ? (
                       <Spinner
                         thickness={2}
                         size={20}
@@ -223,4 +228,4 @@ const NewUpdate = (props) => {
   );
 };
 
-export default NewUpdate;
+export default NewPost;

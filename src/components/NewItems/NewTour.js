@@ -38,7 +38,7 @@ import { AddDays, DeleteDay } from "../../store/Slices/newTourSlice";
 
 let dayActivityDescription = [];
 
-console.log("Outside", dayActivityDescription);
+// console.log("Outside", dayActivityDescription);
 
 const NewTour = (props) => {
   const DarkMode = false;

@@ -19,7 +19,7 @@ const Itinary = ({ id,day, title, description, meal_plan, accomodation,onEditCli
         <Avatar
           className={classes.dav__itinary_day}
         >
-          {day}
+          {day? day: id+1}
         </Avatar>
       </ListItemAvatar>
       <ListItemText primary={title} secondary={description}  className={classes.dav__tour_texts} />
