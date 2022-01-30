@@ -38,6 +38,8 @@ import Policies from "../containers/PrivacyPolicies/Policies";
 import Updates from "./SafariUpdates/Updates";
 import NewsLetterForm from "./ContactUs/NewsLetterForm";
 import ManageUpdates from "./DashBoard/ManageUpdates/ManageUpdates";
+import { fetchAllPosts } from "../store/Actions/PostActions";
+import Update from "./SafariUpdates/SingleUpdate/Update";
 
 const App = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -47,6 +49,7 @@ const App = (props) => {
     window.scrollTo(0, 0);
     AutoAuthenticate(dispatch);
     dispatch(fetchAllTours())
+    dispatch(fetchAllPosts())
   }, [dispatch]);
 
   return (
@@ -84,7 +87,8 @@ const App = (props) => {
             <Route path="/terms-of-services" exact element={<Terms />} />
             <Route path="/privacy-policies" exact element={<Policies />} />
             <Route path="/tours" exact element={<Tours />} />
-            <Route path="/updates" exact element={<Updates />} />
+            <Route path="/safari-updates" exact element={<Updates isPostPage={true}/>} />
+            <Route path="/safari-updates/:postTitle" exact element={<Update/>} />
             <Route
               path="/:countryName"
               exact

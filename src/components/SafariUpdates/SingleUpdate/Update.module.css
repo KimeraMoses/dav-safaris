@@ -1,0 +1,102 @@
+.dav__single_update_wrapper {
+  padding: 20px 40px !important;
+}
+.dav__single_update_details_wrapper {
+  padding: 0 50px 0 30px !important;
+}
+.dav__post_header {
+  padding-bottom: 10px;
+}
+.dav__single_recent_title h1,
+.dav__post_header h1 {
+  font-size: 28px;
+  font-weight: normal;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  color: #6aa441;
+}
+.dav__post_header h1 {
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+.dav__post_meta {
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-family: "Merriweather", serif;
+  font-style: italic;
+  color: #aaa;
+}
+.dav__date_posted {
+  margin-right: 15px;
+}
+.dav__post_meta svg {
+  font-size: 16px;
+  display: inline-block;
+  color: #477000;
+}
+.dav__safari_updates_tag a {
+  color: #aaa;
+}
+.dav__safari_updates_tag a:hover {
+  color: #477000;
+}
+.dav__post_content_wrapper p {
+  text-align: justify;
+}
+.dav__post_content_wrapper h3 {
+  font-size: 22px;
+  font-weight: normal;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  color: #6aa441;
+  margin: 15px 0;
+}
+
+.dav__single_update_recent_posts_wrapper {
+  background-color: #edf2f2;
+  border-radius: 20px;
+}
+.dav__single_recent_title {
+  padding: 10px;
+}
+.dav__single_recent_title h1 {
+  margin: 0;
+}
+.dav__single_recent_posts ul {
+  margin-left: 0;
+  padding-right: 20px;
+  padding-left: 20px;
+  color: #343434;
+  list-style: none;
+}
+.dav__single_recent_posts ul li a {
+  color: #000;
+}
+.dav__single_recent_posts ul li a:hover {
+  color: #6aa441;
+}
+.dav__single_recent_posts ul li::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 10px;
+  margin-bottom: 2px;
+  margin-left: -1em;
+  border-radius: 50%;
+  background-color: var(--dav__tertiary_color);
+}
+.dav__single_recent_posts_date {
+  text-align: right;
+  font-size: 14px;
+  font-family: "Merriweather", serif;
+  font-style: italic;
+  color: #aaa;
+}
+
+@media screen and (max-width: 689px) {
+  .dav__single_update_wrapper {
+    padding: 20px 20px !important;
+  }
+  .dav__single_update_details_wrapper {
+    padding: 0 20px 0 20px !important;
+  }
+}

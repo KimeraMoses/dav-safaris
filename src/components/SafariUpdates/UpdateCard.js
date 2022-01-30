@@ -11,15 +11,15 @@ import classes from "./UpdateCard.module.css";
 import { Link } from "react-router-dom";
 
 export default function UpdateCard(props) {
-  const { Tour } = props;
-
+  const { Post } = props;
+  const slug = Post && Post.name && Post.name.toLowerCase().replace(/ /g, '-')
   return (
     <Card className={classes.dav__update_card_wrapper}>
       <CardActionArea>
         <CardMedia
           className={classes.dav__update_image_wrapper}
-          image={Tour && Tour.imageCover}
-          title={Tour && Tour.name}
+          image={Post && Post.postImage}
+          title={Post && Post.name}
         />
         <CardContent>
           <Typography
@@ -28,7 +28,7 @@ export default function UpdateCard(props) {
             component="h2"
             className={classes.dav__update_card_title}
           >
-            {Tour && Tour.name}
+            {Post && Post.name}
           </Typography>
           <Typography
             variant="body2"
@@ -36,12 +36,12 @@ export default function UpdateCard(props) {
             component="p"
             className={classes.dav__update_card_description}
           >
-            {Tour && Tour.description}
+            {Post && Post.post_content}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" component={Link} to={`/tours/${Tour && Tour.slug}`}>
+        <Button size="small" color="primary" component={Link} to={`/safari-updates/${slug}`}>
           Read More
         </Button>
       </CardActions>

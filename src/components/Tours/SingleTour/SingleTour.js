@@ -20,6 +20,21 @@ import RelatedTours from "./RelatedTour/RelatedTours";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTourName } from "../../../store/Actions/TourActions";
 
+export const SingleHero = (props) => {
+  const { title, image } = props;
+  return (
+    <div
+      className={classes.dav__single_tour_hero}
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+      }}
+    >
+      <h1>{title}</h1>
+    </div>
+  );
+};
 
 const SingleTour = () => {
   const dispatch = useDispatch();
@@ -33,16 +48,7 @@ const SingleTour = () => {
 
   return (
     <div className={classes.dav__single_tour_page_wrapper}>
-      <div
-        className={classes.dav__single_tour_hero}
-        style={{
-          backgroundImage: `url(${Tour && Tour.imageCover})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
-        }}
-      >
-        <h1>{Tour && Tour.name}</h1>
-      </div>
+      <SingleHero title={Tour && Tour.name} image={Tour && Tour.imageCover}/>
       <JumpNavigation />
 
       <div className={classes.dav__single_tour_highlights_wrapper}>

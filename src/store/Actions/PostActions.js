@@ -40,7 +40,7 @@ export const creatNewPost = (
     try {
       const response = await fetch(`${baseUrl}/api/v1/posts/getAllPosts`);
       const fetchedPosts = await response.json();
-      dispatch(fetchAllPostSuccess(fetchedPosts.tours));
+      dispatch(fetchAllPostSuccess(fetchedPosts.Posts));
       console.log(fetchedPosts)
     } catch (error) {
       dispatch(fetchAllPostFail(error.message));
