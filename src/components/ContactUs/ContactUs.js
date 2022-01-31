@@ -61,7 +61,7 @@ const ContactUs = () => {
             </div>
             <ul className={classes.dav__contact_country_expert_contact}>
               <li>
-                <a href="tel:+256757795781">
+                <a href="https://wa.link/0v0s1w">
                   <strong>
                     <span
                       className={classes.dav__contact_country_expert_contact}
@@ -72,7 +72,7 @@ const ContactUs = () => {
                 </a>
               </li>
               <li>
-                <a href="tel:+256701412430">
+                <a href="https://wa.link/barf5j">
                   <strong>
                     <span
                       className={classes.dav__contact_country_expert_contact}
@@ -124,7 +124,7 @@ const ContactUs = () => {
               <div className={classes.dav__phone_contacts_content}>
                 <ul>
                   <li>
-                    Phone: <a href="tel:+256757795781">+256757795781</a>
+                    Phone: <a href="https://wa.link/0v0s1w">+256757795781</a>
                   </li>
                   <li>
                     WhatsApp: <a href="https://wa.link/barf5j">+256701412430</a>

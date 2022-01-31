@@ -98,7 +98,7 @@ const Footer = () => {
               </li>
               <li>
                 <PhoneOutlined />
-                <a href="tel:+256757795781">+256757795781</a>{" "}
+                <a href="https://wa.link/0v0s1w">+256757795781</a>{" "}
               </li>
               <li>
                 <EmailOutlined />
