@@ -16,6 +16,7 @@ import BookingSearchResults from "../HeroBooking/BookingSearchResults";
 import Partners from "../Partners/Partners";
 import Updates from "../SafariUpdates/Updates";
 import Slideshow from "../HeroSection/SlideShow";
+import NewsLetterForm from "../ContactUs/NewsLetterForm";
 
 const Home = () => {
   const Tours = useSelector((state) => state.tours.toursList);
@@ -83,6 +84,7 @@ const Home = () => {
       <CountyToursSection />
       <Updates/>
       <Partners/>
+      <NewsLetterForm/>
     </Wrapper>
   );
 };

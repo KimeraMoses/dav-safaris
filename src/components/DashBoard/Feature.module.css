@@ -1,0 +1,40 @@
+.gpa__feature_comming{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 450px;
+    margin: 50px auto 0;
+    padding: 40px;
+    text-align: center;
+}
+
+.gpa__feature_icon{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--dav__tertiary_color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.gpa__feature_icon svg{
+    font-size: 60px;
+    color: #fff;
+}
+.gpa__feature_comming h4{
+    margin-top: 16px;
+    color: rgba(0, 0, 0, 0.425);
+    text-transform: uppercase;
+}
+.gpa__feature_comming_msg{
+    max-width: 240px;
+    color: rgba(0, 0, 0, 0.6);
+}
+.gpa__dark_mode.gpa__feature_comming h4{
+    color: #fff;
+    color: rgba(255, 255, 255, .8);
+}
+.gpa__dark_mode.gpa__feature_comming .gpa__feature_comming_msg{
+    color: rgba(255, 255, 255, .4);
+}

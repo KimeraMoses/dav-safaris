@@ -65,10 +65,8 @@ export const fetchAllCountries = () => async (dispatch) => {
     const response = await fetch(`https://restcountries.com/v2/all`);
     const fetchedCountries = await response.json();
     dispatch(fetchCountriesSuccess(fetchedCountries));
-    // console.log(fetchedCountries)
   } catch (error) {
     dispatch(fetchCountriesFail(error.message));
-    // console.log(error)
   }
 };
 
@@ -81,10 +79,8 @@ export const fetchAllCountryTours = (country) => async (dispatch) => {
     );
     const fetchedTours = await response.json();
     dispatch(fetchCountryToursSuccess(fetchedTours.tours));
-    console.log("Country Ts", fetchedTours);
   } catch (error) {
     dispatch(fetchCountryToursFail(error.message));
-    console.log("Country T err", error);
   }
 };
 
@@ -94,10 +90,8 @@ export const fetchTourDetails = (tour_id) => async (dispatch) => {
     const response = await fetch(`${baseUrl}/api/v1/tours/${tour_id}`);
     const fetchedTour = await response.json();
     dispatch(fetchTourSuccess(fetchedTour.tour));
-    console.log(fetchedTour);
   } catch (error) {
     dispatch(fetchTourFail(error.message));
-    console.log(error);
   }
 };
 
@@ -140,8 +134,6 @@ export const creatNewTour = (
   packageDetails,
   category,
   country
-  // maxGroupSize,
-  // summary,
 ) => {
   return async (dispatch) => {
     dispatch(NewTourPending());
@@ -156,8 +148,6 @@ export const creatNewTour = (
     data.append("price", price);
     data.append("duration", duration);
     data.append("dayActivityDescription", dayActivityDescription);
-    // data.append("maxGroupSize", maxGroupSize);
-    // data.append("summary", summary);
     const response = await fetch(`${baseUrl}/api/v1/tours/create`, {
       method: "POST",
       body: data,
@@ -200,12 +190,6 @@ export const editTourDetails = (
     data.append("price", price);
     data.append("duration", duration);
     data.append("dayActivityDescription", dayActivityDescription);
-    // data.append("maxGroupSize", maxGroupSize);
-    // data.append("summary", summary);
-
-    // console.log("Tour activities", tourActivities)
-    // console.log("day", dayActivityDescription)
-    // console.log("package", packageDetails)
 
     const response = await fetch(
       `${baseUrl}/api/v1/tours/updateTour/${tourId}`,
@@ -272,7 +256,6 @@ export const BookTour = (
       const error = await response.json();
 
       dispatch(bookTourFail(error));
-      console.log(error);
     }
     const data = await response.json();
     dispatch(bookTourSuccess(data));

@@ -9,8 +9,8 @@ import {
 import { Button } from "@material-ui/core";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import Vid1 from "../../assets/Vid1.mp4";
 import Image4 from "../../assets/image-1.jpg";
-import Image2 from "../../assets/Image21.jpg";
 
 import "./Benefits.css";
 import { Link } from "react-router-dom";
@@ -86,7 +86,9 @@ const Benefits = () => {
               <div className="benefit__pic_top">
                 <img className="image__big" src={Image4} alt="" />
                 <div className="benefit__pic_bottom">
-                  <img src={Image2} alt="" />
+                  <video className="videoTag" autoPlay loop muted>
+                    <source src={Vid1} type="video/mp4" />
+                  </video>
                 </div>
               </div>
             </div>
@@ -100,7 +102,7 @@ const Benefits = () => {
                 type="submit"
                 className="dav__membership_submit_button"
                 component={Link}
-                to="/tours"
+                to="/about-us"
               >
                 Read More
               </Button>

@@ -36,10 +36,11 @@ import Category from "./CountryTours/Category/Category";
 import Terms from "../containers/PrivacyPolicies/Terms";
 import Policies from "../containers/PrivacyPolicies/Policies";
 import Updates from "./SafariUpdates/Updates";
-import NewsLetterForm from "./ContactUs/NewsLetterForm";
 import ManageUpdates from "./DashBoard/ManageUpdates/ManageUpdates";
 import { fetchAllPosts } from "../store/Actions/PostActions";
 import Update from "./SafariUpdates/SingleUpdate/Update";
+import Feature from "./DashBoard/Feature";
+import AboutUs from "./AboutUs/AboutUs";
 
 const App = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -48,8 +49,8 @@ const App = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     AutoAuthenticate(dispatch);
-    dispatch(fetchAllTours())
-    dispatch(fetchAllPosts())
+    dispatch(fetchAllTours());
+    dispatch(fetchAllPosts());
   }, [dispatch]);
 
   return (
@@ -68,6 +69,9 @@ const App = (props) => {
               <Route path="user" element={<DashBoardItem />} />
               <Route path="manage-tours" element={<ManageTours />} />
               <Route path="manage-safari-updates" element={<ManageUpdates />} />
+              <Route path="manage-bookings" element={<Feature Title="Manage Bookings" />} />
+              <Route path="manage-subscribers" element={<Feature Title="Manage Mailing List" />} />
+              <Route path="manage-users" element={<Feature Title="Manage Users" />} />
             </Route>
             <Route
               path="/login"
@@ -84,30 +88,31 @@ const App = (props) => {
             <Route path="/password-reset" exact element={<ResetPassword />} />
             <Route path="/change-password" exact element={<ChangePassword />} />
             <Route path="/contact-us" exact element={<ContactUs />} />
+            <Route path="/about-us" exact element={<AboutUs />} />
             <Route path="/terms-of-services" exact element={<Terms />} />
             <Route path="/privacy-policies" exact element={<Policies />} />
             <Route path="/tours" exact element={<Tours />} />
-            <Route path="/safari-updates" exact element={<Updates isPostPage={true}/>} />
-            <Route path="/safari-updates/:postTitle" exact element={<Update/>} />
             <Route
-              path="/:countryName"
+              path="/safari-updates"
               exact
-              element={<CountrySingle />}
+              element={<Updates isPostPage={true} />}
             />
+            <Route
+              path="/safari-updates/:postTitle"
+              exact
+              element={<Update />}
+            />
+            <Route path="/:countryName" exact element={<CountrySingle />} />
             <Route
               path="/:countryName/:tourCategory"
               exact
               element={<Category />}
             />
-            <Route
-              path="/tours/:tourTitle"
-              exact
-              element={<SingleTour />}
-            />
+            <Route path="/tours/:tourTitle" exact element={<SingleTour />} />
           </Routes>
           <ChatNow />
           <BackToTop />
-          <NewsLetterForm/>
+
           <Footer />
         </Paper>
       </Router>

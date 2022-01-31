@@ -1,5 +1,5 @@
 import classes from "./ContactUs.module.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "../../assets/background.webp";
 import Operator from "../../assets/davLogo.png";
 import RoomIcon from "@material-ui/icons/Room";
@@ -10,11 +10,50 @@ import { EmailOutlined } from "@material-ui/icons";
 import SocialMedia from "./SocialMedia";
 import { Form } from "react-bootstrap";
 import NewsLetterForm from "./NewsLetterForm";
+import { NewsLetters } from "../../store/Actions/UserActions";
+import { useDispatch, useSelector } from "react-redux";
+import { Alert } from "@material-ui/lab";
 
 const ContactUs = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const isLoading = useSelector((state) => state.message.subcribing);
+  const message = useSelector((state) => state.message.message);
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEmail(value);
+    setError("")
+  };
+  const NewsLetterFormSubmit = async (e) => {
+    e.preventDefault();
+    if (email.length < 1) {
+      return setError("Email required");
+    }
+
+    if (email !== "undefined") {
+      setError("");
+      let pattern = new RegExp(
+        /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+      );
+      if (!pattern.test(email)) {
+        setError("Please enter valid email address.");
+      }
+    }
+
+    try {
+      setError('')
+      await dispatch(NewsLetters(email));
+
+      setEmail("");
+    } catch {
+      return setError("Failed to subscribe to the newsletter");
+    }
+  };
 
   return (
     <div className={classes.dav__contact_us_page_wrapper}>
@@ -92,7 +131,6 @@ const ContactUs = () => {
                 <strong>Monday - Sunday:</strong>
                 <span>Open 24hours</span>
               </li>
-
             </ul>
           </div>
         </div>
@@ -162,18 +200,29 @@ const ContactUs = () => {
           <Paper className={classes.dav__newsletter_wrapper}>
             <h5>Subscribe to our Newsletters</h5>
             <div className={classes.dav__newsletter_form_wrapper}>
-              <Form>
+              {message && (
+                <Alert style={{marginBottom: 5}} severity={message === "success" ? "success" : "error"}>
+                  {message === "success"
+                    ? "You have successfully subscribed to our Newsletter"
+                    : message}
+                </Alert>
+              )}
+
+              {error && <Alert style={{marginBottom: 5}} severity="error">{error}</Alert>}
+              <Form onSubmit={NewsLetterFormSubmit} style={{marginTop: 10}}>
                 <TextField
                   variant="outlined"
                   size="small"
                   fullWidth
                   type="email"
-                  required
+                  name="email"
+                  value={email}
+                  onChange={handleChange}
                   placeholder="Email"
                   className={classes.dav__subscribe_form_field}
                 />
                 <Button variant="outlined" color="primary" type="submit">
-                  Subscribe
+                  {isLoading? "Subscribing...": "Subscribe"}
                 </Button>
               </Form>
             </div>

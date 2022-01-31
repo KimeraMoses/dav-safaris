@@ -61,7 +61,7 @@
   display: flex;
   justify-content: center;
 }
-.benefit__pic_bottom img {
+.benefit__pic_bottom video {
   width: 60%;
   margin-top: -120px;
   border-radius: 15px;
@@ -81,7 +81,9 @@
   .dav__read_more_wrapper {
     margin-bottom: 20px;
   }
-  .benefit__pic_bottom img {
+  .benefit__pic_bottom video {
     margin-top: -60px;
+    width: 80%;
+    margin-bottom: 30px;
   }
 }

@@ -28,7 +28,7 @@ const NavigationMenu = (props) => {
         <NavMenuItem itemTitle="Kenya" itemLink="/kenya-safaris" />
         <NavMenuItem itemTitle="Tanzania" itemLink="/tanzania-safaris" />
         <NavMenuItem itemTitle="Rwanda" itemLink="/rwanda-safaris" />
-        <NavMenuItem itemTitle="About Us" itemLink="/tours" />
+        <NavMenuItem itemTitle="About Us" itemLink="/about-us" />
         <NavMenuItem itemTitle="Safari Updates" itemLink="/safari-updates" />
         <NavMenuItem itemTitle="Contact us" itemLink="/contact-us" />
       </ul>
