@@ -29,7 +29,7 @@ export const TourCategories_Uganda = [
   },
   {
     name: "Mountaineering",
-    value: " mountaineering",
+    value: "mountaineering",
     image: UgMountains,
   },
 ];
