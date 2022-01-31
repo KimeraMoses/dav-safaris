@@ -33,7 +33,7 @@ const AboutCountry = (props) => {
                 <span style={{textTransform: "capitalize"}}>{countryName.replace(/-/g, " ")}</span> specialists
               </p>
             </div>
-            <ul className={classes.dav__contact_country_expert_contact}>
+            <ul className={classes.dav__contact_country_expert_contact_wrapper}>
               <li>
                 <strong>
                   <span className={classes.dav__contact_country_expert_contact}>

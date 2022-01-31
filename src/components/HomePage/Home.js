@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import BookingSearchResults from "../HeroBooking/BookingSearchResults";
 import Partners from "../Partners/Partners";
 import Updates from "../SafariUpdates/Updates";
+import Slideshow from "../HeroSection/SlideShow";
 
 const Home = () => {
   const Tours = useSelector((state) => state.tours.toursList);
@@ -66,7 +67,8 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <HeroSection />
+      <Slideshow/>
+      {/* <HeroSection /> */}
       <HeroBooking
         values={values}
         error={error}

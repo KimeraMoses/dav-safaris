@@ -1,0 +1,51 @@
+.each-slide {
+}
+.homeslider {
+  /* border: 2px solid red; */
+  position: relative;
+  z-index: 3;
+}
+.each-slide > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 400px;
+}
+
+.each-slide span {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 500px;
+  min-height: 250px;
+  margin: 0 auto;
+  padding: 22px 20px;
+  border-radius: 5px;
+  background: rgba(255,255,255,.85);
+  color: #545454;
+
+}
+.nav .default-nav {
+    color: #aaa;
+}
+.dav__slider_content h2{
+    font-family: "Merriweather",serif;
+    font-style: italic;
+}
+.slider_btn{
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    outline: 0;
+    background-color: var(--dav__tertiary_color);
+    text-decoration: none;
+}
+.slider_btn:hover{
+    color: #fff;
+}

@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import CountryCard from "./CountryCard";
-import UgandaImage from "../../../assets/Image12.jpg";
+import UgandaImage from "../../../assets/ugandan-golliras.jpg";
 import KenyaImage from "../../../assets/Image19.jpg";
 import RwandaImage from "../../../assets/Image20.jpg";
 import TanzaniaImage from "../../../assets/Image21.jpg";

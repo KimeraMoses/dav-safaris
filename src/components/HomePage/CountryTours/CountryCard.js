@@ -1,7 +1,6 @@
 import { Paper } from "@material-ui/core";
 import React from "react";
 import { Link } from "react-router-dom";
-import Country1 from "../../../assets/Image12.jpg";
 import classes from "./CountryCard.module.css";
 
 const CountryCard = (props) => {
