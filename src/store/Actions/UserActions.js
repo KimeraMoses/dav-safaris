@@ -8,6 +8,7 @@ import {
 } from "../Slices/userSlice";
 
 import { baseUrl } from "..";
+import { NewsLetterFail, NewsLetterPending, NewsLetterSuccess } from "../Slices/messageSlice";
 
 export const fetchUsers = (AuthToken) => {
   return async (dispatch) => {
@@ -39,3 +40,37 @@ export const fetchUserDetails = (uni_id) => async (dispatch) => {
     dispatch(fetchUserFail(error.message));
   }
 };
+
+
+export const NewsLetters = (
+  email,
+) => {
+  return async (dispatch) => {
+    dispatch(NewsLetterPending());
+    const response = await fetch(`${baseUrl}/api/v1/subscribers/joinNewsLetter`, {
+      method: "POST",
+      body: JSON.stringify({
+        email,
+      }),
+      headers: new Headers({
+        "Content-type": "application/json",
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      let message = ""
+      if(error.message.includes("Duplicate")){
+        message = "Email already subscribed to NewsLetter"
+      }else{
+        message = "Failed to subscribe to Newsletter, Please check your connection and try again"
+      }
+      dispatch(NewsLetterFail(message));
+      console.log(error)
+    }
+    const data = await response.json();
+    dispatch(NewsLetterSuccess(data.status));
+    console.log(data)
+  };
+};
+
