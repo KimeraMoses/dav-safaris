@@ -71,6 +71,17 @@ const ContactUs = () => {
                   </strong>
                 </a>
               </li>
+              <li>
+                <a href="tel:+256701412430">
+                  <strong>
+                    <span
+                      className={classes.dav__contact_country_expert_contact}
+                    >
+                      +256701412430
+                    </span>
+                  </strong>
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -78,14 +89,10 @@ const ContactUs = () => {
             <h3>Office Hours</h3>
             <ul>
               <li>
-                <strong>Monday - Friday:</strong>
-                <span>8am to 6pm</span>
+                <strong>Monday - Sunday:</strong>
+                <span>Open 24hours</span>
               </li>
 
-              <li>
-                <strong>Saturday - Sunday: </strong>
-                <span>9:30am to 4:30pm</span>
-              </li>
             </ul>
           </div>
         </div>

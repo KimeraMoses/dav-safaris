@@ -78,7 +78,7 @@
   list-style-type: none;
 }
 .dav__contact_country_expert_contact li {
-  padding: 10px 0;
+  padding: 0px 0;
   border-bottom: 1px solid #eee;
 }
 .dav__contact_country_expert_contact li a {
@@ -92,7 +92,7 @@
 .dav__office_hours ul li {
   line-height: 1.7;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 /* ==== SEND MESSAGE-OFFICE LOCATION DETAILS==== */
