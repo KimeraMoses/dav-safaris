@@ -49,6 +49,8 @@ const Slideshow = () => {
       <Slide
         easing="ease"
         cssClass="homeslider"
+        arrows={false}
+        duration={2000}
       >
         {CountrySlides.map((country) => {
           return (
