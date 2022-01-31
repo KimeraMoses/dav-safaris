@@ -9,7 +9,7 @@ import RwCulture from "../../assets/Rwanda-culture.jpg";
 import RwBirding from "../../assets/Rwanda-Birding.jpg";
 import TzWild from "../../assets/Image21.jpg";
 import TzMoutains from "../../assets/Hiking-safaris-tanzania.jpg";
-import TzBirding from "../../assets/Tanzania Birding.jpg";
+import TzBirding from "../../assets/Tanzania-Birding.jpg";
 
 export const TourCategories_Uganda = [
   {
