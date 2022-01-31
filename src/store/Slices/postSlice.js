@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   posts: [],
+  post: {},
   isLoading: false,
   status: "",
   message: "",
@@ -34,6 +35,15 @@ const postSlice = createSlice({
       state.isLoading = false;
       state.message = payload;
     },
+    fetchPostPending: (state)=>{
+      state.isLoading =true;
+    },
+    fetchPostSuccess:(state, {payload})=>{
+      state.post = payload;
+    },
+    fetchPostFail: (state, {payload})=>{
+      state.status = payload;
+    }
   },
 });
 
@@ -46,5 +56,9 @@ export const {
   fetchAllPostPending,
   fetchAllPostSuccess,
   fetchAllPostFail,
+  fetchPostPending,
+  fetchPostSuccess,
+  fetchPostFail
+
 } = actions;
 export default reducer;

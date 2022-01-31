@@ -41,7 +41,7 @@ export default function UpdateCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" component={Link} to={`/safari-updates/${slug}`}>
+        <Button size="small" color="primary" component={Link} to={`/safari-updates/${Post && Post.slug}`}>
           Read More
         </Button>
       </CardActions>

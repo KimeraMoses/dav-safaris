@@ -1,5 +1,5 @@
 import { baseUrl } from "..";
-import { fetchAllPostFail, fetchAllPostPending, fetchAllPostSuccess, NewPostFail, NewPostPending, NewPostSuccess } from "../Slices/postSlice";
+import { fetchAllPostFail, fetchAllPostPending, fetchAllPostSuccess, fetchPostFail, fetchPostPending, fetchPostSuccess, NewPostFail, NewPostPending, NewPostSuccess } from "../Slices/postSlice";
 
 
 
@@ -34,17 +34,30 @@ export const creatNewPost = (
     };
   };
   //====END====//
-
+ 
   export const fetchAllPosts = () => async (dispatch) => {
     dispatch(fetchAllPostPending());
     try {
       const response = await fetch(`${baseUrl}/api/v1/posts/getAllPosts`);
       const fetchedPosts = await response.json();
       dispatch(fetchAllPostSuccess(fetchedPosts.Posts));
-      console.log(fetchedPosts)
+      // console.log(fetchedPosts)
     } catch (error) {
       dispatch(fetchAllPostFail(error.message));
-      console.log(error)
+      // console.log(error)
+    }
+  };
+
+  export const fetchPostDetails = (post_slug) => async (dispatch) => {
+    dispatch(fetchPostPending());
+    try {
+      const response = await fetch(
+        `${baseUrl}/api/v1/posts/getPostByName/${post_slug}`
+      );
+      const fetchedPost = await response.json();
+      dispatch(fetchPostSuccess(fetchedPost.post));
+    } catch (error) {
+      dispatch(fetchPostFail(error.message));
     }
   };
   
