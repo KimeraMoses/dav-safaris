@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   Navigate,
   BrowserRouter as Router,
@@ -53,10 +53,27 @@ const App = (props) => {
     dispatch(fetchAllPosts());
   }, [dispatch]);
 
+  const listInnerRef = useRef();
+  
+  const onScroll = () => {
+    if (listInnerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
+      if (scrollTop + clientHeight === scrollHeight) {
+        // TO SOMETHING HERE
+        console.log("Reached bottom");
+      }
+    }
+  };
+
   return (
     <Theme>
       <Router>
-        <Paper elevation={0} square>
+        <Paper
+          elevation={0}
+          square
+          onScroll={() => onScroll()}
+          ref={listInnerRef}
+        >
           <AppBar />
           <Routes>
             <Route path="/" exact element={<Home />} />
@@ -69,9 +86,18 @@ const App = (props) => {
               <Route path="user" element={<DashBoardItem />} />
               <Route path="manage-tours" element={<ManageTours />} />
               <Route path="manage-safari-updates" element={<ManageUpdates />} />
-              <Route path="manage-bookings" element={<Feature Title="Manage Bookings" />} />
-              <Route path="manage-subscribers" element={<Feature Title="Manage Mailing List" />} />
-              <Route path="manage-users" element={<Feature Title="Manage Users" />} />
+              <Route
+                path="manage-bookings"
+                element={<Feature Title="Manage Bookings" />}
+              />
+              <Route
+                path="manage-subscribers"
+                element={<Feature Title="Manage Mailing List" />}
+              />
+              <Route
+                path="manage-users"
+                element={<Feature Title="Manage Users" />}
+              />
             </Route>
             <Route
               path="/login"
