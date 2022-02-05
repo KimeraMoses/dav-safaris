@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import {
   Navigate,
   BrowserRouter as Router,
@@ -53,17 +53,9 @@ const App = (props) => {
     dispatch(fetchAllPosts());
   }, [dispatch]);
 
-  const listInnerRef = useRef();
-  
-  const onScroll = () => {
-    if (listInnerRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
-      if (scrollTop + clientHeight === scrollHeight) {
-        // TO SOMETHING HERE
-        console.log("Reached bottom");
-      }
-    }
-  };
+
+
+
 
   return (
     <Theme>
@@ -71,8 +63,6 @@ const App = (props) => {
         <Paper
           elevation={0}
           square
-          onScroll={() => onScroll()}
-          ref={listInnerRef}
         >
           <AppBar />
           <Routes>

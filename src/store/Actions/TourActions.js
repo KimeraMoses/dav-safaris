@@ -71,7 +71,6 @@ export const fetchAllCountries = () => async (dispatch) => {
 };
 
 export const fetchAllCountryTours = (country) => async (dispatch) => {
-  console.log("Reached");
   dispatch(fetchCountryToursPending());
   try {
     const response = await fetch(
@@ -96,7 +95,6 @@ export const fetchTourDetails = (tour_id) => async (dispatch) => {
 };
 
 export const fetchTourReviews = (tour_id) => async (dispatch) => {
-  console.log("Started fetching Reviews for ", tour_id);
   dispatch(fetchTourReviewsPending());
   try {
     const response = await fetch(

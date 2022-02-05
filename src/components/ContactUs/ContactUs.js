@@ -27,7 +27,7 @@ const ContactUs = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEmail(value);
-    setError("")
+    setError("");
   };
   const NewsLetterFormSubmit = async (e) => {
     e.preventDefault();
@@ -46,7 +46,7 @@ const ContactUs = () => {
     }
 
     try {
-      setError('')
+      setError("");
       await dispatch(NewsLetters(email));
 
       setEmail("");
@@ -149,8 +149,7 @@ const ContactUs = () => {
               </div>
               <div className={classes.dav__address_content}>
                 <p>
-                  Freedom City Shopping Mall
-                  <br /> Entebbe Road, Uganda
+                  Freedom City Shopping Mall Entebbe Road
                 </p>
               </div>
             </div>
@@ -201,15 +200,22 @@ const ContactUs = () => {
             <h5>Subscribe to our Newsletters</h5>
             <div className={classes.dav__newsletter_form_wrapper}>
               {message && (
-                <Alert style={{marginBottom: 5}} severity={message === "success" ? "success" : "error"}>
+                <Alert
+                  style={{ marginBottom: 5 }}
+                  severity={message === "success" ? "success" : "error"}
+                >
                   {message === "success"
                     ? "You have successfully subscribed to our Newsletter"
                     : message}
                 </Alert>
               )}
 
-              {error && <Alert style={{marginBottom: 5}} severity="error">{error}</Alert>}
-              <Form onSubmit={NewsLetterFormSubmit} style={{marginTop: 10}}>
+              {error && (
+                <Alert style={{ marginBottom: 5 }} severity="error">
+                  {error}
+                </Alert>
+              )}
+              <Form onSubmit={NewsLetterFormSubmit} style={{ marginTop: 10 }}>
                 <TextField
                   variant="outlined"
                   size="small"
@@ -222,7 +228,7 @@ const ContactUs = () => {
                   className={classes.dav__subscribe_form_field}
                 />
                 <Button variant="outlined" color="primary" type="submit">
-                  {isLoading? "Subscribing...": "Subscribe"}
+                  {isLoading ? "Subscribing..." : "Subscribe"}
                 </Button>
               </Form>
             </div>
