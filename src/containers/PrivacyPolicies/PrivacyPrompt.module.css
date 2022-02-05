@@ -1,0 +1,27 @@
+/****************************
+  PRIVACY POLICY PROMPT
+  ****************************/
+
+  .privacy_prompt {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 20px 40px;
+    z-index: 999;
+    display: flex;
+    justify-content: space-around;
+  }
+  .privacy_prompt.privacy_prompt_seen{
+      display: none;
+  }
+  .prompt_content a{
+    color: var(--dav__primary_color);
+  }
+
+  @media screen and (max-width: 482px) {
+      .privacy_prompt{
+          flex-direction: column;
+      }
+  }

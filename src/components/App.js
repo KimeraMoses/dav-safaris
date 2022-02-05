@@ -41,6 +41,7 @@ import { fetchAllPosts } from "../store/Actions/PostActions";
 import Update from "./SafariUpdates/SingleUpdate/Update";
 import Feature from "./DashBoard/Feature";
 import AboutUs from "./AboutUs/AboutUs";
+import PrivacyPrompt from "../containers/PrivacyPolicies/PrivacyPrompt";
 
 const App = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -53,17 +54,10 @@ const App = (props) => {
     dispatch(fetchAllPosts());
   }, [dispatch]);
 
-
-
-
-
   return (
     <Theme>
       <Router>
-        <Paper
-          elevation={0}
-          square
-        >
+        <Paper elevation={0} square>
           <AppBar />
           <Routes>
             <Route path="/" exact element={<Home />} />
@@ -126,9 +120,9 @@ const App = (props) => {
             />
             <Route path="/tours/:tourTitle" exact element={<SingleTour />} />
           </Routes>
+          <PrivacyPrompt />
           <ChatNow />
           <BackToTop />
-
           <Footer />
         </Paper>
       </Router>
