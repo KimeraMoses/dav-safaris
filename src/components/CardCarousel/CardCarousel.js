@@ -33,24 +33,24 @@ const CardCarousel = () => {
       easing="ease"
       tiltEasing="ease"
     >
-      {isLoading ? [...Array(8).keys()].map((index)=>{
-        return <TourCardSkeleton type="slider"/>
-      }):
-      FilteredTours.slice(0,20).map((tour) => {
-  
-        return (
-          <TourCard
-            TourImage={tour.imageCover}
-            TourTitle={tour.name}
-            TourSlug={tour.slug}
-            NumDays={tour.duration}
-            NumNights={tour.duration - 1}
-            TourDescription={tour.description}
-            TourRating={tour.ratingsAverage}
-        
-          />
-        );
-      })}
+      {isLoading
+        ? [...Array(8).keys()].map((index) => {
+            return <TourCardSkeleton type="slider" key={index} />;
+          })
+        : FilteredTours.slice(0, 20).map((tour) => {
+            return (
+              <TourCard
+                key={tour.id}
+                TourImage={tour.imageCover}
+                TourTitle={tour.name}
+                TourSlug={tour.slug}
+                NumDays={tour.duration}
+                NumNights={tour.duration - 1}
+                TourDescription={tour.description}
+                TourRating={tour.ratingsAverage}
+              />
+            );
+          })}
     </Carousel>
   );
 };

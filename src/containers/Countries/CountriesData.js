@@ -1,7 +1,7 @@
-import UgCover from "../../assets/UgCover.jpg";
-import TzCover from "../../assets/Image19.jpg";
-import KeCover from "../../assets/Kenya-Safaris.jpg";
-import RwCover from "../../assets/Rwanda-Safaris.jpg";
+import UgCover from "../../assets/uganda-safaris.jpeg";
+import TzCover from "../../assets/tanzania-safaris.JPEG";
+import KeCover from "../../assets/kenya-safaris.jpeg";
+import RwCover from "../../assets/rwanda-safaris.JPEG";
 import { TourCategories_Kenya, TourCategories_Rwanda, TourCategories_Tanzania, TourCategories_Uganda } from "./TourCategories";
 
 export const CountriesData = [

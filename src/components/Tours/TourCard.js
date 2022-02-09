@@ -6,13 +6,13 @@ import { Timer, Watch } from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
 
 const TourCard = (props) => {
-  const { TourImage, TourTitle, NumDays, NumNights, TourDescription,TourRating,TourSlug } = props;
+  const { TourImage, TourTitle, NumDays, NumNights, TourDescription,TourRating,TourSlug,key } = props;
   const [average, setAverage] =useState(0)
   useEffect(()=>{
     setAverage(TourRating && TourRating)
   },[TourRating]);
   return (
-    <div className={classes.tour_card_wrapper}>
+    <div className={classes.tour_card_wrapper} key={key}>
       <div className={classes.tour_card_header}>
         <Link to={`/tours/${TourSlug}`}>
           <img src={TourImage} alt="Tour" />

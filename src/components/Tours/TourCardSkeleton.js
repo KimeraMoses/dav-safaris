@@ -16,11 +16,12 @@ const TourCardSkeleton = (props) => {
     TourDescription,
     TourRating,
     TourSlug,
-    type
+    type,
+    key
   } = props;
 
   return (
-    <div className={classes.tour_card_wrapper}>
+    <div className={classes.tour_card_wrapper} key={key}>
       <Skeleton width={`${type==="slider"? "300px": "100%"}`} height={220}>
         <Avatar>
           <div className={classes.tour_card_header}>

@@ -56,7 +56,7 @@ const Footer = () => {
               {Tours &&
                 Tours.slice(0, 3).map((tour) => {
                   return (
-                    <li>
+                    <li key={tour.id}>
                       <Link to={`/tours/${tour.slug}`}>
                         <MenuIcon />
                         {tour.name}

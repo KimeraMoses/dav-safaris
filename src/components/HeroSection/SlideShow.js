@@ -52,9 +52,9 @@ const Slideshow = () => {
         arrows={false}
         duration={2000}
       >
-        {CountrySlides.map((country) => {
+        {CountrySlides.map((country, index) => {
           return (
-            <div className="each-slide">
+            <div className="each-slide" key={index}>
               <div style={{ backgroundImage: `url(${country.image})`, backgroundPosition: "center center" }}>
                 <span className="dav__slider_content">
                   <h2>{country.title}</h2>

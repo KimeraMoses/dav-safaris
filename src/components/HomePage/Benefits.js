@@ -10,7 +10,7 @@ import { Button } from "@material-ui/core";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Vid1 from "../../assets/Vid1.mp4";
-import Image4 from "../../assets/image-1.jpg";
+import Image4 from "../../assets/dav-tourist-vehicle.jpeg";
 
 import "./Benefits.css";
 import { Link } from "react-router-dom";

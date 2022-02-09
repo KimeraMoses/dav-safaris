@@ -4,22 +4,26 @@ import { Link } from "react-router-dom";
 import classes from "./CountryCard.module.css";
 
 const CountryCard = (props) => {
-    const {countryImage,countryTitle,numTours,countyDescription } = props
+  const { countryImage, countryTitle, numTours, countyDescription } = props;
   return (
-    <Paper className={classes.dav__country_card}>
-      <Link to={`/${countryTitle.toLowerCase()}`}>
-        <img src={countryImage} alt={countryTitle} />
+    <Link to={`/${countryTitle.toLowerCase()}`}>
+      <Paper
+        className={classes.dav__country_card}
+        style={{
+          backgroundImage: `url(${countryImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+        }}
+      >
+        {/* <img src={countryImage} alt={countryTitle} /> */}
         <div className={classes.dav__country_title_wrapper}>
           <h3 className={classes.dav__country_name}>{countryTitle}</h3>
-          {/* <span>{numTours} Tours</span> */}
         </div>
         <div className={classes.dav__country_content}>
-          <p>
-           {countyDescription}
-          </p>
+          <p>{countyDescription}</p>
         </div>
-      </Link>
-    </Paper>
+      </Paper>
+    </Link>
   );
 };
 
