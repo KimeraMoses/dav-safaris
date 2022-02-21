@@ -1,4 +1,4 @@
-import { createSvgIcon } from "@material-ui/core";
+import React from "react";
 import {
   EmailOutlined,
   Instagram,
@@ -6,20 +6,20 @@ import {
   RoomOutlined,
   Twitter,
 } from "@material-ui/icons";
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import MenuIcon from "@material-ui/icons/ArrowForward";
-import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import NewsLetterForm from "../ContactUs/NewsLetterForm";
-import SocialMedia from "../ContactUs/SocialMedia";
+import { Fb } from "../../containers/Icons/Icons";
+import InstagramIcon from "@material-ui/icons/Instagram";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import YouTubeIcon from "@material-ui/icons/YouTube";
+import { SocialIcon } from "../ContactUs/SocialMedia";
+
 import classes from "./Footer.module.css";
-export const Fb = createSvgIcon(
-  <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z" />,
-  "Fb"
-);
 
 const Footer = () => {
   const Tours = useSelector((state) => state.tours.toursList);
@@ -75,8 +75,34 @@ const Footer = () => {
         >
           <div className={`${classes.dav__footer_section_title_wrapper}`}>
             <h5>Follow Us</h5>
-
-           <SocialMedia/>
+            <div className={classes.dav__footer_socials}>
+              <SocialIcon
+                socialLink="https://www.instagram.com/davsafaris/?hl=en"
+                socialIcon={<InstagramIcon />}
+              />
+              <SocialIcon
+                socialLink="https://ug.linkedin.com/in/david-mukasa-78a38a1a3"
+                socialIcon={<LinkedInIcon />}
+              />
+              <SocialIcon
+                socialLink="https://www.facebook.com/klaebb/"
+                socialIcon={<Fb />}
+              />
+            </div>
+            <div className={classes.dav__footer_socials}>
+              <SocialIcon
+                socialLink="https://wa.link/barf5j"
+                socialIcon={<WhatsAppIcon />}
+              />
+              <SocialIcon
+                socialLink="https://mobile.twitter.com/davsafaris"
+                socialIcon={<TwitterIcon />}
+              />
+              <SocialIcon
+                socialLink="https://www.youtube.com/channel/UCYZIcOaxLXheJ5ejwNUz7Ug"
+                socialIcon={<YouTubeIcon />}
+              />
+            </div>
           </div>
         </Col>
         <Col
@@ -90,7 +116,7 @@ const Footer = () => {
 
             <ul className={classes.dav__contact_info}>
               <li>
-                <RoomOutlined /> Freedom City Shopping Mall Entebbe Road
+                <RoomOutlined /> Freedom City Shopping Mall Entebbe Road, Uganda
               </li>
               <li>
                 <WhatsAppIcon />
@@ -136,10 +162,16 @@ const Footer = () => {
               </ul>
             </div>
             <div className={classes.dav__footer_socials}>
-              <a href="https://www.instagram.com/davsafaris/?hl=en" target="_blank">
+              <a
+                href="https://www.instagram.com/davsafaris/?hl=en"
+                target="_blank"
+              >
                 <Instagram />
               </a>
-              <a href="https://ug.linkedin.com/in/david-mukasa-78a38a1a3" target="_blank">
+              <a
+                href="https://ug.linkedin.com/in/david-mukasa-78a38a1a3"
+                target="_blank"
+              >
                 <LinkedInIcon />
               </a>
               <a href="https://www.facebook.com/klaebb/" target="_blank">

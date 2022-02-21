@@ -9,13 +9,14 @@ import PopularTours from "./PopularTours/PopularTours";
 import CountyToursSection from "./CountryTours/CountyToursSection";
 import SectionTitle from "./SectionTitle/SectionTitle";
 import CardCarousel from "../CardCarousel/CardCarousel";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import BookingSearchResults from "../HeroBooking/BookingSearchResults";
 import Partners from "../Partners/Partners";
 import Updates from "../SafariUpdates/Updates";
 import Slideshow from "../HeroSection/SlideShow";
 import NewsLetterForm from "../ContactUs/NewsLetterForm";
+import ModalComponent from "../../components/UI/Modal/ModalComponent";
 
 const Home = () => {
   const Tours = useSelector((state) => state.tours.toursList);
@@ -24,11 +25,33 @@ const Home = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState("");
   const [show, setShow] = useState(false);
+  const [open, setOpen] = useState(false);
   const [values, setValues] = useState({
     destination: "",
     duration: "",
     departure: "",
   });
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
+
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll, { passive: true });
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+  // useEffect(() => {
+  //   console.log(scrollPosition);
+  //   if (scrollPosition>4410) {
+  //     setOpen(true);
+  //     console.log("Reached bottom");
+  //     console.log("Reacehd bottomssss");
+  //   }
+  // }, [scrollPosition]);
 
   const handleOnChange = (event) => {
     setError("");
@@ -69,6 +92,7 @@ const Home = () => {
 
   return (
     <Wrapper>
+      <ModalComponent open={open} setOpen={setOpen} />
       <Slideshow />
       <HeroBooking
         values={values}

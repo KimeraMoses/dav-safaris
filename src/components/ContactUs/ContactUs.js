@@ -149,7 +149,7 @@ const ContactUs = () => {
               </div>
               <div className={classes.dav__address_content}>
                 <p>
-                  Freedom City Shopping Mall Entebbe Road
+                Freedom City Shopping Mall <br/>Entebbe Road, Uganda
                 </p>
               </div>
             </div>

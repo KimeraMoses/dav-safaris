@@ -67,9 +67,7 @@
     font-size: 18px;
     font-weight: 500;
 }
-.dav__footer_socials svg{
-    margin: 0 5px;
-}
+
 .dav__footer_socials a{
     color: #fff;
 }
@@ -94,6 +92,9 @@
     color: var(--dav__primary_color);
 }
 
+.dav__footer_socials{
+  display: flex;
+}
 @media screen and (max-width: 689px) {
   .dav__footer {
     padding: 30px 10px 0;
