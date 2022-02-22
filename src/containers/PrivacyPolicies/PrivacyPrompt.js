@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import classes from "./PrivacyPrompt.module.css";
 
 const PrivacyPrompt = () => {
-  let Read = !!localStorage.getItem("PP");
+  let Read = !!localStorage.getItem("Pp");
   const [show, setShow] = useState(!Read);
   const handlePrivaryPrompt = () => {
-    localStorage.setItem("PP", true);
+    localStorage.setItem("Pp", true);
     setShow(false);
   };
   return (

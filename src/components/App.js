@@ -42,6 +42,7 @@ import Update from "./SafariUpdates/SingleUpdate/Update";
 import Feature from "./DashBoard/Feature";
 import AboutUs from "./AboutUs/AboutUs";
 import PrivacyPrompt from "../containers/PrivacyPolicies/PrivacyPrompt";
+import SEO from "../containers/SEO/SEO";
 
 const App = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -56,6 +57,7 @@ const App = (props) => {
 
   return (
     <Theme>
+      <SEO title="Uganda Safaris, Gorilla Trekking, African Wildlife Safaris" />
       <Router>
         <Paper elevation={0} square>
           <AppBar />

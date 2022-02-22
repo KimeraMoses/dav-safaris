@@ -4,7 +4,6 @@ import {
   Instagram,
   PhoneOutlined,
   RoomOutlined,
-  Twitter,
 } from "@material-ui/icons";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
