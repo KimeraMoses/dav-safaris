@@ -43,6 +43,7 @@ import Feature from "./DashBoard/Feature";
 import AboutUs from "./AboutUs/AboutUs";
 import PrivacyPrompt from "../containers/PrivacyPolicies/PrivacyPrompt";
 import SEO from "../containers/SEO/SEO";
+import { Helmet } from "react-helmet";
 
 const App = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -57,7 +58,11 @@ const App = (props) => {
 
   return (
     <Theme>
-      <SEO title="Uganda Safaris, Gorilla Trekking, African Wildlife Safaris" />
+      <Helmet>
+        <title>
+          Uganda Safaris, Gorilla Trekking, African Wildlife Safaris
+        </title>
+      </Helmet>
       <Router>
         <Paper elevation={0} square>
           <AppBar />
