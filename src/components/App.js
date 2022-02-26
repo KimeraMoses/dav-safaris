@@ -44,6 +44,8 @@ import AboutUs from "./AboutUs/AboutUs";
 import PrivacyPrompt from "../containers/PrivacyPolicies/PrivacyPrompt";
 import SEO from "../containers/SEO/SEO";
 import { Helmet } from "react-helmet";
+import ReactGA from "react-ga";
+import { TRACKING_ID } from "../store";
 
 const App = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -54,6 +56,10 @@ const App = (props) => {
     AutoAuthenticate(dispatch);
     dispatch(fetchAllTours());
     dispatch(fetchAllPosts());
+
+    //====SEND DATA TO GOOGLE ANALYTICS===
+    ReactGA.initialize(TRACKING_ID);
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }, [dispatch]);
 
   return (
