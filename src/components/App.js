@@ -68,6 +68,11 @@ const App = (props) => {
         <title>
           Uganda Safaris, Gorilla Trekking, African Wildlife Safaris
         </title>
+        <meta
+          name="description"
+          content="Get Gorilla Trekking Tours and Wildlife Safaris In Africa, we're Travel Agency in Uganda rendering mountain gorilla Trekking tours, birding, wildlife safaris"
+        />
+        
       </Helmet>
       <Router>
         <Paper elevation={0} square>
