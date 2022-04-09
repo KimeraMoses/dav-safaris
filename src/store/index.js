@@ -33,4 +33,5 @@ const store = configureStore({
 
 export default store;
 export const baseUrl = "https://davsafaris.herokuapp.com";
-export const TRACKING_ID = "G-LJDPXC1D4T";
+// export const TRACKING_ID = "G-LJDPXC1D4T";
+export const TRACKING_ID = "UA-221371729-1";
