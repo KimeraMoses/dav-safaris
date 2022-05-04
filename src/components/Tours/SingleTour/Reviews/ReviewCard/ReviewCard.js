@@ -1,5 +1,5 @@
 import { Avatar, Tooltip } from "@material-ui/core";
-import { Rating, Skeleton } from "@material-ui/lab";
+import { Rating } from "@material-ui/lab";
 import React from "react";
 import { useSelector } from "react-redux";
 import classes from "./ReviewCard.module.css";
@@ -11,19 +11,21 @@ const ReviewCard = ({
   ReviewDate,
   visit_month,
   visit_year,
-  country_of_residence
+  country_of_residence,
 }) => {
-  const Countries = useSelector((state)=>state.countries.countryList)
-  const userCountry = Countries && Countries.filter((country)=>country.name === country_of_residence)[0];
+  const Countries = useSelector((state) => state.countries.countryList);
+  const userCountry =
+    Countries &&
+    Countries.filter((country) => country.name === country_of_residence)[0];
   const countryLogo = userCountry && userCountry.flags && userCountry.flags.png;
   const RDate = new Date(ReviewDate);
   const options = {
     day: "numeric",
-    month: "long", 
+    month: "long",
     year: "numeric",
   };
   const ReviewedDate = RDate.toLocaleDateString("en-US", options);
-  
+
   return (
     <div className={classes.dav__review_card_wrapper}>
       <div className={classes.dav__review_user_wrapper}>
@@ -33,7 +35,12 @@ const ReviewCard = ({
         <div className={classes.dav__user_rating}>
           <span className={classes.dav__review_user_name}>{UserName}</span>
           <p>
-            <Rating name="read-only" value={userRating} readOnly precision={0.5} />
+            <Rating
+              name="read-only"
+              value={userRating}
+              readOnly
+              precision={0.5}
+            />
           </p>
         </div>
       </div>

@@ -2,7 +2,6 @@ import React from "react";
 import { Box, IconButton, Paper, Zoom } from "@material-ui/core";
 import classes from "./ChatCard.module.css";
 import { ExpandMore } from "@material-ui/icons";
-import ReviewForm from "../../Tours/SingleTour/Reviews/ReviewForm/ReviewForm";
 import ChatForm from "./ChatForm";
 
 const Chart = (props) => {

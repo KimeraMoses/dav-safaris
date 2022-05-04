@@ -16,10 +16,9 @@ const Tours = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchAllTours());
-  }, []);
+  }, [dispatch]);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedId, setSelectedId] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [values, setValues] = useState({
     duration: "",
@@ -53,7 +52,7 @@ const Tours = () => {
   }
 
   const userSearchHandler = (e) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     setSearchTerm(value);
 
     if (searchTerm !== "") {
@@ -67,10 +66,10 @@ const Tours = () => {
       setSearchResults(Results);
     }
   };
-
+  const notSearching = searchTerm.length < 1 ? true : false;
   useEffect(() => {
     setSearchResults([]);
-  }, [searchTerm.length < 1]);
+  }, [notSearching]);
 
   return (
     <div className={classes.dav__all_tours_page_wrapper}>
@@ -123,7 +122,11 @@ const Tours = () => {
               )}
           {!isLoading && FilteredTours.length < 1 && isFiltered && (
             <div className={classes.dav__no_results_wrapper}>
-              <Paper className={classes.dav__no_results_found_error_wrapper_inner} >No Tours matching your search queries found!</Paper>
+              <Paper
+                className={classes.dav__no_results_found_error_wrapper_inner}
+              >
+                No Tours matching your search queries found!
+              </Paper>
             </div>
           )}
         </Row>

@@ -18,7 +18,6 @@ import {
   ReviewTour,
 } from "../../../../../store/Actions/TourActions";
 import CustomTextField from "../../../../CountryInputField/CustomTextField";
-import HoverRating from "../../../../Rating/Rating";
 import { Button } from "../../../../UI/Button/Button";
 import classes from "./ReviewForm.module.css";
 import { useParams } from "react-router";
@@ -37,11 +36,11 @@ const labels = {
 };
 
 const ReviewForm = (props) => {
-  const {tourTitle } = useParams()
+  const { tourTitle } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAllCountries());
-  }, []);
+  }, [dispatch]);
   const countryList = useSelector((state) => state.countries.countryList);
   const isLoading = useSelector((state) => state.tour.isReviewing);
   const Tour = useSelector((state) => state.tour.tourDetails);
@@ -65,7 +64,7 @@ const ReviewForm = (props) => {
     visit_year: "",
     email: "",
   });
-  useEffect(()=>{},[tourTitle])
+  useEffect(() => {}, [tourTitle]);
 
   const keyWordHandler = (e) => {
     setShow(false);
@@ -94,7 +93,7 @@ const ReviewForm = (props) => {
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
-    setValues({ ...values, [name]: event.target.value });
+    setValues({ ...values, [name]: value });
     setError("");
   };
 

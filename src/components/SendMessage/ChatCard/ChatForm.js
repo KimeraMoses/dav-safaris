@@ -1,24 +1,16 @@
-import {
-  Button,
-  Checkbox,
-  Fab,
-  FormControlLabel,
-  Paper,
-  TextField,
-} from "@material-ui/core";
+import { Checkbox, Fab, FormControlLabel, TextField } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 import { Alert } from "@material-ui/lab";
 import React, { useState } from "react";
-import { Form, Spinner } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import Progress from "@material-ui/core/CircularProgress";
-import { SendMessage } from "../../../store/Actions/TourActions";
 import classes from "./ChatForm.module.css";
+import { chatWithUs } from "../../../store/Actions/TourActions";
 
 const ChatForm = () => {
-  const isLoading = useSelector((state) => state.message.isLoading);
   const dispatch = useDispatch();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -31,15 +23,16 @@ const ChatForm = () => {
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
-    setValues({ ...values, [name]: event.target.value });
+    setValues({ ...values, [name]: value });
     setError("");
+    setMessage("");
   };
-  const NewsLetterHandler=(e)=>{
-    setValues({...values, is_add_to_news_letter: e.target.checked})
-  }
+  const NewsLetterHandler = (e) => {
+    setValues({ ...values, is_add_to_news_letter: e.target.checked });
+  };
 
   const MessageFormSubmitHandler = async (e) => {
-    console.log(values)
+    setIsLoading(true);
     e.preventDefault();
     if (values.name.length < 1) {
       return setError("Name(s) required");
@@ -65,7 +58,7 @@ const ChatForm = () => {
     }
     try {
       await dispatch(
-        SendMessage(
+        chatWithUs(
           values.name,
           values.email,
           values.phone,
@@ -73,15 +66,19 @@ const ChatForm = () => {
           values.is_add_to_news_letter
         )
       );
-      setMessage("Message Sent Successfully");
+      setIsLoading(false);
+      setMessage(
+        "Message Sent Successfully, Our team will contact you shortly"
+      );
       setValues({
         name: "",
         email: "",
         phone: "",
         message: "",
-        is_add_to_news_letter: false
+        is_add_to_news_letter: false,
       });
     } catch (error) {
+      setIsLoading(false);
       return setError("Failed to send message, Please try again later");
     }
   };
@@ -148,7 +145,13 @@ const ChatForm = () => {
           <div className={classes.dav__subscribe_wrapper}>
             <FormControlLabel
               fullWidth
-              control={<Checkbox color="primary" checked={values.is_add_to_news_letter} onChange={NewsLetterHandler} />}
+              control={
+                <Checkbox
+                  color="primary"
+                  checked={values.is_add_to_news_letter}
+                  onChange={NewsLetterHandler}
+                />
+              }
               label="Subscribe to our newsletters"
               className={classes.dav__book_tour_account_creation_prompt}
             />
@@ -160,7 +163,7 @@ const ChatForm = () => {
             color="primary"
           >
             {isLoading ? (
-              <Progress/>
+              <Progress />
             ) : (
               <SendIcon className={classes.dav__send_icon} />
             )}

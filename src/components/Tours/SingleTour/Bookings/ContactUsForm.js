@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { Button } from "../../../UI/Button/Button";
-import {
-  Checkbox,
-  FormControlLabel,
-  Paper,
-  TextField,
-} from "@material-ui/core";
+import { Paper, TextField } from "@material-ui/core";
 import classes from "./BookingForm.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { SendMessage } from "../../../../store/Actions/TourActions";
+import { useDispatch } from "react-redux";
+import { contactUs } from "../../../../store/Actions/TourActions";
 import { Alert } from "@material-ui/lab";
 
 const ContactForm = (props) => {
-  const isLoading = useSelector((state) => state.message.isLoading);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   const [values, setValues] = useState({
@@ -27,11 +22,13 @@ const ContactForm = (props) => {
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
-    setValues({ ...values, [name]: event.target.value });
+    setValues({ ...values, [name]: value });
     setError("");
+    setMessage("");
   };
 
   const MessageFormSubmitHandler = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     if (values.name.length < 1) {
       return setError("Name(s) required");
@@ -57,9 +54,12 @@ const ContactForm = (props) => {
     }
     try {
       await dispatch(
-        SendMessage(values.name, values.email, values.phone, values.message)
+        contactUs(values.name, values.email, values.phone, values.message)
       );
-      setMessage("Message Sent Successfully");
+      setIsLoading(false);
+      setMessage(
+        "Message Sent Successfully, Dav Safaris will contact you shortly"
+      );
       setValues({
         name: "",
         email: "",
@@ -67,7 +67,10 @@ const ContactForm = (props) => {
         message: "",
       });
     } catch (error) {
-      return setError("Failed to send message, Please try again later");
+      setIsLoading(false);
+      return setError(
+        "Failed to send message, Please reflesh the page and try again!"
+      );
     }
   };
 
@@ -138,7 +141,7 @@ const ContactForm = (props) => {
           buttonStyle="btn--primary"
           buttonSize="Btn--fullWidth"
         >
-         {isLoading? "Sending...":  "Send"}
+          {isLoading ? "Sending..." : "Send"}
         </Button>
       </Form>
     </Paper>

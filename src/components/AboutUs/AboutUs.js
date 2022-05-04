@@ -1,6 +1,5 @@
 import React from "react";
 import image from "../../assets/background.webp";
-import { SingleHero } from "../Tours/SingleTour/SingleTour";
 import Vid4 from "../../assets/Vid4.mp4";
 import Vid5 from "../../assets/Vid5.mp4";
 import classes from "./AboutUs.module.css";
@@ -73,18 +72,18 @@ const AboutUs = () => {
               years in the business
             </p>
             <p>
-              <strong>Outbound travels</strong>: Our experienced team also offers outbound travel
-              services to our esteemed guests ranging from flight ticket
-              booking, overseas hotel booking, outbound safaris in Europe, Asia,
-              the Middle East, and North America. We also give travel advisory
-              services to our clients. Give back to the community Be part of our
-              help the needy campaign by booking your safari with us or donate
-              directly to our campaign We partner with St Joseph’s Aid’s Society
-              Kigando, this effort is to ensure that orphans, children from
-              impoverished families, and street children have better and safe
-              education. Community outreach, we work with old people and
-              organize Hiv/Aids Women to help them with basic needs such as
-              clothes, food, and shelter.
+              <strong>Outbound travels</strong>: Our experienced team also
+              offers outbound travel services to our esteemed guests ranging
+              from flight ticket booking, overseas hotel booking, outbound
+              safaris in Europe, Asia, the Middle East, and North America. We
+              also give travel advisory services to our clients. Give back to
+              the community Be part of our help the needy campaign by booking
+              your safari with us or donate directly to our campaign We partner
+              with St Joseph’s Aid’s Society Kigando, this effort is to ensure
+              that orphans, children from impoverished families, and street
+              children have better and safe education. Community outreach, we
+              work with old people and organize Hiv/Aids Women to help them with
+              basic needs such as clothes, food, and shelter.
             </p>
             <p>
               Dav Safaris team partners with a variety of accommodation

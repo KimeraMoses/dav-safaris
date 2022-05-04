@@ -298,7 +298,7 @@ export const ReviewTour = (
   };
 };
 
-export const SendMessage = (
+export const chatWithUs = (
   name,
   email,
   phone,
@@ -323,7 +323,31 @@ export const SendMessage = (
 
     if (!response.ok) {
       const error = await response.json();
-      dispatch(SendMessageFail(message));
+      dispatch(SendMessageFail(error));
+    }
+    const data = await response.json();
+    dispatch(SendMessageSuccess(data));
+  };
+};
+export const contactUs = (name, email, contact, message) => {
+  return async (dispatch) => {
+    dispatch(SendMessagePending());
+    const response = await fetch(`${baseUrl}/api/v1/subscribers/contactUs`, {
+      method: "POST",
+      body: JSON.stringify({
+        name,
+        email,
+        contact,
+        message,
+      }),
+      headers: new Headers({
+        "Content-type": "application/json",
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      dispatch(SendMessageFail(error));
     }
     const data = await response.json();
     dispatch(SendMessageSuccess(data));

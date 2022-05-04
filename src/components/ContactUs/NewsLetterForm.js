@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SendIcon from "@material-ui/icons/Telegram";
 import classes from "./NewsLetterForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,20 +7,30 @@ import { Alert } from "@material-ui/lab";
 
 const NewsLetterForm = () => {
   const isLoading = useSelector((state) => state.message.subcribing);
-  const message = useSelector((state) => state.message.message);
+  const userMessage = useSelector((state) => state.message.message);
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const dispatch = useDispatch();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEmail(value);
+    setError("");
+    setMessage("");
   };
+  useEffect(() => {
+    if (userMessage === "success") {
+      setMessage("You have successfully subscribed to our Newsletter");
+    } else {
+      setMessage("Email already subscribed to NewsLetter");
+    }
+  }, [userMessage]);
+
   const NewsLetterFormSubmit = async (e) => {
     e.preventDefault();
     if (email.length < 1) {
       return setError("Email required");
     }
-
     if (email !== "undefined") {
       setError("");
       let pattern = new RegExp(
@@ -42,7 +52,11 @@ const NewsLetterForm = () => {
 
   return (
     <>
-      {message && <Alert severity={message ==='success'? 'success': 'error'}>{message ==='success'?'You have successfully subscribed to our Newsletter': message}</Alert>}
+      {message && (
+        <Alert severity={userMessage === "success" ? "success" : "error"}>
+          {message}
+        </Alert>
+      )}
       <div className={classes.dav__new_form_wrapper}>
         <div className={classes.dav__new_form_text_wrapper}>
           <SendIcon fontSize="large" />

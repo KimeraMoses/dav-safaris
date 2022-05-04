@@ -42,7 +42,6 @@ import Update from "./SafariUpdates/SingleUpdate/Update";
 import Feature from "./DashBoard/Feature";
 import AboutUs from "./AboutUs/AboutUs";
 import PrivacyPrompt from "../containers/PrivacyPolicies/PrivacyPrompt";
-import SEO from "../containers/SEO/SEO";
 import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
 import { TRACKING_ID } from "../store";
@@ -72,7 +71,6 @@ const App = (props) => {
           name="description"
           content="Get Gorilla Trekking Tours and Wildlife Safaris In Africa, we're Travel Agency in Uganda rendering mountain gorilla Trekking tours, birding, wildlife safaris"
         />
-        
       </Helmet>
       <Router>
         <Paper elevation={0} square>

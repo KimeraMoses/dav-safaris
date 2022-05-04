@@ -2,18 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 //===MUI IMPORTS===
-import {
-  Button,
-  Paper,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@material-ui/core";
-import Autocomplete, {
-  createFilterOptions,
-} from "@material-ui/lab/Autocomplete";
+import { Button, Paper, TextField } from "@material-ui/core";
 import Spinner from "@material-ui/core/CircularProgress";
 import { Alert } from "@material-ui/lab";
 
@@ -34,12 +23,10 @@ let postBlocks = [];
 const NewPost = (props) => {
   const isLoading = useSelector((state) => state.post.isLoading);
 
-  const { isEdit, setIsEdit } = props;
+  const { isEdit } = props;
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const [file, setFile] = useState(false);
-
   const [values, setValues] = useState({
     name: "",
     description: "",
@@ -94,7 +81,7 @@ const NewPost = (props) => {
   };
 
   const RegisterFormSubmitHandler = async (e) => {
-    console.log(values, postBlocks)
+    console.log(values, postBlocks);
     e.preventDefault();
     if (values.blockTitle.length > 0) {
       PostBlockHandler();

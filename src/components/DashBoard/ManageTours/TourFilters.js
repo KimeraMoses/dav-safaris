@@ -1,7 +1,6 @@
 import { Fab, Hidden, TextField } from "@material-ui/core";
 import React from "react";
 import Dropdown from "../../UI/Dropdown/Dropdown";
-import Search from "../../UI/Search/Search";
 import classes from "./TourFilters.module.css";
 import AddIcon from "@material-ui/icons/Add";
 import RefreshIcon from "@material-ui/icons/Refresh";

@@ -4,7 +4,6 @@ import React from "react";
 import Zoom from "@material-ui/core/Zoom";
 import Box from "@material-ui/core/Box";
 import Fab from "@material-ui/core/Fab";
-import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 
 //===COMPONENT IMPORTS===
 import classes from "./SendMessage.module.css";

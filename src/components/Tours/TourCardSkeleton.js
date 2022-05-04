@@ -1,9 +1,6 @@
 import React from "react";
 import classes from "./TourCard.module.css";
-import tourImg from "../../assets/background.webp";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Timer, Watch } from "@material-ui/icons";
 import { Rating, Skeleton } from "@material-ui/lab";
 import { Avatar } from "@material-ui/core";
 
@@ -11,18 +8,16 @@ const TourCardSkeleton = (props) => {
   const {
     TourImage,
     TourTitle,
-    NumDays,
-    NumNights,
     TourDescription,
     TourRating,
     TourSlug,
     type,
-    key
+    key,
   } = props;
 
   return (
     <div className={classes.tour_card_wrapper} key={key}>
-      <Skeleton width={`${type==="slider"? "300px": "100%"}`} height={220}>
+      <Skeleton width={`${type === "slider" ? "300px" : "100%"}`} height={220}>
         <Avatar>
           <div className={classes.tour_card_header}>
             <img src={TourImage} alt="Tour" />

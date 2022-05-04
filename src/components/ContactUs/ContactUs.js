@@ -58,7 +58,10 @@ const ContactUs = () => {
 
   return (
     <>
-      <SEO title="Contact Us - Uganda Gorilla Trekking and Safari Holidays" description="If you are looking for Uganda Gorilla trekking and safari holidays, then please feel to contact us to know details about our tour facilities and tour options."/>
+      <SEO
+        title="Contact Us - Uganda Gorilla Trekking and Safari Holidays"
+        description="If you are looking for Uganda Gorilla trekking and safari holidays, then please feel to contact us to know details about our tour facilities and tour options."
+      />
       <div className={classes.dav__contact_us_page_wrapper}>
         <div
           className={classes.dav__contact_us_hero}
@@ -69,7 +72,7 @@ const ContactUs = () => {
           }}
         >
           <h1>Start Planning your trip</h1>
-          <p>Arrange your dream holiday at the confort of your home</p>
+          <p>Arrange your dream holiday at the comfort of your home</p>
         </div>
         <div className={classes.dav__contact_info_wrapper}>
           <div className={classes.dav__safaries_contact_details}>

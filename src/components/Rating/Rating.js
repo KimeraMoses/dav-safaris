@@ -1,8 +1,7 @@
 import React from "react";
-import "./Rating.css"
+import "./Rating.css";
 import { Tooltip } from "@material-ui/core";
-import { Col, Container, Row } from "react-bootstrap";
-import Rating from '@material-ui/lab/Rating';
+import Rating from "@material-ui/lab/Rating";
 
 const labels = {
   0.5: "Useless",
@@ -22,21 +21,18 @@ export default function HoverRating(props) {
   const [hover, setHover] = React.useState(-1);
 
   return (
- 
-          <Tooltip title={labels[hover !== -1 ? hover : value]} placement="top" arrow>
-          <Rating
-          name="hover-feedback"
-          
-          value={value}
-          precision={.5}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          onChangeActive={(event, newHover) => {
-            setHover(newHover);
-          }}
-        />
-        </Tooltip>
-
+    <Tooltip title={labels[hover !== -1 ? hover : value]} placement="top" arrow>
+      <Rating
+        name="hover-feedback"
+        value={value}
+        precision={0.5}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+        onChangeActive={(event, newHover) => {
+          setHover(newHover);
+        }}
+      />
+    </Tooltip>
   );
 }

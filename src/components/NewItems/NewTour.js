@@ -11,9 +11,7 @@ import {
   Select,
   MenuItem,
 } from "@material-ui/core";
-import Autocomplete, {
-  createFilterOptions,
-} from "@material-ui/lab/Autocomplete";
+
 import Spinner from "@material-ui/core/CircularProgress";
 import { Alert } from "@material-ui/lab";
 
@@ -27,14 +25,14 @@ import styles from "./NewTour.module.css";
 import NewItinary from "./NewItinary";
 import ImageUpload from "./ImageUpload";
 import { useEffect } from "react";
-import { creatNewTour, editTourDetails } from "../../store/Actions/TourActions";
+import { creatNewTour } from "../../store/Actions/TourActions";
 import {
   TourCategories_Kenya,
   TourCategories_Rwanda,
   TourCategories_Tanzania,
   TourCategories_Uganda,
 } from "../../containers/Countries/TourCategories";
-import { AddDays, DeleteDay } from "../../store/Slices/newTourSlice";
+import { AddDays } from "../../store/Slices/newTourSlice";
 
 let dayActivityDescription = [];
 
@@ -45,14 +43,10 @@ const NewTour = (props) => {
   const isEditing = useSelector((state) => state.editTour.isLoading);
   const isLoading = useSelector((state) => state.newTour.isLoading);
   const Tour = useSelector((state) => state.tour.tourDetails);
-  const DayActivities = useSelector((state) => state.newTour.days);
-  const { isEdit, setIsEdit } = props;
+  const { isEdit } = props;
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const [file, setFile] = useState(false);
-  const [category, setCategory] = useState([]);
-  const [itinaries, setItinaries] = useState([]);
   const [TourCategories, setTourCategories] = useState([]);
 
   const [values, setValues] = useState({
@@ -103,7 +97,6 @@ const NewTour = (props) => {
         tourActivities.push(item);
       });
   }
-  // console.log(tourActivities);
 
   //====FORMATING THE PRICE INCLUDES AND EXCLUDES====//
   let priceIncludes = [];

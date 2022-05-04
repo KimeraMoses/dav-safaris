@@ -1,16 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import classes from "./SingleTour.module.css";
-import singleImage from "../../../assets/dave-safaris-Home-Uganda.jpg";
 import { useParams } from "react-router";
-import {
-  Checkbox,
-  FormControlLabel,
-  Paper,
-  TextField,
-} from "@material-ui/core";
-import { Form } from "react-bootstrap";
-import { TagFacesOutlined } from "@material-ui/icons";
-import { Button } from "../../UI/Button/Button";
 import Itinary from "./Itinerary/Itinary";
 import JumpNavigation from "./Navigation/JumpNavigation";
 import BookingForm from "./Bookings/BookingForm";
@@ -42,13 +32,12 @@ const SingleTour = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchTourName(tourTitle));
-  }, [tourTitle]);
-  const [show, setShow] = useState(false);
+  }, [tourTitle, dispatch]);
   const Tour = useSelector((state) => state.tour.tourDetails);
 
   return (
     <div className={classes.dav__single_tour_page_wrapper}>
-      <SingleHero title={Tour && Tour.name} image={Tour && Tour.imageCover}/>
+      <SingleHero title={Tour && Tour.name} image={Tour && Tour.imageCover} />
       <JumpNavigation />
 
       <div className={classes.dav__single_tour_highlights_wrapper}>

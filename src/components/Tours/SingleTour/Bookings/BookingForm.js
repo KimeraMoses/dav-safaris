@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { Button } from "../../../UI/Button/Button";
 import {
-  Checkbox,
   FormControl,
-  FormControlLabel,
   InputLabel,
   MenuItem,
   Paper,
@@ -28,7 +26,7 @@ const BookingForm = (props) => {
   const [searchResults, setSearchResults] = useState([]);
   const [country, setCountry] = useState({
     name: "",
-    flag: ""
+    flag: "",
   });
   const dispatch = useDispatch();
   const [values, setValues] = useState({
@@ -37,7 +35,7 @@ const BookingForm = (props) => {
     phone: "",
     email: "",
     travel_plans: "",
-    budget: ""
+    budget: "",
   });
 
   const keyWordHandler = (e) => {
@@ -58,7 +56,7 @@ const BookingForm = (props) => {
   };
 
   const countryNameHandler = (result) => {
-    setCountry({ name: result.name, flag: result.flags.png});
+    setCountry({ name: result.name, flag: result.flags.png });
     setValues({ ...values, country_of_residence: result.name });
     setSearchTerm("");
     setShow(true);
@@ -66,9 +64,9 @@ const BookingForm = (props) => {
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
-    setValues({ ...values, [name]: event.target.value });
+    setValues({ ...values, [name]: value });
     setError("");
-    setMessage("")
+    setMessage("");
   };
 
   const BookingFormSubmitHandler = async (e) => {
@@ -121,17 +119,18 @@ const BookingForm = (props) => {
         phone: "",
         email: "",
         travel_plans: "",
-        budget: ""
+        budget: "",
       });
       setCountry({
         name: "",
-        flag: ""
+        flag: "",
       });
       setSearchTerm("");
-      setMessage("Booking sent successfully, Our travel agent will get back to you shortly")
+      setMessage(
+        "Booking sent successfully, Our travel agent will get back to you shortly"
+      );
     } catch (error) {
-        return setError("Failed to book tour, try again later");
-    
+      return setError("Failed to book tour, try again later");
     }
   };
 
@@ -198,11 +197,7 @@ const BookingForm = (props) => {
           className={`${classes.gpa__form_input_field}`}
         >
           <InputLabel>Travel Budget</InputLabel>
-          <Select
-            value={values.budget}
-            name="budget"
-            onChange={handleOnChange}
-          >
+          <Select value={values.budget} name="budget" onChange={handleOnChange}>
             <MenuItem value="Budget">Budget</MenuItem>
             <MenuItem value="mid-range">Mid Range</MenuItem>
             <MenuItem value="luxury">Luxury</MenuItem>

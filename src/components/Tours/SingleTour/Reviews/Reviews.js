@@ -8,11 +8,11 @@ import { useDispatch } from "react-redux";
 import { fetchTourReviews } from "../../../../store/Actions/TourActions";
 import { Link } from "react-router-dom";
 
-const Reviews = ({Tour}) => {
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(fetchTourReviews(Tour && Tour.id))
-  },[Tour])
+const Reviews = ({ Tour }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTourReviews(Tour && Tour.id));
+  }, [Tour, dispatch]);
   const userNameRef = useRef(null);
 
   const ReviewTour = () => {
@@ -30,20 +30,28 @@ const Reviews = ({Tour}) => {
         </div>
         <div className={classes.dav__reviews_inner_wrapper}>
           <div className={classes.dav__review_count_wrapper}>
-            <RatingCount ratingsAverage={Tour && Tour.ratingsAverage} ratingsQuantity={Tour && Tour.ratingsQuantity}/>
+            <RatingCount
+              ratingsAverage={Tour && Tour.ratingsAverage}
+              ratingsQuantity={Tour && Tour.ratingsQuantity}
+            />
           </div>
           <div className={classes.dav__reviews_list}>
             <h5>Customer Reviews</h5>
-            <ReviewsList ReviewTour={ReviewTour}/>
+            <ReviewsList ReviewTour={ReviewTour} />
           </div>
         </div>
       </Paper>
       <div className={classes.dav__rate_tour_wrapper}>
-        <ReviewForm userNameRef={userNameRef}/>
+        <ReviewForm userNameRef={userNameRef} />
         <Paper className={classes.dav__inquire_about_tour}>
           <strong>Got questions about this tour? </strong>
           <br />{" "}
-          <Button variant="outlined" color="primary" component={Link} to="/contact-us">
+          <Button
+            variant="outlined"
+            color="primary"
+            component={Link}
+            to="/contact-us"
+          >
             {" "}
             Make inquiries
           </Button>

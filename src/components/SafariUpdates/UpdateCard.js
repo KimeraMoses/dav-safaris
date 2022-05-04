@@ -6,13 +6,11 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Image from "../../assets/gollira.jpg";
 import classes from "./UpdateCard.module.css";
 import { Link } from "react-router-dom";
 
 export default function UpdateCard(props) {
   const { Post } = props;
-  const slug = Post && Post.name && Post.name.toLowerCase().replace(/ /g, '-')
   return (
     <Card className={classes.dav__update_card_wrapper}>
       <CardActionArea>
@@ -41,7 +39,12 @@ export default function UpdateCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" component={Link} to={`/safari-updates/${Post && Post.slug}`}>
+        <Button
+          size="small"
+          color="primary"
+          component={Link}
+          to={`/safari-updates/${Post && Post.slug}`}
+        >
           Read More
         </Button>
       </CardActions>

@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 //===MUI IMPORTS===
-import { Box, Modal, Button, IconButton } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
-import CloseIcon from "@material-ui/icons/Close";
-import PhoneIcon from "@material-ui/icons/Phone";
+import { Box, Modal } from "@material-ui/core";
 
 //===COMPONENTS IMPORTS===
 import classes from "./ModalComponent.module.css";
-import { useSelector } from "react-redux";
 
 export const ACTIONTYPE = {
   NON_MEMBER: "NonMember",
@@ -17,7 +13,7 @@ export const ACTIONTYPE = {
 };
 
 const ModalComponent = (props) => {
-  const { open, setOpen, message, type, action } = props;
+  const { open, setOpen } = props;
 
   const handleClose = () => setOpen(false);
   const style = {

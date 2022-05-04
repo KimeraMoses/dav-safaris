@@ -1,20 +1,9 @@
-import {
-  Button,
-  Fab,
-  FormControl,
-  InputLabel,
-  List,
-  MenuItem,
-  Select,
-  TextField,
-} from "@material-ui/core";
-import SendIcon from "@material-ui/icons/Send";
-import React, { useEffect, useState } from "react";
-import { Col, Form, Row } from "react-bootstrap";
+import { Button, List, TextField } from "@material-ui/core";
+import React from "react";
+import { Col, Row } from "react-bootstrap";
 import styles from "./NewTour.module.css";
 import classes from "./NewItinary.module.css";
 import Itinary from "./Itinary";
-import { useSelector } from "react-redux";
 
 const NewItinary = (props) => {
   const {

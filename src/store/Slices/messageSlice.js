@@ -28,7 +28,7 @@ const messageSlice = createSlice({
     },
     NewsLetterSuccess: (state, { payload }) => {
       state.message = payload;
-      state.subcribing =false;
+      state.subcribing = false;
     },
     NewsLetterFail: (state, { payload }) => {
       state.message = payload;

@@ -3,7 +3,6 @@ import SafariTag from "@material-ui/icons/LocalOfferOutlined";
 import DateIcon from "@material-ui/icons/DateRangeOutlined";
 import { SingleHero } from "../../Tours/SingleTour/SingleTour";
 import classes from "./Update.module.css";
-import Image from "../../../assets/background.webp";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +16,7 @@ const Update = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchPostDetails(postTitle));
-  }, [postTitle]);
+  }, [postTitle, dispatch]);
   const FormatedDate = (date) => {
     const PDate = new Date(date);
     const options = {
@@ -27,13 +26,11 @@ const Update = () => {
     };
     return PDate.toLocaleDateString("en-US", options);
   };
-  const FIlteredPosts = Posts && Posts.filter((post)=>post.slug !== postTitle);
+  const FIlteredPosts =
+    Posts && Posts.filter((post) => post.slug !== postTitle);
   return (
     <div>
-      <SingleHero
-        title={Post && Post.name}
-        image={Post && Post.postImage}
-      />
+      <SingleHero title={Post && Post.name} image={Post && Post.postImage} />
       <Container fluid className={classes.dav__single_update_wrapper}>
         <Row style={{ alignItems: "flex-start" }}>
           <Col
@@ -60,15 +57,12 @@ const Update = () => {
                   return (
                     <div key={index}>
                       <h3>
-                        <strong>
-                          {block.title}
-                        </strong>
+                        <strong>{block.title}</strong>
                       </h3>
                       <p>{block.description}</p>
                     </div>
                   );
                 })}
-          
             </div>
           </Col>
           <Col
@@ -94,9 +88,7 @@ const Update = () => {
                     .map((post) => {
                       return (
                         <li key={post.id}>
-                          <Link
-                            to={`/safari-updates/${post.slug}`}
-                          >
+                          <Link to={`/safari-updates/${post.slug}`}>
                             {post.name}
                           </Link>
                           <div
