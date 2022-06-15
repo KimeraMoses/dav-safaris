@@ -16,16 +16,23 @@ const Partners = () => {
           href="https://www.safaribookings.com/profile/p4664"
           target="_blank"
           rel="noreferrer"
+          alt="Partners"
         >
           <img src={safariBooking} />
         </a>
-        <a href="https://utb.go.ug/" target="_blank" rel="noreferrer">
+        <a
+          href="https://utb.go.ug/"
+          target="_blank"
+          rel="noreferrer"
+          alt="Partners"
+        >
           <img className={classes.dav__partners_utb} src={utb} />
         </a>
         <a
           href="https://www.tripadvisor.com/Attraction_Review-g293841-d20284280-Reviews-Dav_Safaris-Kampala_Central_Region.html"
           target="_blank"
           rel="noreferrer"
+          alt="Partners"
         >
           <img src={TripAdvisor} />
         </a>
@@ -33,6 +40,7 @@ const Partners = () => {
           href="https://www.touristlink.com/user/davsafaris.html?sereferer=036B5792"
           target="_blank"
           rel="noreferrer"
+          alt="Partners"
         >
           <img src={touristlink} />
         </a>
@@ -40,10 +48,16 @@ const Partners = () => {
           href="https://ugandatouroperators.org/"
           target="_blank"
           rel="noreferrer"
+          alt="Partners"
         >
           <img className={classes.dav__partners_uwa} src={AutoLogo} />
         </a>
-        <a href="https://ugandawildlife.org/" target="_blank" rel="noreferrer">
+        <a
+          href="https://ugandawildlife.org/"
+          target="_blank"
+          rel="noreferrer"
+          alt="Partners"
+        >
           <img className={classes.dav__partners_uwa} src={uwa} />
         </a>
       </div>

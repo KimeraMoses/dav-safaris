@@ -1,19 +1,7 @@
 import React, { useEffect } from "react";
 import classes from "../Membership.module.css";
-import {
-  FilledInput,
-  FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  Paper,
-  TextField,
-  Button,
-} from "@material-ui/core";
+import { Paper, TextField, Button } from "@material-ui/core";
 import { Col, Container, Row } from "react-bootstrap";
-import DavLogo from "../../AppBar/DavLogo";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
-import { Link } from "react-router-dom";
 
 const ResetPassword = () => {
   useEffect(() => {
@@ -29,8 +17,6 @@ const ResetPassword = () => {
                 className={`col-xs-12 col-sm-6 ${classes.dav__membership_form_side}`}
               >
                 <div className={classes.dav__registration_hero}>
-                  {/* <DavLogo /> */}
-
                   <h1>Forgot Password</h1>
                   <p>
                     Enter your e-mail address and we will send you a link to

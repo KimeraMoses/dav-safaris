@@ -1,74 +1,33 @@
-# Getting Started with Create React App
+# Dav Safaris Booking Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## _The fully functional web application of dav safaris tour and travel company_
 
-## Available Scripts
+# Project Details
 
-In the project directory, you can run:
+Dav Safaris website is a web application for a tour and travel comapany, travellers can book onsite from a range of tours packages.I designed the UI/UX using adobe XD and also turned the designs into pixel perfect designs.
+The application is built in Reactjs,Redux, React Router v6, Material UI v4, among others
 
-### `npm start`
+## Client's Requirements
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The tasks are as follows:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Designing the Mockup using adobe XD
+2. Responsive and beautiful UI and cross-browser page compatibility
+3. API integration
+4. Testing and Debugging
+5. Documentation (Readme)
 
-### `npm test`
+# Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> Mobile Responsiveness:
+> I had a task of making sure that the web pages are made responsive on different device widths
 
-### `npm run build`
+> Semantic tags:
+> Use of the know semantic tags was also a checkpoint during the project, making sure that we used only tags that were neccessary.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> Beautiful UI and UX ✨:
+> Bringing out the webpages as they appear in the mockup was the major goal of this task.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-### Development && Maintenance Credit
-
-This project was fully planned and designed by Kimera Moses @KimeraMoses for the frontend and backend fully done by Isaac Mubiru @zac-09
+> Adding Logic and Making API Calls:
+> The application enables users to book for tours of their choice, review any tour in real time.
+> After the UI implementation, i had to add logic to the UIs making different calls and storing data in redux and passing it on to the different components where it had to be displayed. It was such an awesome experience getting to learn how to connect to metamask extension and capturing the account address to use it when making calls for different transactions.
