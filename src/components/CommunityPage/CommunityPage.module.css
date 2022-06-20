@@ -60,12 +60,15 @@
   padding: 0 20px;
 }
 
+.service_card_wrapper h4,
 .dav__section_top_wrapper__content h4 {
   font-weight: 600;
   font-family: "Merriweather", serif;
   font-style: italic;
 }
-
+.dav__section_top_wrapper__content p {
+  text-align: justify;
+}
 .service_card_wrapper {
   padding: 20px 0;
 }
@@ -122,6 +125,7 @@
 }
 .section_wrapper p {
   font-size: 18px;
+  text-align: justify;
 }
 
 @media screen and (max-width: 680px) {

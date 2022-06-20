@@ -42,7 +42,7 @@ const CommunityPage = () => {
             </div>
           </div>
           <div className={classes.service_card_wrapper}>
-            <h4>Services</h4>
+            <h4>What we offer</h4>
             <Services />
 
             <div className={classes.section_wrapper}>
@@ -82,7 +82,7 @@ const CommunityPage = () => {
                 <img src={image2} alt="Supporting Local Schools" />
               </div>
               <div className={classes.dav__section_top_wrapper__content}>
-                <h4>Supporting Local Schools</h4>
+                <h4>Supporting Local Schools and Communities</h4>
                 <p>
                   We visit schools in rural communities to offer cultural
                   exchange and work together to fund projects through donations.
