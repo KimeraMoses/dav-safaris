@@ -44,27 +44,7 @@ const CommunityPage = () => {
           <div className={classes.service_card_wrapper}>
             <h4>Services</h4>
             <Services />
-            <div
-              className={`${classes.dav__section_top_wrapper} ${classes.schools}`}
-            >
-              <div className={classes.dav__section_top_wrapper__visuals}>
-                <img src={image2} alt="Supporting Local Schools" />
-              </div>
-              <div className={classes.dav__section_top_wrapper__content}>
-                <h4>Supporting Local Schools</h4>
-                <p>
-                  We visit schools in rural communities to offer cultural
-                  exchange and work together to fund projects through donations.
-                  By visiting these underfunded communities on our tours, our
-                  travelers can bring along school supplies and we can directly
-                  donate to where it’s needed to make a real difference. Our
-                  ambition projects are to build a new daycare centers in a
-                  rural communities, contributing to huge infrastructure
-                  improvements, and sponsoring local Football, Biking,
-                  basketball teams to provide uniforms and equipment.
-                </p>
-              </div>
-            </div>
+
             <div className={classes.section_wrapper}>
               <h4>DavSafariship</h4>
               <p>
@@ -94,6 +74,27 @@ const CommunityPage = () => {
                 legends the opportunity to travel somewhere they’ve never had a
                 chance to visit before.
               </p>
+            </div>
+            <div
+              className={`${classes.dav__section_top_wrapper} ${classes.schools}`}
+            >
+              <div className={classes.dav__section_top_wrapper__visuals}>
+                <img src={image2} alt="Supporting Local Schools" />
+              </div>
+              <div className={classes.dav__section_top_wrapper__content}>
+                <h4>Supporting Local Schools</h4>
+                <p>
+                  We visit schools in rural communities to offer cultural
+                  exchange and work together to fund projects through donations.
+                  By visiting these underfunded communities on our tours, our
+                  travelers can bring along school supplies and we can directly
+                  donate to where it’s needed to make a real difference. Our
+                  ambition projects are to build a new daycare centers in a
+                  rural communities, contributing to huge infrastructure
+                  improvements, and sponsoring local Football, Biking,
+                  basketball teams to provide uniforms and equipment.
+                </p>
+              </div>
             </div>
           </div>
         </div>
