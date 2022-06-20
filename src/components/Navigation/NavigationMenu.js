@@ -1,11 +1,11 @@
-import React  from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./NavigationMenu.module.css";
 
 const NavigationMenu = (props) => {
   const { menuOpen, setMenuOpen } = props;
-  
-  const NavMenuItem = ({itemTitle,itemLink }) => {
+
+  const NavMenuItem = ({ itemTitle, itemLink }) => {
     return (
       <li className={classes.menu_item} onClick={() => setMenuOpen(false)}>
         <NavLink
@@ -21,7 +21,11 @@ const NavigationMenu = (props) => {
   };
 
   return (
-    <div className={`${classes.dav__navbar_wrapper} ${menuOpen? classes.menuOpen: ''}`}>
+    <div
+      className={`${classes.dav__navbar_wrapper} ${
+        menuOpen ? classes.menuOpen : ""
+      }`}
+    >
       <ul className={`${classes.nav_menu} ${menuOpen ? classes.active : ""}`}>
         <NavMenuItem itemTitle="Home" itemLink="/" />
         <NavMenuItem itemTitle="Uganda" itemLink="/uganda-safaris" />
@@ -30,6 +34,7 @@ const NavigationMenu = (props) => {
         <NavMenuItem itemTitle="Rwanda" itemLink="/rwanda-safaris" />
         <NavMenuItem itemTitle="About Us" itemLink="/about-us" />
         <NavMenuItem itemTitle="Safari Updates" itemLink="/safari-updates" />
+        <NavMenuItem itemTitle="Community" itemLink="/community" />
         <NavMenuItem itemTitle="Contact us" itemLink="/contact-us" />
       </ul>
     </div>

@@ -6,14 +6,8 @@ import { Box, Modal } from "@material-ui/core";
 //===COMPONENTS IMPORTS===
 import classes from "./ModalComponent.module.css";
 
-export const ACTIONTYPE = {
-  NON_MEMBER: "NonMember",
-  NOT_ENROLLED: "NotEnrolled",
-  COURSE_INTRUDER: "CourseIntruder",
-};
-
 const ModalComponent = (props) => {
-  const { open, setOpen } = props;
+  const { open, setOpen, data } = props;
 
   const handleClose = () => setOpen(false);
   const style = {
@@ -24,7 +18,8 @@ const ModalComponent = (props) => {
     <div>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style} className={classes.gpa__modal_wrapper}>
-          Modal Open
+          <h2>{data?.name}</h2>
+          <p>{data?.description}</p>
         </Box>
       </Modal>
     </div>

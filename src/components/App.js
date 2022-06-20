@@ -45,6 +45,7 @@ import PrivacyPrompt from "../containers/PrivacyPolicies/PrivacyPrompt";
 import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
 import { TRACKING_ID } from "../store";
+import CommunityPage from "./CommunityPage/CommunityPage";
 
 const App = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -115,6 +116,7 @@ const App = (props) => {
             <Route path="/change-password" exact element={<ChangePassword />} />
             <Route path="/contact-us" exact element={<ContactUs />} />
             <Route path="/about-us" exact element={<AboutUs />} />
+            <Route path="/community" exact element={<CommunityPage />} />
             <Route path="/terms-of-services" exact element={<Terms />} />
             <Route path="/privacy-policies" exact element={<Policies />} />
             <Route path="/tours" exact element={<Tours />} />

@@ -36,6 +36,7 @@ const BookingForm = (props) => {
     email: "",
     travel_plans: "",
     budget: "",
+    travellers: "",
   });
 
   const keyWordHandler = (e) => {
@@ -203,6 +204,17 @@ const BookingForm = (props) => {
             <MenuItem value="luxury">Luxury</MenuItem>
           </Select>
         </FormControl>
+        <TextField
+          variant="filled"
+          size="small"
+          fullWidth
+          type="number"
+          value={values.travellers}
+          onChange={handleOnChange}
+          name="travellers"
+          label="Number of travellers"
+          className={classes.dav__booking_form_field__last}
+        />
         <div className={classes.dav__book_tour_travel_plans}>
           Travel Plans *
         </div>

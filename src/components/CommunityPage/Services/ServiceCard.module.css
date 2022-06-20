@@ -1,0 +1,104 @@
+.service__card {
+  margin: 20px 0;
+}
+.single__service {
+  background: #fff;
+  border-radius: 5px;
+  padding: 24px 21px;
+  -webkit-transition: all 0.4s ease-out 0s;
+  -moz-transition: all 0.4s ease-out 0s;
+  -ms-transition: all 0.4s ease-out 0s;
+  -o-transition: all 0.4s ease-out 0s;
+  transition: all 0.4s ease-out 0s;
+  position: relative;
+  z-index: 1;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  /* box-shadow: 0 25px 35px rgb(68 162 255 / 10%); */
+  min-height: 340px;
+  max-height: 340px;
+  overflow: hidden;
+}
+.single__service::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 0;
+  /* background: #192839; */
+  background: var(--dav__primary_color);
+  transition: 0.6s;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 5px;
+}
+.single__service:hover::before {
+  height: 100%;
+}
+.service__card h5 {
+  font-family: "Nunito", sans-serif;
+  color: #192839;
+  margin-top: 0;
+  font-style: normal;
+  font-weight: 500;
+  text-transform: normal;
+}
+.single__service h5 {
+  color: #192839;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 21px;
+  display: block;
+  -webkit-transition: all 0.2s ease-out 0s;
+  -moz-transition: all 0.2s ease-out 0s;
+  -ms-transition: all 0.2s ease-out 0s;
+  -o-transition: all 0.2s ease-out 0s;
+  transition: all 0.2s ease-out 0s;
+}
+.single__service:hover h5 {
+  color: #fff;
+}
+.single__service .service__num {
+  color: var(--dav__primary_color);
+  display: block;
+  width: 78px;
+  height: 78px;
+  margin-bottom: 10px;
+  background: #ffe1ee;
+  line-height: 78px;
+  text-align: center;
+  border-radius: 50px;
+  display: inline-block;
+  box-shadow: 0 15px 25px rgb(0 4 74 / 4%);
+  font-size: 48px;
+  user-select: none;
+}
+.single__service .service__desc p {
+  margin-bottom: 36px;
+  color: #192839;
+  font-size: 18px;
+  -webkit-transition: all 0.2s ease-out 0s;
+  -moz-transition: all 0.2s ease-out 0s;
+  -ms-transition: all 0.2s ease-out 0s;
+  -o-transition: all 0.2s ease-out 0s;
+  transition: all 0.2s ease-out 0s;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+.single__service:hover p {
+  color: #fff;
+}
+.single__service:hover .service__card_link {
+  color: #192839;
+}
+.service__card_link {
+  color: var(--dav__primary_color);
+  cursor: pointer;
+}
+.service__card_link:hover {
+  color: var(--dav__secondary_color);
+  font-weight: 600;
+}
