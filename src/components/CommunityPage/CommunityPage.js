@@ -17,7 +17,7 @@ const CommunityPage = () => {
         }}
       >
         <div className={classes.dav__about_us_title}>
-          <h2>Commmunity Travels</h2>
+          <h2>Commmunity Support</h2>
         </div>
       </div>
       <div className={classes.community_page_content_wrapper}>

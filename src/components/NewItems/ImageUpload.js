@@ -31,6 +31,7 @@ const ImageUpload = ({ tourImageHandler, tourImage, Image, isPost }) => {
         <input
           type="file"
           hidden="hidden"
+          accept="image/*"
           title=""
           value=""
           id="tour_image_input_change"
