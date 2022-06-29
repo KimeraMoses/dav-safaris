@@ -34,7 +34,7 @@ const NavigationMenu = (props) => {
         <NavMenuItem itemTitle="Rwanda" itemLink="/rwanda-safaris" />
         <NavMenuItem itemTitle="About Us" itemLink="/about-us" />
         <NavMenuItem itemTitle="Safari Updates" itemLink="/safari-updates" />
-        <NavMenuItem itemTitle="Community" itemLink="/community" />
+        <NavMenuItem itemTitle="Community" itemLink="/community-support" />
         <NavMenuItem itemTitle="Contact us" itemLink="/contact-us" />
       </ul>
     </div>

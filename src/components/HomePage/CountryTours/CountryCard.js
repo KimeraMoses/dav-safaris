@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import classes from "./CountryCard.module.css";
 
 const CountryCard = (props) => {
-  const { countryImage, countryTitle, numTours, countyDescription } = props;
+  const { countryImage, countryTitle, countyDescription } = props;
   return (
     <Link to={`/${countryTitle.toLowerCase()}`}>
       <Paper

@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux"
 import classes from "./Feature.module.css";
 import NotificationsIcon from "@material-ui/icons/NotificationsActive";
 

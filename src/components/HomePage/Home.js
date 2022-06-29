@@ -5,11 +5,10 @@ import Wrapper from "../../containers/hoc/wrapper";
 import HeroBooking from "../HeroBooking/HeroBooking";
 import Benefits from "./Benefits";
 import AboutUs from "./AboutUs";
-import PopularTours from "./PopularTours/PopularTours";
 import CountyToursSection from "./CountryTours/CountyToursSection";
 import SectionTitle from "./SectionTitle/SectionTitle";
 import CardCarousel from "../CardCarousel/CardCarousel";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import BookingSearchResults from "../HeroBooking/BookingSearchResults";
 import Partners from "../Partners/Partners";
@@ -20,7 +19,6 @@ import ModalComponent from "../../components/UI/Modal/ModalComponent";
 
 const Home = () => {
   const Tours = useSelector((state) => state.tours.toursList);
-  const [searchTerm, setSearchTerm] = useState("");
   const [searchQ, setSearchQ] = useState({});
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState("");
@@ -32,11 +30,11 @@ const Home = () => {
     departure: "",
   });
 
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const handleScroll = () => {
-    const position = window.pageYOffset;
-    setScrollPosition(position);
-  };
+  // const [scrollPosition, setScrollPosition] = useState(0);
+  // const handleScroll = () => {
+  //   const position = window.pageYOffset;
+  //   setScrollPosition(position);
+  // };
 
   // useEffect(() => {
   //   window.addEventListener("scroll", handleScroll, { passive: true });
@@ -57,7 +55,7 @@ const Home = () => {
     setError("");
     setValues({ ...values, error: "" });
     const { name, value } = event.target;
-    setValues({ ...values, [name]: event.target.value });
+    setValues({ ...values, [name]: value });
   };
 
   const TourSearchHandler = (e) => {

@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router";
-import CountryHeroImg from "../../assets/Image6.jpg";
-import PopularTours from "../HomePage/PopularTours/PopularTours";
 import CountryHeader from "./CountryHeader";
 import AboutCountry from "./AboutCountry";
 import classes from "./CountrySingle.module.css";
@@ -10,6 +8,7 @@ import { fetchAllCountryTours } from "../../store/Actions/TourActions";
 import { useDispatch } from "react-redux";
 import { CountriesData } from "../../containers/Countries/CountriesData";
 import SEO from "../../containers/SEO/SEO";
+
 const CountryTitle = {
   UG: "Uganda Gorilla Safaris, Birding, Cultural Safaris, Mountain Climbing",
   KE: "Kenya Wildlife Safaris, Birding Safaris, Best African Safaris Holidays",
@@ -30,6 +29,8 @@ const CountrySingle = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchAllCountryTours(currentCountry));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCountry]);
 
   const SelectedCountry = CountriesData.filter(

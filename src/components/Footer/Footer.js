@@ -11,7 +11,6 @@ import MenuIcon from "@material-ui/icons/ArrowForward";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import NewsLetterForm from "../ContactUs/NewsLetterForm";
 import { Fb } from "../../containers/Icons/Icons";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -123,15 +122,33 @@ const Footer = () => {
               </li>
               <li>
                 <PhoneOutlined />
-                <a href="https://wa.link/0v0s1w">+256757795781</a>{" "}
+                <a
+                  href="https://wa.link/0v0s1w"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  +256757795781
+                </a>{" "}
               </li>
               <li>
                 <EmailOutlined />
-                <a href="mailto:info@davsafaris.com">info@davsafaris.com</a>
+                <a
+                  href="mailto:info@davsafaris.com"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  info@davsafaris.com
+                </a>
               </li>
               <li>
                 <EmailOutlined />
-                <a href="mailto:davsafaris@gmail.com">davsafaris@gmail.com</a>
+                <a
+                  href="mailto:davsafaris@gmail.com"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  davsafaris@gmail.com
+                </a>
               </li>
             </ul>
           </div>
@@ -164,16 +181,22 @@ const Footer = () => {
               <a
                 href="https://www.instagram.com/davsafaris/?hl=en"
                 target="_blank"
+                rel="noreferrer"
               >
                 <Instagram />
               </a>
               <a
                 href="https://ug.linkedin.com/in/david-mukasa-78a38a1a3"
                 target="_blank"
+                rel="noreferrer"
               >
                 <LinkedInIcon />
               </a>
-              <a href="https://www.facebook.com/klaebb/" target="_blank">
+              <a
+                href="https://www.facebook.com/klaebb/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <Fb />
               </a>
             </div>

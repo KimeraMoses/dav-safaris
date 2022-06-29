@@ -13,7 +13,7 @@ const NewsLetterForm = () => {
   const [message, setMessage] = useState("");
   const dispatch = useDispatch();
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     setEmail(value);
     setError("");
     setMessage("");
@@ -46,6 +46,7 @@ const NewsLetterForm = () => {
 
       setEmail("");
     } catch {
+      console.log(error);
       return setError("Failed to subscribe to the newsletter");
     }
   };

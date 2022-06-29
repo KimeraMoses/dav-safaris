@@ -1,17 +1,14 @@
-import { Fab, Hidden, Paper } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import React from "react";
-import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import classes from "./DashBoard.module.css";
 import CardMembershipIcon from "@material-ui/icons/CardMembership";
 import DashboardIcon from "@material-ui/icons/Speed";
 import AddLocationIcon from "@material-ui/icons/AddLocationOutlined";
 import GroupAddOutlinedIcon from "@material-ui/icons/GroupAddOutlined";
 import BookOutlinedIcon from "@material-ui/icons/BookOutlined";
-import AddIcon from "@material-ui/icons/Add";
-import RefreshIcon from "@material-ui/icons/Refresh";
 
 const DashBoard = () => {
-  const isLoading = false;
   const location = useLocation();
   const DashMenuTitle = location.pathname.substring(
     location.pathname.lastIndexOf("/") + 1

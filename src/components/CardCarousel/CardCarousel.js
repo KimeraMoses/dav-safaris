@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 //===REDUX IMPORTS
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 //===REACT ELESTIC CAROUSEL IMPORTS
 import Carousel from "react-elastic-carousel";
@@ -20,7 +20,6 @@ const breakpoints = [
 
 const CardCarousel = () => {
   const isLoading = useSelector((state) => state.tours.isLoading);
-  const dispatch = useDispatch();
   const tourList = useSelector((state) => state.tours.toursList);
 
   let FilteredTours = tourList;

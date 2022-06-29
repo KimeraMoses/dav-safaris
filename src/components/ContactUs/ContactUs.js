@@ -9,7 +9,6 @@ import ContactUsForm from "../Tours/SingleTour/Bookings/ContactUsForm";
 import { EmailOutlined } from "@material-ui/icons";
 import SocialMedia from "./SocialMedia";
 import { Form } from "react-bootstrap";
-import NewsLetterForm from "./NewsLetterForm";
 import { NewsLetters } from "../../store/Actions/UserActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert } from "@material-ui/lab";
@@ -26,7 +25,7 @@ const ContactUs = () => {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     setEmail(value);
     setError("");
   };
@@ -84,6 +83,7 @@ const ContactUs = () => {
                 style={{ border: 0 }}
                 allowfullscreen=""
                 loading="lazy"
+                title="Location of Dav Safaris"
               ></iframe>
             </Paper>
           </div>
@@ -97,7 +97,7 @@ const ContactUs = () => {
               </h3>
 
               <div className={classes.specialist__text}>
-                <img src={Operator} />
+                <img src={Operator} alt="" />
 
                 <p>
                   Start planning your trip by contacting one of our specialists

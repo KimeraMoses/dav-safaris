@@ -4,33 +4,21 @@ import React, { useState } from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
-import { Hidden, IconButton, Button, Avatar } from "@material-ui/core";
-
-import Typography from '@material-ui/core/Typography';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-
+import { Hidden, IconButton } from "@material-ui/core";
 
 //===COMPONENT IMPORTS===
 import classes from "./AppBar.module.css";
 import DavLogo from "./DavLogo";
 import NavigationMenu from "../Navigation/NavigationMenu";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const AppBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { user, isLoggedIn } = useSelector((state) => state.auth);
+  // const { user } = useSelector((state) => state.auth);
   // const [auth, setAuth] = React.useState(true);
   // const [anchorEl, setAnchorEl] = React.useState(null);
   // const open = Boolean(anchorEl);
-  const username = user && user.username && user.username.split(" ");
-  
+  // const username = user && user.username && user.username.split(" ");
+
   // const handleChange = (event) => {
   //   setAuth(event.target.checked);
   // };
@@ -43,17 +31,17 @@ const AppBar = () => {
   //   setAnchorEl(null);
   // };
 
-  let userImage = "";
-  if (username && username.length > 1) {
-    userImage =
-      username &&
-      username[0] &&
-      username[0].charAt(0) + username &&
-      username[1] &&
-      username[1].charAt(0);
-  } else {
-    userImage = username && username[0] && username[0].charAt(0);
-  }
+  // let userImage = "";
+  // if (username && username.length > 1) {
+  //   userImage =
+  //     username &&
+  //     username[0] &&
+  //     username[0].charAt(0) + username &&
+  //     username[1] &&
+  //     username[1].charAt(0);
+  // } else {
+  //   userImage = username && username[0] && username[0].charAt(0);
+  // }
   return (
     <>
       <Toolbar id="dav__back_to_top_anchor">

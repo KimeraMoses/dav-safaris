@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   FormControl,
   MenuItem,
@@ -9,11 +9,9 @@ import {
 import SearchIcon from "@material-ui/icons/Search";
 import { Button } from "../UI/Button/Button";
 import classes from "./HeroBooking.module.css";
-import { Alert } from "react-bootstrap";
-import { useEffect } from "react";
 
 const HeroBooking = (props) => {
-  const {values, handleOnChange,TourSearchHandler,error } = props
+  const { values, handleOnChange, TourSearchHandler, error } = props;
 
   return (
     <div className={classes.herobooking__wrapper}>
@@ -45,9 +43,7 @@ const HeroBooking = (props) => {
           </FormControl>
         </div>
         <div className={classes.herobooking__input_wrapper}>
-          <div className={classes.hero__booking__title}>
-            Travel Duration
-          </div>
+          <div className={classes.hero__booking__title}>Travel Duration</div>
           <FormControl
             variant="filled"
             size="small"

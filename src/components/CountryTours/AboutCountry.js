@@ -2,7 +2,6 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Button } from "@material-ui/core";
 import Expert from "../../assets/davLogo.png";
-import SectionTitle from "../HomePage/SectionTitle/SectionTitle";
 import classes from "./AboutCountry.module.css";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -26,18 +25,23 @@ const AboutCountry = (props) => {
             </h2>
 
             <div className={classes.specialist__text}>
-              <img src={Expert} />
+              <img src={Expert} alt="" />
 
               <p>
                 Start planning your trip by contacting one of our{" "}
-                <span style={{textTransform: "capitalize"}}>{countryName.replace(/-/g, " ")}</span> specialists
+                <span style={{ textTransform: "capitalize" }}>
+                  {countryName.replace(/-/g, " ")}
+                </span>{" "}
+                specialists
               </p>
             </div>
             <ul className={classes.dav__contact_country_expert_contact_wrapper}>
               <li>
                 <strong>
                   <span className={classes.dav__contact_country_expert_contact}>
-                    <a href="tel:+256701412430">{Country && Country.country_specialist}</a>
+                    <a href="tel:+256701412430">
+                      {Country && Country.country_specialist}
+                    </a>
                     <a href="tel:+256757795781">+256757795781</a>
                   </span>
                 </strong>

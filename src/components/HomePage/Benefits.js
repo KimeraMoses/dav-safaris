@@ -1,7 +1,5 @@
 import {
-  CalendarToday,
   CalendarTodayOutlined,
-  CalendarViewDay,
   HomeWorkOutlined,
   SecurityOutlined,
   WorkOutline,

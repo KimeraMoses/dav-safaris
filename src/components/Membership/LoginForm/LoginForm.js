@@ -14,14 +14,14 @@ import {
 import { Col, Container, Row } from "react-bootstrap";
 import DavLogo from "../../AppBar/DavLogo";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../../store/Actions/AuthActions";
+import { Alert } from "@material-ui/lab";
 
 const LoginForm = () => {
-  const message = useSelector((state) => state.auth.message);
-  const isLoading = useSelector(state=>state.auth.isLoading)
+  const isLoading = useSelector((state) => state.auth.isLoading);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [values, setValues] = useState({
     password: "",
@@ -78,7 +78,7 @@ const LoginForm = () => {
       await dispatch(login(values.email, values.password));
       setValues({ password: "" });
       setValues({ email: "" });
-      navigate('/dashboard/user')
+      navigate("/dashboard/user");
       // enqueueSnackbar("You have successfully logged in", {
       //   variant: "success",
       //   action,
@@ -128,6 +128,7 @@ const LoginForm = () => {
               <div
                 className={`col-xs-12 col-sm-6 ${classes.dav__membership_form}`}
               >
+                {error && <Alert severity="error">{error}</Alert>}
                 <form onSubmit={LoginHandler}>
                   <TextField
                     fullWidth
@@ -191,7 +192,7 @@ const LoginForm = () => {
                         type="submit"
                         className={classes.dav__membership_submit_button}
                       >
-                        {isLoading? 'Logging in...': 'Login'}
+                        {isLoading ? "Logging in..." : "Login"}
                       </Button>
                     </Col>
                   </Row>

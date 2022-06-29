@@ -2,18 +2,11 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import TourCard from "../../Tours/TourCard";
 import classes from "./PopularTours.module.css";
-import Image1 from "../../../assets/Image5.jpg";
-import Image2 from "../../../assets/Image6.jpg";
-import Image3 from "../../../assets/Image8.jpg";
-import Image4 from "../../../assets/Image18.jpg";
-import SectionTitle from "../SectionTitle/SectionTitle";
 import { useSelector } from "react-redux";
-import CardCarousel from "../../CardCarousel/CardCarousel";
 import TourCardSkeleton from "../../Tours/TourCardSkeleton";
 
 const PopularTours = (props) => {
-  const PopularTours = useSelector((state) => state.tours.toursList);
-  const { Tours } = props
+  const { Tours } = props;
   const isLoading = useSelector((state) => state.tours.isLoading);
   return (
     <Container fluid className={classes.dav__popular_tours_wrapper}>

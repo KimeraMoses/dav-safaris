@@ -116,7 +116,11 @@ const App = (props) => {
             <Route path="/change-password" exact element={<ChangePassword />} />
             <Route path="/contact-us" exact element={<ContactUs />} />
             <Route path="/about-us" exact element={<AboutUs />} />
-            <Route path="/community" exact element={<CommunityPage />} />
+            <Route
+              path="/community-support"
+              exact
+              element={<CommunityPage />}
+            />
             <Route path="/terms-of-services" exact element={<Terms />} />
             <Route path="/privacy-policies" exact element={<Policies />} />
             <Route path="/tours" exact element={<Tours />} />

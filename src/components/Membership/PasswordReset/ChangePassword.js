@@ -7,7 +7,6 @@ import {
   InputAdornment,
   InputLabel,
   Paper,
-  TextField,
   Button,
 } from "@material-ui/core";
 import { Col, Container, Row } from "react-bootstrap";
@@ -38,7 +37,6 @@ const ChangePassword = () => {
                 className={`col-xs-12 col-sm-6 ${classes.dav__membership_form}`}
               >
                 <form>
-          
                   <FormControl
                     className={classes.gpa__form_input_field}
                     variant="filled"
@@ -69,7 +67,9 @@ const ChangePassword = () => {
                     size="small"
                     fullWidth
                   >
-                    <InputLabel htmlFor="password">Comfirm New Password</InputLabel>
+                    <InputLabel htmlFor="password">
+                      Comfirm New Password
+                    </InputLabel>
                     <FilledInput
                       type={password ? "text" : "password"}
                       name="password"

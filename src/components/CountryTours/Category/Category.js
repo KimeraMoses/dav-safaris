@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import {
   TourCategories_Kenya,
@@ -9,7 +9,6 @@ import {
 } from "../../../containers/Countries/TourCategories";
 import { fetchAllCountryTours } from "../../../store/Actions/TourActions";
 import classes from "../CountrySingle.module.css";
-import CountryTours from "../CountryTours";
 import PopularTours from "../../HomePage/PopularTours/PopularTours";
 import SectionTitle from "../../HomePage/SectionTitle/SectionTitle";
 
@@ -21,6 +20,8 @@ const Category = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchAllCountryTours(currentCountry));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCountry]);
 
   const SelectedCategory = TourCategories_Uganda.concat(
@@ -29,9 +30,9 @@ const Category = () => {
     TourCategories_Tanzania
   ).filter(
     (category) => category.value.toLowerCase() === tourCategory.toLowerCase()
-  )[0];  
-  const FilteredTours = Tours.filter((tour)=>tour.category === tourCategory )
-  
+  )[0];
+  const FilteredTours = Tours.filter((tour) => tour.category === tourCategory);
+
   return (
     <div className={classes.dav__country_single_wrapper}>
       <div

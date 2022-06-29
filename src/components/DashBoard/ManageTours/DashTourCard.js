@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 //===MUI IMPORTS===
 import {
@@ -10,17 +9,14 @@ import {
   ListItemAvatar,
   ListItemSecondaryAction,
   ListItemText,
-  Paper,
   Tooltip,
 } from "@material-ui/core";
 
 //===BOOTSTRAP IMPORTS===
-import { Col } from "react-bootstrap";
-import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 //===COMPONENT IMPORTS===
 import classes from "./DashTourCard.module.css";
-import { DeleteOutlined, EditOutlined } from "@material-ui/icons";
+import { DeleteOutlined } from "@material-ui/icons";
 
 const DashTourCard = (props) => {
   const { onEditClick, Tour, onDeleteClick } = props;
@@ -41,7 +37,6 @@ const DashTourCard = (props) => {
             variant="square"
             src={Tour.imageCover}
           />
-            
         </Badge>
       </ListItemAvatar>
       <ListItemText

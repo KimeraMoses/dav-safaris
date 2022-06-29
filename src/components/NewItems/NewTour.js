@@ -91,28 +91,19 @@ const NewTour = (props) => {
 
   //====FORMATING THE TOUR HIGHLIGHTS====//
   let tourActivities = [];
-  {
-    values.tourActivities &&
-      values.tourActivities.split("\n").map((item, index) => {
-        tourActivities.push(item);
-      });
-  }
+
+  values.tourActivities &&
+    values.tourActivities.split("\n").map((item) => tourActivities.push(item));
 
   //====FORMATING THE PRICE INCLUDES AND EXCLUDES====//
   let priceIncludes = [];
   let priceExcludes = [];
-  {
-    values.includes &&
-      values.includes.split("\n").map((item, index) => {
-        priceIncludes.push(item);
-      });
-  }
-  {
-    values.excludes &&
-      values.excludes.split("\n").map((item, index) => {
-        priceExcludes.push(item);
-      });
-  }
+
+  values.includes &&
+    values.includes.split("\n").map((item) => priceIncludes.push(item));
+
+  values.excludes &&
+    values.excludes.split("\n").map((item) => priceExcludes.push(item));
 
   const packageDetails = {
     price_inludes: priceIncludes,

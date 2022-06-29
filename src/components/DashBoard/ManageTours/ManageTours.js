@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
-import { itinaries } from "../../Tours/SingleTour/SingleTour";
 import DashTourCard from "./DashTourCard";
-import tourImage from "../../../assets/Image3.jpg";
 import classes from "./ManageTours.module.css";
 import { List } from "@material-ui/core";
 import TourFilters from "./TourFilters";
@@ -26,11 +24,13 @@ const ManageTours = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAllTours());
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   let FilteredTours = TourList;
-  const onAddNewClick =()=>{
-    setAddNew(true)
-  }
+  // const onAddNewClick =()=>{
+  //   setAddNew(true)
+  // }
   const onEditClick = (tourId) => {
     setIsEdit(true);
     dispatch(fetchTourDetails(tourId));
@@ -40,22 +40,21 @@ const ManageTours = () => {
     dispatch(fetchAllTours());
   };
 
-
   if (country === "Filter by country") {
     FilteredTours = TourList;
   } else {
     FilteredTours = TourList.filter((tour) => tour.country === country);
   }
-  
+
   const SearchHandler = (e) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     setSearchTerm(value);
 
     if (searchTerm !== "") {
       const Results = FilteredTours.filter((Result) => {
         return Object.values(Result)
           .join(" ")
-          .replaceAll('-',' ')
+          .replaceAll("-", " ")
           .toLowerCase()
           .includes(searchTerm.toLowerCase());
       });
@@ -68,11 +67,14 @@ const ManageTours = () => {
     setSearchResults([]);
   }, [country]);
 
+  const isSearching = searchTerm.length < 1 ? true : false;
   useEffect(() => {
     setSearchResults([]);
-  }, [searchTerm.length < 1]);
+  }, [isSearching]);
 
-  const RenderedList = (searchResults.length > 0 ? searchResults : FilteredTours).map((tour) => {
+  const RenderedList = (
+    searchResults.length > 0 ? searchResults : FilteredTours
+  ).map((tour) => {
     return (
       <Col
         lg={6}

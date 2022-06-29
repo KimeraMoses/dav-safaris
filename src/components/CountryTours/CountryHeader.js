@@ -1,15 +1,10 @@
 import React from "react";
-import { useParams } from "react-router";
 import classes from "./CountryHeader.module.css";
-import CatImg from "../../assets/image-1.jpg";
-import BirdImg from "../../assets/Image18.jpg";
-import CultureImg from "../../assets/Culture.jpg";
-import MountImg from "../../assets/Mountains.jpg";
+
 import { Link } from "react-router-dom";
 
 const CountryHeader = (props) => {
-  const { countryLink } = useParams();
-  const { Country, } = props;
+  const { Country } = props;
   return (
     <div className={classes.dav__country_header_section}>
       <div className={classes.dav__section__hdr}>
@@ -28,7 +23,7 @@ const CountryHeader = (props) => {
                 to={`/${Country.slug}/${category.value}`}
                 className={classes.dav__category_card}
               >
-                <img src={category.image} />
+                <img src={category.image} alt={category.name} />
                 <h5>{category.name}</h5>
               </Link>
             );
