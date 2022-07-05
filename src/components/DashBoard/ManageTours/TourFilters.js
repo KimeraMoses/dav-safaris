@@ -20,50 +20,60 @@ const TourFilters = (props) => {
 
   return (
     <div className={classes.dav__tour_filters_wrapper}>
-      <div className={classes.dav__tour_filter_item_wrapper}>
-        <span className={classes.dav__add_new_tour_icon}>
-          {addNew ? (
-            <BackIcon onClick={() => setAddNew(false)} />
-          ) : (
-            <div onClick={() => setAddNew(true)}>
-              <AddIcon />
-              <Hidden xsDown>Add new</Hidden>
-            </div>
-          )}
-        </span>
+      {addNew ? (
+        <div className={classes.back_btn} onClick={() => setAddNew(false)}>
+          <div
+            onClick={() => setAddNew(false)}
+            className={classes.back_btn_wrapper}
+          >
+            <BackIcon />
+            Back
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className={classes.dav__tour_filter_item_wrapper}>
+            <span className={classes.dav__add_new_tour_icon}>
+              <div onClick={() => setAddNew(true)}>
+                <AddIcon />
+                <Hidden xsDown>Add new</Hidden>
+              </div>
+            </span>
 
-        <div className={classes.dav__country_dropdown_wrapper}>
-          <Dropdown selected={Country} setSelected={setCountry} />
-        </div>
-      </div>
-      <div className={classes.dav__tour_filter_item_wrapper}>
-        <div className={classes.dav__tour_search_wrapper}>
-          <TextField
-            label="Search tours..."
-            type="search"
-            name="search"
-            autoComplete="off"
-            value={searchTerm}
-            className={classes.gpa__dashboard_search_field}
-            fullWidth
-            variant="filled"
-            size="small"
-            onChange={SearchHandler}
-          />
-        </div>
-        <Fab
-          size="small"
-          disabled={isLoading}
-          color="primary"
-          className={classes.dav__refresh_icon_wrapper}
-          onClick={RefreshHandler}
-        >
-          <RefreshIcon
-            fontSize="small"
-            className={`${isLoading ? classes.gpa__refreshing_icon : ""}`}
-          />
-        </Fab>
-      </div>
+            <div className={classes.dav__country_dropdown_wrapper}>
+              <Dropdown selected={Country} setSelected={setCountry} />
+            </div>
+          </div>
+          <div className={classes.dav__tour_filter_item_wrapper}>
+            <div className={classes.dav__tour_search_wrapper}>
+              <TextField
+                label="Search tours..."
+                type="search"
+                name="search"
+                autoComplete="off"
+                value={searchTerm}
+                className={classes.gpa__dashboard_search_field}
+                fullWidth
+                variant="filled"
+                size="small"
+                onChange={SearchHandler}
+              />
+            </div>
+            <Fab
+              size="small"
+              disabled={isLoading}
+              color="primary"
+              className={classes.dav__refresh_icon_wrapper}
+              onClick={RefreshHandler}
+            >
+              <RefreshIcon
+                fontSize="small"
+                className={`${isLoading ? classes.gpa__refreshing_icon : ""}`}
+              />
+            </Fab>
+          </div>
+        </>
+      )}
     </div>
   );
 };

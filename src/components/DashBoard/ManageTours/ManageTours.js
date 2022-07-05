@@ -7,19 +7,22 @@ import TourFilters from "./TourFilters";
 import NewTour from "../../NewItems/NewTour";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import {
-  DeleteTour,
-  fetchAllTours,
-  fetchTourDetails,
-} from "../../../store/Actions/TourActions";
+import { fetchAllTours } from "../../../store/Actions/TourActions";
+import EditTour from "../../NewItems/EditTour";
+import { useNavigate } from "react-router";
+import DeleteTourModal from "./Itinary/DeleteTour";
 
 const ManageTours = () => {
   const isLoading = useSelector((state) => state.tour.isLoading);
+
   const TourList = useSelector((state) => state.tours.toursList);
   const [country, setCountry] = useState("Filter by country");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [selectedTour, setSelectedTour] = useState("");
   const [addNew, setAddNew] = useState(false);
+  const [open, setOpen] = useState(false);
+  const Navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -31,13 +34,15 @@ const ManageTours = () => {
   // const onAddNewClick =()=>{
   //   setAddNew(true)
   // }
+
   const onEditClick = (tourId) => {
     setIsEdit(true);
-    dispatch(fetchTourDetails(tourId));
+    Navigate(`/dashboard/manage-tours/edit?tour=${tourId}`);
+    // dispatch(fetchTourDetails(tourId));
   };
   const onDeleteClick = (tourId) => {
-    dispatch(DeleteTour(tourId));
-    dispatch(fetchAllTours());
+    setOpen(true);
+    setSelectedTour(tourId);
   };
 
   if (country === "Filter by country") {
@@ -113,9 +118,17 @@ const ManageTours = () => {
             <NewTour isEdit={isEdit} setIsEdit={setIsEdit} />
           )}
         </div>
+      ) : isEdit ? (
+        <EditTour isEdit={isEdit} setIsEdit={setIsEdit} />
       ) : (
         <Row>{RenderedList}</Row>
       )}
+      <DeleteTourModal
+        open={open}
+        setOpen={setOpen}
+        tourId={selectedTour}
+        setSearchTerm={setSearchTerm}
+      />
     </Container>
   );
 };

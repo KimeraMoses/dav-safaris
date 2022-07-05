@@ -89,6 +89,7 @@ export const fetchTourDetails = (tour_id) => async (dispatch) => {
     const response = await fetch(`${baseUrl}/api/v1/tours/${tour_id}`);
     const fetchedTour = await response.json();
     dispatch(fetchTourSuccess(fetchedTour.tour));
+    console.log(fetchedTour);
   } catch (error) {
     dispatch(fetchTourFail(error.message));
   }

@@ -34,6 +34,7 @@ const SingleTour = () => {
     dispatch(fetchTourName(tourTitle));
   }, [tourTitle, dispatch]);
   const Tour = useSelector((state) => state.tour.tourDetails);
+  console.log(Tour);
 
   return (
     <div className={classes.dav__single_tour_page_wrapper}>
@@ -60,45 +61,51 @@ const SingleTour = () => {
             </ul>
           </div>
 
-          <div className={classes.dav__single_tour_package_wrapper}>
-            <PriceQuote
-              type="includes"
-              Items={
-                Tour && Tour.packageDetails && Tour.packageDetails.price_inludes
-              }
-            />
-            <PriceQuote
-              type="excludes"
-              Items={
-                Tour &&
-                Tour.packageDetails &&
-                Tour.packageDetails.price_excludes
-              }
-            />
-          </div>
-
-          <div className={classes.dav__intinary_details} id="itinerary">
-            <div className={classes.dav__itinary_header}>
-              <h2>Itinary in details</h2>
+          {Tour?.packageDetails?.price_excludes.length &&
+          Tour?.packageDetails?.price_inludes.length ? (
+            <div className={classes.dav__single_tour_package_wrapper}>
+              <PriceQuote
+                type="includes"
+                Items={
+                  Tour &&
+                  Tour.packageDetails &&
+                  Tour.packageDetails.price_inludes
+                }
+              />
+              <PriceQuote
+                type="excludes"
+                Items={
+                  Tour &&
+                  Tour.packageDetails &&
+                  Tour.packageDetails.price_excludes
+                }
+              />
             </div>
+          ) : null}
+          {Tour?.dayActivityDescription?.length ? (
+            <div className={classes.dav__intinary_details} id="itinerary">
+              <div className={classes.dav__itinary_header}>
+                <h2>Itinary in details</h2>
+              </div>
 
-            <ul className={classes.dav__intinary_list_wrapper}>
-              {Tour &&
-                Tour.dayActivityDescription &&
-                Tour.dayActivityDescription.map((itinary, index) => {
-                  return (
-                    <Itinary
-                      key={index}
-                      day={itinary.day}
-                      itinTitle={itinary.title}
-                      itinDescription={itinary.description}
-                      meal_plan={itinary.meal_plan}
-                      accomodation={itinary.accomodation}
-                    />
-                  );
-                })}
-            </ul>
-          </div>
+              <ul className={classes.dav__intinary_list_wrapper}>
+                {Tour &&
+                  Tour.dayActivityDescription &&
+                  Tour.dayActivityDescription.map((itinary, index) => {
+                    return (
+                      <Itinary
+                        key={index}
+                        day={itinary.day}
+                        itinTitle={itinary.title}
+                        itinDescription={itinary.description}
+                        meal_plan={itinary.meal_plan}
+                        accomodation={itinary.accomodation}
+                      />
+                    );
+                  })}
+              </ul>
+            </div>
+          ) : null}
         </div>
         <div className={classes.dav__tour_bookings_section}>
           <BookingForm />

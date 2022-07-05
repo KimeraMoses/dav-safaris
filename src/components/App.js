@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Paper } from "@material-ui/core";
 
 //===REDUX STORE IMPORTS===
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //===COMPONENT IMPORTS===
 import Home from "./HomePage/Home";
@@ -46,6 +48,7 @@ import { Helmet } from "react-helmet";
 import ReactGA from "react-ga";
 import { TRACKING_ID } from "../store";
 import CommunityPage from "./CommunityPage/CommunityPage";
+import EditTours from "./DashBoard/ManageTours/EditTours";
 
 const App = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -75,6 +78,7 @@ const App = (props) => {
       </Helmet>
       <Router>
         <Paper elevation={0} square>
+          <ToastContainer />
           <AppBar />
           <Routes>
             <Route path="/" exact element={<Home />} />
@@ -86,6 +90,7 @@ const App = (props) => {
             >
               <Route path="user" element={<DashBoardItem />} />
               <Route path="manage-tours" element={<ManageTours />} />
+              <Route path="manage-tours/edit" element={<EditTours />} />
               <Route path="manage-safari-updates" element={<ManageUpdates />} />
               <Route
                 path="manage-bookings"

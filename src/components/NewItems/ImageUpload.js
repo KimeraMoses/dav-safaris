@@ -13,18 +13,20 @@ const ImageUpload = ({ tourImageHandler, tourImage, Image, isPost }) => {
       className={classes.dav__cover_image}
       onClick={TourImageHandler}
       style={{
-        backgroundImage: `url(${tourImage.length > 0 ? tourImage : Image})`,
+        backgroundImage: `url(${tourImage?.length > 0 ? tourImage : ""})`,
         backgroundSize: "cover",
         backgroundPosition: "center center",
         backgroundRepeat: "no-repeat",
       }}
     >
       <div
-        className={tourImage.length > 0 ? classes.dav__cover_image_content : ""}
+        className={
+          tourImage?.length > 0 ? classes.dav__cover_image_content : ""
+        }
       >
         <UploadIcon />
         <p>
-          {tourImage.length > 0
+          {tourImage?.length > 0
             ? `Change ${isPost ? "post" : "tour"} cover image`
             : `Upload ${isPost ? "post" : "tour"} cover image`}
         </p>

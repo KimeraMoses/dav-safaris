@@ -7,12 +7,6 @@ const Itinary = (props) => {
   const [show, setShow] = useState(false);
   const { day, itinTitle, itinDescription, meal_plan, accomodation } = props;
 
-  // console.log(day,day.length)
-  // let NewDay = day;
-  // if(day.length>2){
-  //   NewDay = day.split('-')
-  // }
-  // console.log(day, NewDay + NewDay[1].sup())
   return (
     <li className={classes.dav__itinary_day}>
       <div className={classes.itinary_day__icon}>
@@ -24,7 +18,13 @@ const Itinary = (props) => {
           className={classes.dav__itinary_title_wrapper}
           onClick={() => setShow(!show)}
         >
-          <div className={`${classes.dav__itinary_title} ${show? classes.dav__itinary_expanded: ''}`}>{itinTitle}</div>
+          <div
+            className={`${classes.dav__itinary_title} ${
+              show ? classes.dav__itinary_expanded : ""
+            }`}
+          >
+            {itinTitle}
+          </div>
           <div className={classes.dav__itinary_expand_icon}>
             {show ? <LessIcon /> : <MoreIcon />}
           </div>

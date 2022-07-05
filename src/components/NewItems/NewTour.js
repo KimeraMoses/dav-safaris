@@ -33,6 +33,7 @@ import {
   TourCategories_Uganda,
 } from "../../containers/Countries/TourCategories";
 import { AddDays } from "../../store/Slices/newTourSlice";
+import EditItinaryModal from "../DashBoard/ManageTours/Itinary/EditItinary";
 
 let dayActivityDescription = [];
 
@@ -44,6 +45,12 @@ const NewTour = (props) => {
   const isLoading = useSelector((state) => state.newTour.isLoading);
   const Tour = useSelector((state) => state.tour.tourDetails);
   const { isEdit } = props;
+
+  const [open, setOpen] = useState(false);
+  const [Itinary, setItinary] = useState({});
+  const [EditedItinary, setEditedItinary] = useState("");
+  const [type, setType] = useState("Edit");
+
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -221,6 +228,20 @@ const NewTour = (props) => {
     } catch (error) {
       setError("Tour Registration Failed");
     }
+  };
+
+  const onEditClick = (id) => {
+    setType("Edit");
+    const Activity = dayActivityDescription[id];
+
+    setItinary(Activity);
+    setEditedItinary(id);
+    setOpen(true);
+  };
+  const onDeleteClick = (id) => {
+    setType("Delete");
+    setOpen(true);
+    setEditedItinary(id);
   };
 
   return (
@@ -405,13 +426,21 @@ const NewTour = (props) => {
                 </div>
               </div>
               <NewItinary
+                // values={values}
+                // setValues={setValues}
+                // ItinaryHandler={ItinaryHandler}
+                // dayActivity={dayActivityDescription}
+                // days={values.duration}
+                // onEditClick={onEditClick}
+                // isEdit={isEdit}
                 values={values}
                 setValues={setValues}
                 ItinaryHandler={ItinaryHandler}
                 dayActivity={dayActivityDescription}
                 days={values.duration}
-                // onEditClick={onEditClick}
-                // isEdit={isEdit}
+                onEditClick={onEditClick}
+                isEdit={false}
+                onDeleteClick={onDeleteClick}
               />
 
               <Row>
@@ -442,6 +471,14 @@ const NewTour = (props) => {
             </Form>
           </div>
         </Paper>
+        <EditItinaryModal
+          type={type}
+          open={open}
+          setOpen={setOpen}
+          data={Itinary}
+          EditedItinary={EditedItinary}
+          dayActivityDescription={dayActivityDescription}
+        />
       </section>
     </Container>
   );

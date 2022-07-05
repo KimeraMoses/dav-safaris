@@ -46,7 +46,7 @@ const EditTour = (props) => {
   const isLoading = useSelector((state) => state.newTour.isLoading);
   const Tour = useSelector((state) => state.tour.tourDetails);
   const DayActivities = useSelector((state) => state.newTour.days);
-  const { isEdit,setIsEdit } = props;
+  const { isEdit, setIsEdit } = props;
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -54,6 +54,8 @@ const EditTour = (props) => {
   const [category, setCategory] = useState([]);
   const [itinaries, setItinaries] = useState([]);
   const [TourCategories, setTourCategories] = useState([]);
+
+  console.log(Tour);
 
   let tourHighLights = "";
   Tour &&
@@ -274,7 +276,7 @@ const EditTour = (props) => {
       tourActivities = [];
       priceIncludes = [];
       priceExcludes = [];
-      setIsEdit(false)
+      setIsEdit(false);
     } catch (error) {
       setError("Tour Registration Failed");
     }
@@ -284,8 +286,8 @@ const EditTour = (props) => {
   const onEditClick = (id) => {
     console.log("id", id);
     // filteredItinaries = Tour.dayActivityDescription.filter((item, index) => id !== index);
-    const Activity  = Tour.dayActivityDescription[id];
-  
+    const Activity = Tour.dayActivityDescription[id];
+
     console.log("Inside", filteredItinaries);
   };
 
@@ -297,7 +299,7 @@ const EditTour = (props) => {
             DarkMode ? styles.gpa__dark_mode : ""
           }`}
         >
-          Create New Tour
+          Edit Tour
         </h1>
         <Paper
           className={`${styles.gpa__register_wrapper} ${styles.gpa__register_wrapper_register_new}`}

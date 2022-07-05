@@ -16,3 +16,22 @@
 .dav__new_itinary_wrapper .dav__message_count_wrapper{
     float: right;
 }
+.dav_itinary_title_wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.dav__add_new_tour_icon {
+    /* background-color: var(--dav__primary_color);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px; */
+    margin-bottom: 5px;
+    margin-left: 10px;
+    /* color: #fff;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
+  }

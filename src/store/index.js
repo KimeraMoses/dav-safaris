@@ -35,3 +35,13 @@ export default store;
 export const baseUrl = "https://davsafaris-v2.herokuapp.com";
 // export const TRACKING_ID = "G-LJDPXC1D4T";
 export const TRACKING_ID = "UA-221371729-1";
+
+export const messageNotifications = {
+  position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+};

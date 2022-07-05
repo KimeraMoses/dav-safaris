@@ -1,9 +1,10 @@
-import { Button, List, TextField } from "@material-ui/core";
-import React from "react";
+import { Button, Fab, List, TextField } from "@material-ui/core";
+import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import styles from "./NewTour.module.css";
 import classes from "./NewItinary.module.css";
 import Itinary from "./Itinary";
+import AddIcon from "@material-ui/icons/Add";
 
 const NewItinary = (props) => {
   const {
@@ -13,8 +14,11 @@ const NewItinary = (props) => {
     dayActivity,
     days,
     onEditClick,
+    onDeleteClick,
     isEdit,
   } = props;
+
+  const [show, setShow] = useState(isEdit ? false : true);
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -22,13 +26,26 @@ const NewItinary = (props) => {
   };
   return (
     <div className={classes.dav__new_itinary_wrapper}>
-      <h5>
-        Itinaries
-        {dayActivity && dayActivity.length > 0
-          ? `(${dayActivity && dayActivity.length})`
-          : ""}
-      </h5>
+      <div className={classes.dav_itinary_title_wrapper}>
+        <h5>
+          Itinaries
+          {dayActivity && dayActivity.length > 0
+            ? `(${dayActivity && dayActivity.length})`
+            : ""}
+        </h5>
 
+        {isEdit && !show && (
+          <Fab
+            size="small"
+            // disabled={isLoading}
+            color="primary"
+            className={classes.dav__add_new_tour_icon}
+            onClick={() => setShow(true)}
+          >
+            <AddIcon />
+          </Fab>
+        )}
+      </div>
       <Row>
         {dayActivity &&
           dayActivity.map((day, index) => {
@@ -50,13 +67,14 @@ const NewItinary = (props) => {
                     accomodation={day.accomodation}
                     id={index}
                     onEditClick={onEditClick}
+                    onDeleteClick={onDeleteClick}
                   />
                 </List>
               </Col>
             );
           })}
       </Row>
-      {!isEdit && (
+      {show && (
         <>
           <div className="row">
             <div className="col-xs-2 col-sm-2">

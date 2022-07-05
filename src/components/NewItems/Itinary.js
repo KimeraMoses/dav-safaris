@@ -12,17 +12,28 @@ import EditIcon from "@material-ui/icons/Edit";
 import React from "react";
 import classes from "./Itinary.module.css";
 
-const Itinary = ({ id,day, title, description, meal_plan, accomodation,onEditClick }) => {
+const Itinary = ({
+  id,
+  day,
+  title,
+  description,
+  meal_plan,
+  accomodation,
+  onEditClick,
+  onDeleteClick,
+}) => {
   return (
     <ListItem className={classes.dav__itinary_card}>
       <ListItemAvatar>
-        <Avatar
-          className={classes.dav__itinary_day}
-        >
-          {day? day: id+1}
+        <Avatar className={classes.dav__itinary_day}>
+          {day ? day : id + 1}
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary={title} secondary={description}  className={classes.dav__tour_texts} />
+      <ListItemText
+        primary={title}
+        secondary={description}
+        className={classes.dav__tour_texts}
+      />
       <ListItemSecondaryAction>
         <Tooltip title="Edit" placement="left">
           <IconButton
@@ -37,7 +48,7 @@ const Itinary = ({ id,day, title, description, meal_plan, accomodation,onEditCli
           <IconButton
             edge="end"
             aria-label="delete"
-            onClick={() => onEditClick(id)}
+            onClick={() => onDeleteClick(id)}
           >
             <DeleteOutlined fontSize="small" />
           </IconButton>
