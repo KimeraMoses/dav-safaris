@@ -132,7 +132,8 @@ export const creatNewTour = (
   file,
   packageDetails,
   category,
-  country
+  country,
+  key_words
 ) => {
   return async (dispatch) => {
     dispatch(NewTourPending());
@@ -147,6 +148,7 @@ export const creatNewTour = (
     data.append("price", price);
     data.append("duration", duration);
     data.append("dayActivityDescription", dayActivityDescription);
+    data.append("key_words", key_words);
     const response = await fetch(`${baseUrl}/api/v1/tours/create`, {
       method: "POST",
       body: data,
@@ -174,10 +176,12 @@ export const editTourDetails = (
   packageDetails,
   category,
   country,
+  key_words,
   tourId
 ) => {
   return async (dispatch) => {
     dispatch(EditTourPending());
+    console.log(key_words);
     const data = new FormData();
     data.append("file", file);
     data.append("category", category);
@@ -189,6 +193,7 @@ export const editTourDetails = (
     data.append("price", price);
     data.append("duration", duration);
     data.append("dayActivityDescription", dayActivityDescription);
+    data.append("key_words", key_words);
 
     const response = await fetch(
       `${baseUrl}/api/v1/tours/updateTour/${tourId}`,

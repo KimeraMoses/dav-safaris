@@ -17,8 +17,8 @@ const Itinary = ({
   day,
   title,
   description,
-  meal_plan,
-  accomodation,
+  // meal_plan,
+  // accomodation,
   onEditClick,
   onDeleteClick,
 }) => {

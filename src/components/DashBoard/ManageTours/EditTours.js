@@ -43,6 +43,7 @@ import { baseUrl } from "../../../store";
 import EditItinaryModal from "./Itinary/EditItinary";
 import { Link } from "react-router-dom";
 import Loader from "../../../containers/Loader/Loader";
+import NewKeyWord from "./Keywords/NewKeyWord";
 
 let dayActivityDescription = [];
 
@@ -52,6 +53,7 @@ const EditTour = (props) => {
   const isFetching = useSelector((state) => state.tour.isLoading);
   const [isLoading, setIsLoading] = useState(false);
   const [Tour, setTour] = useState({});
+  const [keys, setKeys] = useState([]);
   const [open, setOpen] = useState(false);
   const [Itinary, setItinary] = useState({});
   const [EditedItinary, setEditedItinary] = useState("");
@@ -78,6 +80,7 @@ const EditTour = (props) => {
       dispatch(fetchTourFail(error.message));
     }
   };
+  console.log(Tour);
 
   //====GET THE SELECTED DOCUMENT CATEGORY====//
   function useQuery() {
@@ -267,6 +270,7 @@ const EditTour = (props) => {
           JSON.stringify(packageDetails),
           values.category,
           values.country,
+          JSON.stringify(keys),
           Tour.id
         )
       );
@@ -518,6 +522,12 @@ const EditTour = (props) => {
                   onEditClick={onEditClick}
                   isEdit={true}
                   onDeleteClick={onDeleteClick}
+                />
+
+                <NewKeyWord
+                  setKeys={setKeys}
+                  keys={keys}
+                  key_words={Tour && Tour.key_words}
                 />
 
                 <Row>

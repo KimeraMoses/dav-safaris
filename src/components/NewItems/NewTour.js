@@ -34,19 +34,18 @@ import {
 } from "../../containers/Countries/TourCategories";
 import { AddDays } from "../../store/Slices/newTourSlice";
 import EditItinaryModal from "../DashBoard/ManageTours/Itinary/EditItinary";
+import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
 
 let dayActivityDescription = [];
 
 // console.log("Outside", dayActivityDescription);
 
-const NewTour = (props) => {
+const NewTour = () => {
   const DarkMode = false;
-  const isEditing = useSelector((state) => state.editTour.isLoading);
   const isLoading = useSelector((state) => state.newTour.isLoading);
   const Tour = useSelector((state) => state.tour.tourDetails);
-  const { isEdit } = props;
-
   const [open, setOpen] = useState(false);
+  const [keys, setKeys] = useState([]);
   const [Itinary, setItinary] = useState({});
   const [EditedItinary, setEditedItinary] = useState("");
   const [type, setType] = useState("Edit");
@@ -179,7 +178,7 @@ const NewTour = (props) => {
       return setError("Tour price is required");
     }
 
-    if (!isEdit && values.selectedImage.length < 1) {
+    if (values.selectedImage.length < 1) {
       return setError("Tour cover image required");
     }
     if (values.description.length < 1) {
@@ -187,6 +186,7 @@ const NewTour = (props) => {
     }
 
     try {
+      console.log("Submited", JSON.stringify(keys));
       await dispatch(
         creatNewTour(
           values.name,
@@ -198,7 +198,8 @@ const NewTour = (props) => {
           values.selectedImage,
           JSON.stringify(packageDetails),
           values.category,
-          values.country
+          values.country,
+          JSON.stringify(keys)
         )
       );
       setMessage(`${values.name} Created Successfully`);
@@ -426,13 +427,6 @@ const NewTour = (props) => {
                 </div>
               </div>
               <NewItinary
-                // values={values}
-                // setValues={setValues}
-                // ItinaryHandler={ItinaryHandler}
-                // dayActivity={dayActivityDescription}
-                // days={values.duration}
-                // onEditClick={onEditClick}
-                // isEdit={isEdit}
                 values={values}
                 setValues={setValues}
                 ItinaryHandler={ItinaryHandler}
@@ -442,6 +436,7 @@ const NewTour = (props) => {
                 isEdit={false}
                 onDeleteClick={onDeleteClick}
               />
+              <NewKeyWord setKeys={setKeys} keys={keys} key_words={[]} />
 
               <Row>
                 <Col xs={{ span: 8, offset: 2 }}>
@@ -451,14 +446,8 @@ const NewTour = (props) => {
                     type="submit"
                     className={styles.gpa__register_submit_button}
                   >
-                    {isEdit
-                      ? isEditing
-                        ? "Saving changes..."
-                        : "Save changes"
-                      : isLoading
-                      ? "Creating Tour..."
-                      : "Create Tour"}
-                    {isLoading | isEditing ? (
+                    {isLoading ? "Creating Tour..." : "Create Tour"}
+                    {isLoading ? (
                       <Spinner
                         thickness={2}
                         size={20}

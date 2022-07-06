@@ -8,13 +8,14 @@ import NewTour from "../../NewItems/NewTour";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchAllTours } from "../../../store/Actions/TourActions";
-import EditTour from "../../NewItems/EditTour";
 import { useNavigate } from "react-router";
 import DeleteTourModal from "./Itinary/DeleteTour";
+import Loader from "../../../containers/Loader/Loader";
 
 const ManageTours = () => {
   const isLoading = useSelector((state) => state.tour.isLoading);
 
+  const isFetching = useSelector((state) => state.tours.isLoading);
   const TourList = useSelector((state) => state.tours.toursList);
   const [country, setCountry] = useState("Filter by country");
   const [searchTerm, setSearchTerm] = useState("");
@@ -38,7 +39,6 @@ const ManageTours = () => {
   const onEditClick = (tourId) => {
     setIsEdit(true);
     Navigate(`/dashboard/manage-tours/edit?tour=${tourId}`);
-    // dispatch(fetchTourDetails(tourId));
   };
   const onDeleteClick = (tourId) => {
     setOpen(true);
@@ -118,10 +118,8 @@ const ManageTours = () => {
             <NewTour isEdit={isEdit} setIsEdit={setIsEdit} />
           )}
         </div>
-      ) : isEdit ? (
-        <EditTour isEdit={isEdit} setIsEdit={setIsEdit} />
       ) : (
-        <Row>{RenderedList}</Row>
+        <Row>{isFetching ? <Loader /> : RenderedList}</Row>
       )}
       <DeleteTourModal
         open={open}

@@ -1,37 +1,38 @@
-.dav__new_itinary_wrapper{
-    padding: 12px;
-    background-color: #f5f5f5;
+.dav__new_itinary_wrapper {
+  padding: 12px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
 }
-.dav__new_itinary_wrapper h5{
-    text-align: left;
-    font-family: "Merriweather", serif;
-    font-style: italic;
-    color: #343434;
-    font-weight: 600;
-    text-transform: capitalize;
+.dav__new_itinary_wrapper h5 {
+  text-align: left;
+  font-family: "Merriweather", serif;
+  font-style: italic;
+  color: #343434;
+  font-weight: 600;
+  text-transform: capitalize;
 }
-.dav__itinary_submit_button_wrapper{
-    align-items: center;
+.dav__itinary_submit_button_wrapper {
+  align-items: center;
 }
-.dav__new_itinary_wrapper .dav__message_count_wrapper{
-    float: right;
+.dav__new_itinary_wrapper .dav__message_count_wrapper {
+  float: right;
 }
-.dav_itinary_title_wrapper{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.dav_itinary_title_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .dav__add_new_tour_icon {
-    /* background-color: var(--dav__primary_color);
+  /* background-color: var(--dav__primary_color);
     border-radius: 50%;
     width: 28px;
     height: 28px; */
-    margin-bottom: 5px;
-    margin-left: 10px;
-    /* color: #fff;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  /* color: #fff;
     cursor: pointer;
     user-select: none;
     display: flex;
     align-items: center;
     justify-content: center; */
-  }
+}
