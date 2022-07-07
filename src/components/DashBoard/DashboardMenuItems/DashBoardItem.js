@@ -21,7 +21,7 @@ const DashBoardItem = () => {
 
   return (
     <div className={classes.dav__dashboard_menu_item_wrapper}>
-      <Avatar variant="circle" className={classes.dav__user_avater}>
+      <Avatar variant="circular" className={classes.dav__user_avater}>
         {userImage}
       </Avatar>
       Welcome to your DashBoard

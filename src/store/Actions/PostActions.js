@@ -1,5 +1,8 @@
 import { baseUrl } from "..";
 import {
+  deletePostFail,
+  deletePostPending,
+  deletePostSuccess,
   EditPostFail,
   EditPostPending,
   EditPostSuccess,
@@ -42,6 +45,7 @@ export const creatNewPost = (
     }
     const res = await response.json();
     dispatch(NewPostSuccess(res));
+    dispatch(fetchAllPosts());
   };
 };
 //====END====//
@@ -79,6 +83,21 @@ export const editPostDetails = (
     const res = await response.json();
     dispatch(EditPostSuccess(res));
   };
+};
+//====END====//
+
+//====DELETE TOUR FROM DB====//
+export const DeletePost = (postId) => async (dispatch) => {
+  dispatch(deletePostPending());
+  try {
+    await fetch(`${baseUrl}/api/v1/posts/deletePost/${postId}`, {
+      method: "DELETE",
+    });
+    // const Post = await response.json();
+    dispatch(deletePostSuccess({ message: "deleted", status: "success" }));
+  } catch (error) {
+    dispatch(deletePostFail(error));
+  }
 };
 //====END====//
 

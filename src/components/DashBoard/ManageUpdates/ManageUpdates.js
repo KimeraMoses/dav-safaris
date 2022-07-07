@@ -8,6 +8,7 @@ import { fetchAllPosts } from "../../../store/Actions/PostActions";
 import TourFilters from "../ManageTours/TourFilters";
 import UpdateCard from "../../SafariUpdates/UpdateCard";
 import Loader from "../../../containers/Loader/Loader";
+import DeleteModal from "../ManageTours/Itinary/DeleteModal";
 
 const ManageUpdates = () => {
   const isLoading = useSelector((state) => state.post.isLoading);
@@ -15,7 +16,8 @@ const ManageUpdates = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [addNew, setAddNew] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
+  const [selectedPostId, setSelectedPostId] = useState("");
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAllPosts());
@@ -24,24 +26,6 @@ const ManageUpdates = () => {
   }, []);
 
   let FilteredPosts = PostList;
-
-  // const onAddNewClick =()=>{
-  //   setAddNew(true)
-  // }
-  // const onEditClick = (tourId) => {
-  //   setIsEdit(true);
-  //   dispatch(fetchTourDetails(tourId));
-  // };
-  //   const onDeleteClick = (tourId) => {
-  //     dispatch(DeleteTour(tourId));
-  //     dispatch(fetchAllTours());
-  //   };
-
-  //   if (country === "Filter by country") {
-  //     FilteredTours = TourList;
-  //   } else {
-  //     FilteredTours = TourList.filter((tour) => tour.country === country);
-  //   }
 
   const SearchHandler = (e) => {
     const { value } = e.target;
@@ -59,10 +43,11 @@ const ManageUpdates = () => {
     }
   };
 
-  // useEffect(() => {
-  //   setSearchTerm("");
-  //   setSearchResults([]);
-  // }, [country]);
+  const onDeleteClick = (postId) => {
+    setOpen(true);
+    setSelectedPostId(postId);
+  };
+
   const isSeaching = searchTerm.length < 1 ? false : true;
   useEffect(() => {
     setSearchResults([]);
@@ -78,7 +63,7 @@ const ManageUpdates = () => {
         sm={12}
         className={styles.dav__updates_card_wrapper}
       >
-        <UpdateCard Post={post} isAdmin={true} />
+        <UpdateCard Post={post} isAdmin={true} onDeleteClick={onDeleteClick} />
       </Col>
     );
   });
@@ -96,11 +81,18 @@ const ManageUpdates = () => {
       />
       {addNew ? (
         <div className={classes.dav__new_tour_form_wrapper}>
-          <NewPost isEdit={isEdit} setIsEdit={setIsEdit} />
+          <NewPost setAddNew={setAddNew} />
         </div>
       ) : (
         <Row>{isLoading ? <Loader /> : RenderedList}</Row>
       )}
+      <DeleteModal
+        source="post"
+        open={open}
+        setOpen={setOpen}
+        Id={selectedPostId}
+        setSearchTerm={setSearchTerm}
+      />
     </Container>
   );
 };

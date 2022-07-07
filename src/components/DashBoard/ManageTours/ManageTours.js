@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchAllTours } from "../../../store/Actions/TourActions";
 import { useNavigate } from "react-router";
-import DeleteTourModal from "./Itinary/DeleteTour";
+import DeleteModal from "./Itinary/DeleteModal";
 import Loader from "../../../containers/Loader/Loader";
 
 const ManageTours = () => {
@@ -23,8 +23,7 @@ const ManageTours = () => {
   const [selectedTour, setSelectedTour] = useState("");
   const [addNew, setAddNew] = useState(false);
   const [open, setOpen] = useState(false);
-  const Navigate = useNavigate();
-  const [isEdit, setIsEdit] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAllTours());
@@ -37,8 +36,7 @@ const ManageTours = () => {
   // }
 
   const onEditClick = (tourId) => {
-    setIsEdit(true);
-    Navigate(`/dashboard/manage-tours/edit?tour=${tourId}`);
+    navigate(`/dashboard/manage-tours/edit?tour=${tourId}`);
   };
   const onDeleteClick = (tourId) => {
     setOpen(true);
@@ -112,16 +110,13 @@ const ManageTours = () => {
       />
       {addNew ? (
         <div className={classes.dav__new_tour_form_wrapper}>
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <NewTour isEdit={isEdit} setIsEdit={setIsEdit} />
-          )}
+          {isLoading ? <Spinner /> : <NewTour setAddNew={setAddNew} />}
         </div>
       ) : (
         <Row>{isFetching ? <Loader /> : RenderedList}</Row>
       )}
-      <DeleteTourModal
+      <DeleteModal
+        source="tour"
         open={open}
         setOpen={setOpen}
         tourId={selectedTour}

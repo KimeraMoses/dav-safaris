@@ -59,6 +59,11 @@ const EditTour = (props) => {
   const [EditedItinary, setEditedItinary] = useState("");
   const [type, setType] = useState("Edit");
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");

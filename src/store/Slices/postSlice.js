@@ -4,6 +4,7 @@ const initialState = {
   posts: [],
   post: {},
   isLoading: false,
+  isDeleting: false,
   status: "",
   message: "",
 };
@@ -51,13 +52,26 @@ const postSlice = createSlice({
     },
     EditPostSuccess: (state, { payload }) => {
       state.isLoading = false;
-      state.status = payload.status;
-      state.message = payload.message;
+      state.status = payload?.status;
+      state.message = payload?.message;
     },
     EditPostFail: (state, { payload }) => {
       state.isLoading = false;
-      state.status = payload.status;
-      state.message = payload.message;
+      state.status = payload?.status;
+      state.message = payload?.message;
+    },
+    deletePostPending: (state) => {
+      state.isDeleting = true;
+    },
+    deletePostSuccess: (state, { payload }) => {
+      state.message = payload?.message;
+      state.status = payload?.status;
+      state.isDeleting = false;
+    },
+    deletePostFail: (state, { payload }) => {
+      state.status = payload?.status;
+      state.message = payload?.message;
+      state.isDeleting = false;
     },
   },
 });
@@ -77,5 +91,8 @@ export const {
   EditPostPending,
   EditPostSuccess,
   EditPostFail,
+  deletePostPending,
+  deletePostSuccess,
+  deletePostFail,
 } = actions;
 export default reducer;

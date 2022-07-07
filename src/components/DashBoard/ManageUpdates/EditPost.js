@@ -42,6 +42,11 @@ const EditPost = () => {
   const [post, setPost] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [values, setValues] = useState({
@@ -247,7 +252,7 @@ const EditPost = () => {
                     <TextField
                       className={styles.gpa__form_input_field}
                       label="Post Description"
-                      placeholder="Write each highlight on a new line"
+                      placeholder="Write each paragraph on a new line"
                       multiline
                       value={values.description}
                       name="description"

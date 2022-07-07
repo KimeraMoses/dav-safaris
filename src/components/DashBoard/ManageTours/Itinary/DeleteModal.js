@@ -10,9 +10,13 @@ import {
   DeleteTour,
   fetchAllTours,
 } from "../../../../store/Actions/TourActions";
+import {
+  DeletePost,
+  fetchAllPosts,
+} from "../../../../store/Actions/PostActions";
 
-const DeleteTourModal = (props) => {
-  const { open, setOpen, tourId, setSearchTerm } = props;
+const DeleteModal = (props) => {
+  const { open, setOpen, Id, setSearchTerm, source } = props;
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -25,22 +29,29 @@ const DeleteTourModal = (props) => {
 
   const deleteHandler = async () => {
     setLoading(true);
-    await dispatch(DeleteTour(tourId));
-    toast.success("Tour deleted Successfully");
+    if (source === "tour") {
+      await dispatch(DeleteTour(Id));
+      toast.success("Tour deleted Successfully");
+      dispatch(fetchAllTours());
+    } else {
+      await dispatch(DeletePost(Id));
+      toast.success("Post deleted Successfully");
+      dispatch(fetchAllPosts());
+    }
     setLoading(false);
     setOpen(false);
     setSearchTerm("");
-    dispatch(fetchAllTours());
   };
 
   return (
     <div>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style} className={classes.delete_itinary_model}>
-          <h1>Delete Tour</h1>
+          <h1>Delete {source === "tour" ? "Tour" : "Post"}</h1>
           <div className={classes.delete_itinary_model_content}>
-            Are you sure you wish to delete this Tour? This action will be
-            permanent and can not be undone.
+            Are you sure you wish to delete this{" "}
+            {source === "tour" ? "tour" : "post"}? This action will be permanent
+            and can not be undone.
           </div>
           <div className={classes.delete_itinary_model_actions}>
             <Button
@@ -66,4 +77,4 @@ const DeleteTourModal = (props) => {
   );
 };
 
-export default DeleteTourModal;
+export default DeleteModal;

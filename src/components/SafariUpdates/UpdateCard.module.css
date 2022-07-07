@@ -21,6 +21,18 @@
   display: flex;
   justify-content: space-between;
 }
+.admin_action_btns {
+  display: flex;
+
+  /* margin: 0 3px !important; */
+}
+.delete_icon_wrapper {
+  border: 1px solid var(--dav__primary_color);
+  color: var(--dav__primary_color);
+  margin-left: 3px;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
 @media screen and (max-width: 689px) {
   .dav__update_card_wrapper {

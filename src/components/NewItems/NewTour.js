@@ -56,6 +56,10 @@ const NewTour = () => {
   const [message, setMessage] = useState("");
   const [TourCategories, setTourCategories] = useState([]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [values, setValues] = useState({
     name: "",
     description: "",

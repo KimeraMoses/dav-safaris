@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 //===MUI IMPORTS===
@@ -13,14 +13,13 @@ import { Col, Container, Row, Form } from "react-bootstrap";
 
 //===COMPONENT IMPORTS===
 import styles from "./NewTour.module.css";
-import { useNavigate } from "react-router";
 import EditPostModal from "../DashBoard/ManageUpdates/EditPostModel";
 import { creatNewPost } from "../../store/Actions/PostActions";
 import PostBlock from "./PostBlock";
 import ImageUpload from "./ImageUpload";
 import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
 
-const NewPost = () => {
+const NewPost = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedPost, setSelectedPost] = useState({});
   const [open, setOpen] = useState(false);
@@ -28,8 +27,12 @@ const NewPost = () => {
   const [keys, setKeys] = useState([]);
   const [EditedPostId, setEditedPostId] = useState("");
   const [type, setType] = useState("Edit");
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [values, setValues] = useState({
@@ -40,7 +43,7 @@ const NewPost = () => {
     blockTitle: "",
     blockDesc: "",
   });
-
+  const { setAddNew } = props;
   //====TOUR COVER IMAGE HANDLER====//
   const tourImageHandler = async (e) => {
     const file = e.target.files[0];
@@ -112,6 +115,7 @@ const NewPost = () => {
       );
       setIsLoading(false);
       toast.success("Changes saved Successfully");
+      setAddNew(false);
       setMessage(`${values.name} Created Successfully`);
       setValues({
         name: "",
@@ -123,7 +127,6 @@ const NewPost = () => {
       });
       setPostBlocks([]);
       setKeys([]);
-      navigate("/dashboard/manage-safari-updates");
     } catch (error) {
       setIsLoading(false);
       setError("Post Registration Failed");
@@ -181,7 +184,7 @@ const NewPost = () => {
                   <TextField
                     className={styles.gpa__form_input_field}
                     label="Post Description"
-                    placeholder="Write each highlight on a new line"
+                    placeholder="Write each paragraph on a new line"
                     multiline
                     value={values.description}
                     name="description"
