@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import { toast } from "react-toastify";
 //===MUI IMPORTS===
 import {
   Button,
@@ -35,6 +35,7 @@ import {
 import { AddDays } from "../../store/Slices/newTourSlice";
 import EditItinaryModal from "../DashBoard/ManageTours/Itinary/EditItinary";
 import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
+import { useNavigate } from "react-router";
 
 let dayActivityDescription = [];
 
@@ -49,7 +50,7 @@ const NewTour = () => {
   const [Itinary, setItinary] = useState({});
   const [EditedItinary, setEditedItinary] = useState("");
   const [type, setType] = useState("Edit");
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -186,7 +187,6 @@ const NewTour = () => {
     }
 
     try {
-      console.log("Submited", JSON.stringify(keys));
       await dispatch(
         creatNewTour(
           values.name,
@@ -202,7 +202,9 @@ const NewTour = () => {
           JSON.stringify(keys)
         )
       );
+      toast.success(`${values.name} Created Successfully`);
       setMessage(`${values.name} Created Successfully`);
+      navigate("/dashboard/manage-tours");
       setTourCategories([]);
       setValues({
         name: "",
@@ -226,7 +228,9 @@ const NewTour = () => {
       tourActivities = [];
       priceIncludes = [];
       priceExcludes = [];
+      setKeys([]);
     } catch (error) {
+      toast.error("Tour Registration Failed!");
       setError("Tour Registration Failed");
     }
   };

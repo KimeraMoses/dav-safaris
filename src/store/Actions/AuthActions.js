@@ -44,19 +44,18 @@ export const login = (email, password) => {
     });
     if (!response.ok) {
       const error = await response.json();
-      console.log(error)
-      let message = ""
-      if(error.message === 'invalid credentials'){
-        message = "User not found, Please double check your credentials and try again"
-      }else if(error.error.statusCode === 403){
-        message = "Please verify your account and try again"
-      }else{
-        message = "Failed to login, Please check your connection and try again"
+      let message = "";
+      if (error.message === "invalid credentials") {
+        message =
+          "User not found, Please double check your credentials and try again";
+      } else if (error.error.statusCode === 403) {
+        message = "Please verify your account and try again";
+      } else {
+        message = "Failed to login, Please check your connection and try again";
       }
       dispatch(authenticationFail(message));
     }
     const data = await response.json();
-    console.log(data)
     dispatch(
       authenticationSuccess({
         data,
@@ -69,11 +68,7 @@ export const login = (email, password) => {
   };
 };
 
-export const signup = (
-  email,
-  username,
-  password,
-) => {
+export const signup = (email, username, password) => {
   return async (dispatch) => {
     dispatch(UserRegistrationPending());
     const response = await fetch(`${baseUrl}/api/v1/users/signup`, {
@@ -90,18 +85,17 @@ export const signup = (
 
     if (!response.ok) {
       const error = await response.json();
-      let message = ""
-      if(error.message === 'Email already exists'){
-        message = "Account with the same email already exits"
-      }else{
-        message = "Failed to create account, Please check your connection and try again"
+      let message = "";
+      if (error.message === "Email already exists") {
+        message = "Account with the same email already exits";
+      } else {
+        message =
+          "Failed to create account, Please check your connection and try again";
       }
       dispatch(UserRegistrationFail(message));
-      console.log(error)
     }
     const data = await response.json();
     dispatch(UserRegistrationSuccess(data.status));
-    console.log(data)
   };
 };
 
@@ -171,15 +165,18 @@ export const forgotPassword = (email) => {
 export const RequestAccountVerification = (email) => {
   return async (dispatch) => {
     dispatch(requestVerificationPending());
-    const response = await fetch(`${baseUrl}/api/v1/users/requestAccountVerification`, {
-      method: "POST",
-      body: JSON.stringify({
-        email,
-      }),
-      headers: new Headers({
-        "Content-type": "application/json",
-      }),
-    });
+    const response = await fetch(
+      `${baseUrl}/api/v1/users/requestAccountVerification`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+        }),
+        headers: new Headers({
+          "Content-type": "application/json",
+        }),
+      }
+    );
 
     if (!response.ok) {
       const error = await response.json();
@@ -192,64 +189,71 @@ export const RequestAccountVerification = (email) => {
 export const VerifyAccount = (verificationToken) => {
   return async (dispatch) => {
     dispatch(verificationPending());
-    const response = await fetch(`${baseUrl}/api/v1/users/verifyAccount/${verificationToken}`, {
-      method: "PATCH",
-    });
+    const response = await fetch(
+      `${baseUrl}/api/v1/users/verifyAccount/${verificationToken}`,
+      {
+        method: "PATCH",
+      }
+    );
 
     if (!response.ok) {
       const error = await response.json();
       dispatch(verificationFail(error));
     }
     const data = await response.json();
-    dispatch(verificationSuccess({
-      data,
-      user: data.user,
-      token: data.token,
-    }));
+    dispatch(
+      verificationSuccess({
+        data,
+        user: data.user,
+        token: data.token,
+      })
+    );
     SaveTokenInLocalStorage(dispatch, data);
   };
 };
-export const passwordReset = (password,pwdResetToken) => {
+export const passwordReset = (password, pwdResetToken) => {
   return async (dispatch) => {
     dispatch(UpdatePasswordPending());
-    const response = await fetch(`${baseUrl}/api/v1/users/resetPassword/${pwdResetToken}`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        password,
-      }),
-      headers: new Headers({
-        "Content-type": "application/json",
-      }),
-    });
+    const response = await fetch(
+      `${baseUrl}/api/v1/users/resetPassword/${pwdResetToken}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          password,
+        }),
+        headers: new Headers({
+          "Content-type": "application/json",
+        }),
+      }
+    );
     if (!response.ok) {
       const error = await response.json();
       dispatch(UpdatePasswordFail(error));
     }
     const data = await response.json();
     dispatch(UpdatePasswordSuccess(data));
-    
   };
 };
 
-export const validateToken = (Token) => {
-  return async (dispatch) => {
-    // dispatch(validateTokenPending())
-    const response = await fetch(`${baseUrl}/api/v1/users/validate`, {
-      method: "GET",
-      headers: new Headers({
-        Authorization: "Bearer " + Token,
-      }),
-    });
-    if (!response.ok) {
-      const error = await response.json();
-      // dispatch(logout());
-      console.log("auto auth", error);
-    }
-    const data = await response.json();
-    console.log("auto auth", data);
-    // dispatch(autoAuthenticationSuccess(CurrentUser));
-  };
-};
+// export const validateToken = (Token) => {
+//   return async (dispatch) => {
+//     // dispatch(validateTokenPending())
+//     const response = await fetch(`${baseUrl}/api/v1/users/validate`, {
+//       method: "GET",
+//       headers: new Headers({
+//         Authorization: "Bearer " + Token,
+//       }),
+//     });
+//     if (!response.ok) {
+//       const error = await response.json();
+//       // dispatch(logout());
+//       // console.log("auto auth", error);
+//     }
+//     const data = await response.json();
+//     // console.log("auto auth", data);
+//     // dispatch(autoAuthenticationSuccess(CurrentUser));
+//   };
+// };
 
 export const SaveTokenInLocalStorage = (dispatch, userDetails) => {
   logOutTimer(dispatch, userDetails.expiresIn);

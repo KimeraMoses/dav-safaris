@@ -49,6 +49,7 @@ import ReactGA from "react-ga";
 import { TRACKING_ID } from "../store";
 import CommunityPage from "./CommunityPage/CommunityPage";
 import EditTours from "./DashBoard/ManageTours/EditTours";
+import EditPost from "./DashBoard/ManageUpdates/EditPost";
 
 const App = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -92,6 +93,7 @@ const App = (props) => {
               <Route path="manage-tours" element={<ManageTours />} />
               <Route path="manage-tours/edit" element={<EditTours />} />
               <Route path="manage-safari-updates" element={<ManageUpdates />} />
+              <Route path="manage-safari-updates/edit" element={<EditPost />} />
               <Route
                 path="manage-bookings"
                 element={<Feature Title="Manage Bookings" />}

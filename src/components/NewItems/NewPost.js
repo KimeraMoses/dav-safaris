@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 //===MUI IMPORTS===
 import { Button, Paper, TextField } from "@material-ui/core";
 import Spinner from "@material-ui/core/CircularProgress";
@@ -13,17 +13,22 @@ import { Col, Container, Row, Form } from "react-bootstrap";
 
 //===COMPONENT IMPORTS===
 import styles from "./NewTour.module.css";
-import ImageUpload from "./ImageUpload";
-import { useEffect } from "react";
+import { useNavigate } from "react-router";
+import EditPostModal from "../DashBoard/ManageUpdates/EditPostModel";
 import { creatNewPost } from "../../store/Actions/PostActions";
 import PostBlock from "./PostBlock";
+import ImageUpload from "./ImageUpload";
+import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
 
-let postBlocks = [];
-
-const NewPost = (props) => {
-  const isLoading = useSelector((state) => state.post.isLoading);
-
-  const { isEdit } = props;
+const NewPost = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedPost, setSelectedPost] = useState({});
+  const [open, setOpen] = useState(false);
+  const [postBlocks, setPostBlocks] = useState([]);
+  const [keys, setKeys] = useState([]);
+  const [EditedPostId, setEditedPostId] = useState("");
+  const [type, setType] = useState("Edit");
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -35,7 +40,6 @@ const NewPost = (props) => {
     blockTitle: "",
     blockDesc: "",
   });
-  useEffect(() => {}, [values]);
 
   //====TOUR COVER IMAGE HANDLER====//
   const tourImageHandler = async (e) => {
@@ -81,7 +85,7 @@ const NewPost = (props) => {
   };
 
   const RegisterFormSubmitHandler = async (e) => {
-    console.log(values, postBlocks);
+    setIsLoading(true);
     e.preventDefault();
     if (values.blockTitle.length > 0) {
       PostBlockHandler();
@@ -90,7 +94,7 @@ const NewPost = (props) => {
       return setError("Post title is required");
     }
 
-    if (!isEdit && values.selectedImage.length < 1) {
+    if (values.selectedImage.length < 1) {
       return setError("Post cover image required");
     }
     if (values.description.length < 1) {
@@ -102,9 +106,12 @@ const NewPost = (props) => {
           values.name,
           values.description,
           JSON.stringify(postBlocks),
-          values.selectedImage
+          values.selectedImage,
+          JSON.stringify(keys)
         )
       );
+      setIsLoading(false);
+      toast.success("Changes saved Successfully");
       setMessage(`${values.name} Created Successfully`);
       setValues({
         name: "",
@@ -114,10 +121,27 @@ const NewPost = (props) => {
         blockTitle: "",
         blockDesc: "",
       });
-      postBlocks = [];
+      setPostBlocks([]);
+      setKeys([]);
+      navigate("/dashboard/manage-safari-updates");
     } catch (error) {
+      setIsLoading(false);
       setError("Post Registration Failed");
     }
+  };
+
+  const onEditClick = (id) => {
+    setType("Edit");
+    const Activity = postBlocks[id];
+
+    setSelectedPost(Activity);
+    setEditedPostId(id);
+    setOpen(true);
+  };
+  const onDeleteClick = (id) => {
+    setType("Delete");
+    setOpen(true);
+    setEditedPostId(id);
   };
 
   return (
@@ -186,7 +210,11 @@ const NewPost = (props) => {
                 setValues={setValues}
                 BlockHandler={PostBlockHandler}
                 Blocks={postBlocks}
+                onEditClick={onEditClick}
+                isEdit={false}
+                onDeleteClick={onDeleteClick}
               />
+              <NewKeyWord setKeys={setKeys} keys={keys} key_words={[]} />
 
               <Row>
                 <Col xs={{ span: 8, offset: 2 }}>
@@ -210,6 +238,15 @@ const NewPost = (props) => {
             </Form>
           </div>
         </Paper>
+        <EditPostModal
+          type={type}
+          open={open}
+          setOpen={setOpen}
+          data={selectedPost}
+          EditedPostId={EditedPostId}
+          postBlocks={postBlocks}
+          setPostBlocks={setPostBlocks}
+        />
       </section>
     </Container>
   );

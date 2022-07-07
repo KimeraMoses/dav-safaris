@@ -36,3 +36,8 @@
     align-items: center;
     justify-content: center; */
 }
+
+.no_block_wrapper {
+  margin: 10px 40px !important;
+  padding: 30px;
+}

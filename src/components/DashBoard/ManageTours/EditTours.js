@@ -80,7 +80,6 @@ const EditTour = (props) => {
       dispatch(fetchTourFail(error.message));
     }
   };
-  console.log(Tour);
 
   //====GET THE SELECTED DOCUMENT CATEGORY====//
   function useQuery() {

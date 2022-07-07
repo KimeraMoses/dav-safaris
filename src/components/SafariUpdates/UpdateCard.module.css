@@ -1,8 +1,8 @@
-.dav__update_card_wrapper{
+.dav__update_card_wrapper {
   max-width: 345px;
 }
-.dav__update_image_wrapper{
-    height: 140px;
+.dav__update_image_wrapper {
+  height: 140px;
 }
 .dav__update_card_description,
 .dav__update_card_title {
@@ -17,10 +17,13 @@
 .dav__update_card_description {
   -webkit-line-clamp: 4;
 }
+.post_card_actions_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
 
 @media screen and (max-width: 689px) {
-  .dav__update_card_wrapper{
+  .dav__update_card_wrapper {
     max-width: 100%;
-
   }
 }

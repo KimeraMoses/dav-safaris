@@ -10,7 +10,7 @@ import classes from "./UpdateCard.module.css";
 import { Link } from "react-router-dom";
 
 export default function UpdateCard(props) {
-  const { Post } = props;
+  const { Post, isAdmin } = props;
   return (
     <Card className={classes.dav__update_card_wrapper}>
       <CardActionArea>
@@ -38,7 +38,7 @@ export default function UpdateCard(props) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      <CardActions className={classes.post_card_actions_wrapper}>
         <Button
           size="small"
           color="primary"
@@ -47,6 +47,17 @@ export default function UpdateCard(props) {
         >
           Read More
         </Button>
+        {isAdmin && (
+          <Button
+            size="small"
+            color="primary"
+            variant="outlined"
+            component={Link}
+            to={`/dashboard/manage-safari-updates/edit?post=${Post && Post.id}`}
+          >
+            Edit
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

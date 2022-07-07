@@ -8,14 +8,27 @@ import BackIcon from "@material-ui/icons/Reply";
 import { useDispatch } from "react-redux";
 import { fetchAllTours } from "../../../store/Actions/TourActions";
 import { useSelector } from "react-redux";
+import { fetchAllPosts } from "../../../store/Actions/PostActions";
 
 const TourFilters = (props) => {
   const dispatch = useDispatch();
-  const { addNew, setAddNew, Country, setCountry, searchTerm, SearchHandler } =
-    props;
+  const {
+    addNew,
+    setAddNew,
+    Country,
+    setCountry,
+    searchTerm,
+    SearchHandler,
+    type,
+  } = props;
   const isLoading = useSelector((state) => state.tours.isLoading);
+  const isFetchingPosts = useSelector((state) => state.post.isLoading);
   const RefreshHandler = () => {
-    dispatch(fetchAllTours());
+    if (type === "posts") {
+      dispatch(fetchAllPosts());
+    } else {
+      dispatch(fetchAllTours());
+    }
   };
 
   return (
@@ -39,10 +52,11 @@ const TourFilters = (props) => {
                 <Hidden xsDown>Add new</Hidden>
               </div>
             </span>
-
-            <div className={classes.dav__country_dropdown_wrapper}>
-              <Dropdown selected={Country} setSelected={setCountry} />
-            </div>
+            {type !== "posts" ? (
+              <div className={classes.dav__country_dropdown_wrapper}>
+                <Dropdown selected={Country} setSelected={setCountry} />
+              </div>
+            ) : null}
           </div>
           <div className={classes.dav__tour_filter_item_wrapper}>
             <div className={classes.dav__tour_search_wrapper}>
@@ -61,14 +75,18 @@ const TourFilters = (props) => {
             </div>
             <Fab
               size="small"
-              disabled={isLoading}
+              disabled={isLoading || isFetchingPosts}
               color="primary"
               className={classes.dav__refresh_icon_wrapper}
               onClick={RefreshHandler}
             >
               <RefreshIcon
                 fontSize="small"
-                className={`${isLoading ? classes.gpa__refreshing_icon : ""}`}
+                className={`${
+                  isFetchingPosts || isLoading
+                    ? classes.gpa__refreshing_icon
+                    : ""
+                }`}
               />
             </Fab>
           </div>

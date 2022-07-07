@@ -35,15 +35,30 @@ const postSlice = createSlice({
       state.isLoading = false;
       state.message = payload;
     },
-    fetchPostPending: (state)=>{
-      state.isLoading =true;
+    fetchPostPending: (state) => {
+      state.isLoading = true;
     },
-    fetchPostSuccess:(state, {payload})=>{
+    fetchPostSuccess: (state, { payload }) => {
       state.post = payload;
+      state.isLoading = false;
     },
-    fetchPostFail: (state, {payload})=>{
+    fetchPostFail: (state, { payload }) => {
       state.status = payload;
-    }
+      state.isLoading = false;
+    },
+    EditPostPending: (state) => {
+      state.isLoading = true;
+    },
+    EditPostSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.status = payload.status;
+      state.message = payload.message;
+    },
+    EditPostFail: (state, { payload }) => {
+      state.isLoading = false;
+      state.status = payload.status;
+      state.message = payload.message;
+    },
   },
 });
 
@@ -58,7 +73,9 @@ export const {
   fetchAllPostFail,
   fetchPostPending,
   fetchPostSuccess,
-  fetchPostFail
-
+  fetchPostFail,
+  EditPostPending,
+  EditPostSuccess,
+  EditPostFail,
 } = actions;
 export default reducer;
