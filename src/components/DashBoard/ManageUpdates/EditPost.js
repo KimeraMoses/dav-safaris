@@ -299,7 +299,7 @@ const EditPost = () => {
                       type="submit"
                       className={styles.gpa__register_submit_button}
                     >
-                      {isLoading ? "Creating Updates..." : "Post Update"}
+                      {isLoading ? "Saving..." : "Save Changes"}
                       {isLoading ? (
                         <Spinner
                           thickness={2}

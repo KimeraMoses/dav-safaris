@@ -41,6 +41,7 @@ const ManageTours = () => {
   };
   const onDeleteClick = (tourId) => {
     setOpen(true);
+    console.log(tourId);
     setSelectedTour(tourId);
   };
 
@@ -120,7 +121,7 @@ const ManageTours = () => {
         source="tour"
         open={open}
         setOpen={setOpen}
-        tourId={selectedTour}
+        Id={selectedTour}
         setSearchTerm={setSearchTerm}
       />
     </Container>
