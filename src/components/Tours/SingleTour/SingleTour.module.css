@@ -38,7 +38,7 @@
   justify-content: space-between;
   padding: 20px 30px;
 }
-.dav__tour_highlights{
+.dav__tour_highlights {
   width: 100%;
   padding-right: 30px;
 }
@@ -53,7 +53,6 @@
   margin: 16px 0;
   font-family: "Merriweather", serif;
   font-style: italic;
-  
 }
 .dav__tour_highlights_list ul {
   margin-left: 0;
@@ -85,7 +84,6 @@
   font-family: "Merriweather", serif;
   font-style: italic;
   margin-bottom: 0;
-  
 }
 
 /* ====BOOK TOUR==== */
@@ -100,7 +98,7 @@
 .dav__booking_form_field {
   margin-bottom: 20px !important;
 }
-.dav__booking_form_field_last{
+.dav__booking_form_field_last {
   margin-bottom: 10px;
 }
 .dav__book_tour_form_wrapper::before,
@@ -126,40 +124,63 @@
   border-left: 30px solid transparent;
 }
 
-.dav__book_tour_title{
+.dav__book_tour_title {
   text-align: center;
   padding: 10px 0;
   margin-bottom: 16px;
 }
 .dav__book_tour_travel_plans,
-.dav__book_tour_title h2{
+.dav__book_tour_title h2 {
   font-family: "Merriweather", serif;
   font-style: italic;
 }
 
-.dav__book_tour_travel_plans{
+.dav__book_tour_travel_plans {
   padding: 10px;
 }
 
-.dav__book_tour_account_creation_prompt{
+.dav__book_tour_account_creation_prompt {
   text-align: justify;
-  font-size: 12px!important;
+  font-size: 12px !important;
 }
 
 .dav__intinary_details:target::before {
   content: "";
   display: block;
-  height: 130px; 
+  height: 130px;
   margin: -120px 0 0;
 }
 
-
-.dav__intinary_list_wrapper{
+.dav__intinary_list_wrapper {
   padding: 10px 20px 20px;
 }
 
+.dav__payment_btn_wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 0 60px;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.dav__payment_btn {
+  padding: 5px 12px;
+  background-color: var(--dav__primary_color);
+  border-radius: 20px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.dav__payment_btn:hover {
+  color: #fff;
+  background-color: var(--dav__tertiary_color);
+  box-shadow: none;
+}
 @media screen and (max-width: 637px) {
-  .dav__tour_highlights{
+  .dav__tour_highlights {
     padding-right: 0px;
   }
   /* ====SINGLE TOUR HERO==== */
@@ -172,33 +193,29 @@
   .dav__single_tour_highlights_wrapper {
     flex-direction: column;
     padding: 20px 10px;
-
   }
 
   .dav__tour_bookings_section {
     padding: 30px 0;
   }
-  .dav__book_tour_form_wrapper{
+  .dav__book_tour_form_wrapper {
     width: 100%;
   }
 
-  .dav__single_tour_package_wrapper{
+  .dav__single_tour_package_wrapper {
     flex-direction: column;
   }
 
-  
-.dav__intinary_list_wrapper{
-  padding: 20px 0px 20px;
+  .dav__intinary_list_wrapper {
+    padding: 20px 0px 20px;
+  }
 }
-
-}
-
 
 @media screen and (min-width: 959px) {
   .dav__single_tour_highlights_wrapper {
     padding: 20px 100px;
   }
-  .dav__book_tour_form_wrapper{
+  .dav__book_tour_form_wrapper {
     margin-top: -40px;
     z-index: 9;
   }

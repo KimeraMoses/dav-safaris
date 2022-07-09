@@ -9,6 +9,7 @@ import PriceQuote from "./PriceQuote/PriceQuote";
 import RelatedTours from "./RelatedTour/RelatedTours";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTourName } from "../../../store/Actions/TourActions";
+import { Paper } from "@material-ui/core";
 
 export const SingleHero = (props) => {
   const { title, image } = props;
@@ -51,13 +52,15 @@ const SingleTour = () => {
             <ul>
               {Tour &&
                 Tour.tourActivities &&
-                Tour.tourActivities.map((item, index) => {
-                  return (
-                    <li key={index}>
-                      <p>{item}</p>
-                    </li>
-                  );
-                })}
+                Tour.tourActivities
+                  .filter((item) => item.length > 0)
+                  .map((item, index) => {
+                    return (
+                      <li key={index}>
+                        <p>{item}</p>
+                      </li>
+                    );
+                  })}
             </ul>
           </div>
 
@@ -106,6 +109,18 @@ const SingleTour = () => {
               </ul>
             </div>
           ) : null}
+          {/* <div className={classes.dav__payment_btn_wrapper}> */}
+          <Paper className={classes.dav__payment_btn_wrapper}>
+            <a
+              href="https://payments.pesapal.com/davsafaris"
+              className={classes.dav__payment_btn}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Pay for Tour
+            </a>
+          </Paper>
+          {/* </div> */}
         </div>
         <div className={classes.dav__tour_bookings_section}>
           <BookingForm />

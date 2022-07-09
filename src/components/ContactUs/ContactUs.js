@@ -7,6 +7,7 @@ import PhoneIcon from "@material-ui/icons/Phone";
 import { Button, Paper, TextField } from "@material-ui/core";
 import ContactUsForm from "../Tours/SingleTour/Bookings/ContactUsForm";
 import { EmailOutlined } from "@material-ui/icons";
+import OfficeIcon from "@material-ui/icons/QueryBuilder";
 import SocialMedia from "./SocialMedia";
 import { Form } from "react-bootstrap";
 import { NewsLetters } from "../../store/Actions/UserActions";
@@ -129,16 +130,17 @@ const ContactUs = () => {
                 </li>
               </ul>
             </div>
-
-            <div className={`${classes.dav__office_hours} bg-light`}>
-              <h3>Office Hours</h3>
-              <ul>
-                <li>
-                  <strong>Monday - Sunday:</strong>
-                  <span>Open 24hours</span>
-                </li>
-              </ul>
-            </div>
+            <Paper className={classes.dav__payment_btn_wrapper}>
+              <h5>Payment Portal</h5>
+              <a
+                href="https://payments.pesapal.com/davsafaris"
+                className={classes.dav__payment_btn}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Pay for Tours
+              </a>
+            </Paper>
           </div>
         </div>
 
@@ -148,6 +150,19 @@ const ContactUs = () => {
               <ContactUsForm />
             </div>
             <div className={classes.dav__address_details}>
+              <div className={classes.dav__phone_contacts}>
+                <div className={classes.dav__phone_contacts_title}>
+                  <OfficeIcon />
+                  <h5>Office Hours</h5>
+                </div>
+                <div className={classes.dav__phone_contacts_content}>
+                  <ul>
+                    <li>
+                      <span>Monday - Sunday: </span> <span> Open 24hours</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
               <div className={classes.dav__address}>
                 <div className={classes.dav__address_title}>
                   <RoomIcon />

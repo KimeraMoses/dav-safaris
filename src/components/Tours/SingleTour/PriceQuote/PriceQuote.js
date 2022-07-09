@@ -17,7 +17,7 @@ const PriceQuote = (props) => {
           }`}
         >
           {Items &&
-            Items.map((item, index) => {
+            Items.filter((item) => item.length > 0).map((item, index) => {
               return (
                 <li key={index}>
                   <span>{item}</span>

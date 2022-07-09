@@ -100,7 +100,6 @@
 .dav__contact_us_form,
 .dav__connect_wrapper {
   margin: 10px;
-  
 }
 .dav__contact_us_form {
   width: 70%;
@@ -113,26 +112,24 @@
   flex-direction: column;
 }
 .dav__newsletter_wrapper,
-.dav__contact_details{
+.dav__contact_details {
   padding: 20px;
   margin-bottom: 10px;
-
 }
 .dav__newsletter_wrapper h5,
-.dav__contact_details h5{
-    font-family: "Merriweather", serif;
-    font-style: italic;
+.dav__contact_details h5 {
+  font-family: "Merriweather", serif;
+  font-style: italic;
 }
 
-.dav__newsletter_form_wrapper{
+.dav__newsletter_form_wrapper {
   text-align: center;
 }
-.dav__newsletter_form_wrapper button{
+.dav__newsletter_form_wrapper button {
   margin: 10px 0;
 }
-.dav__subscribe_form_field{
+.dav__subscribe_form_field {
   margin: 20px 0;
-  
 }
 
 /* ====OFFICE LOCATION AND CONTACTS==== */
@@ -158,11 +155,33 @@
 .dav__phone_contacts_content ul {
   list-style-type: none;
 }
-.dav__phone_contacts_content ul a{
-    color: #343434;
+.dav__phone_contacts_content ul a {
+  color: #343434;
 }
-.dav__phone_contacts_content ul a:hover{
-    color: var(--dav__primary_color);
+.dav__phone_contacts_content ul a:hover {
+  color: var(--dav__primary_color);
+}
+
+.dav__payment_btn_wrapper {
+  padding: 20px 20px 40px;
+  text-align: center;
+}
+.dav__payment_btn {
+  padding: 5px 12px;
+  background-color: var(--dav__primary_color);
+  border-radius: 20px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin-top: 24px;
+}
+.dav__payment_btn:hover {
+  color: #fff;
+  background-color: var(--dav__tertiary_color);
+  box-shadow: none;
 }
 
 @media screen and (max-width: 678px) {
@@ -181,7 +200,7 @@
     width: 100%;
     margin: 10px 0;
   }
-  .dav__address_details{
-      padding-top: 30px;
+  .dav__address_details {
+    padding-top: 30px;
   }
 }
