@@ -1,30 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SendIcon from "@material-ui/icons/Telegram";
 import classes from "./NewsLetterForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { NewsLetters } from "../../store/Actions/UserActions";
 import { Alert } from "@material-ui/lab";
+import { toast } from "react-toastify";
 
 const NewsLetterForm = () => {
   const isLoading = useSelector((state) => state.message.subcribing);
-  const userMessage = useSelector((state) => state.message.message);
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
   const dispatch = useDispatch();
   const handleChange = (e) => {
     const { value } = e.target;
     setEmail(value);
     setError("");
-    setMessage("");
   };
-  useEffect(() => {
-    if (userMessage === "success") {
-      setMessage("You have successfully subscribed to our Newsletter");
-    } else {
-      setMessage("Email already subscribed to NewsLetter");
-    }
-  }, [userMessage]);
 
   const NewsLetterFormSubmit = async (e) => {
     e.preventDefault();
@@ -43,21 +34,19 @@ const NewsLetterForm = () => {
 
     try {
       await dispatch(NewsLetters(email));
-
+      toast.success(
+        "You have successfully subscribed to Dav Safaris newsletter"
+      );
       setEmail("");
     } catch {
-      console.log(error);
+      toast.error("Failed to subscribe to Dav Safaris newsletter");
       return setError("Failed to subscribe to the newsletter");
     }
   };
 
   return (
     <>
-      {message && (
-        <Alert severity={userMessage === "success" ? "success" : "error"}>
-          {message}
-        </Alert>
-      )}
+      {error && <Alert severity="error">{error}</Alert>}
       <div className={classes.dav__new_form_wrapper}>
         <div className={classes.dav__new_form_text_wrapper}>
           <SendIcon fontSize="large" />

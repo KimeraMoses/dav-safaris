@@ -16,6 +16,7 @@ const ChatForm = () => {
     email: "",
     phone: "",
     message: "",
+    traveller: "",
     is_add_to_news_letter: false,
   });
   const [message, setMessage] = useState("");
@@ -42,6 +43,9 @@ const ChatForm = () => {
     }
     if (values.email.length < 1) {
       return setError("Email required");
+    }
+    if (values.traveller.length < 1) {
+      return setError("Number of travellers is required");
     }
     if (values.message.length < 1) {
       return setError("Please message is required");
@@ -127,6 +131,17 @@ const ChatForm = () => {
           value={values.phone}
           onChange={handleOnChange}
           placeholder="Phone Number"
+          className={classes.dav__booking_form_field}
+        />
+        <TextField
+          variant="outlined"
+          size="small"
+          fullWidth
+          type="number"
+          name="traveller"
+          value={values.traveller}
+          onChange={handleOnChange}
+          placeholder="Number of travellers"
           className={classes.dav__booking_form_field}
         />
         <TextField
