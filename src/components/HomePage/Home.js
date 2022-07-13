@@ -90,6 +90,7 @@ const Home = () => {
 
   return (
     <Wrapper>
+      
       <ModalComponent open={open} setOpen={setOpen} />
       <Slideshow />
       <HeroBooking

@@ -89,7 +89,6 @@ export const fetchTourDetails = (tour_id) => async (dispatch) => {
     const response = await fetch(`${baseUrl}/api/v1/tours/${tour_id}`);
     const fetchedTour = await response.json();
     dispatch(fetchTourSuccess(fetchedTour.tour));
-    console.log(fetchedTour);
   } catch (error) {
     dispatch(fetchTourFail(error.message));
   }
@@ -97,14 +96,16 @@ export const fetchTourDetails = (tour_id) => async (dispatch) => {
 
 export const fetchTourReviews = (tour_id) => async (dispatch) => {
   dispatch(fetchTourReviewsPending());
-  try {
-    const response = await fetch(
-      `${baseUrl}/api/v1/tours/${tour_id}/reviews/getAllReviews`
-    );
-    const fetchedReviews = await response.json();
-    dispatch(fetchTourReviewsSuccess(fetchedReviews));
-  } catch (error) {
-    dispatch(fetchTourReviewsFail(error.message));
+  if (tour_id) {
+    try {
+      const response = await fetch(
+        `${baseUrl}/api/v1/tours/${tour_id}/reviews/getAllReviews`
+      );
+      const fetchedReviews = await response.json();
+      dispatch(fetchTourReviewsSuccess(fetchedReviews));
+    } catch (error) {
+      dispatch(fetchTourReviewsFail(error.message));
+    }
   }
 };
 
@@ -181,7 +182,6 @@ export const editTourDetails = (
 ) => {
   return async (dispatch) => {
     dispatch(EditTourPending());
-    console.log(key_words);
     const data = new FormData();
     data.append("file", file);
     data.append("category", category);

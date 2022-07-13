@@ -14,12 +14,13 @@ const ReviewsList = (props) => {
     <>
       {isLoading ? (
         [...Array(4).keys()].map((index) => {
-          return <ReviewCardSkeleton />;
+          return <ReviewCardSkeleton key={index} />;
         })
       ) : ReviewsList && ReviewsList.length > 0 ? (
         ReviewsList.map((review) => {
           return (
             <ReviewCard
+              key={review.id}
               userRating={review.rating}
               userReview={review.review}
               UserName={review.user_name}

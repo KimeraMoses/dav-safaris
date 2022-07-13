@@ -48,10 +48,10 @@ const ReviewCard = ({
         <p>{userReview}</p>
       </div>
       <div className={classes.dav__user_review_meta}>
-        <span class={classes.dav__review__person__visit_date}>
+        <span className={classes.dav__review__person__visit_date}>
           <b>Visited:</b> {visit_month}, {visit_year}
         </span>
-        <span class={classes.dav__review__person__reviewed}>
+        <span className={classes.dav__review__person__reviewed}>
           <b>Reviewed:</b> {ReviewedDate}
         </span>
       </div>

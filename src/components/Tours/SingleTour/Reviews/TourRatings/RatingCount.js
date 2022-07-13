@@ -21,7 +21,12 @@ const RatingCount = (props) => {
         <div className={classes.dav__rating_overall}>
           Average Ratings <span>{average}</span>{" "}
         </div>
-        <Rating name="read-only" value={average} precision={0.5} readOnly />
+        <Rating
+          name="read-only"
+          value={average * 1.0}
+          precision={0.5}
+          readOnly
+        />
         <div className={classes.dav__rating_number}>
           {ratingsQuantity} rating{ratingsAverage !== 1 ? "s" : ""}
         </div>

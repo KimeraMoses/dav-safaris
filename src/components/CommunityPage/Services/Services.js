@@ -34,6 +34,7 @@ const Services = ({ isHomePage }) => {
           {ServicesData.map((service, index) => {
             return (
               <ServiceCard
+                key={service.name}
                 name={service.name}
                 desc={service.description}
                 num={index}
