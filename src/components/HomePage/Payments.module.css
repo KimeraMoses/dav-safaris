@@ -1,0 +1,60 @@
+.payments_wrapper{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #edf2f2;
+}
+.payment_options{
+    padding: 10px;
+}
+
+.payment_options img{
+    width: 340px;
+    border-radius: 20px;
+}
+
+.payment_link_wrapper{
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.payments_wrapper h4 {
+    font-family: "Merriweather", serif;
+    font-style: italic;
+  }
+  
+  .dav__payment_btn {
+    padding: 5px 12px;
+    background-color: var(--dav__primary_color);
+    border-radius: 20px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    max-width: 140px;
+  }
+  .dav__payment_btn:hover {
+    color: #fff;
+    background-color: var(--dav__tertiary_color);
+    box-shadow: none;
+  }
+
+
+  @media screen and (max-width: 637px) {
+    .payments_wrapper{
+        flex-direction: column;
+    }
+    .payment_options img{
+        width: 100%;
+    }
+    .payment_link_wrapper{
+        margin-left: 10px;
+        padding: 0;
+    }
+}

@@ -16,6 +16,7 @@ import Updates from "../SafariUpdates/Updates";
 import Slideshow from "../HeroSection/SlideShow";
 import NewsLetterForm from "../ContactUs/NewsLetterForm";
 import ModalComponent from "../../components/UI/Modal/ModalComponent";
+import Payments from "./Payments";
 
 const Home = () => {
   const Tours = useSelector((state) => state.tours.toursList);
@@ -90,7 +91,6 @@ const Home = () => {
 
   return (
     <Wrapper>
-      
       <ModalComponent open={open} setOpen={setOpen} />
       <Slideshow />
       <HeroBooking
@@ -109,6 +109,7 @@ const Home = () => {
       <CountyToursSection />
       <Updates />
       <Partners />
+      <Payments />
       <NewsLetterForm />
     </Wrapper>
   );

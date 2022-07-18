@@ -40,7 +40,7 @@ const SingleTour = () => {
   return (
     <>
       <SEO
-        title={Tour? `${Tour && Tour.name} - Dav Safaris`: 'Loading...'}
+        title={Tour ? `${Tour && Tour.name} - Dav Safaris` : "Loading..."}
         description={Tour && Tour.description?.substr(0, 260)}
         keywords={Tour && Tour.key_words?.join()}
         image={Tour && Tour.imageCover}
@@ -117,7 +117,7 @@ const SingleTour = () => {
               </div>
             ) : null}
             {/* <div className={classes.dav__payment_btn_wrapper}> */}
-            <Paper className={classes.dav__payment_btn_wrapper}>
+            {/* <Paper className={classes.dav__payment_btn_wrapper}>
               <a
                 href="https://payments.pesapal.com/davsafaris"
                 className={classes.dav__payment_btn}
@@ -126,7 +126,7 @@ const SingleTour = () => {
               >
                 Pay for Tour
               </a>
-            </Paper>
+            </Paper> */}
             {/* </div> */}
           </div>
           <div className={classes.dav__tour_bookings_section}>
