@@ -237,7 +237,9 @@ export const BookTour = (
   country_of_residence,
   phone,
   email,
-  travel_plans
+  travellers,
+  travel_plans,
+  budget
 ) => {
   return async (dispatch) => {
     dispatch(bookTourPending());
@@ -249,7 +251,9 @@ export const BookTour = (
         country_of_residence,
         phone,
         email,
+        travellers,
         travel_plans,
+        budget,
       }),
       headers: new Headers({
         "Content-type": "application/json",
@@ -258,7 +262,6 @@ export const BookTour = (
 
     if (!response.ok) {
       const error = await response.json();
-
       dispatch(bookTourFail(error));
     }
     const data = await response.json();
@@ -288,6 +291,7 @@ export const ReviewTour = (
         country_of_residence,
         visit_month,
         visit_year,
+        email,
       }),
       headers: new Headers({
         "Content-type": "application/json",
@@ -309,6 +313,7 @@ export const chatWithUs = (
   email,
   phone,
   message,
+  travellers,
   is_add_to_news_letter
 ) => {
   return async (dispatch) => {
@@ -320,6 +325,7 @@ export const chatWithUs = (
         email,
         phone,
         message,
+        travellers,
         is_add_to_news_letter,
       }),
       headers: new Headers({

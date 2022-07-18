@@ -88,6 +88,9 @@ const BookingForm = (props) => {
     if (values.country_of_residence.length < 1) {
       return setError("Please select your country of residence");
     }
+    if (values.travellers.length < 1) {
+      return setError("Number of travellers required");
+    }
     if (values.travel_plans.length < 1) {
       return setError("Please tell us some of your travel plans");
     }
@@ -110,6 +113,7 @@ const BookingForm = (props) => {
           values.country_of_residence,
           values.phone,
           values.email,
+          parseInt(values.travellers),
           values.travel_plans,
           values.budget
         )
@@ -120,6 +124,7 @@ const BookingForm = (props) => {
         phone: "",
         email: "",
         travel_plans: "",
+        travellers: "",
         budget: "",
       });
       setCountry({

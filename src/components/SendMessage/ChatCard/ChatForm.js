@@ -16,7 +16,7 @@ const ChatForm = () => {
     email: "",
     phone: "",
     message: "",
-    traveller: "",
+    travellers: "",
     is_add_to_news_letter: false,
   });
   const [message, setMessage] = useState("");
@@ -44,7 +44,7 @@ const ChatForm = () => {
     if (values.email.length < 1) {
       return setError("Email required");
     }
-    if (values.traveller.length < 1) {
+    if (values.travellers.length < 1) {
       return setError("Number of travellers is required");
     }
     if (values.message.length < 1) {
@@ -67,6 +67,7 @@ const ChatForm = () => {
           values.email,
           values.phone,
           values.message,
+          parseInt(values.travellers),
           values.is_add_to_news_letter
         )
       );
@@ -79,6 +80,7 @@ const ChatForm = () => {
         email: "",
         phone: "",
         message: "",
+        travellers: "",
         is_add_to_news_letter: false,
       });
     } catch (error) {
@@ -138,8 +140,8 @@ const ChatForm = () => {
           size="small"
           fullWidth
           type="number"
-          name="traveller"
-          value={values.traveller}
+          name="travellers"
+          value={values.travellers}
           onChange={handleOnChange}
           placeholder="Number of travellers"
           className={classes.dav__booking_form_field}
