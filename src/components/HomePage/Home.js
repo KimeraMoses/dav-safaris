@@ -9,6 +9,7 @@ import CountyToursSection from "./CountryTours/CountyToursSection";
 import SectionTitle from "./SectionTitle/SectionTitle";
 import CardCarousel from "../CardCarousel/CardCarousel";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import BookingSearchResults from "../HeroBooking/BookingSearchResults";
 import Partners from "../Partners/Partners";
@@ -91,6 +92,15 @@ const Home = () => {
 
   return (
     <Wrapper>
+      <Helmet>
+        <title>
+          Uganda Safaris, Gorilla Trekking, African Wildlife Safaris
+        </title>
+        <meta
+          name="description"
+          content="Get Gorilla Trekking Tours and Wildlife Safaris In Africa, we're Travel Agency in Uganda rendering mountain gorilla Trekking tours, birding, wildlife safaris"
+        />
+      </Helmet>
       <ModalComponent open={open} setOpen={setOpen} />
       <Slideshow />
       <HeroBooking

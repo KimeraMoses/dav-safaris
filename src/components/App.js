@@ -44,7 +44,7 @@ import Update from "./SafariUpdates/SingleUpdate/Update";
 import Feature from "./DashBoard/Feature";
 import AboutUs from "./AboutUs/AboutUs";
 import PrivacyPrompt from "../containers/PrivacyPolicies/PrivacyPrompt";
-import { Helmet } from "react-helmet";
+
 import ReactGA from "react-ga";
 import { TRACKING_ID } from "../store";
 import CommunityPage from "./CommunityPage/CommunityPage";
@@ -68,15 +68,6 @@ const App = (props) => {
 
   return (
     <Theme>
-      <Helmet>
-        <title>
-          Uganda Safaris, Gorilla Trekking, African Wildlife Safaris
-        </title>
-        <meta
-          name="description"
-          content="Get Gorilla Trekking Tours and Wildlife Safaris In Africa, we're Travel Agency in Uganda rendering mountain gorilla Trekking tours, birding, wildlife safaris"
-        />
-      </Helmet>
       <Router>
         <Paper elevation={0} square>
           <ToastContainer />
