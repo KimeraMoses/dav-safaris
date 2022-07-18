@@ -44,6 +44,14 @@
     background-color: var(--dav__tertiary_color);
     box-shadow: none;
   }
+  .secure_symbol{
+    padding: 20px 0 12px;
+    color: gray;
+    font-family: "Merriweather", serif;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+  }
 
 
   @media screen and (max-width: 637px) {

@@ -1,6 +1,12 @@
 .dav__update_card_wrapper {
   max-width: 345px;
 }
+.dav__update_card_wrapper a{
+  color: var(--dav__primary_color);
+}
+.dav__update_card_wrapper a:hover{
+  color: var(--dav__tertiary_color);
+}
 .dav__update_image_wrapper {
   height: 140px;
 }

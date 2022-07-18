@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./Payments.module.css";
 import Image from "../../assets/pesapal.png";
+import LockIcon from "@material-ui/icons/Lock";
 
 const Payments = () => {
   return (
@@ -23,6 +24,10 @@ const Payments = () => {
           >
             Pay for Tour
           </a>
+        </div>
+        <div className={classes.secure_symbol}>
+          <LockIcon fontSize="small" />
+          Secured by pasapal
         </div>
       </div>
     </div>

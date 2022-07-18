@@ -21,14 +21,16 @@ export default function UpdateCard(props) {
           title={Post && Post.name}
         />
         <CardContent>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="h2"
-            className={classes.dav__update_card_title}
-          >
-            {Post && Post.name}
-          </Typography>
+          <Link to={`/safari-updates/${Post && Post.slug}`}>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h2"
+              className={classes.dav__update_card_title}
+            >
+              {Post && Post.name}
+            </Typography>
+          </Link>
           <Typography
             variant="body2"
             color="textSecondary"

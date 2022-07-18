@@ -9,7 +9,6 @@ import PriceQuote from "./PriceQuote/PriceQuote";
 import RelatedTours from "./RelatedTour/RelatedTours";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTourName } from "../../../store/Actions/TourActions";
-import { Paper } from "@material-ui/core";
 import SEO from "../../../containers/SEO/SEO";
 
 export const SingleHero = (props) => {
