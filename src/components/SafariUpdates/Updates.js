@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import SectionTitle from "../HomePage/SectionTitle/SectionTitle";
 import TourCardSkeleton from "../Tours/TourCardSkeleton";
 import UpdateCard from "./UpdateCard";
-import SEO from "../../containers/SEO/SEO";
 import classes from "./Updates.module.css";
 
 const Updates = (props) => {
@@ -18,7 +17,6 @@ const Updates = (props) => {
   }, []);
   return (
     <>
-      <SEO title="Uganda Safari Tour Packages, African Safaris, Wildlife Safari Tour" description="Are you looking for Uganda safari tour packages? Grab the best African safaris and wildlife safari tour packages at an affordable cost to meet your budget."/>
       <Container fluid className={classes.dav__updates_wrapper}>
         <SectionTitle subTitle="stay updated with" Title="Safari Updates" />
         <Row className={classes.dav__updates_row_wrapper}>

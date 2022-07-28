@@ -9,7 +9,6 @@ import CountyToursSection from "./CountryTours/CountyToursSection";
 import SectionTitle from "./SectionTitle/SectionTitle";
 import CardCarousel from "../CardCarousel/CardCarousel";
 import { useState } from "react";
-import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import BookingSearchResults from "../HeroBooking/BookingSearchResults";
 import Partners from "../Partners/Partners";
@@ -18,6 +17,7 @@ import Slideshow from "../HeroSection/SlideShow";
 import NewsLetterForm from "../ContactUs/NewsLetterForm";
 import ModalComponent from "../../components/UI/Modal/ModalComponent";
 import Payments from "./Payments";
+import SEO from "../../containers/SEO/SEO";
 
 const Home = () => {
   const Tours = useSelector((state) => state.tours.toursList);
@@ -92,19 +92,11 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <Helmet>
-        <title>
-          Uganda Safaris, Gorilla Trekking, African Wildlife Safaris
-        </title>
-        <meta
-          name="description"
-          content="Get Gorilla Trekking Tours and Wildlife Safaris In Africa, we're Travel Agency in Uganda rendering mountain gorilla Trekking tours, birding, wildlife safaris"
-        />
-        <meta
-          name="keywords"
-          content="golliras,wildlife ,Chimpanzee ,uganda safaris,gorilla safaris,gorilla trekking uganda,gorilla safaris uganda,uganda safari tours,gorilla tours,gorilla trekking,uganda gorilla tours,uganda tours,uganda wildlife,gorilla trekking safaris,uganda wildlife safari,gorilla trekking tours,african gorilla tours,uganda gorilla,uganda gorilla safari tours,african gorilla safari,gorilla safari tours in uganda,uganda safaris and tours,uganda gorilla trekking tours,gorilla trekking trip,gorilla trekking safaris in uganda,gorilla trips uganda,tours in uganda,uganda gorilla trekking safaris,gorilla safaris tours,wildlife safaris,gorilla trek uganda,gorilla trekking safaris uganda,african wildlife,african tours,gorilla uganda safari,african wildlife safari,safaris tours,african wildlife tours,wild safari tours,african wild tours,wild gorilla safaris,wildlife uganda,african safari uganda,trek gorilla safaris,wildlife tours uganda,gorilla in uganda safari,wildlife safari tours,gorilla trekking uganda tours,uganda safari gorilla,the wilds tours,uganda wildlife tours,gorillas in uganda tour,trekking uganda,african gorilla,wildlife tours,trekking tours,uganda safari trips,wildlife trekking,the wilds safari tour,wild trek tours,wildlife trips,african wildlife safari tours,african safaris"
-        />
-      </Helmet>
+      <SEO
+        title="Africa Safari | Wildlife Safaris | Gorilla Trekking | Chimpanzee Trekking| Gorilla Trekking Uganda | Tanzania Safari | Kenya Safaris | Gorilla trekking Rwanda |African Wildlife Safari park | African Safari tours | trip advisor"
+        description="Tours and Travel Agency based in Uganda rendering mountain gorilla Trekking experience, birding and wildlife safaris doubled with a range of services including mountaineering , white water rafting and culture and community tours among others in Uganda and the entire East African Countries offering tailor made services suiting all travel budgets. We pride ourselves in ensuring convenient safaris based on our guest requests in terms of budget, time and travel needs to enjoy your African safari. Mountain Gorilla trekking in Uganda and Rwanda, wild beast Migration in Tanzania and Kenya, Rwenzori and Kirimanjaro Mountain Hiking experiences and white water rafting adventure along the Nile River. Our excellent team of Safari guides is capable to make your safari a lifetime experience accompanied by the great and mechanically sounding fleet. All our services are available throughout the year with the best time being December to January and June to August."
+        keywords="golliras,wildlife ,Chimpanzee ,uganda safaris,gorilla safaris,gorilla trekking uganda,gorilla safaris uganda,uganda safari tours,gorilla tours,gorilla trekking,uganda gorilla tours,uganda tours,uganda wildlife,gorilla trekking safaris,uganda wildlife safari,gorilla trekking tours,african gorilla tours,uganda gorilla,uganda gorilla safari tours,african gorilla safari,gorilla safari tours in uganda,uganda safaris and tours,uganda gorilla trekking tours,gorilla trekking trip,gorilla trekking safaris in uganda,gorilla trips uganda,tours in uganda,uganda gorilla trekking safaris,gorilla safaris tours,wildlife safaris,gorilla trek uganda,gorilla trekking safaris uganda,african wildlife,african tours,gorilla uganda safari,african wildlife safari,safaris tours,african wildlife tours,wild safari tours,african wild tours,wild gorilla safaris,wildlife uganda,african safari uganda,trek gorilla safaris,wildlife tours uganda,gorilla in uganda safari,wildlife safari tours,gorilla trekking uganda tours,uganda safari gorilla,the wilds tours,uganda wildlife tours,gorillas in uganda tour,trekking uganda,african gorilla,wildlife tours,trekking tours,uganda safari trips,wildlife trekking,the wilds safari tour,wild trek tours,wildlife trips,african wildlife safari tours,african safaris"
+      />
       <ModalComponent open={open} setOpen={setOpen} />
       <Slideshow />
       <HeroBooking

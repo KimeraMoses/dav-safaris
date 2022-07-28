@@ -21,7 +21,7 @@ const TourCard = (props) => {
       <div className={classes.tour_card_header}>
         <Link to={`/tours/${TourSlug}`}>
           <img src={TourImage} alt="Tour" />
-          <span className={classes.tour__discount}>20% off</span>
+          {/* <span className={classes.tour__discount}>20% off</span> */}
         </Link>
       </div>
       <div className={classes.tour_card_body}>
