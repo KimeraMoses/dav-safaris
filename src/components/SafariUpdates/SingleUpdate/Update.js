@@ -32,7 +32,7 @@ const Update = () => {
   return (
     <>
       <SEO
-        title={Post ? `${Post.name} - Dav Safaris` : "Loading..."}
+        title={`${Post && Post.name} - Dav Safaris`}
         description={Post && Post.post_content?.substr(0, 260)}
         keywords={Post && Post.key_words?.join()}
         image={Post && Post.postImage}
