@@ -28,6 +28,7 @@ import SingleTour from "./Tours/SingleTour/SingleTour";
 import CountrySingle from "./CountryTours/CountrySingle";
 import ChatNow from "./SendMessage/ChatNow/ChatNow";
 import ContactUs from "./ContactUs/ContactUs";
+import Thanks from "./ContactUs/Thanks";
 import DashBoard from "./DashBoard/DashBoard";
 import DashBoardItem from "./DashBoard/DashboardMenuItems/DashBoardItem";
 import ManageTours from "./DashBoard/ManageTours/ManageTours";
