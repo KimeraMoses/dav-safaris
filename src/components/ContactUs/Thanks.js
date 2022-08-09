@@ -7,7 +7,7 @@ import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import SEO from "../../containers/SEO/SEO";
 
-const AboutUs = () => {
+const Thanks = () => {
   return (
     <>
       <SEO
@@ -33,4 +33,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default Thanks;
