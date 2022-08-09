@@ -15,20 +15,10 @@ const Thanks = () => {
         description="Thank You"
         keywords="African Safaris, Gorilla Safaris"
       />
-      <div className={classes.about_us_wrapper}>
-        <div
-          className={classes.dav__about_us_hero}
-          style={{
-            backgroundImage: `url(${image})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
-          }}
-        >
-          <div className={classes.dav__about_us_title}>
+       
+          <div>
             <h2>Thanks For Contacting Us. Our Repersentative Will Contact You Shortly.</h2>
           </div>
-        </div>
-        </div>
     </>
   );
 };
