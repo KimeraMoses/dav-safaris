@@ -1,10 +1,18 @@
-import React from "react";
-import image from "../../assets/background.webp";
-import Vid4 from "../../assets/Vid4.mp4";
-import Vid5 from "../../assets/Vid5.mp4";
-import classes from "./AboutUs.module.css";
-import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import classes from "./ContactUs.module.css";
+import React, { useEffect, useState } from "react";
+import Image from "../../assets/background.webp";
+import Operator from "../../assets/davLogo.png";
+import RoomIcon from "@material-ui/icons/Room";
+import PhoneIcon from "@material-ui/icons/Phone";
+import { Button, Paper, TextField } from "@material-ui/core";
+import ContactUsForm from "../Tours/SingleTour/Bookings/ContactUsForm";
+import { EmailOutlined } from "@material-ui/icons";
+import OfficeIcon from "@material-ui/icons/QueryBuilder";
+import SocialMedia from "./SocialMedia";
+import { Form } from "react-bootstrap";
+import { NewsLetters } from "../../store/Actions/UserActions";
+import { useDispatch, useSelector } from "react-redux";
+import { Alert } from "@material-ui/lab";
 import SEO from "../../containers/SEO/SEO";
 
 const Thanks = () => {
