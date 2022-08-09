@@ -57,6 +57,7 @@ const ContactForm = (props) => {
         contactUs(values.name, values.email, values.phone, values.message)
       );
       setIsLoading(false);
+      return <Link to="/thank-you" />
       setMessage(
         "Message Sent Successfully, Dav Safaris will contact you shortly"
       );
