@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { Button } from "../../../UI/Button/Button";
 import { Paper, TextField } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 import classes from "./BookingForm.module.css";
 import { useDispatch } from "react-redux";
 import { contactUs } from "../../../../store/Actions/TourActions";
@@ -10,6 +11,7 @@ import { Alert } from "@material-ui/lab";
 const ContactForm = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [values, setValues] = useState({
     name: "",
@@ -57,7 +59,7 @@ const ContactForm = (props) => {
         contactUs(values.name, values.email, values.phone, values.message)
       );
       setIsLoading(false);
-      return <Link to="/thank-you" />
+      // return <Link to="/thank-you" />
       setMessage(
         "Message Sent Successfully, Dav Safaris will contact you shortly"
       );
@@ -67,6 +69,7 @@ const ContactForm = (props) => {
         phone: "",
         message: "",
       });
+      navigate("/thank-you");
     } catch (error) {
       setIsLoading(false);
       return setError(

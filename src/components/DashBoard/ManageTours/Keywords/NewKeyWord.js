@@ -50,7 +50,7 @@ const NewKeyWord = (props) => {
 
   const deleteRow = (id) => {
     let copy_word = [...words];
-    if (typeof id === undefined) return;
+    if (!id) return;
     copy_word.splice(id, 1);
     setWords(copy_word);
     setKeys(copy_word);
