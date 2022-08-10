@@ -11,7 +11,7 @@ const Thanks = () => {
       />
 
       <div>
-         <br/><br/><br/>
+         <br/><br/><br/><br/><br/><br/>
         <h2>
           Thanks For Contacting Us. Our Repersentative Will Contact You Shortly.
         </h2>
