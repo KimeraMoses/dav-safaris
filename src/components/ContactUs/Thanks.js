@@ -15,6 +15,7 @@ const Thanks = () => {
         <h2>
           Thanks For Contacting Us. Our Repersentative Will Contact You Shortly.
         </h2>
+    <br/><br/>
       </div>
     </>
   );
