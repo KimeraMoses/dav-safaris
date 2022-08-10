@@ -12,7 +12,7 @@ const Thanks = () => {
 
       <div>
          <br/><br/><br/><br/><br/><br/>
-        <h2>
+        <h2 style={{text-align: "center"}}>
           Thanks For Contacting Us. Our Repersentative Will Contact You Shortly.
         </h2>
     <br/><br/>
