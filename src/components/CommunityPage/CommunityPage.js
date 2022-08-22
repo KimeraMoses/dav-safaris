@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./CommunityPage.module.css";
 import image1 from "../../assets/tourist.jpg";
 import image2 from "../../assets/student.jpg";
-import image from "../../assets/background.webp";
+import image from "../../assets/dav-tourist-vehicle.jpeg";
 import Services from "./Services/Services";
 import SEO from "../../containers/SEO/SEO";
 

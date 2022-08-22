@@ -1,21 +1,21 @@
 /* ====SINGLE TOUR HERO==== */
 .dav__single_tour_hero {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-family: "Merriweather", serif;
-    font-style: italic;
-  }
-  
-  .dav__single_tour_hero h1 {
-    max-width: 75%;
-    margin: 0 auto;
-    color: #fff;
-    text-shadow: 0 0 20px #000;
-    font-weight: 600;
-    text-transform: capitalize;
-  }
+  position: relative;
+  width: 100%;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: "Merriweather", serif;
+  font-style: italic;
+}
+
+.dav__single_tour_hero h1 {
+  max-width: 75%;
+  margin: 0 auto;
+  color: #fff;
+  text-shadow: 0 0 20px #000;
+  font-weight: 600;
+  text-transform: capitalize;
+}

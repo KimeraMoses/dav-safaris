@@ -1,6 +1,6 @@
 import classes from "./ContactUs.module.css";
 import React, { useEffect, useState } from "react";
-import Image from "../../assets/background.webp";
+import Image from "../../assets/contact-us.jpeg";
 import Operator from "../../assets/davLogo.png";
 import RoomIcon from "@material-ui/icons/Room";
 import PhoneIcon from "@material-ui/icons/Phone";

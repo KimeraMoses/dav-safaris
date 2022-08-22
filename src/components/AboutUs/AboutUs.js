@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../../assets/background.webp";
+import image from "../../assets/background.jpeg";
 import Vid4 from "../../assets/Vid4.mp4";
 import Vid5 from "../../assets/Vid5.mp4";
 import classes from "./AboutUs.module.css";

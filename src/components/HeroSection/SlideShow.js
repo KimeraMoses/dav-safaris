@@ -2,7 +2,7 @@ import React from "react";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "./SlideShow.css";
-import Image1 from "../../assets/background.webp";
+import Image1 from "../../assets/dav-tourist-vehicle.jpeg";
 import Image2 from "../../assets/KeWildlife.jpg";
 import Image3 from "../../assets/Image21.jpg";
 import Image4 from "../../assets/Rwanda-Culture-Safaris.jpg";
@@ -40,22 +40,22 @@ const CountrySlides = [
       "Visit Tanzania for an exceptional beach experience in Zanzibar, Hike kilimanjaro mountain, visit the serengeti commonly known safari mecca for its variety of wildlife species",
     link: "/tanzania-safaris",
     btnText: "Popular Tour in Tanzania",
-  }
+  },
 ];
 
 const Slideshow = () => {
   return (
     <div className="test-wrapper">
-      <Slide
-        easing="ease"
-        cssClass="homeslider"
-        arrows={false}
-        duration={2000}
-      >
+      <Slide easing="ease" cssClass="homeslider" arrows={false} duration={2000}>
         {CountrySlides.map((country, index) => {
           return (
             <div className="each-slide" key={index}>
-              <div style={{ backgroundImage: `url(${country.image})`, backgroundPosition: "center center" }}>
+              <div
+                style={{
+                  backgroundImage: `url(${country.image})`,
+                  backgroundPosition: "center center",
+                }}
+              >
                 <span className="dav__slider_content">
                   <h2>{country.title}</h2>
                   <p>{country.paragraph}</p>
