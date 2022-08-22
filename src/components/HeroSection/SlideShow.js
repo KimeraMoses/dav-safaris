@@ -2,7 +2,7 @@ import React from "react";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "./SlideShow.css";
-import Image1 from "../../assets/dav-tourist-vehicle.jpeg";
+import Image1 from "../../assets/Uganda-scenary.jpg";
 import Image2 from "../../assets/KeWildlife.jpg";
 import Image3 from "../../assets/Image21.jpg";
 import Image4 from "../../assets/Rwanda-Culture-Safaris.jpg";
