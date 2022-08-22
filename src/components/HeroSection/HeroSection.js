@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
-import HeroBooking from "../HeroBooking/HeroBooking";
 import { Button } from "../UI/Button/Button";
 
 import "./HeroSection.css";

@@ -100,15 +100,7 @@ const RegisterForm = () => {
         values.password,
       ));
       navigate('/login')
-      // enqueueSnackbar("Account created Succesfully", {
-        //   variant: "success",
-      //   action,
-      //   anchorOrigin: {
-        //     vertical: "top",
-      //     horizontal: "center",
-      //   },
-      //   TransitionComponent: Slide,
-      // });
+   
       
       setValues({ ...values, values: "" });
       setError('')

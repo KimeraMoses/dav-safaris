@@ -29,16 +29,6 @@ const LoginForm = () => {
     showPassword: false,
   });
 
-  // const action = (key) => (
-  //   <Button
-  //     onClick={() => {
-  //       closeSnackbar(key);
-  //     }}
-  //   >
-  //     OK
-  //   </Button>
-  // );
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: event.target.value });
@@ -79,15 +69,6 @@ const LoginForm = () => {
       setValues({ password: "" });
       setValues({ email: "" });
       navigate("/dashboard/user");
-      // enqueueSnackbar("You have successfully logged in", {
-      //   variant: "success",
-      //   action,
-      //   anchorOrigin: {
-      //     vertical: "top",
-      //     horizontal: "center",
-      //   },
-      //   TransitionComponent: Slide,
-      // });
     } catch (error) {
       setError(
         "Failed to login, Please verify your account first or double check your credentials if account is already verified"

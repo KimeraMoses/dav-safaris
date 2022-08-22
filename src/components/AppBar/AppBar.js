@@ -13,35 +13,7 @@ import NavigationMenu from "../Navigation/NavigationMenu";
 
 const AppBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  // const { user } = useSelector((state) => state.auth);
-  // const [auth, setAuth] = React.useState(true);
-  // const [anchorEl, setAnchorEl] = React.useState(null);
-  // const open = Boolean(anchorEl);
-  // const username = user && user.username && user.username.split(" ");
 
-  // const handleChange = (event) => {
-  //   setAuth(event.target.checked);
-  // };
-
-  // const handleMenu = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
-
-  // let userImage = "";
-  // if (username && username.length > 1) {
-  //   userImage =
-  //     username &&
-  //     username[0] &&
-  //     username[0].charAt(0) + username &&
-  //     username[1] &&
-  //     username[1].charAt(0);
-  // } else {
-  //   userImage = username && username[0] && username[0].charAt(0);
-  // }
   return (
     <>
       <Toolbar id="dav__back_to_top_anchor">
@@ -55,82 +27,11 @@ const AppBar = () => {
           <Hidden xsDown>
             <div className={classes.dav__action_btn_wrapper}>
               <NavigationMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-              {/* {isLoggedIn ? (
-                <div>
-                   <Avatar onClick={handleMenu} >{userImage}</Avatar>
-                    <Menu
-                      id="menu-appbar"
-                      anchorEl={anchorEl}
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      open={open}
-                      onClose={handleClose}
-                    >
-                      <MenuItem onClick={handleClose}>My DashBoard</MenuItem>
-                      <MenuItem onClick={handleClose}>Logout</MenuItem>
-                    </Menu>
-                  </div>
-              ) : (
-                <Link to="/login">
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    endIcon={<LockOpenIcon />}
-                    size="small"
-                  >
-                    Login
-                  </Button>
-                </Link>
-              )} */}
             </div>
           </Hidden>
 
           <Hidden smUp>
             <div className={classes.mobile_header_menu}>
-              {/* {isLoggedIn ? (
-                  <div>
-                    <IconButton
-                      aria-label="account of current user"
-                      aria-controls="menu-appbar"
-                      aria-haspopup="true"
-                      onClick={handleMenu}
-                      color="inherit"
-                    >
-                      <AccountCircle />
-                    </IconButton>
-                    <Menu
-                      id="menu-appbar"
-                      anchorEl={anchorEl}
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      open={open}
-                      onClose={handleClose}
-                    >
-                      <MenuItem onClick={handleClose}>Profile</MenuItem>
-                      <MenuItem onClick={handleClose}>My account</MenuItem>
-                    </Menu>
-                  </div>
-              ) : (
-                <Link to="/login">
-                  <Button variant="contained" color="primary" size="small">
-                    <LockOpenIcon />
-                  </Button>
-                </Link>
-              )} */}
               <IconButton
                 size="large"
                 onClick={() => setMenuOpen(!menuOpen)}

@@ -76,8 +76,6 @@ const ManageUpdates = () => {
         addNew={addNew}
         setAddNew={setAddNew}
         type="posts"
-        // Country={country}
-        // setCountry={setCountry}
         searchTerm={searchTerm}
         SearchHandler={SearchHandler}
       />

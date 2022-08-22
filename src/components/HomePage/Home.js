@@ -31,28 +31,7 @@ const Home = () => {
     duration: "",
     departure: "",
   });
-
-  // const [scrollPosition, setScrollPosition] = useState(0);
-  // const handleScroll = () => {
-  //   const position = window.pageYOffset;
-  //   setScrollPosition(position);
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll, { passive: true });
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
-  // useEffect(() => {
-  //   console.log(scrollPosition);
-  //   if (scrollPosition>4410) {
-  //     setOpen(true);
-  //     console.log("Reached bottom");
-  //     console.log("Reacehd bottomssss");
-  //   }
-  // }, [scrollPosition]);
-
+  
   const handleOnChange = (event) => {
     setError("");
     setValues({ ...values, error: "" });

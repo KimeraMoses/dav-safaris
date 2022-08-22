@@ -1,11 +1,8 @@
-.gpa__course_unit_card_carousel_wrapper{
-    /* background-color: var(--gpa__App_bg_sections_light); */
-    padding: 0px 0 20px;
+.gpa__course_unit_card_carousel_wrapper {
+  padding: 0px 0 20px;
 }
-.gpa__dark_mode.gpa__course_unit_card_carousel_wrapper{
-    /* background-color: var(--gpa__App_bg_sections_dark); */
-}
-.gpa__tours_carousel_wrapper{
-    background-color: #f5f5f5;
-    padding: 30px 0px;
+
+.gpa__tours_carousel_wrapper {
+  background-color: #f5f5f5;
+  padding: 30px 0px;
 }

@@ -74,6 +74,5 @@
     transition: all 0.3s ease-out;
     background: #fff;
     color: var(--primary);
-    /* color: #588048; */
     transition: 250ms;
   }
