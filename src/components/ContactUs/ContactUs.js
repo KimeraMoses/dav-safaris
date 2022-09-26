@@ -14,6 +14,7 @@ import { NewsLetters } from "../../store/Actions/UserActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert } from "@material-ui/lab";
 import SEO from "../../containers/SEO/SEO";
+// import RichTextEditor from "../NewItems/RichTextEditor";
 
 const ContactUs = () => {
   useEffect(() => {
@@ -261,6 +262,7 @@ const ContactUs = () => {
           </div>
         </div>
       </div>
+      <div className={classes.texteditor}>{/* <RichTextEditor /> */}</div>
     </>
   );
 };
