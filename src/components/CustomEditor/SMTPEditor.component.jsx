@@ -53,7 +53,8 @@ export function SMTPEditor({
           className: undefined,
           component: undefined,
           dropdownClassName: undefined,
-          options: ["left", "center", "right", "justify"],
+          // options: ["left", "center", "right", "justify"],
+          options: ["justify"],
         },
         link: {
           inDropdown: false,
