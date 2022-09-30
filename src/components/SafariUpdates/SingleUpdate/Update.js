@@ -59,7 +59,12 @@ const Update = () => {
                 </div>
               </div>
               <div className={classes.dav__post_content_wrapper}>
-                <p>{Post && Post.post_content}</p>
+                <div
+                  className="dav__single_tour_description"
+                  dangerouslySetInnerHTML={{
+                    __html: Post && Post.post_content,
+                  }}
+                ></div>
                 {Post &&
                   Post.post_blocks &&
                   Post.post_blocks.map((block, index) => {
@@ -68,7 +73,12 @@ const Update = () => {
                         <h3>
                           <strong>{block.title}</strong>
                         </h3>
-                        <p>{block.description}</p>
+                        <div
+                          className="dav__single_tour_description"
+                          dangerouslySetInnerHTML={{
+                            __html: block.description,
+                          }}
+                        ></div>
                       </div>
                     );
                   })}

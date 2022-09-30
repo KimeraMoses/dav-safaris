@@ -37,8 +37,6 @@ const SingleTour = () => {
   }, [tourTitle, dispatch]);
   const Tour = useSelector((state) => state.tour.tourDetails);
 
-  console.log("tour", Tour);
-
   return (
     <>
       <SEO
@@ -54,7 +52,6 @@ const SingleTour = () => {
         <div className={classes.dav__single_tour_highlights_wrapper}>
           <div className={classes.dav__tour_highlights} id="description">
             <div
-              // className={classes.dav__single_tour_description}
               className="dav__single_tour_description"
               dangerouslySetInnerHTML={{ __html: Tour.description }}
             >

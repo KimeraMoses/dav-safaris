@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import classes from "./Itinary.module.css";
 import LessIcon from "@material-ui/icons/ExpandLess";
 import MoreIcon from "@material-ui/icons/ExpandMore";
-import "./Itinary.scss";
 
 const Itinary = (props) => {
   const [show, setShow] = useState(false);

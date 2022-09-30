@@ -5,6 +5,9 @@ import { Col, Row } from "react-bootstrap";
 import styles from "./NewTour.module.css";
 import classes from "./NewItinary.module.css";
 import Itinary from "./Itinary";
+import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
+import { EditorState, convertToRaw } from "draft-js";
+import { convertToHTML } from "draft-convert";
 
 const PostBlock = (props) => {
   const {
@@ -22,6 +25,11 @@ const PostBlock = (props) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   };
+
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
+
   return (
     <div className={classes.dav__new_itinary_wrapper}>
       <div className={classes.dav_itinary_title_wrapper}>
@@ -93,23 +101,39 @@ const PostBlock = (props) => {
 
           <div className={`row ${classes.dav__itinary_submit_button_wrapper}`}>
             <div className="col-xs-10 col-sm-10">
-              <TextField
-                fullWidth
-                label="Block Description"
-                multiline
-                size="small"
-                rows={4}
-                variant="filled"
-                name="blockDesc"
-                value={values.blockDesc}
-                onChange={onChangeHandler}
-                className={styles.gpa__form_input_field}
+              <ConfigurationEditor
+                placeholder="Type block description here..."
+                editorState={editorState}
+                onEditorStateChange={(state) => {
+                  setEditorState(state);
+                  const currentContentAsHTML = convertToHTML({
+                    entityToHTML: (entity, originalText) => {
+                      if (entity.type === "IMAGE") {
+                        return `<img src="${entity.data.src}" />`;
+                      }
+                      if (entity.type === "LINK") {
+                        return ` <a href="${entity.data.url}">${originalText}</a> `;
+                      }
+                      return originalText;
+                    },
+                  })(state.getCurrentContent());
+                  if (
+                    convertToRaw(state.getCurrentContent()).blocks.length ===
+                      1 &&
+                    convertToRaw(state.getCurrentContent()).blocks[0].text ===
+                      ""
+                  ) {
+                    setValues({ ...values, blockDesc: "" });
+                  } else {
+                    setValues({ ...values, blockDesc: currentContentAsHTML });
+                  }
+                }}
               />
             </div>
 
             <div className="col-xs-2 col-sm-2">
               <Button
-                //   disabled={isLoading || isEdditing}
+                disabled={!values?.blockDesc || !values?.blockTitle}
                 variant="contained"
                 color="primary"
                 size="small"

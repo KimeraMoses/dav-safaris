@@ -17,6 +17,7 @@ const ImageUpload = ({ tourImageHandler, tourImage, Image, isPost }) => {
         backgroundSize: "cover",
         backgroundPosition: "center center",
         backgroundRepeat: "no-repeat",
+        minHeight: isPost ? "240px" : null,
       }}
     >
       <div

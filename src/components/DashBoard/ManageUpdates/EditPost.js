@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { convertToRaw } from "draft-js";
+import { convertToHTML } from "draft-convert";
+
 //===MUI IMPORTS===
 import { Button, Paper, TextField } from "@material-ui/core";
 import Spinner from "@material-ui/core/CircularProgress";
@@ -29,6 +32,8 @@ import EditPostModal from "./EditPostModel";
 import Loader from "../../../containers/Loader/Loader";
 import { editPostDetails } from "../../../store/Actions/PostActions";
 import NewKeyWord from "../ManageTours/Keywords/NewKeyWord";
+import { convertHTMLToDraftState } from "../../../utils/Utils";
+import { ConfigurationEditor } from "../../CustomEditor/SMTPEditor.component";
 
 const EditPost = () => {
   const [isFetching, setIsFetching] = useState(false);
@@ -47,6 +52,9 @@ const EditPost = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const [editorState, setEditorState] = useState(() =>
+    convertHTMLToDraftState(post.post_content)
+  );
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [values, setValues] = useState({
@@ -67,6 +75,7 @@ const EditPost = () => {
       selectedImage: post && post.postImage,
     });
 
+    setEditorState(convertHTMLToDraftState(post.post_content));
     // eslint-disable-next-line
   }, [post]);
 
@@ -249,17 +258,36 @@ const EditPost = () => {
                 />
                 <div className="row">
                   <div className="col-xs-12 col-sm-9">
-                    <TextField
-                      className={styles.gpa__form_input_field}
-                      label="Post Description"
-                      placeholder="Write each paragraph on a new line"
-                      multiline
-                      value={values.description}
-                      name="description"
-                      onChange={onChangeHandler}
-                      rows={4}
-                      fullWidth
-                      variant="filled"
+                    <ConfigurationEditor
+                      placeholder="Type post description here..."
+                      editorState={editorState}
+                      onEditorStateChange={(state) => {
+                        setEditorState(state);
+                        const currentContentAsHTML = convertToHTML({
+                          entityToHTML: (entity, originalText) => {
+                            if (entity.type === "IMAGE") {
+                              return `<img src="${entity.data.src}" />`;
+                            }
+                            if (entity.type === "LINK") {
+                              return ` <a href="${entity.data.url}">${originalText}</a> `;
+                            }
+                            return originalText;
+                          },
+                        })(state.getCurrentContent());
+                        if (
+                          convertToRaw(state.getCurrentContent()).blocks
+                            .length === 1 &&
+                          convertToRaw(state.getCurrentContent()).blocks[0]
+                            .text === ""
+                        ) {
+                          setValues({ ...values, description: "" });
+                        } else {
+                          setValues({
+                            ...values,
+                            description: currentContentAsHTML,
+                          });
+                        }
+                      }}
                     />
                   </div>
 
@@ -294,6 +322,7 @@ const EditPost = () => {
                 <Row>
                   <Col xs={{ span: 8, offset: 2 }}>
                     <Button
+                      disabled={!values?.description}
                       variant="contained"
                       color="primary"
                       type="submit"

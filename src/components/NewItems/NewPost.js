@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { EditorState, convertToRaw } from "draft-js";
+import { convertToHTML } from "draft-convert";
 //===MUI IMPORTS===
 import { Button, Paper, TextField } from "@material-ui/core";
 import Spinner from "@material-ui/core/CircularProgress";
@@ -18,6 +20,7 @@ import { creatNewPost } from "../../store/Actions/PostActions";
 import PostBlock from "./PostBlock";
 import ImageUpload from "./ImageUpload";
 import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
+import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
 
 const NewPost = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -50,7 +53,9 @@ const NewPost = (props) => {
     const Image = await convertbase64Logo(file);
     setValues({ ...values, cover_image: Image, selectedImage: file });
   };
-
+  const [editorState, setEditorState] = React.useState(() =>
+    EditorState.createEmpty()
+  );
   const convertbase64Logo = (file) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
@@ -181,17 +186,36 @@ const NewPost = (props) => {
               />
               <div className="row">
                 <div className="col-xs-12 col-sm-9">
-                  <TextField
-                    className={styles.gpa__form_input_field}
-                    label="Post Description"
-                    placeholder="Write each paragraph on a new line"
-                    multiline
-                    value={values.description}
-                    name="description"
-                    onChange={onChangeHandler}
-                    rows={4}
-                    fullWidth
-                    variant="filled"
+                  <ConfigurationEditor
+                    placeholder="Type tour description here..."
+                    editorState={editorState}
+                    onEditorStateChange={(state) => {
+                      setEditorState(state);
+                      const currentContentAsHTML = convertToHTML({
+                        entityToHTML: (entity, originalText) => {
+                          if (entity.type === "IMAGE") {
+                            return `<img src="${entity.data.src}" />`;
+                          }
+                          if (entity.type === "LINK") {
+                            return ` <a href="${entity.data.url}">${originalText}</a> `;
+                          }
+                          return originalText;
+                        },
+                      })(state.getCurrentContent());
+                      if (
+                        convertToRaw(state.getCurrentContent()).blocks
+                          .length === 1 &&
+                        convertToRaw(state.getCurrentContent()).blocks[0]
+                          .text === ""
+                      ) {
+                        setValues({ ...values, description: "" });
+                      } else {
+                        setValues({
+                          ...values,
+                          description: currentContentAsHTML,
+                        });
+                      }
+                    }}
                   />
                 </div>
 

@@ -119,7 +119,6 @@ const EditTour = (props) => {
   const [editorState, setEditorState] = useState(() =>
     convertHTMLToDraftState(Tour.description)
   );
-  console.log(editorState);
   const [values, setValues] = useState({
     name: Tour.name,
     bodyText: Tour.description,

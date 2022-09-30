@@ -9,18 +9,17 @@
   justify-content: center;
   box-sizing: border-box;
   user-select: none;
-
 }
-.dav__cover_image p{
-    font-family: "Merriweather", serif;
-    font-style: italic;
-    padding: 12px;
+.dav__cover_image p {
+  font-family: "Merriweather", serif;
+  font-style: italic;
+  padding: 12px;
 }
-.dav__cover_image_content{
-    background-color: rgba(0, 0, 0, 0.219);
-    color: #fff;
-    opacity: 0;
+.dav__cover_image_content {
+  background-color: rgba(0, 0, 0, 0.219);
+  color: #fff;
+  opacity: 0;
 }
-.dav__cover_image:hover .dav__cover_image_content{
+.dav__cover_image:hover .dav__cover_image_content {
   opacity: 1;
 }

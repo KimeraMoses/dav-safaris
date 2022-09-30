@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { convertToRaw } from "draft-js";
+import { convertToHTML } from "draft-convert";
 
 //===MUI IMPORTS===
 import { Box, Button, Modal, TextField } from "@material-ui/core";
@@ -6,11 +8,15 @@ import { Box, Button, Modal, TextField } from "@material-ui/core";
 //===COMPONENTS IMPORTS===
 import classes from "../ManageTours/Itinary/ModalComponent.module.css";
 import styles from "../../NewItems/NewTour.module.css";
+import { convertHTMLToDraftState } from "../../../utils/Utils";
+import { ConfigurationEditor } from "../../CustomEditor/SMTPEditor.component";
 
 const EditPostModal = (props) => {
   const { open, setOpen, type, data, EditedPostId, postBlocks, setPostBlocks } =
     props;
-
+  const [editorState, setEditorState] = useState(() =>
+    convertHTMLToDraftState(data.description)
+  );
   const [values, setValues] = useState({
     blockTitle: "",
     blockDesc: "",
@@ -21,6 +27,8 @@ const EditPostModal = (props) => {
       blockTitle: data.title,
       blockDesc: data.description,
     });
+
+    setEditorState(convertHTMLToDraftState(data.description));
   }, [data]);
 
   const handleClose = () => {
@@ -69,7 +77,7 @@ const EditPostModal = (props) => {
           <Box sx={style} className={classes.delete_itinary_model}>
             <h1>Delete Block</h1>
             <div className={classes.delete_itinary_model_content}>
-              Are you sure you wish to delete this Itinary? This action will be
+              Are you sure you wish to delete this block? This action will be
               permanent and can not be undone.
             </div>
             <div className={classes.delete_itinary_model_actions}>
@@ -106,17 +114,36 @@ const EditPostModal = (props) => {
                 variant="filled"
                 className={styles.gpa__form_input_field}
               />
-              <TextField
-                fullWidth
-                label="Block Description"
-                multiline
-                size="small"
-                rows={4}
-                variant="filled"
-                name="blockDesc"
-                value={values.blockDesc}
-                onChange={onChangeHandler}
-                className={styles.gpa__form_input_field}
+              <ConfigurationEditor
+                placeholder="Type itinary description here..."
+                editorState={editorState}
+                onEditorStateChange={(state) => {
+                  setEditorState(state);
+                  const currentContentAsHTML = convertToHTML({
+                    entityToHTML: (entity, originalText) => {
+                      if (entity.type === "IMAGE") {
+                        return `<img src="${entity.data.src}" />`;
+                      }
+                      if (entity.type === "LINK") {
+                        return ` <a href="${entity.data.url}">${originalText}</a> `;
+                      }
+                      return originalText;
+                    },
+                  })(state.getCurrentContent());
+                  if (
+                    convertToRaw(state.getCurrentContent()).blocks.length ===
+                      1 &&
+                    convertToRaw(state.getCurrentContent()).blocks[0].text ===
+                      ""
+                  ) {
+                    setValues({ ...values, blockDesc: "" });
+                  } else {
+                    setValues({
+                      ...values,
+                      blockDesc: currentContentAsHTML,
+                    });
+                  }
+                }}
               />
               <div className={classes.delete_itinary_model_actions}>
                 <Button

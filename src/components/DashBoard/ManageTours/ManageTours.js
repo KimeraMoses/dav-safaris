@@ -41,7 +41,6 @@ const ManageTours = () => {
   };
   const onDeleteClick = (tourId) => {
     setOpen(true);
-    console.log(tourId);
     setSelectedTour(tourId);
   };
 

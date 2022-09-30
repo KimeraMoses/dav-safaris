@@ -11,4 +11,16 @@
   & img {
     border-radius: 14px;
   }
+  & ul {
+    & li::marker {
+      color: var(--dav__primary_color);
+    }
+  }
+  & h2 {
+    font-size: 22px;
+    font-weight: bold;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    color: #6aa441;
+    margin: 15px 0;
+  }
 }

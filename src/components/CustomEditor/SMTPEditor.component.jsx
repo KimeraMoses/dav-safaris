@@ -32,7 +32,7 @@ export function SMTPEditor({
         ],
         blockType: {
           inDropdown: false,
-          options: ["Normal", "H1", "H2", "H3", "H4", "H5", "H6", "Blockquote"],
+          options: ["Normal", "H1", "H2", "H3", "H4", "H5", "H6"],
           className: undefined,
           component: undefined,
           dropdownClassName: undefined,
