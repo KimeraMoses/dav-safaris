@@ -82,8 +82,7 @@ const NewPost = (props) => {
       title: values.blockTitle,
       description: values.blockDesc,
     };
-
-    postBlocks.push(postblock);
+    setPostBlocks([...postBlocks, postblock]);
 
     setValues({
       ...values,
