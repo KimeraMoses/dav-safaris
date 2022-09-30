@@ -34,7 +34,10 @@ const TourCard = (props) => {
           <Timer /> {NumDays} DAYS - {NumNights} NIGHTS
         </span>
         <div className={classes.tour__description}>
-          <p>{TourDescription} </p>
+          <div
+            className="dav__single_tour_description"
+            dangerouslySetInnerHTML={{ __html: TourDescription }}
+          ></div>
         </div>
       </div>
       <div className={classes.tour__footer}>

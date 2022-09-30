@@ -1,10 +1,10 @@
 .dav__update_card_wrapper {
   max-width: 345px;
 }
-.dav__update_card_wrapper a{
+.dav__update_card_wrapper a {
   color: var(--dav__primary_color);
 }
-.dav__update_card_wrapper a:hover{
+.dav__update_card_wrapper a:hover {
   color: var(--dav__tertiary_color);
 }
 .dav__update_image_wrapper {
@@ -22,6 +22,7 @@
 }
 .dav__update_card_description {
   -webkit-line-clamp: 4;
+  font-size: 18px !important;
 }
 .post_card_actions_wrapper {
   display: flex;

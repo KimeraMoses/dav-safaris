@@ -36,16 +36,15 @@
   position: absolute;
   top: -5px;
   left: 0;
-  content: '';
+  content: "";
   width: 0;
   height: 0;
   border-style: solid;
   border-width: 0 0 5px 5px;
   border-color: transparent transparent #c7390d transparent;
 }
-.tour_card_wrapper:hover .tour__discount{
-    padding-left: 24px;
-
+.tour_card_wrapper:hover .tour__discount {
+  padding-left: 24px;
 }
 .tour_card_body {
   padding: 14px;
@@ -65,7 +64,6 @@
 .tour_card_body h4 a:hover {
   color: var(--dav__primary_color);
 }
-
 .tour__date {
   text-transform: uppercase;
   color: #666;
@@ -73,7 +71,7 @@
   display: block;
   text-align: left;
 }
-.tour__description p {
+.tour__description {
   margin-bottom: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -111,9 +109,9 @@
   text-transform: uppercase;
   background-color: var(--dav__primary_color);
 }
-.tour__read_more.btn__disabled a{
+.tour__read_more.btn__disabled a {
   cursor: default;
-  pointer-events: none;        
+  pointer-events: none;
   text-decoration: none;
   color: grey;
 }

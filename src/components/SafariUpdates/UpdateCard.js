@@ -34,11 +34,16 @@ export default function UpdateCard(props) {
           <Typography
             variant="body2"
             color="textSecondary"
-            component="p"
+            // component="p"
             className={classes.dav__update_card_description}
+            dangerouslySetInnerHTML={{ __html: Post && Post.post_content }}
           >
-            {Post && Post.post_content}
+            {/* {Post && Post.post_content} */}
           </Typography>
+          {/* <div
+            className="dav__single_tour_description"
+            dangerouslySetInnerHTML={{ __html: Post && Post.post_content }}
+          ></div> */}
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.post_card_actions_wrapper}>
