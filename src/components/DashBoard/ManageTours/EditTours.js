@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { convertToRaw } from "draft-js";
+import { convertToHTML } from "draft-convert";
 //===MUI IMPORTS===
 import {
   Button,
@@ -44,6 +46,8 @@ import EditItinaryModal from "./Itinary/EditItinary";
 import { Link } from "react-router-dom";
 import Loader from "../../../containers/Loader/Loader";
 import NewKeyWord from "./Keywords/NewKeyWord";
+import { ConfigurationEditor } from "../../CustomEditor/SMTPEditor.component";
+import { convertHTMLToDraftState } from "../../../utils/Utils";
 
 let dayActivityDescription = [];
 
@@ -112,8 +116,13 @@ const EditTour = (props) => {
     Tour.packageDetails.price_excludes &&
     Tour.packageDetails.price_excludes?.map((el) => (tourExclude += el + "\n"));
 
+  const [editorState, setEditorState] = useState(() =>
+    convertHTMLToDraftState(Tour.description)
+  );
+  console.log(editorState);
   const [values, setValues] = useState({
     name: Tour.name,
+    bodyText: Tour.description,
     description: Tour.description,
     tourActivities: tourHighLights,
     cover_image: "",
@@ -148,6 +157,7 @@ const EditTour = (props) => {
       includes: tourIncludes,
       excludes: tourExclude,
     });
+    setEditorState(convertHTMLToDraftState(Tour.description));
 
     // eslint-disable-next-line
   }, [Tour]);
@@ -370,7 +380,38 @@ const EditTour = (props) => {
                   onChange={onChangeHandler}
                   className={styles.gpa__form_input_field}
                 />
-                <TextField
+                <ConfigurationEditor
+                  placeholder="Type tour description here..."
+                  editorState={editorState}
+                  onEditorStateChange={(state) => {
+                    setEditorState(state);
+                    const currentContentAsHTML = convertToHTML({
+                      entityToHTML: (entity, originalText) => {
+                        if (entity.type === "IMAGE") {
+                          return `<img src="${entity.data.src}" />`;
+                        }
+                        if (entity.type === "LINK") {
+                          return ` <a href="${entity.data.url}">${originalText}</a> `;
+                        }
+                        return originalText;
+                      },
+                    })(state.getCurrentContent());
+                    if (
+                      convertToRaw(state.getCurrentContent()).blocks.length ===
+                        1 &&
+                      convertToRaw(state.getCurrentContent()).blocks[0].text ===
+                        ""
+                    ) {
+                      setValues({ ...values, description: "" });
+                    } else {
+                      setValues({
+                        ...values,
+                        description: currentContentAsHTML,
+                      });
+                    }
+                  }}
+                />
+                {/* <TextField
                   className={styles.gpa__form_input_field}
                   label="Tour Description"
                   multiline
@@ -380,7 +421,7 @@ const EditTour = (props) => {
                   rows={6}
                   fullWidth
                   variant="filled"
-                />
+                /> */}
                 <div className="row">
                   <div className="col-xs-12 col-sm-9">
                     <TextField

@@ -5,6 +5,9 @@ import styles from "./NewTour.module.css";
 import classes from "./NewItinary.module.css";
 import Itinary from "./Itinary";
 import AddIcon from "@material-ui/icons/Add";
+import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
+import { EditorState, convertToRaw } from "draft-js";
+import { convertToHTML } from "draft-convert";
 
 const NewItinary = (props) => {
   const {
@@ -17,6 +20,9 @@ const NewItinary = (props) => {
     onDeleteClick,
     isEdit,
   } = props;
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
 
   const [show, setShow] = useState(isEdit ? false : true);
 
@@ -37,7 +43,6 @@ const NewItinary = (props) => {
         {isEdit && !show && (
           <Fab
             size="small"
-            // disabled={isLoading}
             color="primary"
             className={classes.dav__add_new_tour_icon}
             onClick={() => setShow(true)}
@@ -105,19 +110,33 @@ const NewItinary = (props) => {
               />
             </div>
           </div>
-
-          <TextField
-            fullWidth
-            label="Itinary Description"
-            multiline
-            size="small"
-            rows={4}
-            variant="filled"
-            name="itinaryDesc"
-            value={values.itinaryDesc}
-            onChange={onChangeHandler}
-            className={styles.gpa__form_input_field}
+          <ConfigurationEditor
+            placeholder="Type itinary description here..."
+            editorState={editorState}
+            onEditorStateChange={(state) => {
+              setEditorState(state);
+              const currentContentAsHTML = convertToHTML({
+                entityToHTML: (entity, originalText) => {
+                  if (entity.type === "IMAGE") {
+                    return `<img src="${entity.data.src}" />`;
+                  }
+                  if (entity.type === "LINK") {
+                    return ` <a href="${entity.data.url}">${originalText}</a> `;
+                  }
+                  return originalText;
+                },
+              })(state.getCurrentContent());
+              if (
+                convertToRaw(state.getCurrentContent()).blocks.length === 1 &&
+                convertToRaw(state.getCurrentContent()).blocks[0].text === ""
+              ) {
+                setValues({ ...values, itinaryDesc: "" });
+              } else {
+                setValues({ ...values, itinaryDesc: currentContentAsHTML });
+              }
+            }}
           />
+
           <div className={`row ${classes.dav__itinary_submit_button_wrapper}`}>
             <div className="col-xs-12 col-sm-5">
               <TextField
@@ -145,7 +164,9 @@ const NewItinary = (props) => {
             </div>
             <div className="col-xs-2 col-sm-2">
               <Button
-                //   disabled={isLoading || isEdditing}
+                disabled={
+                  !values?.itinaryTitle || !values?.itinaryDesc || !values?.day
+                }
                 variant="contained"
                 color="primary"
                 size="small"

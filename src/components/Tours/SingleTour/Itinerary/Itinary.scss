@@ -1,0 +1,13 @@
+.dav__itinary_content_description {
+  font-size: 18px;
+
+  & a {
+    color: var(--dav__primary_color);
+    &:hover {
+      color: var(--dav__tertiary_color);
+    }
+  }
+  & img {
+    border-radius: 14px;
+  }
+}

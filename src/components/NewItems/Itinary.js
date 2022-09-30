@@ -4,7 +4,6 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemSecondaryAction,
-  ListItemText,
   Tooltip,
 } from "@material-ui/core";
 import { DeleteOutlined } from "@material-ui/icons";
@@ -29,14 +28,14 @@ const Itinary = ({
           {day ? day : id + 1}
         </Avatar>
       </ListItemAvatar>
-      <ListItemText
-        primary={title}
-        secondary={description}
-        className={classes.dav__tour_texts}
-      />
+      <div className={classes.dav__tour_texts}>
+        <span>{title}</span>
+        <p dangerouslySetInnerHTML={{ __html: description }}></p>
+      </div>
       <ListItemSecondaryAction>
         <Tooltip title="Edit" placement="left">
           <IconButton
+            className={classes.actionButton}
             edge="end"
             aria-label="edit"
             onClick={() => onEditClick(id)}
@@ -46,6 +45,7 @@ const Itinary = ({
         </Tooltip>
         <Tooltip title="Delete" placement="left">
           <IconButton
+            className={classes.actionButton}
             edge="end"
             aria-label="delete"
             onClick={() => onDeleteClick(id)}

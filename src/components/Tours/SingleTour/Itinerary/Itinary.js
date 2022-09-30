@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import classes from "./Itinary.module.css";
 import LessIcon from "@material-ui/icons/ExpandLess";
 import MoreIcon from "@material-ui/icons/ExpandMore";
+import "./Itinary.scss";
 
 const Itinary = (props) => {
   const [show, setShow] = useState(false);
@@ -35,7 +36,10 @@ const Itinary = (props) => {
           }`}
         >
           <div className={classes.dav__itinary_content_inner}>
-            <p>{itinDescription}</p>
+            <div
+              dangerouslySetInnerHTML={{ __html: itinDescription }}
+              className="dav__itinary_content_description"
+            ></div>
             <div className={classes.dav__itinary_meta}>
               <p>
                 <span className={classes.dav__itinary_meta__item}>

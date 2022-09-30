@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { EditorState, convertToRaw } from "draft-js";
+import { convertToHTML } from "draft-convert";
 import { toast } from "react-toastify";
 //===MUI IMPORTS===
 import {
@@ -36,6 +38,7 @@ import { AddDays } from "../../store/Slices/newTourSlice";
 import EditItinaryModal from "../DashBoard/ManageTours/Itinary/EditItinary";
 import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
 import { useNavigate } from "react-router";
+import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
 
 let dayActivityDescription = [];
 
@@ -59,7 +62,9 @@ const NewTour = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  const [editorState, setEditorState] = React.useState(() =>
+    EditorState.createEmpty()
+  );
   const [values, setValues] = useState({
     name: "",
     description: "",
@@ -76,6 +81,7 @@ const NewTour = () => {
     day: "",
     itinaryTitle: "",
     itinaryDesc: "",
+    itinaryBodyText: EditorState.createEmpty(),
     meal_plan: "",
     accomodation_plan: "",
   });
@@ -289,17 +295,35 @@ const NewTour = () => {
                 onChange={onChangeHandler}
                 className={styles.gpa__form_input_field}
               />
-              <TextField
-                className={styles.gpa__form_input_field}
-                label="Tour Description"
-                multiline
-                value={values.description}
-                name="description"
-                onChange={onChangeHandler}
-                rows={6}
-                fullWidth
-                variant="filled"
+              <ConfigurationEditor
+                placeholder="Type tour description here..."
+                editorState={editorState}
+                onEditorStateChange={(state) => {
+                  setEditorState(state);
+                  const currentContentAsHTML = convertToHTML({
+                    entityToHTML: (entity, originalText) => {
+                      if (entity.type === "IMAGE") {
+                        return `<img src="${entity.data.src}" />`;
+                      }
+                      if (entity.type === "LINK") {
+                        return ` <a href="${entity.data.url}">${originalText}</a> `;
+                      }
+                      return originalText;
+                    },
+                  })(state.getCurrentContent());
+                  if (
+                    convertToRaw(state.getCurrentContent()).blocks.length ===
+                      1 &&
+                    convertToRaw(state.getCurrentContent()).blocks[0].text ===
+                      ""
+                  ) {
+                    setValues({ ...values, description: "" });
+                  } else {
+                    setValues({ ...values, description: currentContentAsHTML });
+                  }
+                }}
               />
+
               <div className="row">
                 <div className="col-xs-12 col-sm-9">
                   <TextField

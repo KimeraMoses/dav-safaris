@@ -33,6 +33,7 @@
   background-color: #edf2f2;
   /* width: 100%; */
 }
+
 .dav__single_tour_highlights_wrapper {
   display: flex;
   justify-content: space-between;
@@ -46,7 +47,6 @@
   content: "";
   display: block;
   height: 120px;
-  /* margin-top: -160px; */
   margin: -130px 0 0;
 }
 .dav__tour_highlights h2 {

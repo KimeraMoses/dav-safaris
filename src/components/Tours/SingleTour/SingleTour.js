@@ -10,6 +10,7 @@ import RelatedTours from "./RelatedTour/RelatedTours";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTourName } from "../../../store/Actions/TourActions";
 import SEO from "../../../containers/SEO/SEO";
+import "./SingleTour.scss";
 
 export const SingleHero = (props) => {
   const { title, image } = props;
@@ -36,6 +37,8 @@ const SingleTour = () => {
   }, [tourTitle, dispatch]);
   const Tour = useSelector((state) => state.tour.tourDetails);
 
+  console.log("tour", Tour);
+
   return (
     <>
       <SEO
@@ -50,8 +53,12 @@ const SingleTour = () => {
 
         <div className={classes.dav__single_tour_highlights_wrapper}>
           <div className={classes.dav__tour_highlights} id="description">
-            <div className={classes.dav__single_tour_description}>
-              {Tour.description}
+            <div
+              // className={classes.dav__single_tour_description}
+              className="dav__single_tour_description"
+              dangerouslySetInnerHTML={{ __html: Tour.description }}
+            >
+              {/* {Tour.description} */}
             </div>
             <h2>Tour highlights</h2>
             <div className={classes.dav__tour_highlights_list}>
