@@ -10,9 +10,22 @@ import UpdateCard from "../../SafariUpdates/UpdateCard";
 import Loader from "../../../containers/Loader/Loader";
 import DeleteModal from "../ManageTours/Itinary/DeleteModal";
 
+export const NoPosts = ({ type }) => {
+  return (
+    <div className={styles.no_posts_wrapper}>
+      No{" "}
+      {type === "langauge"
+        ? "posts with different languages found!"
+        : "posts found"}
+    </div>
+  );
+};
+
 const ManageUpdates = () => {
   const isLoading = useSelector((state) => state.post.isLoading);
+  const language = useSelector((state) => state.post.language);
   const PostList = useSelector((state) => state.post.posts);
+  const languagePosts = useSelector((state) => state.post.languagePosts);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [addNew, setAddNew] = useState(false);
@@ -21,13 +34,13 @@ const ManageUpdates = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllPosts());
+    dispatch(fetchAllPosts(language ? "language" : ""));
     window.scrollTo(0, 0);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [language]);
 
-  let FilteredPosts = PostList;
+  let FilteredPosts = language ? languagePosts : PostList;
 
   const SearchHandler = (e) => {
     const { value } = e.target;
@@ -57,7 +70,7 @@ const ManageUpdates = () => {
 
   const RenderedList = (
     searchResults.length > 0 ? searchResults : FilteredPosts
-  ).map((post) => {
+  )?.map((post) => {
     return (
       <Col
         key={post.id}
@@ -65,7 +78,12 @@ const ManageUpdates = () => {
         sm={12}
         className={styles.dav__updates_card_wrapper}
       >
-        <UpdateCard Post={post} isAdmin={true} onDeleteClick={onDeleteClick} />
+        <UpdateCard
+          Post={post}
+          isAdmin={true}
+          onDeleteClick={onDeleteClick}
+          language={language}
+        />
       </Col>
     );
   });
@@ -78,15 +96,25 @@ const ManageUpdates = () => {
         type="posts"
         searchTerm={searchTerm}
         SearchHandler={SearchHandler}
+        language={language}
       />
       {addNew ? (
         <div className={classes.dav__new_tour_form_wrapper}>
-          <NewPost setAddNew={setAddNew} />
+          <NewPost setAddNew={setAddNew} language={language} />
         </div>
       ) : (
-        <Row>{isLoading ? <Loader /> : RenderedList}</Row>
+        <Row>
+          {isLoading ? (
+            <Loader />
+          ) : FilteredPosts?.length ? (
+            RenderedList
+          ) : (
+            <NoPosts type={language ? "language" : "post"} />
+          )}
+        </Row>
       )}
       <DeleteModal
+        language={language}
         source="post"
         open={open}
         setOpen={setOpen}

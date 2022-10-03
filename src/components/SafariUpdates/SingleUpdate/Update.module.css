@@ -91,6 +91,12 @@
   font-style: italic;
   color: #aaa;
 }
+.related_posts {
+  display: grid;
+  gap: 30px 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 20px 0;
+}
 
 @media screen and (max-width: 689px) {
   .dav__single_update_wrapper {
@@ -98,5 +104,8 @@
   }
   .dav__single_update_details_wrapper {
     padding: 0 20px 0 20px !important;
+  }
+  .related_posts {
+    grid-template-columns: 1fr;
   }
 }

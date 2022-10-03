@@ -136,6 +136,14 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.7) !important;
 }
 
+.language_info {
+  display: flex;
+  justify-content: center;
+  color: var(--dav__primary_color);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
 @media screen and (max-width: 575px) {
   .gpa__category_input_wrapper {
     margin-bottom: 10px;

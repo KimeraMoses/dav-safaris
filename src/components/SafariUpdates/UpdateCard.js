@@ -11,7 +11,7 @@ import classes from "./UpdateCard.module.css";
 import { Link } from "react-router-dom";
 
 export default function UpdateCard(props) {
-  const { Post, isAdmin, onDeleteClick } = props;
+  const { Post, isAdmin, onDeleteClick, language } = props;
   return (
     <Card className={classes.dav__update_card_wrapper}>
       <CardActionArea>
@@ -21,7 +21,13 @@ export default function UpdateCard(props) {
           title={Post && Post.name}
         />
         <CardContent>
-          <Link to={`/safari-updates/${Post && Post.slug}`}>
+          <Link
+            to={
+              language
+                ? `/safari-updates/languages/${Post && Post.slug}`
+                : `/safari-updates/${Post && Post.slug}`
+            }
+          >
             <Typography
               gutterBottom
               variant="h5"
@@ -40,10 +46,6 @@ export default function UpdateCard(props) {
           >
             {/* {Post && Post.post_content} */}
           </Typography>
-          {/* <div
-            className="dav__single_tour_description"
-            dangerouslySetInnerHTML={{ __html: Post && Post.post_content }}
-          ></div> */}
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.post_card_actions_wrapper}>
@@ -51,7 +53,12 @@ export default function UpdateCard(props) {
           size="small"
           color="primary"
           component={Link}
-          to={`/safari-updates/${Post && Post.slug}`}
+          to={
+            language
+              ? `/safari-updates/languages/${Post && Post.slug}`
+              : `/safari-updates/${Post && Post.slug}`
+          }
+          // to={`/safari-updates/${Post && Post.slug}`}
         >
           Read More
         </Button>

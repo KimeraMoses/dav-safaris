@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { convertToRaw } from "draft-js";
 import { convertToHTML } from "draft-convert";
@@ -36,6 +36,7 @@ import { convertHTMLToDraftState } from "../../../utils/Utils";
 import { ConfigurationEditor } from "../../CustomEditor/SMTPEditor.component";
 
 const EditPost = () => {
+  const language = useSelector((state) => state.post.language);
   const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedPost, setSelectedPost] = useState({});
@@ -53,7 +54,7 @@ const EditPost = () => {
   }, []);
 
   const [editorState, setEditorState] = useState(() =>
-    convertHTMLToDraftState(post.post_content)
+    convertHTMLToDraftState(post?.post_content)
   );
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -64,6 +65,7 @@ const EditPost = () => {
     selectedImage: "",
     blockTitle: "",
     blockDesc: "",
+    language: "",
   });
 
   useEffect(() => {
@@ -73,9 +75,10 @@ const EditPost = () => {
       description: post && post.post_content,
       cover_image: post && post.postImage,
       selectedImage: post && post.postImage,
+      language: language ? post?.language : "",
     });
 
-    setEditorState(convertHTMLToDraftState(post.post_content));
+    setEditorState(convertHTMLToDraftState(post?.post_content));
     // eslint-disable-next-line
   }, [post]);
 
@@ -85,7 +88,9 @@ const EditPost = () => {
     setIsFetching(true);
     dispatch(fetchPostPending());
     try {
-      const response = await fetch(`${baseUrl}/api/v1/posts/${postId}`);
+      const response = await fetch(
+        `${baseUrl}/api/v1/${language ? "languagePost" : "posts"}/${postId}`
+      );
       const fetchedPost = await response.json();
       dispatch(fetchPostSuccess(fetchedPost.post));
       setPost(fetchedPost?.post);
@@ -176,7 +181,9 @@ const EditPost = () => {
           JSON.stringify(postBlocks),
           values.selectedImage,
           JSON.stringify(keys),
-          selectedPostId
+          selectedPostId,
+          language ? values?.language : "",
+          language ? "language" : ""
         )
       );
       setIsLoading(false);
@@ -300,6 +307,22 @@ const EditPost = () => {
                       uploaded={true}
                       tourImageHandler={tourImageHandler}
                     />
+                    {language ? (
+                      <div style={{ marginTop: 20 }}>
+                        <TextField
+                          fullWidth
+                          label="Language Used"
+                          variant="filled"
+                          value={values.language}
+                          name="language"
+                          size="small"
+                          onChange={onChangeHandler}
+                          className={styles.gpa__form_input_field}
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </div>
 

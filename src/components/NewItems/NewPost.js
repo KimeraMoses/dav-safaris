@@ -41,12 +41,13 @@ const NewPost = (props) => {
   const [values, setValues] = useState({
     name: "",
     description: "",
+    language: "",
     cover_image: "",
     selectedImage: "",
     blockTitle: "",
     blockDesc: "",
   });
-  const { setAddNew } = props;
+  const { setAddNew, language } = props;
   //====TOUR COVER IMAGE HANDLER====//
   const tourImageHandler = async (e) => {
     const file = e.target.files[0];
@@ -114,7 +115,9 @@ const NewPost = (props) => {
           values.description,
           JSON.stringify(postBlocks),
           values.selectedImage,
-          JSON.stringify(keys)
+          JSON.stringify(keys),
+          language ? values?.language : "",
+          language ? "language" : "normal"
         )
       );
       setIsLoading(false);
@@ -128,6 +131,7 @@ const NewPost = (props) => {
         selectedImage: "",
         blockTitle: "",
         blockDesc: "",
+        language: "",
       });
       setPostBlocks([]);
       setKeys([]);
@@ -157,6 +161,13 @@ const NewPost = (props) => {
         <h1 className={styles.gpa__membership_section_title}>
           Create New Safari Update
         </h1>
+        {language && (
+          <div className={styles.language_info}>
+            **Please use any language of your choice in any of the fields
+            below**
+          </div>
+        )}
+
         <Paper
           className={`${styles.gpa__register_wrapper} ${styles.gpa__register_wrapper_register_new}`}
         >
@@ -228,6 +239,22 @@ const NewPost = (props) => {
                     uploaded={true}
                     tourImageHandler={tourImageHandler}
                   />
+                  {language ? (
+                    <div style={{ marginTop: 20 }}>
+                      <TextField
+                        fullWidth
+                        label="Language Used"
+                        variant="filled"
+                        value={values.language}
+                        name="language"
+                        size="small"
+                        onChange={onChangeHandler}
+                        className={styles.gpa__form_input_field}
+                      />
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </div>
 

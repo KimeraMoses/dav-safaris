@@ -10,13 +10,10 @@ import {
   DeleteTour,
   fetchAllTours,
 } from "../../../../store/Actions/TourActions";
-import {
-  DeletePost,
-  fetchAllPosts,
-} from "../../../../store/Actions/PostActions";
+import { DeletePost } from "../../../../store/Actions/PostActions";
 
 const DeleteModal = (props) => {
-  const { open, setOpen, Id, setSearchTerm, source } = props;
+  const { open, setOpen, Id, setSearchTerm, source, language } = props;
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -34,9 +31,8 @@ const DeleteModal = (props) => {
       toast.success("Tour deleted Successfully");
       dispatch(fetchAllTours());
     } else {
-      await dispatch(DeletePost(Id));
+      await dispatch(DeletePost(Id, language ? "language" : ""));
       toast.success("Post deleted Successfully");
-      dispatch(fetchAllPosts());
     }
     setLoading(false);
     setOpen(false);

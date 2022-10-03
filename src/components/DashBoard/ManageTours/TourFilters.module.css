@@ -40,6 +40,12 @@
 .back_btn_wrapper:hover {
   color: var(--dav__tertiary_color);
 }
+.language_post_btn {
+  padding: 0 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  color: var(--dav__primary_color);
+}
 
 @media screen and (max-width: 799px) {
   .dav__tour_filters_wrapper {

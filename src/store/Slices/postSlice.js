@@ -2,9 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   posts: [],
+  languagePosts: [],
   post: {},
   isLoading: false,
   isDeleting: false,
+  language: false,
   status: "",
   message: "",
 };
@@ -12,6 +14,12 @@ const postSlice = createSlice({
   name: "newPost",
   initialState,
   reducers: {
+    getPostsLoading: (state, { payload }) => {
+      state.isLoading = payload;
+    },
+    setIsLanguage: (state, { payload }) => {
+      state.language = payload;
+    },
     NewPostPending: (state) => {
       state.isLoading = true;
     },
@@ -25,16 +33,8 @@ const postSlice = createSlice({
       state.status = payload.status;
       state.message = payload.message;
     },
-    fetchAllPostPending: (state) => {
-      state.isLoading = true;
-    },
     fetchAllPostSuccess: (state, { payload }) => {
-      state.isLoading = false;
       state.posts = payload;
-    },
-    fetchAllPostFail: (state, { payload }) => {
-      state.isLoading = false;
-      state.message = payload;
     },
     fetchPostPending: (state) => {
       state.isLoading = true;
@@ -73,6 +73,9 @@ const postSlice = createSlice({
       state.message = payload?.message;
       state.isDeleting = false;
     },
+    getLanguagePosts: (state, { payload }) => {
+      state.languagePosts = payload;
+    },
   },
 });
 
@@ -82,9 +85,7 @@ export const {
   NewPostPending,
   NewPostSuccess,
   NewPostFail,
-  fetchAllPostPending,
   fetchAllPostSuccess,
-  fetchAllPostFail,
   fetchPostPending,
   fetchPostSuccess,
   fetchPostFail,
@@ -94,5 +95,8 @@ export const {
   deletePostPending,
   deletePostSuccess,
   deletePostFail,
+  getLanguagePosts,
+  getPostsLoading,
+  setIsLanguage,
 } = actions;
 export default reducer;

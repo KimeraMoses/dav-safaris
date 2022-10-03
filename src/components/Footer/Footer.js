@@ -62,6 +62,12 @@ const Footer = () => {
                     </li>
                   );
                 })}
+              <li>
+                <Link to="/safari-updates/languages">
+                  <MenuIcon />
+                  Click to view more updates
+                </Link>
+              </li>
             </ul>
           </div>
         </Col>

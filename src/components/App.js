@@ -51,6 +51,7 @@ import { TRACKING_ID } from "../store";
 import CommunityPage from "./CommunityPage/CommunityPage";
 import EditTours from "./DashBoard/ManageTours/EditTours";
 import EditPost from "./DashBoard/ManageUpdates/EditPost";
+import LanguagePosts from "./SafariUpdates/LanguagePosts";
 
 const App = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -114,7 +115,7 @@ const App = (props) => {
             <Route path="/password-reset" exact element={<ResetPassword />} />
             <Route path="/change-password" exact element={<ChangePassword />} />
             <Route path="/contact-us" exact element={<ContactUs />} />
-              <Route path="/thank-you" exact element={<Thanks />} />
+            <Route path="/thank-you" exact element={<Thanks />} />
             <Route path="/about-us" exact element={<AboutUs />} />
             <Route
               path="/community-support"
@@ -128,6 +129,16 @@ const App = (props) => {
               path="/safari-updates"
               exact
               element={<Updates isPostPage={true} />}
+            />
+            <Route
+              path="/safari-updates/languages"
+              exact
+              element={<LanguagePosts />}
+            />
+            <Route
+              path="/safari-updates/languages/:postTitle"
+              exact
+              element={<Update type="language" />}
             />
             <Route
               path="/safari-updates/:postTitle"

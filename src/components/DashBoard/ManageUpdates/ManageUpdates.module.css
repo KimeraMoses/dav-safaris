@@ -1,3 +1,12 @@
 .dav__updates_card_wrapper {
   margin-top: 20px !important;
 }
+.no_posts_wrapper {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #eee;
+  background-color: aliceblue;
+  font-weight: 600;
+  margin: 20px auto;
+}
