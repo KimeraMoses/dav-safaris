@@ -41,7 +41,6 @@ const NewPost = (props) => {
   const [values, setValues] = useState({
     name: "",
     description: "",
-    language: "",
     cover_image: "",
     selectedImage: "",
     blockTitle: "",
@@ -116,7 +115,6 @@ const NewPost = (props) => {
           JSON.stringify(postBlocks),
           values.selectedImage,
           JSON.stringify(keys),
-          language ? values?.language : "",
           language ? "language" : "normal"
         )
       );
@@ -131,7 +129,6 @@ const NewPost = (props) => {
         selectedImage: "",
         blockTitle: "",
         blockDesc: "",
-        language: "",
       });
       setPostBlocks([]);
       setKeys([]);
@@ -239,22 +236,6 @@ const NewPost = (props) => {
                     uploaded={true}
                     tourImageHandler={tourImageHandler}
                   />
-                  {language ? (
-                    <div style={{ marginTop: 20 }}>
-                      <TextField
-                        fullWidth
-                        label="Language Used"
-                        variant="filled"
-                        value={values.language}
-                        name="language"
-                        size="small"
-                        onChange={onChangeHandler}
-                        className={styles.gpa__form_input_field}
-                      />
-                    </div>
-                  ) : (
-                    <></>
-                  )}
                 </div>
               </div>
 

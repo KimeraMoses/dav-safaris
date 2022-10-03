@@ -22,7 +22,6 @@ export const creatNewPost = (
   post_blocks,
   file,
   key_words,
-  language,
   type
 ) => {
   return async (dispatch) => {
@@ -33,7 +32,6 @@ export const creatNewPost = (
     data.append("post_content", post_content);
     data.append("post_blocks", post_blocks);
     data.append("key_words", key_words);
-    if (type === "language") data.append("language", language);
 
     const response = await fetch(
       `${baseUrl}/api/v1/${
@@ -65,7 +63,6 @@ export const editPostDetails = (
   file,
   key_words,
   post_Id,
-  language,
   type
 ) => {
   return async (dispatch) => {
@@ -76,7 +73,6 @@ export const editPostDetails = (
     data.append("post_content", post_content);
     data.append("post_blocks", post_blocks);
     data.append("key_words", key_words);
-    if (type === "language") data.append("language", language);
     const response = await fetch(
       `${baseUrl}/api/v1/${
         type === "language" ? "languagePost" : "posts"

@@ -44,7 +44,7 @@ const Update = ({ type }) => {
 
   return (
     <>
-      {Post && (
+      {Post?.name && (
         <SEO
           title={`${Post && Post.name} - Dav Safaris`}
           description={Post && Post.post_content?.substr(0, 260)}

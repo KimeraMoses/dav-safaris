@@ -65,7 +65,6 @@ const EditPost = () => {
     selectedImage: "",
     blockTitle: "",
     blockDesc: "",
-    language: "",
   });
 
   useEffect(() => {
@@ -75,7 +74,6 @@ const EditPost = () => {
       description: post && post.post_content,
       cover_image: post && post.postImage,
       selectedImage: post && post.postImage,
-      language: language ? post?.language : "",
     });
 
     setEditorState(convertHTMLToDraftState(post?.post_content));
@@ -182,7 +180,6 @@ const EditPost = () => {
           values.selectedImage,
           JSON.stringify(keys),
           selectedPostId,
-          language ? values?.language : "",
           language ? "language" : ""
         )
       );
@@ -307,22 +304,6 @@ const EditPost = () => {
                       uploaded={true}
                       tourImageHandler={tourImageHandler}
                     />
-                    {language ? (
-                      <div style={{ marginTop: 20 }}>
-                        <TextField
-                          fullWidth
-                          label="Language Used"
-                          variant="filled"
-                          value={values.language}
-                          name="language"
-                          size="small"
-                          onChange={onChangeHandler}
-                          className={styles.gpa__form_input_field}
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
                   </div>
                 </div>
 
