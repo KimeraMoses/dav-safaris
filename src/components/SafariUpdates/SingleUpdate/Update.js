@@ -114,13 +114,11 @@ const Update = ({ type }) => {
                 </div>
               )}
             </Col>
-            <Col
-              lg={3}
-              sm={12}
-              className={classes.dav__single_update_recent_posts_wrapper}
-            >
+            <Col lg={3} sm={12}>
               {FIlteredPosts?.length > 0 && (
-                <>
+                <div
+                  className={classes.dav__single_update_recent_posts_wrapper}
+                >
                   <div className={classes.dav__single_recent_title}>
                     <h1>Recent Updates</h1>
                   </div>
@@ -160,7 +158,7 @@ const Update = ({ type }) => {
                           })}
                     </ul>
                   </div>
-                </>
+                </div>
               )}
             </Col>
           </Row>
