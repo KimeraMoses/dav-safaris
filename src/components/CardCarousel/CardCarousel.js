@@ -36,7 +36,7 @@ const CardCarousel = () => {
         ? [...Array(8).keys()].map((index) => {
             return <TourCardSkeleton type="slider" key={index} />;
           })
-        : FilteredTours.slice(0, 20).map((tour) => {
+        : FilteredTours?.slice(0, 20).map((tour) => {
             return (
               <TourCard
                 key={tour.id}
