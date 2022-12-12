@@ -32,7 +32,7 @@ const store = configureStore({
 });
 
 export default store;
-export const baseUrl = "http://api.davsafaris.com"; // PROD VERSION
+export const baseUrl = "https://davsafaris.herokuapp.com"; // PROD VERSION
 // export const baseUrl = "http://127.0.0.1:5000"; // DEV VERSION
 // export const TRACKING_ID = "G-LJDPXC1D4T";
 export const TRACKING_ID = "UA-221371729-1";
