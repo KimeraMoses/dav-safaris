@@ -9,17 +9,34 @@ import { useDispatch } from "react-redux";
 import { CountriesData } from "../../containers/Countries/CountriesData";
 import SEO from "../../containers/SEO/SEO";
 
-const CountryTitle = {
-  UG: "Uganda Gorilla Safaris, Birding, Cultural Safaris, Mountain Climbing",
-  KE: "Kenya Wildlife Safaris, Birding Safaris, Best African Safaris Holidays",
-  TZ: "Tanzania Wildlife Safaris, Mountain Hiking, Birdwatching Tours",
-  RW: "Rwanda Gorilla Trekking, Rwanda Culture Safaris, Birding Safaris",
-};
-const CountryDesc = {
-  UG: "Uganda gorilla safaris gives tourists an opportunity to glance birding, cultural safaris and mountain climbing in the most affordable cost to fit your budget.",
-  KE: "We the reputed African wildlife and birding safaris offer an exceptional variety of travel options with best safari holidays to meet travellers requirements.",
-  TZ: "Tanzania wildlife safaris are renowned for animals and birdlife. Tourists can enjoy birdwatching tours and mountain hiking during their Tanzania safari trip.",
-  RW: "Rwanda Gorilla trekking gives you an experience to glance Gorillas in their natural habitat. Rwanda culture safaris give you an opportunity to experience birding safaris.",
+const countryMeta = {
+  UG: {
+    title: "Uganda Gorilla Safaris & Gorilla Trekking, Safari Tours Uganda",
+    description:
+      "gorilla trekking are the most popular way to view these magnificent creatures in the wild. Plan a trip with us and enjoy safari tours, mountain climbing, and more.",
+    keywords:
+      "safari uganda, safari tours uganda, uganda gorilla safaris, uganda gorilla trekking",
+  },
+  KE: {
+    title:
+      "Kenya Safari Tours,  Best Wildlife Safari in Kenya, Birding Safaris",
+    description:
+      "We the reputed Kenya safari tours offer an exceptional variety of travel options with the best safari holidays to meet travelers' requirements.",
+    keywords: "best safari in kenya, kenya safari tours",
+  },
+  TZ: {
+    title: "Best Tanzania Safari Tours, Luxury Tanzania Wildlife Safari",
+    description:
+      "Best Tanzania Safari Tours are renowned for animals and bird life. Tourists can enjoy  birdwatching tours and mountain hiking during their luxury Tanzania safari trip.",
+    keywords:
+      "best safari in tanzania, best tanzania safari, tanzania safari tours, luxury tanzania safari",
+  },
+  RW: {
+    title: "Gorilla Trekking Rwanda, Culture Safaris & Birding Safaris Rwanda",
+    description:
+      "Gorilla trekking in Rwanda gives you the experience to glance Gorillas in their natural habitat. Rwanda culture safaris allow you to experience birding safaris.",
+    keywords: "gorilla trekking rwanda",
+  },
 };
 
 const CountrySingle = () => {
@@ -41,21 +58,30 @@ const CountrySingle = () => {
       <SEO
         title={
           countryName === "uganda-safaris"
-            ? CountryTitle.UG
+            ? countryMeta.UG.title
             : countryName === "kenya-safaris"
-            ? CountryTitle.KE
+            ? countryMeta.KE.title
             : countryName === "tanzania-safaris"
-            ? CountryTitle.TZ
-            : CountryTitle.RW
+            ? countryMeta.TZ.title
+            : countryMeta.RW.title
         }
         description={
           countryName === "uganda-safaris"
-            ? CountryDesc.UG
+            ? countryMeta.UG.description
             : countryName === "kenya-safaris"
-            ? CountryDesc.KE
+            ? countryMeta.KE.description
             : countryName === "tanzania-safaris"
-            ? CountryDesc.TZ
-            : CountryDesc.RW
+            ? countryMeta.TZ.description
+            : countryMeta.RW.description
+        }
+        keywords={
+          countryName === "uganda-safaris"
+            ? countryMeta.UG.keywords
+            : countryName === "kenya-safaris"
+            ? countryMeta.KE.keywords
+            : countryName === "tanzania-safaris"
+            ? countryMeta.TZ.keywords
+            : countryMeta.RW.keywords
         }
       />
       <div className={classes.dav__country_single_wrapper}>

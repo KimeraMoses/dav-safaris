@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import SafariTag from "@material-ui/icons/LocalOfferOutlined";
 import DateIcon from "@material-ui/icons/DateRangeOutlined";
-import { SingleHero } from "../../Tours/SingleTour/SingleTour";
+import { isEmptyObject, SingleHero } from "../../Tours/SingleTour/SingleTour";
 import classes from "./Update.module.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
@@ -12,6 +12,13 @@ import {
 } from "../../../store/Actions/PostActions";
 import SEO from "../../../containers/SEO/SEO";
 import UpdateCard from "../UpdateCard";
+
+const defaultMeta = {
+  title:
+    "Best african Gorilla Safaris, Birding, Cultural Safaris and Mountain Climbing",
+  description:
+    "Africa Safari | Wildlife Safaris | Gorilla Trekking | Chimpanzee Trekking| Gorilla Trekking Uganda | Tanzania Safari | Kenya Safaris | Gorilla trekking Rwanda |African Wildlife Safari park | African Safari tours | trip advisor",
+};
 
 const Update = ({ type }) => {
   const Posts = useSelector((state) => state.post.posts);
@@ -42,12 +49,25 @@ const Update = ({ type }) => {
       ? languagePosts?.filter((post) => post.slug !== postTitle)
       : Posts?.filter((post) => post.slug !== postTitle);
 
+  let title = isEmptyObject(Post)
+    ? defaultMeta.title
+    : `${Post?.name} - Dav Safaris`;
+
+  let description = isEmptyObject(Post)
+    ? defaultMeta.description
+    : Post?.post_content?.substr(0, 268);
+
+  if (postTitle === "best-places-to-visit-in-rwanda") {
+    description =
+      "If you are wandering the most visited places in Rwanda, Visit here and explore the best places to visit in Rwanda.";
+  }
+
   return (
     <>
       {Post?.name && (
         <SEO
-          title={`${Post && Post.name} - Dav Safaris`}
-          description={Post && Post.post_content?.substr(0, 260)}
+          title={title}
+          description={description}
           keywords={Post && Post.key_words?.join()}
           image={Post && Post.postImage}
         />

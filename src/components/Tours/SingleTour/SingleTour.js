@@ -12,6 +12,10 @@ import { fetchTourName } from "../../../store/Actions/TourActions";
 import SEO from "../../../containers/SEO/SEO";
 import "./SingleTour.scss";
 
+export const isEmptyObject = (obj) => {
+  return JSON.stringify(obj) === "{}";
+};
+
 export const SingleHero = (props) => {
   const { title, image } = props;
   return (
@@ -28,6 +32,13 @@ export const SingleHero = (props) => {
   );
 };
 
+const defaultMeta = {
+  title:
+    "Best african Gorilla Safaris, Birding, Cultural Safaris and Mountain Climbing",
+  description:
+    "Africa Safari | Wildlife Safaris | Gorilla Trekking | Chimpanzee Trekking| Gorilla Trekking Uganda | Tanzania Safari | Kenya Safaris | Gorilla trekking Rwanda |African Wildlife Safari park | African Safari tours | trip advisor",
+};
+
 const SingleTour = () => {
   const dispatch = useDispatch();
   const { tourTitle } = useParams();
@@ -37,11 +48,39 @@ const SingleTour = () => {
   }, [tourTitle, dispatch]);
   const Tour = useSelector((state) => state.tour.tourDetails);
 
+  let title = isEmptyObject(Tour)
+    ? defaultMeta.title
+    : `${Tour?.name} - Dav Safaris`;
+
+  let description = isEmptyObject(Tour)
+    ? defaultMeta.description
+    : Tour?.description?.substr(0, 268);
+
+  if (tourTitle === "7-day-luxury-kenya-safari-holiday") {
+    title = "7-Day Luxury Kenya Safari Holiday, Kenya Safari Luxury";
+    description =
+      "Our 7-Day Luxury Kenya Safari Holiday offers a chance to experience one of the world's most beautiful and varied wildlife destinations in style and comfort. ";
+  } else if (tourTitle === "6-days-kenya-safari-adventure") {
+    title = "6 Days Kenya Safari Adventure, Safari in Kenya Masai Mara";
+    description =
+      "6 Days Kenya Safari adventure allows you to encounter the best wildlife experience in Africa. Plan your trip with us and enjoy Safari in Kenya Masai Mara.";
+  } else if (tourTitle === "10-days-wildlife-kenya-and-tanzania-safari") {
+    title = "10 Days Wildlife Safari in Kenya and Tanzania  - Dav Safaris";
+    description =
+      "Looking for 10 Day wildlife Kenya and Tanzania safari combo tour, Visit us and enjoy our 10 Days Wildlife safaris in Kenya and Tanzania on one trip.";
+  } else if (
+    tourTitle === "3-days-gorilla-trekking-in-mgahinga-gorilla-national-park."
+  ) {
+    title = "3 Days Gorilla Trekking in Mgahinga Gorilla National Park Uganda";
+    description =
+      "Mgahinga Gorilla National Park is the biggest reason to visit Uganda. So what are you thinking? Choose 3 Days Gorilla Trekking in Mgahinga Gorilla National Park Uganda and enjoy your trip.";
+  }
+
   return (
     <>
       <SEO
-        title={Tour ? `${Tour && Tour.name} - Dav Safaris` : "Loading..."}
-        description={Tour && Tour.description?.substr(0, 260)}
+        title={title}
+        description={description}
         keywords={Tour && Tour.key_words?.join()}
         image={Tour && Tour.imageCover}
       />
