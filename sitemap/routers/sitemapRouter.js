@@ -100,6 +100,7 @@ router.get("/", async function (req, res) {
       (pipeline = smStream.pipe(zlib.createGzip()));
 
     // Write tours URL to the stream
+    console.log("total tours", tours.length); //lastTotal 146
     tours.forEach((item) =>
       smStream.write({
         url: item,
@@ -108,7 +109,9 @@ router.get("/", async function (req, res) {
         priority: 0.7,
       })
     );
+
     // Write safari updates URL to the stream
+    console.log("total posts", posts.length); //lastRead 61
     posts.forEach((item) =>
       smStream.write({
         url: item,
@@ -117,7 +120,9 @@ router.get("/", async function (req, res) {
         priority: 0.7,
       })
     );
+
     // Write safari updates URL to the stream
+    console.log("total language posts", languagePosts.length); //lastTotal 134
     languagePosts.forEach((item) =>
       smStream.write({
         url: item,
