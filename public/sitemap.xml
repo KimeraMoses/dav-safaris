@@ -1,6 +1,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 	<url>
 		<loc>
+			https://davsafaris.com
+		</loc>
+		<lastmod>
+			2023-01-09T14:38:55.576Z
+		</lastmod>
+		<changefreq>
+			daily
+		</changefreq>
+		<priority>
+			0.7
+		</priority>
+	</url>
+	<url>
+		<loc>
 			https://davsafaris.com/tours/15-days-gorilla-safari-and-wildlife-in-uganda
 		</loc>
 		<lastmod>
