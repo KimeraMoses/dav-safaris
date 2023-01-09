@@ -16,10 +16,11 @@ const AboutUs = () => {
         safari. Mountain Gorilla trekking in Uganda and Rwanda, wild beast
         Migration in Tanzania and Kenya, Rwenzori and Kirimanjaro Mountain
         Hiking experiences and white water rafting adventure along the Nile
-        River. Our excellent team of Safari guides is capable to make your
-        safari a lifetime experience accompanied by the great and mechanically
-        sounding fleet. All our services are available throughout the year with
-        the best time being December to January and June to August.
+        River. Our excellent team provides the best safari in Africa and Safari
+        guides are capable to make your safari a lifetime experience accompanied
+        by the great and mechanically sounding fleet. All our services are
+        available throughout the year with the best time being December to
+        January and June to August.
       </p>
     </div>
   );
