@@ -95,7 +95,7 @@ const CountrySingle = () => {
             backgroundPosition: "center center",
           }}
         >
-          <h1>{currentCountry + " safaris"}</h1>
+          <h1>{SelectedCountry.title}</h1>
         </div>
         <CountryHeader Country={SelectedCountry} />
         <AboutCountry Country={SelectedCountry} />
