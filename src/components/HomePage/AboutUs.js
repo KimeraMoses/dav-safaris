@@ -4,7 +4,7 @@ import classes from "./AboutUs.module.css";
 const AboutUs = () => {
   return (
     <div className={classes.home__about__section}>
-      <h2>DAV SAFARIS UGANDA</h2>
+      <h1>DAV SAFARIS UGANDA</h1>
       <p>
         Tours and Travel Agency based in Uganda rendering mountain gorilla
         Trekking experience, birding and wildlife safaris doubled with a range
