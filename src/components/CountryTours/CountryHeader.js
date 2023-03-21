@@ -9,10 +9,7 @@ const CountryHeader = (props) => {
     <div className={classes.dav__country_header_section}>
       <div className={classes.dav__section__hdr}>
         <h2>Where you can travel with us in {Country && Country.name}</h2>
-        <p>
-          Our specialists can help you plan your trip, individually focusing on
-          your tastes and interests, to the destinations below.
-        </p>
+        <p>{Country?.summary}</p>
       </div>
       <div className={classes.dav__country_safaris_category}>
         {Country &&

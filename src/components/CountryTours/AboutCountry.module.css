@@ -1,65 +1,63 @@
-.dav__country_tours_overall_wrapper{
-    padding: 30px 100px!important;
+.dav__country_tours_overall_wrapper {
+  padding: 30px 100px !important;
 }
 
-.dav__contact_country_expert{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+.dav__contact_country_expert {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
 }
 
-.dav__contact_country_expert h2{
-    color: #343434;
-    font-family: "Merriweather", serif;
-    font-style: italic;
-    line-height: 1.4;
-    text-align: center;
+.dav__contact_country_expert h2 {
+  color: #343434;
+  font-family: "Merriweather", serif;
+  font-style: italic;
+  line-height: 1.4;
+  text-align: center;
 }
 
 .dav__contact_country_expert img {
-    flex-shrink: 0;
-    width: 80px;
-    margin-right: 10px;
-    padding: 0;
-    border-radius: 50%;
-    background-size: 40px;
-    height: 80px;
-    box-sizing: border-box;
-    border: 5px solid #fff;
+  flex-shrink: 0;
+  width: 80px;
+  margin-right: 10px;
+  padding: 0;
+  border-radius: 50%;
+  background-size: 40px;
+  height: 80px;
+  box-sizing: border-box;
+  border: 5px solid #fff;
 }
-.specialist__text{
-    display: flex;
+.specialist__text {
+  display: flex;
 }
-.dav__about_country_section p{
-    text-align: justify;
+.dav__about_country_section p {
+  text-align: justify;
 }
-.dav__contact_country_expert_card{
-    padding: 20px;
-    
-}
-
-.dav__contact_country_expert_contact_wrapper{
-    text-align: center;
-    list-style-type: none;
-}
-.dav__contact_country_expert_contact{
-    display: flex;
-    flex-direction: column;
-
+.dav__contact_country_expert_card {
+  padding: 20px;
 }
 
-.dav__contact_country_expert_contact_wrapper li{
-    padding: 10px 0;
+.dav__contact_country_expert_contact_wrapper {
+  text-align: center;
+  list-style-type: none;
 }
-.dav__contact_country_expert_contact a{
-    color: var(--dav__primary_color);
+.dav__contact_country_expert_contact {
+  display: flex;
+  flex-direction: column;
 }
-.dav__contact_country_expert_contact a:hover{
-    color: var(--dav__primary_color);
+
+.dav__contact_country_expert_contact_wrapper li {
+  padding: 10px 0;
+}
+.dav__contact_country_expert_contact a {
+  color: var(--dav__primary_color);
+}
+.dav__contact_country_expert_contact a:hover {
+  color: var(--dav__primary_color);
 }
 
 @media screen and (max-width: 689px) {
-    .dav__country_tours_overall_wrapper{
-        padding: 30px!important;
-    }
+  .dav__country_tours_overall_wrapper {
+    padding: 30px !important;
+  }
 }

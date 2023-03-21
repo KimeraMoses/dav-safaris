@@ -72,7 +72,8 @@ const Benefits = () => {
                     </h4>
                     <p>
                       Our travel experts, Safari Guides and the friendly local
-                      people ensures a lifetime experience away from home
+                      people ensures a lifetime experience for visiting the best
+                      safari in africa away from home.
                     </p>
                   </div>
                 </div>

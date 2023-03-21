@@ -12,6 +12,7 @@ import classes from "../CountrySingle.module.css";
 import PopularTours from "../../HomePage/PopularTours/PopularTours";
 import SectionTitle from "../../HomePage/SectionTitle/SectionTitle";
 import SEO from "../../../containers/SEO/SEO";
+import DescriptionSection from "../DescriptionSection";
 
 const categoryMeta = {
   "tanzania-wildlife-safaris": {
@@ -55,6 +56,8 @@ const Category = () => {
   )[0];
   const FilteredTours = Tours.filter((tour) => tour.category === tourCategory);
 
+  console.log(SelectedCategory.description);
+
   return (
     <>
       {categoryMeta[tourCategory] && (
@@ -78,6 +81,9 @@ const Category = () => {
           <h1>{SelectedCategory.name}</h1>
         </div>
         <div className={classes.dav__country_tours_wrapper}>
+          {SelectedCategory?.description && (
+            <DescriptionSection description={SelectedCategory.description} />
+          )}
           <SectionTitle
             subTitle="Exciting tours in "
             Title={`${SelectedCategory && SelectedCategory.name} Category`}

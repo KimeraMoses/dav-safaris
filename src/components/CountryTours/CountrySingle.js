@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import CountryHeader from "./CountryHeader";
-import AboutCountry from "./AboutCountry";
+import DescriptionSection from "./DescriptionSection";
 import classes from "./CountrySingle.module.css";
 import CountryTours from "./CountryTours";
 import { fetchAllCountryTours } from "../../store/Actions/TourActions";
@@ -98,7 +98,7 @@ const CountrySingle = () => {
           <h1>{SelectedCountry.title}</h1>
         </div>
         <CountryHeader Country={SelectedCountry} />
-        <AboutCountry Country={SelectedCountry} />
+        <DescriptionSection description={SelectedCountry.description} />
         <CountryTours Country={SelectedCountry && SelectedCountry.name} />
       </div>
     </>
