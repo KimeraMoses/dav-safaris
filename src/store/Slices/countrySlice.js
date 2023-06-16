@@ -25,9 +25,14 @@ const countrySlice = createSlice({
 
 const { reducer, actions } = countrySlice;
 
+//====SELECTING ALL COUNTRY STATES====//
+export const selectAllCountries = (state) => state.countries.countryList;
+export const selectIsLoading = (state) => state.countries.isLoading;
+export const selectError = (state) => state.countries.error;
+
 export const {
   fetchCountriesPending,
   fetchCountriesSuccess,
-  fetchCountriesFail
+  fetchCountriesFail,
 } = actions;
 export default reducer;
