@@ -13,7 +13,12 @@ const AboutCountry = (props) => {
     <Container fluid className={classes.dav__country_tours_overall_wrapper}>
       <Row className={classes.dav__country_tours_wrapper}>
         <Col md={8} sm={12} className={classes.dav__about_country_section}>
-          <p>{description}</p>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: description,
+            }}
+          ></div>
+          {/* <p>{description}</p> */}
         </Col>
         <Col md={4} sm={12} className={classes.dav__contact_country_expert}>
           <div
