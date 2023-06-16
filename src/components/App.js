@@ -32,6 +32,8 @@ import Thanks from "./ContactUs/Thanks";
 import DashBoard from "./DashBoard/DashBoard";
 import DashBoardItem from "./DashBoard/DashboardMenuItems/DashBoardItem";
 import ManageTours from "./DashBoard/ManageTours/ManageTours";
+import ManageCountries from "./DashBoard/ManageCountries/ManageCountries";
+import ManageTourCategories from "./DashBoard/ManageTourCategories/ManageTourCategories";
 import { AutoAuthenticate } from "../store/Actions/AuthActions";
 import { fetchAllTours } from "../store/Actions/TourActions";
 import Tours from "./Tours/AllTours/Tours";
@@ -41,6 +43,8 @@ import Policies from "../containers/PrivacyPolicies/Policies";
 import Updates from "./SafariUpdates/Updates";
 import ManageUpdates from "./DashBoard/ManageUpdates/ManageUpdates";
 import { fetchAllPosts } from "../store/Actions/PostActions";
+import { fetchAllCountrys } from "../store/Actions/CountryActions";
+import { fetchAllCategories } from "../store/Actions/TourCategoriesActions";
 import Update from "./SafariUpdates/SingleUpdate/Update";
 import Feature from "./DashBoard/Feature";
 import AboutUs from "./AboutUs/AboutUs";
@@ -52,6 +56,8 @@ import CommunityPage from "./CommunityPage/CommunityPage";
 import EditTours from "./DashBoard/ManageTours/EditTours";
 import EditPost from "./DashBoard/ManageUpdates/EditPost";
 import LanguagePosts from "./SafariUpdates/LanguagePosts";
+import EditCountry from "./DashBoard/ManageCountries/EditCountry";
+import EditCategory from "./DashBoard/ManageTourCategories/EditCategory";
 
 const App = (props) => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -62,6 +68,8 @@ const App = (props) => {
     AutoAuthenticate(dispatch);
     dispatch(fetchAllTours());
     dispatch(fetchAllPosts());
+    dispatch(fetchAllCountrys());
+    dispatch(fetchAllCategories());
 
     //====SEND DATA TO GOOGLE ANALYTICS===
     ReactGA.initialize(TRACKING_ID);
@@ -78,13 +86,24 @@ const App = (props) => {
             <Route path="/" exact element={<Home />} />
             <Route
               path="/dashboard/*"
-              element={
+                            element={
                 isAuthenticated ? <DashBoard /> : <Navigate to="/login" />
               }
             >
               <Route path="user" element={<DashBoardItem />} />
               <Route path="manage-tours" element={<ManageTours />} />
               <Route path="manage-tours/edit" element={<EditTours />} />
+              <Route path="manage-countries" element={<ManageCountries />} />
+              <Route path="manage-countries/edit" element={<EditCountry />} />
+              <Route
+                path="manage-tour-categories"
+                element={<ManageTourCategories />}
+              />
+              <Route
+                path="manage-tour-categories/edit"
+                element={<EditCategory />}
+              />
+
               <Route path="manage-safari-updates" element={<ManageUpdates />} />
               <Route path="manage-safari-updates/edit" element={<EditPost />} />
               <Route
