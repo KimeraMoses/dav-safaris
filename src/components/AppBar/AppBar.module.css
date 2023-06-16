@@ -12,7 +12,7 @@
   margin-bottom: 30px;
   padding: 0;
   background-color: transparent;
-  overflow: hidden;
+  /* overflow: auto; */
   box-shadow: 0 10px 15px rgb(25 25 25 / 10%);
   background-color: #fff;
 }
@@ -28,8 +28,8 @@
 .dav__AppBar_spacer {
   flex: 1;
 }
-.navbar_mobile_menu{
-    z-index: 99;
+.navbar_mobile_menu {
+  z-index: 99;
 }
 @media (max-width: 600px) {
   .dav__AppBar_logo_Wrapper img {
