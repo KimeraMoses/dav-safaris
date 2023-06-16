@@ -31,7 +31,7 @@ const ManageAgents = () => {
     setSelectedAgent(id);
     setIsLoading(true);
     const agent = agents.find((agent) => agent.id === id);
-    const res = await DAV_APIS.activateDeactivateAgent(
+    const res = await DAV_APIS.auth.activateDeactivateAgent(
       id,
       agent.isActive ? "deactivate" : "activate"
     );

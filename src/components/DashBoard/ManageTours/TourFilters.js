@@ -1,5 +1,5 @@
-import { Fab, Hidden, TextField } from "@material-ui/core";
 import React from "react";
+import { Fab, Hidden, TextField } from "@material-ui/core";
 import Dropdown from "../../UI/Dropdown/Dropdown";
 import classes from "./TourFilters.module.css";
 import AddIcon from "@material-ui/icons/Add";
@@ -25,6 +25,7 @@ const TourFilters = (props) => {
   } = props;
   const isLoading = useSelector((state) => state.tours.isLoading);
   const isFetchingPosts = useSelector((state) => state.post.isLoading);
+
   const RefreshHandler = () => {
     if (type === "posts") {
       dispatch(fetchAllPosts(language ? "language" : ""));

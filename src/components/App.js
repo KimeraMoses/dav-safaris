@@ -61,8 +61,10 @@ import EditCountry from "./DashBoard/ManageCountries/EditCountry";
 import EditCategory from "./DashBoard/ManageTourCategories/EditCategory";
 import ManageAgents from "./DashBoard/ManageAgents";
 import { DAV_ROLES } from "../constants";
+import Interceptor from "../Adapter/axios-interceptor";
 
 const App = () => {
+  Interceptor();
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
@@ -157,7 +159,11 @@ const App = () => {
             />
             <Route path="/register" exact element={<RegisterForm />} />
             <Route path="/password-reset" exact element={<ResetPassword />} />
-            <Route path="/change-password" exact element={<ChangePassword />} />
+            <Route
+              path="/reset-password/:resetToken"
+              exact
+              element={<ChangePassword />}
+            />
             <Route path="/contact-us" exact element={<ContactUs />} />
             <Route path="/thank-you" exact element={<Thanks />} />
             <Route path="/about-us" exact element={<AboutUs />} />
