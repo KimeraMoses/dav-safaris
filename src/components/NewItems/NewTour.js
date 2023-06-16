@@ -39,7 +39,8 @@ import EditItinaryModal from "../DashBoard/ManageTours/Itinary/EditItinary";
 import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
 import { useNavigate } from "react-router";
 import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
-
+import { selectAllCountries } from "../../store/Slices/countrySlice";
+import { fetchAllCountrys } from "../../store/Actions/CountryActions";
 let dayActivityDescription = [];
 
 // console.log("Outside", dayActivityDescription);
@@ -48,6 +49,8 @@ const NewTour = () => {
   const DarkMode = false;
   const isLoading = useSelector((state) => state.newTour.isLoading);
   const Tour = useSelector((state) => state.tour.tourDetails);
+  const CountryList = useSelector(selectAllCountries);
+  const [countryArray, setCountryArray] = useState([]);
   const [open, setOpen] = useState(false);
   const [keys, setKeys] = useState([]);
   const [Itinary, setItinary] = useState({});
@@ -86,19 +89,25 @@ const NewTour = () => {
     accomodation_plan: "",
   });
   useEffect(() => {}, [values]);
+  useEffect(() => {
+    dispatch(fetchAllCountrys());
+  }, [dispatch]);
+  useEffect(() => {
+    setCountryArray(CountryList?.countries);
+  }, [CountryList]);
 
   useEffect(() => {
     switch (values.country) {
-      case "uganda":
+      case "Uganda":
         setTourCategories(TourCategories_Uganda);
         break;
-      case "kenya":
+      case "Kenya":
         setTourCategories(TourCategories_Kenya);
         break;
-      case "rwanda":
+      case "Rwanda":
         setTourCategories(TourCategories_Rwanda);
         break;
-      case "tanzania":
+      case "Tanzania":
         setTourCategories(TourCategories_Tanzania);
         break;
       default:
@@ -364,10 +373,17 @@ const NewTour = () => {
                       name="country"
                       onChange={onChangeHandler}
                     >
-                      <MenuItem value="uganda">Uganda</MenuItem>
+                      {countryArray?.map((country) => {
+                        return (
+                          <MenuItem key={country?.id} value={country?.name}>
+                            {country?.name}
+                          </MenuItem>
+                        );
+                      })}
+                      {/* <MenuItem value="uganda">Uganda</MenuItem>
                       <MenuItem value="kenya">Kenya</MenuItem>
                       <MenuItem value="tanzania">Tanzania</MenuItem>
-                      <MenuItem value="rwanda">Rwanda</MenuItem>
+                      <MenuItem value="rwanda">Rwanda</MenuItem> */}
                     </Select>
                   </FormControl>
                 </div>
