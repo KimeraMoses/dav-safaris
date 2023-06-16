@@ -1,0 +1,11 @@
+.gpa__university_card_wrapper a{
+    text-decoration: none;
+}
+.gpa__university_card_wrapper{
+    /* padding:5px 10px; */
+}
+.dav__new_tour_form_wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
