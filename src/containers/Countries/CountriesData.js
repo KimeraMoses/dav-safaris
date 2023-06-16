@@ -58,4 +58,16 @@ export const CountriesData = [
     country_specialist: "+256701412430",
     tourCategories: TourCategories_Rwanda,
   },
+  {
+    name: "Egypt",
+    slug: "egypt-safaris",
+    title: "The Valley of the Kings - Egypt Safaris",
+    description:
+      "This comprehensive, multi-day journey gives you a personalized tour of Egypt from north to south and serves as the best introduction to the country. Slumber soundly in accommodations with all you need, including an overnight cruise on the Nile from Luxor to Aswan. ",
+    summary:
+      "A hot air balloon trip over the Valley of the Kings and a visit of Abu Simbel accompanied by an Egyptologist are two other attractions",
+    imageCover: RwCover,
+    country_specialist: "+256701412430",
+    tourCategories: TourCategories_Rwanda,
+  },
 ];
