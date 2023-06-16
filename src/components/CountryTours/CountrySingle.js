@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import CountryHeader from "./CountryHeader";
 import DescriptionSection from "./DescriptionSection";
 import classes from "./CountrySingle.module.css";
 import CountryTours from "./CountryTours";
 import { fetchAllCountryTours } from "../../store/Actions/TourActions";
 import { useDispatch } from "react-redux";
-import { CountriesData } from "../../containers/Countries/CountriesData";
+// import { CountriesData } from "../../containers/Countries/CountriesData";
+import { useSelector } from "react-redux";
+import { selectAllCountries } from "../../store/Slices/countrySlice";
 import SEO from "../../containers/SEO/SEO";
+import { fetchAllCountrys } from "../../store/Actions/CountryActions";
 
 const countryMeta = {
   UG: {
@@ -40,19 +43,25 @@ const countryMeta = {
 };
 
 const CountrySingle = () => {
+  const navigate = useNavigate();
   const { countryName } = useParams();
   const dispatch = useDispatch();
+  const Countries = useSelector(selectAllCountries);
+  let CountriesData = Countries?.countries;
+
   const currentCountry = countryName.split("-")[0];
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchAllCountryTours(currentCountry));
+    dispatch(fetchAllCountrys());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCountry]);
 
-  const SelectedCountry = CountriesData.filter(
-    (country) => country.name.toLowerCase() === currentCountry.toLowerCase()
+  const SelectedCountry = CountriesData?.filter(
+    (country) => country?.name.toLowerCase() === currentCountry.toLowerCase()
   )[0];
+
   return (
     <>
       <SEO
@@ -89,16 +98,16 @@ const CountrySingle = () => {
           className={classes.dav__single_tour_hero}
           style={{
             backgroundImage: `url(${
-              SelectedCountry && SelectedCountry.imageCover
+              SelectedCountry && SelectedCountry.countryImage
             })`,
             backgroundSize: "cover",
             backgroundPosition: "center center",
           }}
         >
-          <h1>{SelectedCountry.title}</h1>
+          <h1>{SelectedCountry?.title}</h1>
         </div>
         <CountryHeader Country={SelectedCountry} />
-        <DescriptionSection description={SelectedCountry.description} />
+        <DescriptionSection description={SelectedCountry?.description} />
         <CountryTours Country={SelectedCountry && SelectedCountry.name} />
       </div>
     </>
