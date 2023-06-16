@@ -27,9 +27,7 @@ const ImageUpload = ({ tourImageHandler, tourImage, Image, isPost }) => {
       >
         <UploadIcon />
         <p>
-          {tourImage?.length > 0
-            ? `Change ${isPost ? "post" : "tour"} cover image`
-            : `Upload ${isPost ? "post" : "tour"} cover image`}
+          {tourImage?.length > 0 ? `Change  cover image` : `Upload cover image`}
         </p>
         <input
           type="file"
