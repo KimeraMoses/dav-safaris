@@ -14,6 +14,7 @@ const AboutCountry = (props) => {
       <Row className={classes.dav__country_tours_wrapper}>
         <Col md={8} sm={12} className={classes.dav__about_country_section}>
           <div
+            style={{ fontSize: "18px" }}
             dangerouslySetInnerHTML={{
               __html: description,
             }}
