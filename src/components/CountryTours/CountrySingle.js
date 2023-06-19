@@ -61,6 +61,11 @@ const CountrySingle = () => {
   const SelectedCountry = CountriesData?.filter(
     (country) => country?.name.toLowerCase() === currentCountry.toLowerCase()
   )[0];
+  useEffect(() => {
+    if (!SelectedCountry) {
+      navigate("/");
+    }
+  }, [SelectedCountry]);
 
   return (
     <>
