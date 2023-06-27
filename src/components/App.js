@@ -49,11 +49,12 @@ import PrivacyPrompt from "../containers/PrivacyPolicies/PrivacyPrompt";
 import ReactGA from "react-ga";
 import { TRACKING_ID } from "../store";
 import CommunityPage from "./CommunityPage/CommunityPage";
+import { AgentDashboard } from "./DashBoard/Agent";
 import EditTours from "./DashBoard/ManageTours/EditTours";
 import EditPost from "./DashBoard/ManageUpdates/EditPost";
 import LanguagePosts from "./SafariUpdates/LanguagePosts";
 
-const App = (props) => {
+const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
 
@@ -76,6 +77,7 @@ const App = (props) => {
           <AppBar />
           <Routes>
             <Route path="/" exact element={<Home />} />
+            <Route path="/agent-dashboard" element={<AgentDashboard />} />
             <Route
               path="/dashboard/*"
               element={
