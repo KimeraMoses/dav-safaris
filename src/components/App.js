@@ -80,7 +80,16 @@ const App = () => {
           <AppBar />
           <Routes>
             <Route path="/" exact element={<Home />} />
-            <Route path="/agent-dashboard" element={<AgentDashboard />} />
+            <Route
+              path="/agent-dashboard"
+              element={
+                isAuthenticated && user.role === DAV_ROLES.AGENT ? (
+                  <AgentDashboard />
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
             <Route
               path="/dashboard/*"
               element={

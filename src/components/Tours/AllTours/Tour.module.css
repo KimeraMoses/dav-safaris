@@ -1,10 +1,12 @@
 .dav__all_tours_search_area {
   padding: 40px 20px;
-  
 }
 .dav__tours_wrapper {
-  padding: 20px 0 30px;
+  padding: 20px 20px 30px;
   background-color: #fafafa;
+}
+.dav__popular_tour_card_wrapper {
+  padding: 0px !important;
 }
 .dav__no_results_wrapper {
   padding: 50px;
@@ -12,11 +14,9 @@
   justify-content: center;
   align-items: center;
 }
-.dav__no_results_found_error_wrapper_inner{
+.dav__no_results_found_error_wrapper_inner {
   padding: 30px;
   font-weight: 600;
   font-family: "Merriweather", serif;
   font-style: italic;
-
-    
 }

@@ -2,21 +2,29 @@ import { Paper } from "@material-ui/core";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAllTours } from "../../../store/Actions/TourActions";
 import TourFilters from "../../TourFilters/TourFilters";
 import TourCard from "../TourCard";
 import TourCardSkeleton from "../TourCardSkeleton";
 import classes from "./Tour.module.css";
+import { DAV_APIS } from "../../../Adapter";
 
 const Tours = () => {
-  const Tours = useSelector((state) => state.tours.toursList);
-  const isLoading = useSelector((state) => state.tours.isLoading);
-  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+  const [tours, setTours] = useState([]);
+
+  const fetchAllTours = async () => {
+    setIsLoading(true);
+    const res = await DAV_APIS.get.getAllTours();
+    if (res.status === 200) {
+      setTours(res.data.tours);
+    }
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(fetchAllTours());
-  }, [dispatch]);
+    fetchAllTours();
+  }, []);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -27,7 +35,7 @@ const Tours = () => {
   });
   const isFiltered =
     values.duration || values.selectedCategory || values.selectedCountry;
-  let FilteredTours = Tours;
+  let FilteredTours = tours;
 
   const filterChangeHandler = (event) => {
     const { name, value } = event.target;

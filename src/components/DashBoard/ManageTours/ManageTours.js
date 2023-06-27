@@ -5,36 +5,43 @@ import classes from "./ManageTours.module.css";
 import { List } from "@material-ui/core";
 import TourFilters from "./TourFilters";
 import NewTour from "../../NewItems/NewTour";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchAllTours } from "../../../store/Actions/TourActions";
 import { useNavigate } from "react-router";
 import DeleteModal from "./Itinary/DeleteModal";
 import Loader from "../../../containers/Loader/Loader";
+import { DAV_APIS } from "../../../Adapter";
 
 const ManageTours = () => {
+  const [isFetching, setIsFetching] = useState(false);
+  const [tours, setTours] = useState([]);
   const isLoading = useSelector((state) => state.tour.isLoading);
-
-  const isFetching = useSelector((state) => state.tours.isLoading);
-  const TourList = useSelector((state) => state.tours.toursList);
-  const [country, setCountry] = useState("Filter by country");
+  const [country, setCountry] = useState("uganda");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedTour, setSelectedTour] = useState("");
   const [addNew, setAddNew] = useState(false);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchAllTours());
 
-    window.scrollTo(0, 0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  let FilteredTours = TourList;
+  let FilteredTours = tours;
   // const onAddNewClick =()=>{
   //   setAddNew(true)
   // }
+
+  const fetchAllTours = async () => {
+    setIsFetching(true);
+    const res = await DAV_APIS.get.getAllTours();
+    if (res.status === 200) {
+      setTours(res.data.tours);
+    }
+    setIsFetching(false);
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    fetchAllTours();
+  }, []);
 
   const onEditClick = (tourId) => {
     navigate(`/dashboard/manage-tours/edit?tour=${tourId}`);
@@ -45,9 +52,9 @@ const ManageTours = () => {
   };
 
   if (country === "Filter by country") {
-    FilteredTours = TourList;
+    FilteredTours = tours;
   } else {
-    FilteredTours = TourList.filter((tour) => tour.country === country);
+    FilteredTours = tours.filter((tour) => tour.country === country);
   }
 
   const SearchHandler = (e) => {
@@ -122,6 +129,7 @@ const ManageTours = () => {
         setOpen={setOpen}
         Id={selectedTour}
         setSearchTerm={setSearchTerm}
+        callback={fetchAllTours}
       />
     </Container>
   );

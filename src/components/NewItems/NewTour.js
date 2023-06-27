@@ -27,7 +27,6 @@ import styles from "./NewTour.module.css";
 import NewItinary from "./NewItinary";
 import ImageUpload from "./ImageUpload";
 import { useEffect } from "react";
-import { creatNewTour } from "../../store/Actions/TourActions";
 import {
   TourCategories_Kenya,
   TourCategories_Rwanda,
@@ -39,6 +38,7 @@ import EditItinaryModal from "../DashBoard/ManageTours/Itinary/EditItinary";
 import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
 import { useNavigate } from "react-router";
 import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
+import { DAV_APIS } from "../../Adapter";
 
 let dayActivityDescription = [];
 
@@ -197,21 +197,23 @@ const NewTour = () => {
     }
 
     try {
-      await dispatch(
-        creatNewTour(
-          values.name,
-          values.description,
-          JSON.stringify(tourActivities),
-          JSON.stringify(dayActivityDescription),
-          values.duration,
-          values.price,
-          values.selectedImage,
-          JSON.stringify(packageDetails),
-          values.category,
-          values.country,
-          JSON.stringify(keys)
-        )
-      );
+      const data = {
+        name: values.name,
+        description: values.description,
+        tourActivities: JSON.stringify(tourActivities),
+        file: values.cover_image,
+        country: values.country,
+        category: values.category,
+        duration: values.duration,
+        price: values.price,
+        includes: JSON.stringify(priceIncludes),
+        excludes: JSON.stringify(priceExcludes),
+        dayActivityDescription: JSON.stringify(dayActivityDescription),
+        packageDetails: JSON.stringify(packageDetails),
+        key_words: JSON.stringify(keys),
+      };
+      await DAV_APIS.createNewTour(data);
+
       toast.success(`${values.name} Created Successfully`);
       setMessage(`${values.name} Created Successfully`);
       navigate("/dashboard/manage-tours");
