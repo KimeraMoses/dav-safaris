@@ -53,9 +53,12 @@ import { AgentDashboard } from "./DashBoard/Agent";
 import EditTours from "./DashBoard/ManageTours/EditTours";
 import EditPost from "./DashBoard/ManageUpdates/EditPost";
 import LanguagePosts from "./SafariUpdates/LanguagePosts";
+import ManageAgents from "./DashBoard/ManageAgents";
+import { DAV_ROLES } from "../constants";
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -81,11 +84,16 @@ const App = () => {
             <Route
               path="/dashboard/*"
               element={
-                isAuthenticated ? <DashBoard /> : <Navigate to="/login" />
+                isAuthenticated && user.role === DAV_ROLES.ADMIN ? (
+                  <DashBoard />
+                ) : (
+                  <Navigate to="/login" />
+                )
               }
             >
               <Route path="user" element={<DashBoardItem />} />
               <Route path="manage-tours" element={<ManageTours />} />
+              <Route path="manage-agents" element={<ManageAgents />} />
               <Route path="manage-tours/edit" element={<EditTours />} />
               <Route path="manage-safari-updates" element={<ManageUpdates />} />
               <Route path="manage-safari-updates/edit" element={<EditPost />} />
@@ -107,7 +115,13 @@ const App = () => {
               exact
               element={
                 isAuthenticated ? (
-                  <Navigate to="/dashboard/user" />
+                  <Navigate
+                    to={
+                      user.role === DAV_ROLES.AGENT
+                        ? "/agent-dashboard"
+                        : "/dashboard/user"
+                    }
+                  />
                 ) : (
                   <LoginForm />
                 )

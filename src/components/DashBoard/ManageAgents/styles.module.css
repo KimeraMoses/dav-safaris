@@ -1,0 +1,73 @@
+.dav_manage_agents_wrapper {
+  padding: 30px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.dav__agent_dashboard_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.dav_manage_agent_card {
+  border-radius: 20px;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+  width: 25%;
+}
+
+.dav_manage_agent_card_inner {
+  padding: 20px;
+}
+
+.dav_manage_agent_card_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dav_manage_agent_card_header svg {
+  color: var(--dav__primary_color);
+}
+
+.dav_manage_agent_card_header h4 {
+  margin: 0;
+  color: var(--dav__tertiary_color);
+  text-transform: capitalize;
+}
+.dav_manage_agent_card_body {
+  padding: 20px 0;
+}
+.dav_manage_agent_card_body_content {
+  color: #475467;
+}
+
+.dav_manage_agent_card_body_content span {
+  font-weight: 600;
+}
+.dav_manage_agents_no_agents {
+  width: 100%;
+}
+
+.dav_manage_agents_no_agents p {
+  color: var(--dav__tertiary_color);
+  font-size: 18px;
+  margin: 0;
+  padding: 20px 0;
+}
+
+@media screen and (max-width: 769px) {
+  .dav_manage_agent_card {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 569px) {
+  .dav_manage_agent_card {
+    width: 100%;
+  }
+}

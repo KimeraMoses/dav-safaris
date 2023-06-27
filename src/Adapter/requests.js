@@ -37,10 +37,54 @@ const requestAdapter = (requestor) => ({
     },
   },
 
+  activateDeactivateAgent: async (agentId, action) => {
+    const data = { agentId };
+    const url =
+      action === "activate"
+        ? `/api/v1/users/activateAgent`
+        : `/api/v1/users/deactivateAgent`;
+    const response = await requestor({
+      method: "POST",
+      url,
+      data,
+    });
+    return response;
+  },
+
   /**
    * @name get - handle all get requests for estimate
    */
-  get: {},
+  get: {
+    /**
+     * @name getAllAgents
+     * @description Function used to get all agents
+     * @returns {object} response
+     */
+    getAllAgents: async () => {
+      const url = `/api/v1/users/getAllAgents`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+
+      return response;
+    },
+
+    /**
+     * @name getAllTours
+     * @description Function used to get all tours
+     * @returns {object} response
+     */
+    getAllTours: async () => {
+      const url = `/api/v1/tours/getAllTours`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+
+      return response;
+    },
+  },
 });
 
 export default requestAdapter;

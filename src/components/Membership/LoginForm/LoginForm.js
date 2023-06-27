@@ -90,8 +90,14 @@ const LoginForm = () => {
           })
         );
         SaveTokenInLocalStorage(dispatch, data);
+        console.log(
+          "data",
+          data.user.role === DAV_ROLES.AGENT,
+          data.user.role,
+          DAV_ROLES.AGENT
+        );
         if (data.user.role === DAV_ROLES.AGENT) {
-          navigate("/dashboard/agent");
+          navigate("/agent-dashboard");
         } else {
           navigate("/dashboard/user");
         }
