@@ -28,7 +28,7 @@ const DeleteModal = (props) => {
       await DAV_APIS.deletePostById(Id, language ? "language" : "");
       toast.success("Post deleted Successfully");
     }
-    callback();
+    callback && callback();
     setLoading(false);
     setOpen(false);
     setSearchTerm("");

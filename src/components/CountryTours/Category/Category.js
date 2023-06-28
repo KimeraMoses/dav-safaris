@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import {
   TourCategories_Kenya,
@@ -7,12 +6,12 @@ import {
   TourCategories_Tanzania,
   TourCategories_Uganda,
 } from "../../../containers/Countries/TourCategories";
-import { fetchAllCountryTours } from "../../../store/Actions/TourActions";
 import classes from "../CountrySingle.module.css";
 import PopularTours from "../../HomePage/PopularTours/PopularTours";
 import SectionTitle from "../../HomePage/SectionTitle/SectionTitle";
 import SEO from "../../../containers/SEO/SEO";
 import DescriptionSection from "../DescriptionSection";
+import { useCountryTours } from "../../../hooks";
 
 const categoryMeta = {
   "tanzania-wildlife-safaris": {
@@ -37,15 +36,14 @@ const categoryMeta = {
 
 const Category = () => {
   const { countryName, tourCategory } = useParams();
-  const Tours = useSelector((state) => state.tours.countryTours);
-  const dispatch = useDispatch();
   const currentCountry = countryName.split("-")[0];
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(fetchAllCountryTours(currentCountry));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentCountry]);
+  }, [tourCategory]);
+
+  const { tours, isLoading } = useCountryTours(currentCountry);
 
   const SelectedCategory = TourCategories_Uganda.concat(
     TourCategories_Kenya,
@@ -54,9 +52,7 @@ const Category = () => {
   ).filter(
     (category) => category.value.toLowerCase() === tourCategory.toLowerCase()
   )[0];
-  const FilteredTours = Tours.filter((tour) => tour.category === tourCategory);
-
-  console.log(SelectedCategory.description);
+  const FilteredTours = tours.filter((tour) => tour.category === tourCategory);
 
   return (
     <>
@@ -88,7 +84,7 @@ const Category = () => {
             subTitle="Exciting tours in "
             Title={`${SelectedCategory && SelectedCategory.name} Category`}
           />
-          <PopularTours Tours={FilteredTours} />
+          <PopularTours tours={FilteredTours} isLoading={isLoading} />
         </div>
       </div>
     </>

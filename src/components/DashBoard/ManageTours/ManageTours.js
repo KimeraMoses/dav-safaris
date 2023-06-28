@@ -10,11 +10,11 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import DeleteModal from "./Itinary/DeleteModal";
 import Loader from "../../../containers/Loader/Loader";
-import { DAV_APIS } from "../../../Adapter";
+import { useAllTours } from "../../../hooks";
 
 const ManageTours = () => {
-  const [isFetching, setIsFetching] = useState(false);
-  const [tours, setTours] = useState([]);
+  const { tours, isLoading: isFetching } = useAllTours();
+
   const isLoading = useSelector((state) => state.tour.isLoading);
   const [country, setCountry] = useState("uganda");
   const [searchTerm, setSearchTerm] = useState("");
@@ -25,22 +25,9 @@ const ManageTours = () => {
   const navigate = useNavigate();
 
   let FilteredTours = tours;
-  // const onAddNewClick =()=>{
-  //   setAddNew(true)
-  // }
-
-  const fetchAllTours = async () => {
-    setIsFetching(true);
-    const res = await DAV_APIS.get.getAllTours();
-    if (res.status === 200) {
-      setTours(res.data.tours);
-    }
-    setIsFetching(false);
-  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchAllTours();
   }, []);
 
   const onEditClick = (tourId) => {
@@ -129,7 +116,6 @@ const ManageTours = () => {
         setOpen={setOpen}
         Id={selectedTour}
         setSearchTerm={setSearchTerm}
-        callback={fetchAllTours}
       />
     </Container>
   );

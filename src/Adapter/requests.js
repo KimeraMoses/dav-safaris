@@ -26,6 +26,12 @@ const requestAdapter = (requestor) => ({
       return response;
     },
 
+    /**
+     * @name login
+     * @description Function used to make request to login user
+     * @param {object} data
+     * @returns {Promise<any>} response
+     */
     login: async (data) => {
       const url = `/api/v1/users/login`;
       const response = await requestor({
@@ -37,6 +43,13 @@ const requestAdapter = (requestor) => ({
     },
   },
 
+  /**
+   * @name activateDeactivateAgent
+   * @description Function used to make request to activate or deactivate an agent
+   * @param {string} agentId
+   * @param {string} action
+   * @returns {Promise<any>} response
+   */
   activateDeactivateAgent: async (agentId, action) => {
     const data = { agentId };
     const url =
@@ -171,6 +184,92 @@ const requestAdapter = (requestor) => ({
   },
 
   /**
+   * @name createCountry
+   * @description Function used to make request to create a country
+   * @param {object} data
+   * @returns {Promise<any>} response
+   */
+  createCountry: async (data) => {
+    const url = `/api/v1/countries/create`;
+    // TODO: if formData, then check tour creation for the format of formData
+    const response = await requestor({
+      method: "POST",
+      url,
+      data,
+    });
+    return response;
+  },
+
+  /**
+   * @name editCountry
+   * @description Function used to make request to edit a country
+   * @param {object} data
+   * @param {string} countryId
+   * @returns {Promise<any>} response
+   */
+  editCountry: async (data, countryId) => {
+    const url = `/api/v1/countries/updateCountry/${countryId}`;
+    // TODO: if formData, then check tour creation for the format of formData
+    const response = await requestor({
+      method: "PATCH",
+      url,
+      data,
+    });
+    return response;
+  },
+
+  /**
+   * @name getCountryBySlug
+   * @description Function used to make request to get a country by slug
+   * @param {string} slug
+   * @returns {Promise<any>} response
+   */
+  getCountryBySlug: async (slug) => {
+    const url = `/api/v1/countries/getCountryBySlug/${slug}`;
+    const response = await requestor({
+      method: "GET",
+      url,
+    });
+    return response;
+  },
+
+  /**
+   * @name createCategory
+   * @description Function used to make request to create a category
+   * @param {object} data
+   * @returns {Promise<any>} response
+   */
+  createCategory: async (data) => {
+    const url = `/api/v1/categories/create`;
+    // TODO: if formData, then check tour creation for the format of formData
+    const response = await requestor({
+      method: "POST",
+      url,
+      data,
+    });
+    return response;
+  },
+
+  /**
+   * @name editCategory
+   * @description Function used to make request to edit a category
+   * @param {object} data
+   * @param {string} categoryId
+   * @returns {Promise<any>} response
+   * @todo check if formData is needed and switch to it
+   */
+  editCategory: async (data, categoryId) => {
+    const url = `/api/v1/categories/updateCategory/${categoryId}`;
+    // TODO: if formData, then check tour creation for the format of formData
+    const response = await requestor({
+      method: "PATCH",
+      url,
+      data,
+    });
+    return response;
+  },
+
+  /**
    * @name get - handle all get requests for estimate
    */
   get: {
@@ -196,6 +295,38 @@ const requestAdapter = (requestor) => ({
      */
     getAllTours: async () => {
       const url = `/api/v1/tours/getAllTours`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+
+      return response;
+    },
+
+    /**
+     * @name getAllToursByCountry
+     * @description Function used to get all tours by country name
+     * @param {string} country
+     * @returns {object} response
+     */
+    getAllToursByCountry: async (country) => {
+      const url = `/api/v1/tours/getAllTours/${country}`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+
+      return response;
+    },
+
+    /**
+     * @name getTourByName
+     * @description Function used to get tour by name
+     * @param {string} tourName
+     * @returns {Promise<any>} response
+     */
+    getTourByName: async (tourName) => {
+      const url = `/api/v1/tours/getTourByName/${tourName}`;
       const response = await requestor({
         method: "GET",
         url,

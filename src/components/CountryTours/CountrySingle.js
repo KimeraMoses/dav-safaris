@@ -4,8 +4,6 @@ import CountryHeader from "./CountryHeader";
 import DescriptionSection from "./DescriptionSection";
 import classes from "./CountrySingle.module.css";
 import CountryTours from "./CountryTours";
-import { fetchAllCountryTours } from "../../store/Actions/TourActions";
-import { useDispatch } from "react-redux";
 import { CountriesData } from "../../containers/Countries/CountriesData";
 import SEO from "../../containers/SEO/SEO";
 
@@ -41,12 +39,9 @@ const countryMeta = {
 
 const CountrySingle = () => {
   const { countryName } = useParams();
-  const dispatch = useDispatch();
   const currentCountry = countryName.split("-")[0];
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(fetchAllCountryTours(currentCountry));
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCountry]);
 

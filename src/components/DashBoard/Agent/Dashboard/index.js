@@ -4,8 +4,7 @@ import classes from "./styles.module.css";
 import { useEffect } from "react";
 import TourCard from "../../../Tours/TourCard";
 import TourCardSkeleton from "../../../Tours/TourCardSkeleton";
-import { DAV_APIS } from "../../../../Adapter";
-import { useState } from "react";
+import { useAllTours } from "../../../../hooks";
 
 function getGreeting(name) {
   const currentTime = new Date();
@@ -21,25 +20,16 @@ function getGreeting(name) {
     greeting = "Good Evening";
   }
 
-  return `${greeting} ${name}`;
+  return `${greeting}, ${name}`;
 }
 
 const AgentDashboard = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [tours, setTours] = useState([]);
+  const { tours, isLoading } = useAllTours();
+
   const user = useSelector((state) => state.auth.user);
 
-  const allTours = async () => {
-    setIsLoading(true);
-    const res = await DAV_APIS.get.getAllTours();
-    if (res.status === 200) {
-      setTours(res.data.tours);
-    }
-    setIsLoading(false);
-  };
-
   useEffect(() => {
-    allTours();
+    window.scrollTo(0, 0);
   }, []);
 
   return (

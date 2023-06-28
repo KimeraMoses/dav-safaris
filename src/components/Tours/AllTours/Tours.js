@@ -6,24 +6,13 @@ import TourFilters from "../../TourFilters/TourFilters";
 import TourCard from "../TourCard";
 import TourCardSkeleton from "../TourCardSkeleton";
 import classes from "./Tour.module.css";
-import { DAV_APIS } from "../../../Adapter";
+import { useAllTours } from "../../../hooks";
 
 const Tours = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [tours, setTours] = useState([]);
-
-  const fetchAllTours = async () => {
-    setIsLoading(true);
-    const res = await DAV_APIS.get.getAllTours();
-    if (res.status === 200) {
-      setTours(res.data.tours);
-    }
-    setIsLoading(false);
-  };
+  const { tours, isLoading } = useAllTours();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchAllTours();
   }, []);
 
   const [searchTerm, setSearchTerm] = useState("");
