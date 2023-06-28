@@ -35,7 +35,6 @@ const ManageAgents = () => {
       id,
       agent.isActive ? "deactivate" : "activate"
     );
-    console.log("res", res);
     if (res.status === 200) {
       getAllAgents();
     }

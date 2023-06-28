@@ -42,8 +42,6 @@ import { DAV_APIS } from "../../Adapter";
 
 let dayActivityDescription = [];
 
-// console.log("Outside", dayActivityDescription);
-
 const NewTour = () => {
   const DarkMode = false;
   const isLoading = useSelector((state) => state.newTour.isLoading);

@@ -61,7 +61,6 @@ export const login = (email, password, navigate) => {
     );
 
     SaveTokenInLocalStorage(dispatch, data);
-    console.log("data", data);
     if (data.user.role === DAV_ROLES.AGENT) {
       navigate("/dashboard/agent");
     } else {
