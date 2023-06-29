@@ -33,20 +33,15 @@ const SearchResults = ({ Results }) => {
                   sm={12}
                   className={classes.dav__popular_tour_card_wrapper}
                 >
-                  <TourCard
-                    TourImage={tour.imageCover}
-                    TourTitle={tour.name}
-                    TourSlug={tour.slug}
-                    NumDays={tour.duration}
-                    NumNights={tour.duration - 1}
-                    TourDescription={tour.description}
-                    TourRating={tour.ratingsAverage}
-                  />
+                  <TourCard tour={tour} />
                 </Col>
               );
             })}
         {!isLoading && Results.length < 1 && (
-          <Paper className={classes.dav__no_results_found_error_wrapper}> No Tours matching your search queries found!</Paper>
+          <Paper className={classes.dav__no_results_found_error_wrapper}>
+            {" "}
+            No Tours matching your search queries found!
+          </Paper>
         )}
       </Row>
     </Container>

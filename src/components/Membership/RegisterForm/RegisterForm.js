@@ -103,9 +103,6 @@ const RegisterForm = () => {
       if (values.companyName.length < 1) {
         return setError("Company name is required");
       }
-      if (values.companyWebsite.length < 1) {
-        return setError("Company website is required");
-      }
     }
 
     if (values.password.length < 6) {

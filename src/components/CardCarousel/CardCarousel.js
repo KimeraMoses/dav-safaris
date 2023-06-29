@@ -31,18 +31,7 @@ const CardCarousel = ({ tours, isLoading }) => {
             return <TourCardSkeleton type="slider" key={index} />;
           })
         : tours?.slice(0, 20).map((tour) => {
-            return (
-              <TourCard
-                key={tour.id}
-                TourImage={tour.imageCover}
-                TourTitle={tour.name}
-                TourSlug={tour.slug}
-                NumDays={tour.duration}
-                NumNights={tour.duration - 1}
-                TourDescription={tour.description}
-                TourRating={tour.ratingsAverage}
-              />
-            );
+            return <TourCard key={tour.id} tour={tour} />;
           })}
     </Carousel>
   );
