@@ -18,16 +18,16 @@ import { Col, Container, Row, Form } from "react-bootstrap";
 //===COMPONENT IMPORTS===
 import styles from "../../NewItems/NewTour.module.css";
 import { useEffect } from "react";
-import {
-  TourCategories_Kenya,
-  TourCategories_Rwanda,
-  TourCategories_Tanzania,
-  TourCategories_Uganda,
-} from "../../../containers/Countries/TourCategories";
+// import {
+//   TourCategories_Kenya,
+//   TourCategories_Rwanda,
+//   TourCategories_Tanzania,
+//   TourCategories_Uganda,
+// } from "../../../containers/Countries/TourCategories";
 import ImageUpload from "../../NewItems/ImageUpload";
 
 import {
-  fetchCountryDetails,
+  // fetchCountryDetails,
   editCountryDetails,
 } from "../../../store/Actions/CountryActions";
 import { useLocation, useNavigate } from "react-router";
@@ -42,7 +42,7 @@ import { convertHTMLToDraftState } from "../../../utils/Utils";
 import { countryEditIsLoading } from "../../../store/Slices/editCountrySlice";
 import {
   countryFetchIsLoading,
-  selectCountryDetails,
+  // selectCountryDetails,
   fetchCountryFail,
   fetchCountryPending,
   fetchCountrySuccess,
@@ -52,7 +52,7 @@ const EditCountry = (props) => {
   const DarkMode = false;
   const isEditing = useSelector(countryEditIsLoading);
   const isFetching = useSelector(countryFetchIsLoading);
-  const fetchedCountry = useSelector(selectCountryDetails);
+  // const fetchedCountry = useSelector(selectCountryDetails);
   const [isLoading, setIsLoading] = useState(false);
   const [country, setCountry] = useState({});
   const [keys, setKeys] = useState([]);
@@ -66,7 +66,7 @@ const EditCountry = (props) => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const [TourCategories, setTourCategories] = useState([]);
+
   const fetchCountryDetails = (country_id) => async (dispatch) => {
     dispatch(fetchCountryPending());
     try {
@@ -78,17 +78,18 @@ const EditCountry = (props) => {
       dispatch(fetchCountryFail(error.message));
     }
   };
+  console.log(country);
 
   //====GET THE SELECTED DOCUMENT CATEGORY====//
   function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
   let query = useQuery();
-  const selectedCategory = query.get("country");
+  const selectedCountry = query.get("country");
   useEffect(() => {
-    dispatch(fetchCountryDetails(selectedCategory));
+    dispatch(fetchCountryDetails(selectedCountry));
     // eslint-disable-next-li
-  }, [dispatch, selectedCategory]);
+  }, [dispatch, selectedCountry]);
 
   const [editorState, setEditorState] = useState(() =>
     convertHTMLToDraftState(country.description)
@@ -119,25 +120,6 @@ const EditCountry = (props) => {
 
     // eslint-disable-next-line
   }, [country]);
-
-  useEffect(() => {
-    switch (values.country) {
-      case "uganda":
-        setTourCategories(TourCategories_Uganda);
-        break;
-      case "kenya":
-        setTourCategories(TourCategories_Kenya);
-        break;
-      case "rwanda":
-        setTourCategories(TourCategories_Rwanda);
-        break;
-      case "tanzania":
-        setTourCategories(TourCategories_Tanzania);
-        break;
-      default:
-        break;
-    }
-  }, [values.country]);
 
   //====TOUR COVER IMAGE HANDLER====//
   const tourImageHandler = async (e) => {
@@ -219,7 +201,7 @@ const EditCountry = (props) => {
       setIsLoading(false);
       toast.success("Changes saved Successfully");
       setMessage(`Changes to ${country.name} saved Successfully`);
-      setTourCategories([]);
+
       setValues({
         name: "",
         title: "",
@@ -235,7 +217,7 @@ const EditCountry = (props) => {
     } catch (error) {
       setIsLoading(false);
       toast.error("Failed to save changes!");
-      setError("Tour Registration Failed");
+      setError("Country Registration Failed");
     }
   };
 
@@ -333,7 +315,7 @@ const EditCountry = (props) => {
                     <TextField
                       className={styles.gpa__form_input_field}
                       label="Country summary"
-                      placeholder="Write each highlight on a new line"
+                      placeholder="Write each on a new line"
                       multiline
                       value={values.countrySummary}
                       name="countrySummary"

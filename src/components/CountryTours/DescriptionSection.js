@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const AboutCountry = (props) => {
   const { countryName } = useParams();
-  const { description } = props;
+  const { description, specialist } = props;
   return (
     <Container fluid className={classes.dav__country_tours_overall_wrapper}>
       <Row className={classes.dav__country_tours_wrapper}>
@@ -45,8 +45,8 @@ const AboutCountry = (props) => {
               <li>
                 <strong>
                   <span className={classes.dav__contact_country_expert_contact}>
-                    <a href="tel:+256701412430">+256701412430</a>
-                    <a href="tel:+256757795781">+256757795781</a>
+                    <a href={`tel:${specialist}`}>{specialist}</a>
+                    {/* <a href="tel:+256757795781">+256757795781</a> */}
                   </span>
                 </strong>
               </li>

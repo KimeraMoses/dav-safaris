@@ -1,11 +1,26 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-
+import React, { useState, useEffect } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { Slide } from "react-slideshow-image";
+import "react-slideshow-image/dist/styles.css";
 import classes from "./NavigationMenu.module.css";
-import styles from "./NavDropDown.module.css";
+import { Col, Row } from "react-bootstrap";
+import { fetchAllCountrys } from "../../store/Actions/CountryActions";
+import { useSelector, useDispatch } from "react-redux";
+import { selectAllCountries } from "../../store/Slices/countrySlice";
 
 const NavigationMenu = (props) => {
   const { menuOpen, setMenuOpen } = props;
+  const fetchedCountries = useSelector(selectAllCountries);
+  const dispatch = useDispatch();
+  const [allCountries, setAllCountries] = useState([]);
+  const [isHovered, setIsHovered] = useState(false);
+  const [hoveredCountry, setHoveredCountry] = useState({});
+  useEffect(() => {
+    dispatch(fetchAllCountrys());
+    setAllCountries(fetchedCountries?.countries);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const NavMenuItem = ({ itemTitle, itemLink, ...props }) => {
     return (
@@ -23,6 +38,15 @@ const NavigationMenu = (props) => {
     );
   };
 
+  const hoverHandler = (e) => {
+    setIsHovered(true);
+    setHoveredCountry(
+      allCountries?.filter((country) => country.name === e.target.innerText)[0]
+    );
+  };
+  const mouseLeaveHandler = () => setIsHovered(false);
+  console.log(hoveredCountry);
+
   return (
     <div
       className={`${classes.dav__navbar_wrapper} ${
@@ -36,30 +60,78 @@ const NavigationMenu = (props) => {
         <NavMenuItem itemTitle="Tanzania" itemLink="/tanzania-safaris" />
         <NavMenuItem itemTitle="Rwanda" itemLink="/rwanda-safaris" />
         <NavMenuItem
-          class={styles.dav__dropdown_wrapper}
+          class={classes.more}
           itemLink="/more-safaris"
-          itemTitle="More Safaris"
+          itemTitle="Other Destinations"
         >
-          <ul className={styles.dav_dropdown}>
-            <NavMenuItem itemTitle="Botswana" itemLink="/botswana-safaris" />
-            <NavMenuItem
-              itemTitle="South Africa"
-              itemLink="/south-africa-safaris"
-            />
-            <NavMenuItem itemTitle="Zimbabwe" itemLink="/zimbabwe-safaris" />
-            <NavMenuItem itemTitle="Zambia" itemLink="/zambia-safaris" />
-            <NavMenuItem itemTitle="Namibia" itemLink="/namibia-safaris" />
-            <NavMenuItem itemTitle="Egypt" itemLink="/egypt-safaris" />
+          <div className={classes.dav__dropdown_wrapper}>
+            <Row className={classes.dav_dropdown}>
+              <Col lg={8} md={6} sm={4} xs={12}>
+                <Row>
+                  {allCountries?.slice(4).map((country) => (
+                    <Col lg={3} md={6} sm={6} xs={6} key={country.id}>
+                      <NavMenuItem
+                        key={country.id}
+                        itemTitle={country.name}
+                        itemLink={country.slug}
+                      />
+                    </Col>
+                  ))}
+                </Row>
+              </Col>
 
-            <NavMenuItem
-              itemTitle="Madagascar"
-              itemLink="/madagascar-safaris"
-            />
-            <NavMenuItem
-              itemTitle="Seychelles"
-              itemLink="/seychelles-safaris"
-            />
-          </ul>
+              <Col
+                className={classes.dropdown_slider}
+                lg={4}
+                md={6}
+                sm={3}
+                xs={0}
+              >
+                <Slide easing="ease" arrows={false} duration={2000}>
+                  {allCountries?.slice(4).map((country) => (
+                    <Link to={country.slug} key={country.id}>
+                      <div
+                        className={classes.dropdown_slide}
+                        style={{
+                          backgroundImage: `url(${country.countryImage})`,
+                          backgroundPosition: "center center",
+                          backgroundSize: "cover",
+                        }}
+                      >
+                        <span>
+                          <h2>{country.name}</h2>
+                        </span>
+                        <div className={classes.dropdown_slide__paragraph}>
+                          <p>{`${country.description.substring(4, 65)}...`}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </Slide>
+                {/* <Slide easing="ease" arrows={false} duration={2000}>
+                  {allCountries?.map((country) => (
+                    <Link to={country.slug} key={country.id}>
+                      <div
+                        className={classes.dropdown_slide}
+                        style={{
+                          backgroundImage: `url(${country.countryImage})`,
+                          backgroundPosition: "center center",
+                          backgroundSize: "cover",
+                        }}
+                      >
+                        <span>
+                          <h2>{country.name}</h2>
+                        </span>
+                        <div className={classes.dropdown_slide__paragraph}>
+                          <p>{`${country.description.substring(4, 65)}...`}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </Slide> */}
+              </Col>
+            </Row>
+          </div>
         </NavMenuItem>
 
         <NavMenuItem itemTitle="About Us" itemLink="/about-us" />

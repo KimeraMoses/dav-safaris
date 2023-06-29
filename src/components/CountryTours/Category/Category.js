@@ -1,18 +1,20 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import {
-  TourCategories_Kenya,
-  TourCategories_Rwanda,
-  TourCategories_Tanzania,
-  TourCategories_Uganda,
-} from "../../../containers/Countries/TourCategories";
+// import {
+//   TourCategories_Kenya,
+//   TourCategories_Rwanda,
+//   TourCategories_Tanzania,
+//   TourCategories_Uganda,
+// } from "../../../containers/Countries/TourCategories";
+import { fetchAllCategories } from "../../../store/Actions/TourCategoriesActions";
 import { fetchAllCountryTours } from "../../../store/Actions/TourActions";
 import classes from "../CountrySingle.module.css";
 import PopularTours from "../../HomePage/PopularTours/PopularTours";
 import SectionTitle from "../../HomePage/SectionTitle/SectionTitle";
 import SEO from "../../../containers/SEO/SEO";
 import DescriptionSection from "../DescriptionSection";
+import { selectAllCategories } from "../../../store/Slices/fetchCategoriesSlice";
 
 const categoryMeta = {
   "tanzania-wildlife-safaris": {
@@ -38,25 +40,23 @@ const categoryMeta = {
 const Category = () => {
   const { countryName, tourCategory } = useParams();
   const Tours = useSelector((state) => state.tours.countryTours);
+  const Categories = useSelector(selectAllCategories);
   const dispatch = useDispatch();
   const currentCountry = countryName.split("-")[0];
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchAllCountryTours(currentCountry));
+    dispatch(fetchAllCategories());
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCountry]);
-
-  const SelectedCategory = TourCategories_Uganda.concat(
-    TourCategories_Kenya,
-    TourCategories_Rwanda,
-    TourCategories_Tanzania
-  ).filter(
+  console.log(Categories?.categories);
+  const SelectedCategory = Categories?.categories?.filter(
     (category) => category.value.toLowerCase() === tourCategory.toLowerCase()
   )[0];
-  const FilteredTours = Tours.filter((tour) => tour.category === tourCategory);
+  const FilteredTours = Tours?.filter((tour) => tour.category === tourCategory);
 
-  console.log(SelectedCategory.description);
+  console.log(SelectedCategory);
 
   return (
     <>
@@ -72,17 +72,20 @@ const Category = () => {
           className={classes.dav__single_tour_hero}
           style={{
             backgroundImage: `url(${
-              SelectedCategory && SelectedCategory.image
+              SelectedCategory && SelectedCategory.tourCategoryImage
             })`,
             backgroundSize: "cover",
             backgroundPosition: "center center",
           }}
         >
-          <h1>{SelectedCategory.name}</h1>
+          <h1>{SelectedCategory?.name}</h1>
         </div>
         <div className={classes.dav__country_tours_wrapper}>
           {SelectedCategory?.description && (
-            <DescriptionSection description={SelectedCategory.description} />
+            <DescriptionSection
+              description={SelectedCategory.description}
+              specialist="+256757795781"
+            />
           )}
           <SectionTitle
             subTitle="Exciting tours in "

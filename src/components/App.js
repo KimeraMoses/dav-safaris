@@ -84,12 +84,13 @@ const App = (props) => {
           <AppBar />
           <Routes>
             <Route path="/" exact element={<Home />} />
-            <Route
+            <Route path="/dashboard/*" element={<DashBoard />}>
+              {/* <Route
               path="/dashboard/*"
                             element={
                 isAuthenticated ? <DashBoard /> : <Navigate to="/login" />
               }
-            >
+            > */}
               <Route path="user" element={<DashBoardItem />} />
               <Route path="manage-tours" element={<ManageTours />} />
               <Route path="manage-tours/edit" element={<EditTours />} />

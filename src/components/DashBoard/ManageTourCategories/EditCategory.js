@@ -54,7 +54,7 @@ const EditCategory = (props) => {
   const [countryArray, setCountryArray] = useState([]);
   const [category, setCategory] = useState({});
   const [keys, setKeys] = useState([]);
-  const [type, setType] = useState("Edit");
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -83,8 +83,6 @@ const EditCategory = (props) => {
       dispatch(fetchCategoryFail(error.message));
     }
   };
-  console.log(category.country);
-  console.log("Country Name", category?.country?.id);
 
   //====GET THE SELECTED DOCUMENT CATEGORY====//
   function useQuery() {
@@ -105,7 +103,7 @@ const EditCategory = (props) => {
   const [values, setValues] = useState({
     name: category.name,
     description: category.description,
-    country: category?.country?.id,
+    country: JSON.stringify(category?.country?.name),
     value: category.value,
     cover_image: "",
     selectedImage: "",
@@ -115,15 +113,17 @@ const EditCategory = (props) => {
     setValues({
       name: category.name,
       description: category.description,
-      country: category?.country?.id,
+      country: JSON.stringify(category?.country?.name),
       value: category.value,
       cover_image: category.tourCategoryImage,
       selectedImage: category.tourCategoryImage,
     });
+
     setEditorState(convertHTMLToDraftState(category.description));
     // eslint-disable-next-line
   }, [category]);
-  console.log("Value of country", category?.country?.id, values.country);
+  console.log("Value of country", category?.country, values.country);
+  console.log("country Array", countryArray);
 
   //====TOUR COVER IMAGE HANDLER====//
   const tourImageHandler = async (e) => {
@@ -302,13 +302,11 @@ const EditCategory = (props) => {
                         name="country"
                         onChange={onChangeHandler}
                       >
-                        {countryArray?.map((country) => {
-                          return (
-                            <MenuItem key={country?.id} value={country?.id}>
-                              {country?.name}
-                            </MenuItem>
-                          );
-                        })}
+                        {countryArray?.map((country) => (
+                          <MenuItem key={country?.id} value={country?.name}>
+                            {country?.name}
+                          </MenuItem>
+                        ))}
                         {/* <MenuItem value="uganda">Uganda</MenuItem>
                         <MenuItem value="kenya">Kenya</MenuItem>
                         <MenuItem value="tanzania">Tanzania</MenuItem>

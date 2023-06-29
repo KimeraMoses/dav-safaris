@@ -1,6 +1,6 @@
 import { Fab, Hidden, TextField } from "@material-ui/core";
 import React from "react";
-import Dropdown from "../../UI/Dropdown/Dropdown";
+// import Dropdown from "../../UI/Dropdown/Dropdown";
 import classes from "./Filters.module.css";
 import AddIcon from "@material-ui/icons/Add";
 import RefreshIcon from "@material-ui/icons/Refresh";
@@ -16,8 +16,8 @@ const Filters = (props) => {
   const {
     addNew,
     setAddNew,
-    Country,
-    setCountry,
+    // Country,
+    // setCountry,
     searchTerm,
     SearchHandler,
     language,

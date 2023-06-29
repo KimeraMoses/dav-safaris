@@ -7,7 +7,6 @@ import TourFilters from "./TourFilters";
 import NewTourCategory from "../../NewItems/NewTourCategory";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-// import { fetchAllTours } from "../../../store/Actions/TourActions";
 import { useNavigate } from "react-router";
 import DeleteModal from "./delete/DeleteModal";
 import Loader from "../../../containers/Loader/Loader";

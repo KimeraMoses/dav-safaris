@@ -28,12 +28,13 @@ import NewItinary from "./NewItinary";
 import ImageUpload from "./ImageUpload";
 import { useEffect } from "react";
 import { creatNewTour } from "../../store/Actions/TourActions";
-import {
-  TourCategories_Kenya,
-  TourCategories_Rwanda,
-  TourCategories_Tanzania,
-  TourCategories_Uganda,
-} from "../../containers/Countries/TourCategories";
+// import {
+//   TourCategories_Kenya,
+//   TourCategories_Rwanda,
+//   TourCategories_Tanzania,
+//   TourCategories_Uganda,
+// } from "../../containers/Countries/TourCategories";
+import { fetchAllCategories } from "../../store/Actions/TourCategoriesActions";
 import { AddDays } from "../../store/Slices/newTourSlice";
 import EditItinaryModal from "../DashBoard/ManageTours/Itinary/EditItinary";
 import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
@@ -41,6 +42,7 @@ import { useNavigate } from "react-router";
 import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
 import { selectAllCountries } from "../../store/Slices/countrySlice";
 import { fetchAllCountrys } from "../../store/Actions/CountryActions";
+import { selectAllCategories } from "../../store/Slices/fetchCategoriesSlice";
 let dayActivityDescription = [];
 
 // console.log("Outside", dayActivityDescription);
@@ -50,6 +52,8 @@ const NewTour = () => {
   const isLoading = useSelector((state) => state.newTour.isLoading);
   const Tour = useSelector((state) => state.tour.tourDetails);
   const CountryList = useSelector(selectAllCountries);
+  const Categories = useSelector(selectAllCategories);
+
   const [countryArray, setCountryArray] = useState([]);
   const [open, setOpen] = useState(false);
   const [keys, setKeys] = useState([]);
@@ -91,25 +95,30 @@ const NewTour = () => {
   useEffect(() => {}, [values]);
   useEffect(() => {
     dispatch(fetchAllCountrys());
-  }, [dispatch]);
+    dispatch(fetchAllCategories());
+  }, []);
   useEffect(() => {
     setCountryArray(CountryList?.countries);
-  }, [CountryList]);
+  }, []);
+
+  const selectedCountry = Categories?.categories?.filter(
+    (category) => values.country === category.country?.id
+  );
 
   useEffect(() => {
     switch (values.country) {
-      case "Uganda":
-        setTourCategories(TourCategories_Uganda);
+      case `${values.country}`:
+        setTourCategories(selectedCountry);
         break;
-      case "Kenya":
-        setTourCategories(TourCategories_Kenya);
-        break;
-      case "Rwanda":
-        setTourCategories(TourCategories_Rwanda);
-        break;
-      case "Tanzania":
-        setTourCategories(TourCategories_Tanzania);
-        break;
+      // case "Kenya":
+      //   setTourCategories(TourCategories_Kenya);
+      //   break;
+      // case "Rwanda":
+      //   setTourCategories(TourCategories_Rwanda);
+      //   break;
+      // case "Tanzania":
+      //   setTourCategories(TourCategories_Tanzania);
+      //   break;
       default:
         break;
     }
@@ -375,7 +384,7 @@ const NewTour = () => {
                     >
                       {countryArray?.map((country) => {
                         return (
-                          <MenuItem key={country?.id} value={country?.name}>
+                          <MenuItem key={country?.id} value={country?.id}>
                             {country?.name}
                           </MenuItem>
                         );
@@ -399,7 +408,7 @@ const NewTour = () => {
                       name="category"
                       onChange={onChangeHandler}
                     >
-                      {TourCategories.length > 0 ? (
+                      {TourCategories?.length > 0 ? (
                         TourCategories.map((category, index) => {
                           return (
                             <MenuItem key={index} value={category.value}>
@@ -410,7 +419,10 @@ const NewTour = () => {
                       ) : (
                         <MenuItem>
                           <Alert severity="error">
-                            Please choose a country first!
+                            {values.country === "" &&
+                            selectedCountry?.length === 0
+                              ? "Please choose a country first!"
+                              : "Ooops... No categories found"}
                           </Alert>
                         </MenuItem>
                       )}

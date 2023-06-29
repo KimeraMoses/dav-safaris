@@ -112,7 +112,10 @@ const CountrySingle = () => {
           <h1>{SelectedCountry?.title}</h1>
         </div>
         <CountryHeader Country={SelectedCountry} />
-        <DescriptionSection description={SelectedCountry?.description} />
+        <DescriptionSection
+          description={SelectedCountry?.description}
+          specialist={SelectedCountry?.specialist}
+        />
         <CountryTours Country={SelectedCountry && SelectedCountry.name} />
       </div>
     </>
