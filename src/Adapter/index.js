@@ -9,13 +9,18 @@ export const Requestor = async (config) => {
   const AuthToken = localStorage.getItem("AuthToken");
   const tokenObj = JSON.parse(AuthToken);
   const token = tokenObj?.token;
+  config.headers = {
+    "Content-type": "application/json",
+    "X-API-KEY": "d18a36f4-aa97-4b5c-ade0-4aacc0d70a5b",
+    ...config.headers,
+  };
+  config.headers = {
+    "Content-type": "application/json",
+    "X-API-KEY": "d18a36f4-aa97-4b5c-ade0-4aacc0d70a5b",
+    ...config.headers,
+  };
   if (token) {
-    config.headers = {
-      "Content-type": "application/json",
-      "X-API-KEY": "d18a36f4-aa97-4b5c-ade0-4aacc0d70a5b",
-      Authorization: `Bearer ${token}`,
-      ...config.headers,
-    };
+    config.headers.Authorization = `Bearer ${token}`;
   }
   try {
     const { url, data } = config;
