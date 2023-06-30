@@ -1,39 +1,39 @@
 :root {
-    --primary: #5bc787;
-    --secondary: #f15d30;
-  }
-  
-  .Btn {
-    padding: 8px 20px;
-    border-radius: 2px;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    transition: color 0.4s linear;
-    position: relative;
-    z-index: 1;
-    border: 0;
-    overflow: hidden;
-  }
-
-  .Btn::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 102%;
-    height: 102%;
-    z-index: 1;
-    border-radius: 0px;
-    transition: transform 0.5s;
-    transition-timing-function: ease;
-    transform-origin: 0 0;
-    transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
-    transform: scaleY(0);
-    border-radius: 0px;
+  --primary: #5bc787;
+  --secondary: #f15d30;
 }
-.Btn:hover{
-  color: #fff!important;
+
+.Btn {
+  padding: 8px 20px;
+  border-radius: 2px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.4s linear;
+  position: relative;
+  z-index: 1;
+  border: 0;
+  overflow: hidden;
+}
+
+.Btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 102%;
+  height: 102%;
+  z-index: 1;
+  border-radius: 0px;
+  transition: transform 0.5s;
+  transition-timing-function: ease;
+  transform-origin: 0 0;
+  transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
+  transform: scaleY(0);
+  border-radius: 0px;
+}
+.Btn:hover {
+  color: #fff !important;
   border: 1px solid var(--secondary);
 }
 .Btn:hover::before {
@@ -42,37 +42,52 @@
   z-index: -1;
 }
 
-  .Btn--primary {
-    background-color: var(--primary);
-    color: #fff;
-    border: 1px solid var(--primary);
-  }
-  
-  .Btn--outline {
-    background: #fff;
-    color: var(--primary);
-    padding: 8px 20px;
-    border: 1px solid var(--primary);
-    transition: all 0.3s ease-out;
-  }
-  
-  .Btn--medium {
-    padding: 8px 20px;
-    font-size: 18px;
-  }
-  
-  .Btn--large {
-    padding: 12px 18px;
-    font-size: 20px;
-  }
-  .Btn--fullWidth{
-    width: 100%;
-  }
-  
-  .Btn--large:hover,
-  .Btn--medium:hover {
-    transition: all 0.3s ease-out;
-    background: #fff;
-    color: var(--primary);
-    transition: 250ms;
-  }
+.Btn--primary {
+  background-color: var(--primary);
+  color: #fff;
+  border: 1px solid var(--primary);
+}
+
+.Btn--danger {
+  background-color: red;
+  color: #fff;
+  border: 1px solid red;
+}
+
+.Btn--outline {
+  background: #fff;
+  color: var(--primary);
+  padding: 8px 20px;
+  border: 1px solid var(--primary);
+  transition: all 0.3s ease-out;
+}
+
+.Btn--medium {
+  padding: 8px 20px;
+  font-size: 18px;
+}
+
+.Btn--large {
+  padding: 12px 18px;
+  font-size: 20px;
+}
+
+.Btn--fullWidth {
+  width: 100%;
+}
+
+.Btn--danger:hover,
+.Btn--large:hover,
+.Btn--medium:hover {
+  transition: all 0.3s ease-out;
+  background: #fff;
+  color: var(--primary);
+  transition: 250ms;
+}
+
+.Btn:disabled {
+  background: #ccc;
+  color: #fff;
+  border: 1px solid #ccc;
+  cursor: not-allowed;
+}

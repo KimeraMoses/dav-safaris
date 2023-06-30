@@ -7,10 +7,9 @@ import BookingForm from "./Bookings/BookingForm";
 import Reviews from "./Reviews/Reviews";
 import PriceQuote from "./PriceQuote/PriceQuote";
 import RelatedTours from "./RelatedTour/RelatedTours";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchTourName } from "../../../store/Actions/TourActions";
 import SEO from "../../../containers/SEO/SEO";
 import "./SingleTour.scss";
+import { useTour } from "../../../hooks";
 
 export const isEmptyObject = (obj) => {
   return JSON.stringify(obj) === "{}";
@@ -40,21 +39,20 @@ const defaultMeta = {
 };
 
 const SingleTour = () => {
-  const dispatch = useDispatch();
   const { tourTitle } = useParams();
+  const { tour } = useTour(tourTitle);
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(fetchTourName(tourTitle));
-  }, [tourTitle, dispatch]);
-  const Tour = useSelector((state) => state.tour.tourDetails);
+  }, [tourTitle]);
 
-  let title = isEmptyObject(Tour)
+  let title = isEmptyObject(tour)
     ? defaultMeta.title
-    : `${Tour?.name} - Dav Safaris`;
+    : `${tour?.name} - Dav Safaris`;
 
-  let description = isEmptyObject(Tour)
+  let description = isEmptyObject(tour)
     ? defaultMeta.description
-    : Tour?.description?.substr(0, 268);
+    : tour?.description?.substr(0, 268);
 
   if (tourTitle === "7-day-luxury-kenya-safari-holiday") {
     title = "7-Day Luxury Kenya Safari Holiday, Kenya Safari Luxury";
@@ -81,27 +79,25 @@ const SingleTour = () => {
       <SEO
         title={title}
         description={description}
-        keywords={Tour && Tour.key_words?.join()}
-        image={Tour && Tour.imageCover}
+        keywords={tour && tour.key_words?.join()}
+        image={tour && tour.imageCover}
       />
       <div className={classes.dav__single_tour_page_wrapper}>
-        <SingleHero title={Tour && Tour.name} image={Tour && Tour.imageCover} />
+        <SingleHero title={tour && tour.name} image={tour && tour.imageCover} />
         <JumpNavigation />
 
         <div className={classes.dav__single_tour_highlights_wrapper}>
           <div className={classes.dav__tour_highlights} id="description">
             <div
               className="dav__single_tour_description"
-              dangerouslySetInnerHTML={{ __html: Tour.description }}
-            >
-              {/* {Tour.description} */}
-            </div>
+              dangerouslySetInnerHTML={{ __html: tour.description }}
+            ></div>
             <h2>Tour highlights</h2>
             <div className={classes.dav__tour_highlights_list}>
               <ul>
-                {Tour &&
-                  Tour.tourActivities &&
-                  Tour.tourActivities
+                {tour &&
+                  tour.tourActivities &&
+                  tour.tourActivities
                     .filter((item) => item.length > 0)
                     .map((item, index) => {
                       return (
@@ -113,37 +109,37 @@ const SingleTour = () => {
               </ul>
             </div>
 
-            {Tour?.packageDetails?.price_excludes.length &&
-            Tour?.packageDetails?.price_inludes.length ? (
+            {tour?.packageDetails?.price_excludes.length &&
+            tour?.packageDetails?.price_inludes.length ? (
               <div className={classes.dav__single_tour_package_wrapper}>
                 <PriceQuote
                   type="includes"
                   Items={
-                    Tour &&
-                    Tour.packageDetails &&
-                    Tour.packageDetails.price_inludes
+                    tour &&
+                    tour.packageDetails &&
+                    tour.packageDetails.price_inludes
                   }
                 />
                 <PriceQuote
                   type="excludes"
                   Items={
-                    Tour &&
-                    Tour.packageDetails &&
-                    Tour.packageDetails.price_excludes
+                    tour &&
+                    tour.packageDetails &&
+                    tour.packageDetails.price_excludes
                   }
                 />
               </div>
             ) : null}
-            {Tour?.dayActivityDescription?.length ? (
+            {tour?.dayActivityDescription?.length ? (
               <div className={classes.dav__intinary_details} id="itinerary">
                 <div className={classes.dav__itinary_header}>
                   <h2>Itinary in details</h2>
                 </div>
 
                 <ul className={classes.dav__intinary_list_wrapper}>
-                  {Tour &&
-                    Tour.dayActivityDescription &&
-                    Tour.dayActivityDescription.map((itinary, index) => {
+                  {tour &&
+                    tour.dayActivityDescription &&
+                    tour.dayActivityDescription.map((itinary, index) => {
                       return (
                         <Itinary
                           key={index}
@@ -158,25 +154,13 @@ const SingleTour = () => {
                 </ul>
               </div>
             ) : null}
-            {/* <div className={classes.dav__payment_btn_wrapper}> */}
-            {/* <Paper className={classes.dav__payment_btn_wrapper}>
-              <a
-                href="https://payments.pesapal.com/davsafaris"
-                className={classes.dav__payment_btn}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Pay for Tour
-              </a>
-            </Paper> */}
-            {/* </div> */}
           </div>
           <div className={classes.dav__tour_bookings_section}>
-            <BookingForm />
+            <BookingForm tour={tour} />
           </div>
         </div>
-        <Reviews Tour={Tour} />
-        <RelatedTours TourCategory={Tour && Tour.category} />
+        <Reviews Tour={tour} />
+        <RelatedTours TourCategory={tour && tour.category} />
       </div>
     </>
   );

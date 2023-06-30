@@ -26,7 +26,7 @@ const CountrySlides = [
     btnText: "Popular Tour in Kenya",
   },
   {
-    title: "Experience the best scenaries in Rwanda",
+    title: "Experience the best sceneries in Rwanda",
     image: Image4,
     paragraph:
       "Best known for its friendly people and stunning views of the great rift valley which makes it the most remarkable country in the world",

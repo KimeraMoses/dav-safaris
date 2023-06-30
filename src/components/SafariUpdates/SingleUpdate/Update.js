@@ -20,6 +20,16 @@ const defaultMeta = {
     "Africa Safari | Wildlife Safaris | Gorilla Trekking | Chimpanzee Trekking| Gorilla Trekking Uganda | Tanzania Safari | Kenya Safaris | Gorilla trekking Rwanda |African Wildlife Safari park | African Safari tours | trip advisor",
 };
 
+export const formattedDate = (date) => {
+  const PDate = new Date(date);
+  const options = {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  };
+  return PDate.toLocaleDateString("en-US", options);
+};
+
 const Update = ({ type }) => {
   const Posts = useSelector((state) => state.post.posts);
   const languagePosts = useSelector((state) => state.post.languagePosts);
@@ -35,15 +45,6 @@ const Update = ({ type }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postTitle, dispatch]);
 
-  const FormatedDate = (date) => {
-    const PDate = new Date(date);
-    const options = {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    };
-    return PDate.toLocaleDateString("en-US", options);
-  };
   const FIlteredPosts =
     type === "language"
       ? languagePosts?.filter((post) => post.slug !== postTitle)
@@ -85,7 +86,7 @@ const Update = ({ type }) => {
                 <h1>{Post && Post.name}</h1>
                 <div className={classes.dav__post_meta}>
                   <span className={classes.dav__date_posted}>
-                    <DateIcon /> {FormatedDate(Post && Post.createdAt)}
+                    <DateIcon /> {formattedDate(Post && Post.createdAt)}
                   </span>
                   <span className={classes.dav__safari_updates_tag}>
                     <SafariTag />{" "}
@@ -171,7 +172,7 @@ const Update = ({ type }) => {
                                     classes.dav__single_recent_posts_date
                                   }
                                 >
-                                  {FormatedDate(post.createdAt)}
+                                  {formattedDate(post.createdAt)}
                                 </div>
                               </li>
                             );

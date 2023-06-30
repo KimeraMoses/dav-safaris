@@ -18,10 +18,49 @@ import YouTubeIcon from "@material-ui/icons/YouTube";
 import { SocialIcon } from "../ContactUs/SocialMedia";
 
 import classes from "./Footer.module.css";
+import { DAV_ROLES } from "../../constants";
+
+const MORE_DESTINATIONS = [
+  {
+    name: "Ethiopia",
+    slug: "ethiopia",
+  },
+  {
+    name: "Egypt",
+    slug: "egypt",
+  },
+  {
+    name: "Botswana",
+    slug: "botswana",
+  },
+  {
+    name: "Kenya",
+    slug: "kenya",
+    active: true,
+  },
+  {
+    name: "Uganda",
+    slug: "uganda",
+    active: true,
+  },
+  {
+    name: "Madagascar",
+    slug: "madagascar",
+  },
+  {
+    name: "Mozambique",
+    slug: "mozambique",
+  },
+  {
+    name: "Zambia",
+    slug: "zambia",
+  },
+];
 
 const Footer = () => {
-  const Tours = useSelector((state) => state.tours.toursList);
+  const user = useSelector((state) => state.auth.user);
   let getCurrentYear = new Date().getFullYear();
+
   return (
     <Container fluid className={classes.dav__footer}>
       <Row className={classes.dav__footer_top}>
@@ -48,27 +87,34 @@ const Footer = () => {
           className={classes.dav__footer_section_col_wrapper}
         >
           <div className={`${classes.dav__footer_section_title_wrapper}`}>
-            <h5>Popular Safaris</h5>
+            <h5>Popular Destinations</h5>
 
-            <ul className={classes.dav__footer_safaris}>
-              {Tours &&
-                Tours.slice(0, 3).map((tour) => {
-                  return (
-                    <li key={tour.id}>
-                      <Link to={`/tours/${tour.slug}`}>
-                        <MenuIcon />
-                        {tour.name}
-                      </Link>
-                    </li>
-                  );
-                })}
-              <li>
-                <Link to="/safari-updates/languages">
-                  <MenuIcon />
-                  Click to view more updates
-                </Link>
-              </li>
-            </ul>
+            <div className={classes.dav__footer_safaris_destinations}>
+              {MORE_DESTINATIONS.map((destination) => {
+                return (
+                  <div
+                    key={destination.slug}
+                    className={classes.dav__footer_safaris_destinations_item}
+                  >
+                    <Link
+                      to={
+                        destination.active
+                          ? `/${destination.slug}-safaris`
+                          : "#"
+                      }
+                    >
+                      {destination.name}
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+            <div className={classes.dav_link_to_language_updates}>
+              <Link to="/safari-updates/languages">
+                <MenuIcon />
+                Click to view more updates
+              </Link>
+            </div>
           </div>
         </Col>
         <Col
@@ -175,6 +221,19 @@ const Footer = () => {
           >
             <div className={classes.dav__footer__menu}>
               <ul>
+                {user && (
+                  <li>
+                    <Link
+                      to={
+                        user?.role === DAV_ROLES.AGENT
+                          ? "/agent-dashboard"
+                          : "/dashboard/user"
+                      }
+                    >
+                      DashBoard
+                    </Link>
+                  </li>
+                )}
                 <li>
                   <Link to="/terms-of-services">Terms of Services</Link>
                 </li>

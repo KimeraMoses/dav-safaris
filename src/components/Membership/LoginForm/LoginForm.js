@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import classes from "../Membership.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   FilledInput,
   FormControl,
@@ -15,11 +15,15 @@ import { Col, Container, Row } from "react-bootstrap";
 import DavLogo from "../../AppBar/DavLogo";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../../store/Actions/AuthActions";
+import { SaveTokenInLocalStorage } from "../../../store/Actions/AuthActions";
 import { Alert } from "@material-ui/lab";
+import { DAV_APIS } from "../../../Adapter";
+import { authenticationSuccess } from "../../../store/Slices/authSlice";
+import { DAV_ROLES } from "../../../constants";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
-  const isLoading = useSelector((state) => state.auth.isLoading);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -64,12 +68,38 @@ const LoginForm = () => {
     }
 
     try {
+      setIsLoading(true);
       setError("");
-      await dispatch(login(values.email, values.password));
+      const res = await DAV_APIS.auth.login({
+        email: values.email,
+        password: values.password,
+      });
+      setIsLoading(false);
+      if (res?.response?.status === 403) {
+        toast.error("Please verify your account and try again");
+        return setError("Please contact admin to verify your account");
+      }
+
+      if (res.status === 200) {
+        const data = res.data;
+        dispatch(
+          authenticationSuccess({
+            data,
+            user: data.user,
+            token: data.token,
+          })
+        );
+        SaveTokenInLocalStorage(dispatch, data);
+        if (data.user.role === DAV_ROLES.AGENT) {
+          navigate("/agent-dashboard");
+        } else {
+          navigate("/dashboard/user");
+        }
+      }
       setValues({ password: "" });
       setValues({ email: "" });
-      navigate("/dashboard/user");
     } catch (error) {
+      setIsLoading(false);
       setError(
         "Failed to login, Please verify your account first or double check your credentials if account is already verified"
       );
@@ -109,7 +139,11 @@ const LoginForm = () => {
               <div
                 className={`col-xs-12 col-sm-6 ${classes.dav__membership_form}`}
               >
-                {error && <Alert severity="error">{error}</Alert>}
+                {error && (
+                  <Alert severity="error" className="mb-1">
+                    {error}
+                  </Alert>
+                )}
                 <form onSubmit={LoginHandler}>
                   <TextField
                     fullWidth
@@ -132,6 +166,7 @@ const LoginForm = () => {
                     <FilledInput
                       type={values.showPassword ? "text" : "password"}
                       name="password"
+                      autoComplete="current-password"
                       value={values.password}
                       onChange={handleChange}
                       endAdornment={

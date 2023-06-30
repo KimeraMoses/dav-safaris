@@ -53,14 +53,18 @@ import PrivacyPrompt from "../containers/PrivacyPolicies/PrivacyPrompt";
 import ReactGA from "react-ga";
 import { TRACKING_ID } from "../store";
 import CommunityPage from "./CommunityPage/CommunityPage";
+import { AgentDashboard } from "./DashBoard/Agent";
 import EditTours from "./DashBoard/ManageTours/EditTours";
 import EditPost from "./DashBoard/ManageUpdates/EditPost";
 import LanguagePosts from "./SafariUpdates/LanguagePosts";
 import EditCountry from "./DashBoard/ManageCountries/EditCountry";
 import EditCategory from "./DashBoard/ManageTourCategories/EditCategory";
+import ManageAgents from "./DashBoard/ManageAgents";
+import { DAV_ROLES } from "../constants";
 
-const App = (props) => {
+const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -84,15 +88,29 @@ const App = (props) => {
           <AppBar />
           <Routes>
             <Route path="/" exact element={<Home />} />
-            <Route path="/dashboard/*" element={<DashBoard />}>
-              {/* <Route
-              path="/dashboard/*"
-                            element={
-                isAuthenticated ? <DashBoard /> : <Navigate to="/login" />
+            <Route
+              path="/agent-dashboard"
+              element={
+                isAuthenticated && user.role === DAV_ROLES.AGENT ? (
+                  <AgentDashboard />
+                ) : (
+                  <Navigate to="/login" />
+                )
               }
-            > */}
+            />
+            <Route
+              path="/dashboard/*"
+              element={
+                isAuthenticated && user.role === DAV_ROLES.ADMIN ? (
+                  <DashBoard />
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            >
               <Route path="user" element={<DashBoardItem />} />
               <Route path="manage-tours" element={<ManageTours />} />
+              <Route path="manage-agents" element={<ManageAgents />} />
               <Route path="manage-tours/edit" element={<EditTours />} />
               <Route path="manage-countries" element={<ManageCountries />} />
               <Route path="manage-countries/edit" element={<EditCountry />} />
@@ -125,7 +143,13 @@ const App = (props) => {
               exact
               element={
                 isAuthenticated ? (
-                  <Navigate to="/dashboard/user" />
+                  <Navigate
+                    to={
+                      user.role === DAV_ROLES.AGENT
+                        ? "/agent-dashboard"
+                        : "/dashboard/user"
+                    }
+                  />
                 ) : (
                   <LoginForm />
                 )

@@ -35,6 +35,7 @@ import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
 import { selectAllCountries } from "../../store/Slices/countrySlice";
 import { fetchAllCountrys } from "../../store/Actions/CountryActions";
 import { fetchAllCategories } from "../../store/Actions/TourCategoriesActions";
+import { DAV_APIS } from "../../Adapter";
 
 const NewTourCategory = () => {
   const DarkMode = false;
@@ -124,15 +125,14 @@ const NewTourCategory = () => {
     }
 
     try {
-      await dispatch(
-        createNewTourCategory(
-          values.name,
-          values.description,
-          values.country,
-          values.value,
-          values.selectedImage
-        )
-      );
+      const data = {
+        name: values.name,
+        description: values.description,
+        country: values.country,
+        value: values.value,
+        selectedImage: values.selectedImage,
+      };
+      await DAV_APIS.createCategory(data);
       toast.success(`${values.name} Created Successfully`);
       setMessage(`${values.name} Created Successfully`);
       setValues({

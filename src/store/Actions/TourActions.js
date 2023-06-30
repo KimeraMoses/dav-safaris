@@ -123,7 +123,7 @@ export const fetchTourName = (tour_slug) => async (dispatch) => {
 };
 
 //====CREATING NEW TOUR====//
-export const creatNewTour = (
+export const createNewTour = (
   name,
   description,
   tourActivities,
@@ -182,6 +182,7 @@ export const editTourDetails = (
 ) => {
   return async (dispatch) => {
     dispatch(EditTourPending());
+
     const data = new FormData();
     data.append("file", file);
     data.append("category", category);

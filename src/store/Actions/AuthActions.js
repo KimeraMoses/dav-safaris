@@ -1,4 +1,5 @@
 import { baseUrl } from "..";
+import { DAV_ROLES } from "../../constants";
 import {
   authenticationPending,
   authenticationSuccess,
@@ -23,13 +24,8 @@ import {
   UpdatePasswordPending,
   UpdatePasswordSuccess,
 } from "../Slices/passwordSlice";
-import {
-  UserRegistrationPending,
-  UserRegistrationSuccess,
-  UserRegistrationFail,
-} from "../Slices/userRegistrationSlice";
 
-export const login = (email, password) => {
+export const login = (email, password, navigate) => {
   return async (dispatch) => {
     dispatch(authenticationPending());
     const response = await fetch(`${baseUrl}/api/v1/users/login`, {
@@ -65,38 +61,36 @@ export const login = (email, password) => {
     );
 
     SaveTokenInLocalStorage(dispatch, data);
+    if (data.user.role === DAV_ROLES.AGENT) {
+      navigate("/dashboard/agent");
+    } else {
+      navigate("/dashboard/user");
+    }
   };
 };
 
-export const signup = (email, username, password) => {
-  return async (dispatch) => {
-    dispatch(UserRegistrationPending());
-    const response = await fetch(`${baseUrl}/api/v1/users/signup`, {
+/**
+ * @name signup
+ * @description This is a function that handles user registration
+ * @param {object} data
+ * @param {string} role
+ * @returns {object} dispatch
+ */
+export const signup = async (data, role) => {
+  const response = await fetch(
+    `${baseUrl}/api/v1/users/signup${
+      role === DAV_ROLES.AGENT ? `?role=${DAV_ROLES.AGENT}` : ""
+    }`,
+    {
       method: "POST",
-      body: JSON.stringify({
-        email,
-        username,
-        password,
-      }),
+      body: JSON.stringify(data),
       headers: new Headers({
         "Content-type": "application/json",
       }),
-    });
-
-    if (!response.ok) {
-      const error = await response.json();
-      let message = "";
-      if (error.message === "Email already exists") {
-        message = "Account with the same email already exits";
-      } else {
-        message =
-          "Failed to create account, Please check your connection and try again";
-      }
-      dispatch(UserRegistrationFail(message));
     }
-    const data = await response.json();
-    dispatch(UserRegistrationSuccess(data.status));
-  };
+  );
+
+  return await response.json();
 };
 
 export const updateProfile = (

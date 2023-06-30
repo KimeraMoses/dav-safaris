@@ -72,6 +72,16 @@
   overflow: hidden;
   z-index: 10;
 }
+.more {
+  font-size: 15px;
+
+  font-weight: 500;
+  color: #000000;
+}
+.more .dav_dropdown .row li a:hover {
+  cursor: pointer;
+  color: var(--dav__secondary_color);
+}
 
 .more:hover .dav__dropdown_wrapper {
   display: block;

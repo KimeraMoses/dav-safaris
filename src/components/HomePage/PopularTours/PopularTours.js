@@ -2,12 +2,9 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import TourCard from "../../Tours/TourCard";
 import classes from "./PopularTours.module.css";
-import { useSelector } from "react-redux";
 import TourCardSkeleton from "../../Tours/TourCardSkeleton";
 
-const PopularTours = (props) => {
-  const { Tours } = props;
-  const isLoading = useSelector((state) => state.tours.isLoading);
+const PopularTours = ({ tours, isLoading }) => {
   return (
     <Container fluid className={classes.dav__popular_tours_wrapper}>
       <Row className={classes.dav__popular_tours_row_wrapper}>
@@ -24,8 +21,8 @@ const PopularTours = (props) => {
                 </Col>
               );
             })
-          : Tours &&
-            Tours.map((tour) => {
+          : tours &&
+            tours.map((tour) => {
               return (
                 <Col
                   key={tour.id}

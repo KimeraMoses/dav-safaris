@@ -8,8 +8,7 @@ import RwandaImage from "../../../assets/rwanda-safaris.JPEG";
 import TanzaniaImage from "../../../assets/tanzania-safaris.JPEG";
 import classes from "./CountyToursSection.module.css";
 
-const CountyToursSection = () => {
-
+const CountryToursSection = () => {
   return (
     <div className={classes.dav__country_tour_section_wrapper}>
       <SectionTitle subTitle="Find a tour by" Title="Destination" />
@@ -31,19 +30,19 @@ const CountyToursSection = () => {
           />
         </Col>
         <Col lg={3} sm={12} className={classes.dav__country_tour_card_wrapper}>
-          <CountryCard 
-          countryImage={KenyaImage}
-          countryTitle="Kenya"
-          numTours={9}
-          countyDescription="Enjoy unmatched series of big fives at the world's most epic natural wonders alongside the breathtaking views of birds, and sand beaches"
+          <CountryCard
+            countryImage={KenyaImage}
+            countryTitle="Kenya"
+            numTours={9}
+            countyDescription="Enjoy unmatched series of big fives at the world's most epic natural wonders alongside the breathtaking views of birds, and sand beaches"
           />
         </Col>
         <Col lg={3} sm={12} className={classes.dav__country_tour_card_wrapper}>
-        <CountryCard 
-          countryImage={TanzaniaImage}
-          countryTitle="Tanzania"
-          numTours={5}
-          countyDescription="Visit Tanzania for an exceptional beach experience in Zanzibar, Hike kilimanjaro mountain, visit the serengeti commonly known safari mecca for its variety of wildlife species"
+          <CountryCard
+            countryImage={TanzaniaImage}
+            countryTitle="Tanzania"
+            numTours={5}
+            countyDescription="Visit Tanzania for an exceptional beach experience in Zanzibar, Hike kilimanjaro mountain, visit the serengeti commonly known safari mecca for its variety of wildlife species"
           />
         </Col>
       </Row>
@@ -51,4 +50,4 @@ const CountyToursSection = () => {
   );
 };
 
-export default CountyToursSection;
+export default CountryToursSection;

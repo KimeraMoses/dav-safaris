@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import classes from "../ManageTours/ManageTours.module.css";
 import styles from "./ManageUpdates.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import NewPost from "../../NewItems/NewPost";
-import { fetchAllPosts } from "../../../store/Actions/PostActions";
 import TourFilters from "../ManageTours/TourFilters";
 import UpdateCard from "../../SafariUpdates/UpdateCard";
 import Loader from "../../../containers/Loader/Loader";
 import DeleteModal from "../ManageTours/Itinary/DeleteModal";
+import { DAV_APIS } from "../../../Adapter";
 
 export const NoPosts = ({ type }) => {
   return (
@@ -22,25 +22,32 @@ export const NoPosts = ({ type }) => {
 };
 
 const ManageUpdates = () => {
-  const isLoading = useSelector((state) => state.post.isLoading);
+  const [isFetching, setIsFetching] = useState(false);
   const language = useSelector((state) => state.post.language);
-  const PostList = useSelector((state) => state.post.posts);
-  const languagePosts = useSelector((state) => state.post.languagePosts);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [addNew, setAddNew] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState("");
   const [open, setOpen] = useState(false);
-  const dispatch = useDispatch();
+  const [posts, setPosts] = useState([]);
+
+  const fetchAllPosts = async () => {
+    setIsFetching(true);
+    const res = await DAV_APIS.get.getAllPosts(language ? "language" : "");
+    if (res.status === 200) {
+      setPosts(res.data.Posts);
+    }
+    setIsFetching(false);
+  };
 
   useEffect(() => {
-    dispatch(fetchAllPosts(language ? "language" : ""));
     window.scrollTo(0, 0);
+    fetchAllPosts();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [language]);
 
-  let FilteredPosts = language ? languagePosts : PostList;
+  let FilteredPosts = posts;
 
   const SearchHandler = (e) => {
     const { value } = e.target;
@@ -63,10 +70,10 @@ const ManageUpdates = () => {
     setSelectedPostId(postId);
   };
 
-  const isSeaching = searchTerm.length < 1 ? false : true;
+  const isSearching = searchTerm.length < 1 ? false : true;
   useEffect(() => {
     setSearchResults([]);
-  }, [isSeaching]);
+  }, [isSearching]);
 
   const RenderedList = (
     searchResults.length > 0 ? searchResults : FilteredPosts
@@ -104,7 +111,7 @@ const ManageUpdates = () => {
         </div>
       ) : (
         <Row>
-          {isLoading ? (
+          {isFetching ? (
             <Loader />
           ) : FilteredPosts?.length ? (
             RenderedList
@@ -120,6 +127,7 @@ const ManageUpdates = () => {
         setOpen={setOpen}
         Id={selectedPostId}
         setSearchTerm={setSearchTerm}
+        callback={fetchAllPosts}
       />
     </Container>
   );

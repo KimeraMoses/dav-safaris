@@ -1,9 +1,8 @@
 import React from "react";
 
-//===REDUX IMPORTS
-import { useSelector } from "react-redux";
+//===REDUX IMPORT
 
-//===REACT ELESTIC CAROUSEL IMPORTS
+//===REACT ELASTIC CAROUSEL IMPORTS
 import Carousel from "react-elastic-carousel";
 
 //===COMPONENTS IMPORTS
@@ -18,12 +17,7 @@ const breakpoints = [
   { width: 1200, itemsToShow: 4.2 },
 ];
 
-const CardCarousel = () => {
-  const isLoading = useSelector((state) => state.tours.isLoading);
-  const tourList = useSelector((state) => state.tours.toursList);
-
-  let FilteredTours = tourList;
-
+const CardCarousel = ({ tours, isLoading }) => {
   return (
     <Carousel
       className={`${styles.gpa__tours_carousel_wrapper}`}
@@ -36,7 +30,7 @@ const CardCarousel = () => {
         ? [...Array(8).keys()].map((index) => {
             return <TourCardSkeleton type="slider" key={index} />;
           })
-        : FilteredTours?.slice(0, 20).map((tour) => {
+        : tours?.slice(0, 20).map((tour) => {
             return (
               <TourCard
                 key={tour.id}

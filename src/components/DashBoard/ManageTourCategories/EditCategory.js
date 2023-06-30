@@ -28,7 +28,7 @@ import styles from "../../NewItems/NewTour.module.css";
 import { useEffect } from "react";
 import ImageUpload from "../../NewItems/ImageUpload";
 
-import { editCategoryDetails } from "../../../store/Actions/TourCategoriesActions";
+// import { editCategoryDetails } from "../../../store/Actions/TourCategoriesActions";
 import { useLocation, useNavigate } from "react-router";
 import { fetchAllCountrys } from "../../../store/Actions/CountryActions";
 import {
@@ -44,14 +44,17 @@ import Loader from "../../../containers/Loader/Loader";
 import NewKeyWord from "./Keywords/NewKeyWord";
 import { ConfigurationEditor } from "../../CustomEditor/SMTPEditor.component";
 import { convertHTMLToDraftState } from "../../../utils/Utils";
+import { useAllCountries } from "../../../hooks";
+import { DAV_APIS } from "../../../Adapter";
 
 const EditCategory = (props) => {
+  const { countries } = useAllCountries();
   const DarkMode = false;
   const isEditing = useSelector((state) => state.editTour.isLoading);
   const isFetching = useSelector(categoryFetchIsLoading);
   const [isLoading, setIsLoading] = useState(false);
-  const CountryList = useSelector(selectAllCountries);
-  const [countryArray, setCountryArray] = useState([]);
+  // const CountryList = useSelector(selectAllCountries);
+  const countryArray = countries;
   const [category, setCategory] = useState({});
   const [keys, setKeys] = useState([]);
 
@@ -64,12 +67,12 @@ const EditCategory = (props) => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  useEffect(() => {
-    dispatch(fetchAllCountrys());
-  }, [dispatch]);
-  useEffect(() => {
-    setCountryArray(CountryList?.countries);
-  }, [CountryList]);
+  // useEffect(() => {
+  //   dispatch(fetchAllCountrys());
+  // }, [dispatch]);
+  // useEffect(() => {
+  //   setCountryArray(CountryList?.countries);
+  // }, [CountryList]);
 
   const fetchCategoryDetails = (cat_id) => async (dispatch) => {
     dispatch(fetchCategoryPending());
@@ -180,16 +183,14 @@ const EditCategory = (props) => {
     }
 
     try {
-      await dispatch(
-        editCategoryDetails(
-          values.name,
-          values.description,
-          values.country,
-          values.value,
-          values.selectedImage,
-          category.id
-        )
-      );
+      const data = {
+        name: values.name,
+        description: values.description,
+        country: values.country,
+        value: values.value,
+        selectedImage: values.selectedImage,
+      };
+      await DAV_APIS.editCategory(data, category.id);
       setIsLoading(false);
       setMessage(`Changes to ${category.name} saved Successfully`);
       toast.success("Changes saved Successfully");

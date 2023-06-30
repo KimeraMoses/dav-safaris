@@ -18,11 +18,14 @@ import {
 } from "../../../store/Slices/countrySlice";
 import { fetchAllCountrys } from "../../../store/Actions/CountryActions";
 
+import { useAllCountries } from "../../../hooks";
+
 const ManageTours = () => {
+  const { countries, isLoading: isFetching } = useAllCountries();
   const isLoading = useSelector((state) => state.country.isLoading);
 
-  const isFetching = useSelector(selectIsLoading);
-  const CountryList = useSelector(selectAllCountries);
+  // const isFetching = useSelector(selectIsLoading);
+  // const CountryList = useSelector(selectAllCountries);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -36,7 +39,8 @@ const ManageTours = () => {
     window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  let FilteredCountries = CountryList?.countries;
+  console.log(countries);
+  let FilteredCountries = countries;
 
   // const onAddNewClick =()=>{
   //   setAddNew(true)

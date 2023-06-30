@@ -30,10 +30,10 @@ import { useLocation, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import EditPostModal from "./EditPostModel";
 import Loader from "../../../containers/Loader/Loader";
-import { editPostDetails } from "../../../store/Actions/PostActions";
 import NewKeyWord from "../ManageTours/Keywords/NewKeyWord";
 import { convertHTMLToDraftState } from "../../../utils/Utils";
 import { ConfigurationEditor } from "../../CustomEditor/SMTPEditor.component";
+import { DAV_APIS } from "../../../Adapter";
 
 const EditPost = () => {
   const language = useSelector((state) => state.post.language);
@@ -172,30 +172,33 @@ const EditPost = () => {
       return setError("Post Description required");
     }
     try {
-      await dispatch(
-        editPostDetails(
-          values.name,
-          values.description,
-          JSON.stringify(postBlocks),
-          values.selectedImage,
-          JSON.stringify(keys),
-          selectedPostId,
-          language ? "language" : ""
-        )
+      const data = {
+        name: values.name,
+        post_content: values.description,
+        post_blocks: JSON.stringify(postBlocks),
+        file: values.selectedImage,
+        key_words: JSON.stringify(keys),
+      };
+      const res = await DAV_APIS.editPostDetails(
+        data,
+        selectedPostId,
+        language ? "language" : ""
       );
       setIsLoading(false);
-      toast.success("Changes saved Successfully");
-      setMessage(`${values.name} Created Successfully`);
-      setValues({
-        name: "",
-        description: "",
-        cover_image: "",
-        selectedImage: "",
-        blockTitle: "",
-        blockDesc: "",
-      });
-      setPostBlocks([]);
-      setKeys([]);
+      if (res.status === 200) {
+        toast.success("Changes saved Successfully");
+        setMessage(`${values.name} Created Successfully`);
+        setValues({
+          name: "",
+          description: "",
+          cover_image: "",
+          selectedImage: "",
+          blockTitle: "",
+          blockDesc: "",
+        });
+        setPostBlocks([]);
+        setKeys([]);
+      }
       navigate("/dashboard/manage-safari-updates");
     } catch (error) {
       setIsLoading(false);

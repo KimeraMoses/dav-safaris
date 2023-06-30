@@ -15,10 +15,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { BookTour } from "../../../../store/Actions/TourActions";
 import { Alert } from "@material-ui/lab";
 
-const BookingForm = (props) => {
+const BookingForm = ({ tour }) => {
   const countryList = useSelector((state) => state.countries.countryList);
   const isLoading = useSelector((state) => state.tour.isBooking);
-  const Tour = useSelector((state) => state.tour.tourDetails);
+  // const Tour = useSelector((state) => state.tour.tourDetails);
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -108,7 +108,7 @@ const BookingForm = (props) => {
       setError("");
       await dispatch(
         BookTour(
-          Tour.id,
+          tour.id,
           values.user_name,
           values.country_of_residence,
           values.phone,

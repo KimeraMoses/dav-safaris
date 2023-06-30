@@ -34,7 +34,6 @@ import {
 } from "../../../containers/Countries/TourCategories";
 import ImageUpload from "../../NewItems/ImageUpload";
 import NewItinary from "../../NewItems/NewItinary";
-import { editTourDetails } from "../../../store/Actions/TourActions";
 import { useLocation, useNavigate } from "react-router";
 import {
   fetchTourFail,
@@ -48,10 +47,11 @@ import Loader from "../../../containers/Loader/Loader";
 import NewKeyWord from "./Keywords/NewKeyWord";
 import { ConfigurationEditor } from "../../CustomEditor/SMTPEditor.component";
 import { convertHTMLToDraftState } from "../../../utils/Utils";
+import { DAV_APIS } from "../../../Adapter";
 
 let dayActivityDescription = [];
 
-const EditTour = (props) => {
+const EditTour = () => {
   const DarkMode = false;
   const isEditing = useSelector((state) => state.editTour.isLoading);
   const isFetching = useSelector((state) => state.tour.isLoading);
@@ -152,7 +152,6 @@ const EditTour = (props) => {
       category: Tour.category,
       duration: Tour.duration,
       price: Tour.price,
-
       includes: tourIncludes,
       excludes: tourExclude,
     });
@@ -271,48 +270,48 @@ const EditTour = (props) => {
     }
 
     try {
-      await dispatch(
-        editTourDetails(
-          values.name,
-          values.description,
-          JSON.stringify(tourActivities),
-          JSON.stringify(dayActivityDescription),
-          values.duration,
-          values.price,
-          values.selectedImage,
-          JSON.stringify(packageDetails),
-          values.category,
-          values.country,
-          JSON.stringify(keys),
-          Tour.id
-        )
-      );
+      const data = {
+        name: values.name,
+        description: values.description,
+        tourActivities: JSON.stringify(tourActivities),
+        dayActivityDescription: JSON.stringify(dayActivityDescription),
+        duration: values.duration,
+        price: values.price,
+        file: values.selectedImage,
+        packageDetails: JSON.stringify(packageDetails),
+        category: values.category,
+        country: values.country,
+        key_words: JSON.stringify(keys),
+      };
+      const res = await DAV_APIS.editTour(data, Tour.id);
       setIsLoading(false);
-      toast.success("Changes saved Successfully");
-      setMessage(`Changes to ${Tour.name} saved Successfully`);
-      setTourCategories([]);
-      setValues({
-        name: "",
-        description: "",
-        tourActivities: "",
-        cover_image: "",
-        selectedImage: "",
-        country: "",
-        category: "",
-        duration: "",
-        price: "",
-        includes: "",
-        excludes: "",
-        day: "",
-        itinaryTitle: "",
-        itinaryDesc: "",
-        meal_plan: "",
-        accomodation_plan: "",
-      });
-      dayActivityDescription = [];
-      tourActivities = [];
-      priceIncludes = [];
-      priceExcludes = [];
+      if (res.status === 200) {
+        toast.success("Changes saved Successfully");
+        setMessage(`Changes to ${Tour.name} saved Successfully`);
+        setTourCategories([]);
+        setValues({
+          name: "",
+          description: "",
+          tourActivities: "",
+          cover_image: "",
+          selectedImage: "",
+          country: "",
+          category: "",
+          duration: "",
+          price: "",
+          includes: "",
+          excludes: "",
+          day: "",
+          itinaryTitle: "",
+          itinaryDesc: "",
+          meal_plan: "",
+          accomodation_plan: "",
+        });
+        dayActivityDescription = [];
+        tourActivities = [];
+        priceIncludes = [];
+        priceExcludes = [];
+      }
       navigate("/dashboard/manage-tours");
     } catch (error) {
       setIsLoading(false);

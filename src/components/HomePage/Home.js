@@ -5,11 +5,10 @@ import Wrapper from "../../containers/hoc/wrapper";
 import HeroBooking from "../HeroBooking/HeroBooking";
 import Benefits from "./Benefits";
 import AboutUs from "./AboutUs";
-import CountyToursSection from "./CountryTours/CountyToursSection";
+import CountryToursSection from "./CountryTours/CountryToursSection";
 import SectionTitle from "./SectionTitle/SectionTitle";
-import CardCarousel from "../CardCarousel/CardCarousel";
+import ToursCardCarousel from "../CardCarousel/CardCarousel";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import BookingSearchResults from "../HeroBooking/BookingSearchResults";
 import Partners from "../Partners/Partners";
 import Updates from "../SafariUpdates/Updates";
@@ -18,9 +17,11 @@ import NewsLetterForm from "../ContactUs/NewsLetterForm";
 import ModalComponent from "../../components/UI/Modal/ModalComponent";
 import Payments from "./Payments";
 import SEO from "../../containers/SEO/SEO";
+import { useEffect } from "react";
+import { useAllTours } from "../../hooks";
 
 const Home = () => {
-  const Tours = useSelector((state) => state.tours.toursList);
+  const { tours, isLoading } = useAllTours();
   const [searchQ, setSearchQ] = useState({});
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState("");
@@ -31,6 +32,10 @@ const Home = () => {
     duration: "",
     departure: "",
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleOnChange = (event) => {
     setError("");
@@ -51,7 +56,7 @@ const Home = () => {
       );
     }
 
-    let FilteredTours = Tours.filter(
+    let FilteredTours = tours.filter(
       (Tour) =>
         Tour.country === values.destination && Tour.duration === values.duration
     );
@@ -90,8 +95,8 @@ const Home = () => {
       <AboutUs />
       <Benefits />
       <SectionTitle subTitle="Take a look at our" Title="Most popular tours" />
-      <CardCarousel />
-      <CountyToursSection />
+      <ToursCardCarousel tours={tours} isLoading={isLoading} />
+      <CountryToursSection />
       <Updates />
       <Partners />
       <Payments />

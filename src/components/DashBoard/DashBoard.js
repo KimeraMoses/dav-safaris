@@ -89,6 +89,13 @@ const DashBoard = () => {
             </li>
             <li>
               <DashBoardMenuItem
+                menuItemLink="manage-agents"
+                menuItemTitle="Manage Agents"
+                menuItemIcon={<BookOutlinedIcon />}
+              />
+            </li>
+            <li>
+              <DashBoardMenuItem
                 menuItemLink="manage-bookings"
                 menuItemTitle="Manage Bookings"
                 menuItemIcon={<BookOutlinedIcon />}

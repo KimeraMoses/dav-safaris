@@ -26,33 +26,23 @@ import { Col, Container, Row, Form } from "react-bootstrap";
 import styles from "./NewTour.module.css";
 import ImageUpload from "./ImageUpload";
 import { useEffect } from "react";
-import {
-  createNewCountry,
-  fetchAllCountrys,
-} from "../../store/Actions/CountryActions";
-import {
-  TourCategories_Kenya,
-  TourCategories_Rwanda,
-  TourCategories_Tanzania,
-  TourCategories_Uganda,
-} from "../../containers/Countries/TourCategories";
+import { fetchAllCountrys } from "../../store/Actions/CountryActions";
+
 import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
 import { useNavigate } from "react-router";
 import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
+import { DAV_APIS } from "../../Adapter";
 
 const NewCountry = () => {
   const DarkMode = false;
   const isLoading = useSelector((state) => state.country.isLoading);
-  const Tour = useSelector((state) => state.tour.tourDetails);
-  const [open, setOpen] = useState(false);
+
   const [keys, setKeys] = useState([]);
 
-  const [type, setType] = useState("Edit");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const [TourCategories, setTourCategories] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -71,25 +61,6 @@ const NewCountry = () => {
     selectedImage: "",
   });
   useEffect(() => {}, [values]);
-
-  useEffect(() => {
-    switch (values.country) {
-      case "uganda":
-        setTourCategories(TourCategories_Uganda);
-        break;
-      case "kenya":
-        setTourCategories(TourCategories_Kenya);
-        break;
-      case "rwanda":
-        setTourCategories(TourCategories_Rwanda);
-        break;
-      case "tanzania":
-        setTourCategories(TourCategories_Tanzania);
-        break;
-      default:
-        break;
-    }
-  }, [values.country]);
 
   //====TOUR COVER IMAGE HANDLER====//
   const tourImageHandler = async (e) => {
@@ -155,18 +126,18 @@ const NewCountry = () => {
     }
 
     try {
-      await dispatch(
-        createNewCountry(
-          values.name,
-          values.title,
-          values.description,
-          values.countrySummary,
-          values.specialist,
-          values.selectedImage,
-          values.slug,
-          JSON.stringify(keys)
-        )
-      );
+      const data = {
+        name: values.name,
+        title: values.title,
+        description: values.description,
+        countrySummary: values.countrySummary,
+        specialist: values.specialist,
+        selectedImage: values.selectedImage,
+        slug: values.slug,
+        key_words: JSON.stringify(keys),
+      };
+      await DAV_APIS.createCountry(data);
+
       toast.success(`${values.name} Created Successfully`);
       setMessage(`${values.name} Created Successfully`);
       navigate("/dashboard/manage-countries");
@@ -180,7 +151,7 @@ const NewCountry = () => {
         slug: "",
         selectedImage: "",
       });
-      dispatch(fetchAllCountrys());
+      // dispatch(fetchAllCountrys());
 
       setKeys([]);
     } catch (error) {
@@ -188,16 +159,6 @@ const NewCountry = () => {
       window.scrollTo(0, 0);
       setError("Country Registration Failed");
     }
-  };
-
-  const onEditClick = (id) => {
-    setType("Edit");
-
-    setOpen(true);
-  };
-  const onDeleteClick = (id) => {
-    setType("Delete");
-    setOpen(true);
   };
 
   return (
@@ -299,7 +260,6 @@ const NewCountry = () => {
                 >
                   <ImageUpload
                     tourImage={values.cover_image}
-                    // Image={Tour.imageCover}
                     uploaded={true}
                     tourImageHandler={tourImageHandler}
                   />

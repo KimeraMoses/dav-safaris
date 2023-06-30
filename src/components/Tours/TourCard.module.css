@@ -21,7 +21,7 @@
   left: -5px;
   display: inline-block;
   background: #f15d30;
-  padding: 4px 5px 4px 15px;
+  padding: 4px 10px 4px 15px;
   border-radius: 0 20px 20px 0px;
   color: #fff;
   -moz-transition: all 0.3s ease;
@@ -30,6 +30,7 @@
   -ms-transition: all 0.3s ease;
   transition: all 0.3s ease;
   text-transform: uppercase;
+  font-weight: 700;
 }
 
 .tour__discount:after {
@@ -129,4 +130,34 @@
   border-top: 20px solid transparent;
   border-left: 20px solid #fff;
   border-bottom: 20px solid transparent;
+}
+
+.tour__read_more {
+  transition: all 0.5s;
+}
+
+.tour__read_more span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.tour__read_more span:after {
+  content: "»";
+  position: absolute;
+  opacity: 0;
+  top: -2px;
+  right: -15px;
+  transition: 0.5s;
+  font-size: 26px;
+}
+
+.tour__read_more:hover span {
+  padding-right: 15px;
+}
+.tour__read_more:hover span:after {
+  opacity: 1;
+  right: -5px;
+  margin-bottom: 2px;
 }

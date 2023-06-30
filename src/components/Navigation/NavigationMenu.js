@@ -87,27 +87,32 @@ const NavigationMenu = (props) => {
                 sm={3}
                 xs={0}
               >
-                <Slide easing="ease" arrows={false} duration={2000}>
-                  {allCountries?.slice(4).map((country) => (
-                    <Link to={country.slug} key={country.id}>
-                      <div
-                        className={classes.dropdown_slide}
-                        style={{
-                          backgroundImage: `url(${country.countryImage})`,
-                          backgroundPosition: "center center",
-                          backgroundSize: "cover",
-                        }}
-                      >
-                        <span>
-                          <h2>{country.name}</h2>
-                        </span>
-                        <div className={classes.dropdown_slide__paragraph}>
-                          <p>{`${country.description.substring(4, 65)}...`}</p>
+                {allCountries?.length > 0 && (
+                  <Slide easing="ease" arrows={false} duration={2000}>
+                    {allCountries?.slice(4).map((country) => (
+                      <Link to={country.slug} key={country.id}>
+                        <div
+                          className={classes.dropdown_slide}
+                          style={{
+                            backgroundImage: `url(${country.countryImage})`,
+                            backgroundPosition: "center center",
+                            backgroundSize: "cover",
+                          }}
+                        >
+                          <span>
+                            <h2>{country.name}</h2>
+                          </span>
+                          <div className={classes.dropdown_slide__paragraph}>
+                            <p>{`${country.description.substring(
+                              4,
+                              65
+                            )}...`}</p>
+                          </div>
                         </div>
-                      </div>
-                    </Link>
-                  ))}
-                </Slide>
+                      </Link>
+                    ))}
+                  </Slide>
+                )}
                 {/* <Slide easing="ease" arrows={false} duration={2000}>
                   {allCountries?.map((country) => (
                     <Link to={country.slug} key={country.id}>

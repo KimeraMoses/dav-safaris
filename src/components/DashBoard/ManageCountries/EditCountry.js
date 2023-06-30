@@ -42,19 +42,28 @@ import { convertHTMLToDraftState } from "../../../utils/Utils";
 import { countryEditIsLoading } from "../../../store/Slices/editCountrySlice";
 import {
   countryFetchIsLoading,
-  // selectCountryDetails,
+  selectCountryDetails,
   fetchCountryFail,
   fetchCountryPending,
   fetchCountrySuccess,
 } from "../../../store/Slices/fetchCountryDetailsSlice";
+import { useCountryById } from "../../../hooks";
+import { DAV_APIS } from "../../../Adapter";
 
 const EditCountry = (props) => {
-  const DarkMode = false;
-  const isEditing = useSelector(countryEditIsLoading);
-  const isFetching = useSelector(countryFetchIsLoading);
+  let DarkMode = false;
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+  let query = useQuery();
+  const selectedCountry = query.get("country");
+  const { country, isLoading: isFetching } = useCountryById(selectedCountry);
+  const isLoading = isFetching;
+  const [isEditing, setIsEditing] = useState(false);
+  // const isFetching = useSelector(countryFetchIsLoading);
   // const fetchedCountry = useSelector(selectCountryDetails);
-  const [isLoading, setIsLoading] = useState(false);
-  const [country, setCountry] = useState({});
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [country, setCountry] = useState({});
   const [keys, setKeys] = useState([]);
 
   const dispatch = useDispatch();
@@ -67,29 +76,29 @@ const EditCountry = (props) => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
-  const fetchCountryDetails = (country_id) => async (dispatch) => {
-    dispatch(fetchCountryPending());
-    try {
-      const response = await fetch(`${baseUrl}/api/v1/countries/${country_id}`);
-      const fetchedCountry = await response.json();
-      dispatch(fetchCountrySuccess(fetchedCountry.country));
-      setCountry(fetchedCountry?.country);
-    } catch (error) {
-      dispatch(fetchCountryFail(error.message));
-    }
-  };
-  console.log(country);
+  // const fetchCountryDetails = (country_id) => async (dispatch) => {
+  //   dispatch(fetchCountryPending());
+  //   try {
+  //     const response = await fetch(`${baseUrl}/api/v1/countries/${country_id}`);
+  //     const fetchedCountry = await response.json();
+  //     dispatch(fetchCountrySuccess(fetchedCountry.country));
+  //     setCountry(fetchedCountry?.country);
+  //   } catch (error) {
+  //     dispatch(fetchCountryFail(error.message));
+  //   }
+  // };
+  // console.log(country);
 
   //====GET THE SELECTED DOCUMENT CATEGORY====//
-  function useQuery() {
-    return new URLSearchParams(useLocation().search);
-  }
-  let query = useQuery();
-  const selectedCountry = query.get("country");
-  useEffect(() => {
-    dispatch(fetchCountryDetails(selectedCountry));
-    // eslint-disable-next-li
-  }, [dispatch, selectedCountry]);
+  // function useQuery() {
+  //   return new URLSearchParams(useLocation().search);
+  // }
+  // let query = useQuery();
+  // const selectedCountry = query.get("country");
+  // useEffect(() => {
+  //   dispatch(fetchCountryDetails(selectedCountry));
+  //   // eslint-disable-next-li
+  // }, [dispatch, selectedCountry]);
 
   const [editorState, setEditorState] = useState(() =>
     convertHTMLToDraftState(country.description)
@@ -150,7 +159,7 @@ const EditCountry = (props) => {
   };
 
   const RegisterFormSubmitHandler = async (e) => {
-    setIsLoading(true);
+    setIsEditing(true);
     e.preventDefault();
     if (values.name.length < 1) {
       window.scrollTo(0, 0);
@@ -185,20 +194,19 @@ const EditCountry = (props) => {
     }
 
     try {
-      await dispatch(
-        editCountryDetails(
-          values.name,
-          values.title,
-          values.description,
-          values.countrySummary,
-          values.specialist,
-          values.selectedImage,
-          values.slug,
-          JSON.stringify(keys),
-          country.id
-        )
-      );
-      setIsLoading(false);
+      const data = {
+        name: values.name,
+        title: values.title,
+        description: values.description,
+        countrySummary: values.countrySummary,
+        specialist: values.specialist,
+        selectedImage: values.selectedImage,
+        slug: values.slug,
+        key_words: JSON.stringify(keys),
+      };
+      await DAV_APIS.editCountry(data, country.id);
+      console.log("edit response", DAV_APIS);
+      setIsEditing(false);
       toast.success("Changes saved Successfully");
       setMessage(`Changes to ${country.name} saved Successfully`);
 
@@ -215,7 +223,7 @@ const EditCountry = (props) => {
 
       navigate("/dashboard/manage-countries");
     } catch (error) {
-      setIsLoading(false);
+      setIsEditing(false);
       toast.error("Failed to save changes!");
       setError("Country Registration Failed");
     }
