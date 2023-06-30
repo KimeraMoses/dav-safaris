@@ -352,6 +352,44 @@ const requestAdapter = (requestor) => ({
 
       return response;
     },
+
+    /**
+     * @name getPostByName
+     * @description Function used to get post by name
+     * @param {string} type
+     * @param {string} postName
+     * @returns {Promise<any} response
+     */
+    getPostByName: async (postName, type) => {
+      const url = `/api/v1/${
+        type === "language" ? "languagePost" : "posts"
+      }/getPostByName/${postName}`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+
+      return response;
+    },
+
+    /**
+     * @name getPostById
+     * @description Function used to get post by id
+     * @param {string} type
+     * @param {string} postId
+     * @returns {Promise<any} response
+     */
+    getPostById: async (postId, type) => {
+      const url = `/api/v1/${
+        type === "language" ? "languagePost" : "posts"
+      }/${postId}`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+
+      return response;
+    },
   },
 });
 

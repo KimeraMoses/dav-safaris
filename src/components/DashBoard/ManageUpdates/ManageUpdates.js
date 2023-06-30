@@ -8,7 +8,7 @@ import TourFilters from "../ManageTours/TourFilters";
 import UpdateCard from "../../SafariUpdates/UpdateCard";
 import Loader from "../../../containers/Loader/Loader";
 import DeleteModal from "../ManageTours/Itinary/DeleteModal";
-import { DAV_APIS } from "../../../Adapter";
+import usePosts from "../../../hooks/usePosts";
 
 export const NoPosts = ({ type }) => {
   return (
@@ -22,27 +22,17 @@ export const NoPosts = ({ type }) => {
 };
 
 const ManageUpdates = () => {
-  const [isFetching, setIsFetching] = useState(false);
   const language = useSelector((state) => state.post.language);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [addNew, setAddNew] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState("");
   const [open, setOpen] = useState(false);
-  const [posts, setPosts] = useState([]);
 
-  const fetchAllPosts = async () => {
-    setIsFetching(true);
-    const res = await DAV_APIS.get.getAllPosts(language ? "language" : "");
-    if (res.status === 200) {
-      setPosts(res.data.Posts);
-    }
-    setIsFetching(false);
-  };
+  const { posts, loading: isFetching } = usePosts(language ? "language" : "");
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchAllPosts();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [language]);
@@ -89,7 +79,7 @@ const ManageUpdates = () => {
           Post={post}
           isAdmin={true}
           onDeleteClick={onDeleteClick}
-          language={language}
+          isLanguage={language}
         />
       </Col>
     );
@@ -127,7 +117,6 @@ const ManageUpdates = () => {
         setOpen={setOpen}
         Id={selectedPostId}
         setSearchTerm={setSearchTerm}
-        callback={fetchAllPosts}
       />
     </Container>
   );

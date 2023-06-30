@@ -1,16 +1,15 @@
 import { Button } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import SectionTitle from "../HomePage/SectionTitle/SectionTitle";
 import TourCardSkeleton from "../Tours/TourCardSkeleton";
 import UpdateCard from "./UpdateCard";
 import classes from "./Updates.module.css";
+import usePosts from "../../hooks/usePosts";
 
 const Updates = (props) => {
-  const isLoading = useSelector((state) => state.tours.isLoading);
-  const Posts = useSelector((state) => state.post.posts);
+  const { posts, loading } = usePosts("posts");
   const { isPostPage } = props;
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -18,9 +17,9 @@ const Updates = (props) => {
   return (
     <>
       <Container fluid className={classes.dav__updates_wrapper}>
-        <SectionTitle subTitle="stay updated with" Title="Safari Updates" />
+        <SectionTitle subTitle="stay upto date with" Title="Safari Updates" />
         <Row className={classes.dav__updates_row_wrapper}>
-          {isLoading
+          {loading
             ? [...Array(15).keys()].map((index) => {
                 return (
                   <Col
@@ -33,8 +32,8 @@ const Updates = (props) => {
                   </Col>
                 );
               })
-            : Posts &&
-              Posts.slice(...(isPostPage ? [0] : [0, 12])).map((post) => {
+            : posts &&
+              posts.slice(...(isPostPage ? [0] : [0, 12])).map((post) => {
                 return (
                   <Col
                     key={post.id}
