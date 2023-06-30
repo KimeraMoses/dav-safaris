@@ -3,42 +3,45 @@ import classes from "./TourCard.module.css";
 import { Link } from "react-router-dom";
 import { Timer } from "@material-ui/icons";
 import { Rating } from "@material-ui/lab";
+import { useSelector } from "react-redux";
+import { DAV_ROLES } from "../../constants";
 
-const TourCard = (props) => {
+const TourCard = ({ tour }) => {
   const {
-    TourImage,
-    TourTitle,
-    NumDays,
-    NumNights,
-    TourDescription,
-    TourRating,
-    TourSlug,
+    imageCover,
+    name,
+    slug,
+    duration,
+    description,
+    ratingsAverage,
     price,
-    agent,
-    key,
-  } = props;
+  } = tour;
+
+  const user = useSelector((state) => state.auth.user);
+
+  const isAgent = user?.role === DAV_ROLES.AGENT;
 
   return (
-    <div className={classes.tour_card_wrapper} key={key}>
+    <div className={classes.tour_card_wrapper}>
       <div className={classes.tour_card_header}>
-        <Link to={`/tours/${TourSlug}`}>
-          <img src={TourImage} alt="Tour" />
-          {agent && <span className={classes.tour__discount}>${price}</span>}
+        <Link to={`/tours/${slug}`}>
+          <img src={imageCover} alt="Tour" />
+          {isAgent && <span className={classes.tour__discount}>${price}</span>}
         </Link>
       </div>
       <div className={classes.tour_card_body}>
         <div className={classes.tour_title}>
-          <h4 title={`View ${TourTitle}`}>
-            <Link to={`/tours/${TourSlug}`}>{TourTitle} </Link>
+          <h4 title={`View ${name}`}>
+            <Link to={`/tours/${slug}`}>{name} </Link>
           </h4>
         </div>
         <span className={classes.tour__date}>
-          <Timer /> {NumDays} DAYS - {NumNights} NIGHTS
+          <Timer /> {duration} DAYS - {duration - 1} NIGHTS
         </span>
         <div className={classes.tour__description}>
           <div
             className="dav__single_tour_description"
-            dangerouslySetInnerHTML={{ __html: TourDescription }}
+            dangerouslySetInnerHTML={{ __html: description }}
           ></div>
         </div>
       </div>
@@ -48,12 +51,12 @@ const TourCard = (props) => {
             name="read-only"
             readOnly
             precision={0.5}
-            value={TourRating}
+            value={ratingsAverage}
           />
         </div>
         <div className={classes.tour__read_more}>
-          <Link to={`/tours/${TourSlug}`}>
-            <span>{agent ? "View Tour" : "Book Tour"}</span>
+          <Link to={`/tours/${slug}`}>
+            <span>{isAgent ? "View Tour" : "Book Tour"}</span>
           </Link>
         </div>
       </div>

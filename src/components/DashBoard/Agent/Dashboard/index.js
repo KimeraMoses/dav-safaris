@@ -68,17 +68,7 @@ const AgentDashboard = () => {
                       sm={12}
                       className={classes.dav__popular_tour_card_wrapper}
                     >
-                      <TourCard
-                        TourImage={tour.imageCover}
-                        TourTitle={tour.name}
-                        TourSlug={tour.slug}
-                        NumDays={tour.duration}
-                        NumNights={tour.duration - 1}
-                        TourDescription={tour.description}
-                        TourRating={tour.ratingsAverage}
-                        price={tour.price}
-                        agent
-                      />
+                      <TourCard tour={tour} />
                     </Col>
                   );
                 })}
