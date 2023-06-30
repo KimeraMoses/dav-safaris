@@ -25,25 +25,6 @@ const CountryHeader = (props) => {
               </Link>
             );
           })}
-        {/* <Link to="?tour-cat=golliras" className={classes.dav__category_card}>
-          <img src={CatImg} />
-          <h5>Gorilla &amp; Wildlife Safaris</h5>
-        </Link>
-        <Link to="?tour-cat=birding" className={classes.dav__category_card}>
-          <img src={BirdImg} />
-          <h5>Uganda Birding Safaris</h5>
-        </Link>
-        <Link to="?tour-cat=culture" className={classes.dav__category_card}>
-          <img src={CultureImg} />
-          <h5>Uganda Cultural Tours</h5>
-        </Link>
-        <Link
-          to="?tour-cat=mountaineering"
-          className={classes.dav__category_card}
-        >
-          <img src={MountImg} />
-          <h5>Mountaineering</h5>
-        </Link> */}
       </div>
     </div>
   );
