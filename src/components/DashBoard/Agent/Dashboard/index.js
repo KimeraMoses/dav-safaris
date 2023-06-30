@@ -7,6 +7,7 @@ import TourCardSkeleton from "../../../Tours/TourCardSkeleton";
 import { useAllTours } from "../../../../hooks";
 import { CountriesData } from "../../../../containers/Countries/CountriesData";
 import { useState } from "react";
+import LogOutButton from "../../../Membership/Logout/Logout";
 
 function getGreeting(name) {
   const currentTime = new Date();
@@ -52,6 +53,9 @@ const AgentDashboard = () => {
             Take a look at our exciting tours with their prices and advise our
             clients accordingly
           </p>
+          <div className="mt-2">
+            Not {user && user.username}? <LogOutButton />
+          </div>
         </div>
       </div>
       <div className={classes.dav__agent_country_cards_section}>
