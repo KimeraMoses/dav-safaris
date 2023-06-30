@@ -54,7 +54,7 @@ const AgentDashboard = () => {
             clients accordingly
           </p>
           <div className="mt-2">
-            Not {user && user.username}? <LogOutButton />
+            Not {user?.username}? <LogOutButton />
           </div>
         </div>
       </div>
