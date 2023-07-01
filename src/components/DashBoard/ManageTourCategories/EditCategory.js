@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { convertToRaw } from "draft-js";
 import { convertToHTML } from "draft-convert";
@@ -30,35 +30,51 @@ import ImageUpload from "../../NewItems/ImageUpload";
 
 // import { editCategoryDetails } from "../../../store/Actions/TourCategoriesActions";
 import { useLocation, useNavigate } from "react-router";
-import { fetchAllCountrys } from "../../../store/Actions/CountryActions";
-import {
-  fetchCategoryPending,
-  fetchCategorySuccess,
-  fetchCategoryFail,
-  categoryFetchIsLoading,
-} from "../../../store/Slices/fetchCategorySlice";
-import { selectAllCountries } from "../../../store/Slices/countrySlice";
-import { baseUrl } from "../../../store";
+// import { fetchAllCountrys } from "../../../store/Actions/CountryActions";
+// import {
+//   fetchCategoryPending,
+//   fetchCategorySuccess,
+//   fetchCategoryFail,
+//   categoryFetchIsLoading,
+// } from "../../../store/Slices/fetchCategorySlice";
+// import { selectAllCountries } from "../../../store/Slices/countrySlice";
+// import { baseUrl } from "../../../store";
 import { Link } from "react-router-dom";
 import Loader from "../../../containers/Loader/Loader";
 import NewKeyWord from "./Keywords/NewKeyWord";
 import { ConfigurationEditor } from "../../CustomEditor/SMTPEditor.component";
 import { convertHTMLToDraftState } from "../../../utils/Utils";
-import { useAllCountries } from "../../../hooks";
+import { useAllCountries, useCategoryById } from "../../../hooks";
+
 import { DAV_APIS } from "../../../Adapter";
 
 const EditCategory = (props) => {
+  //====GET THE SELECTED DOCUMENT CATEGORY====//
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+  let query = useQuery();
+  const selectedCategory = query.get("category");
+
+  const { category, isLoading: isFetching } = useCategoryById(selectedCategory);
+  // console.log(
+  //   "selected category",
+  //   selectedCategory,
+  //   "Fetched category",
+  //   category
+  // );
+  const isLoading = isFetching;
   const { countries } = useAllCountries();
   const DarkMode = false;
-  const isEditing = useSelector((state) => state.editTour.isLoading);
-  const isFetching = useSelector(categoryFetchIsLoading);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  // const isFetching = useSelector(categoryFetchIsLoading);
+  // const [isLoading, setIsLoading] = useState(false);
   // const CountryList = useSelector(selectAllCountries);
   const countryArray = countries;
-  const [category, setCategory] = useState({});
+  // const [category, setCategory] = useState({});
   const [keys, setKeys] = useState([]);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -74,31 +90,31 @@ const EditCategory = (props) => {
   //   setCountryArray(CountryList?.countries);
   // }, [CountryList]);
 
-  const fetchCategoryDetails = (cat_id) => async (dispatch) => {
-    dispatch(fetchCategoryPending());
-    try {
-      const response = await fetch(`${baseUrl}/api/v1/categories/${cat_id}`);
-      const fetchedCategory = await response.json();
-      console.log("Fetched", fetchedCategory);
-      dispatch(fetchCategorySuccess(fetchedCategory.tourCategory));
-      setCategory(fetchedCategory?.tourCategory);
-    } catch (error) {
-      dispatch(fetchCategoryFail(error.message));
-    }
-  };
+  // const fetchCategoryDetails = (cat_id) => async (dispatch) => {
+  //   dispatch(fetchCategoryPending());
+  //   try {
+  //     const response = await fetch(`${baseUrl}/api/v1/categories/${cat_id}`);
+  //     const fetchedCategory = await response.json();
+  //     console.log("Fetched", fetchedCategory);
+  //     dispatch(fetchCategorySuccess(fetchedCategory.tourCategory));
+  //     setCategory(fetchedCategory?.tourCategory);
+  //   } catch (error) {
+  //     dispatch(fetchCategoryFail(error.message));
+  //   }
+  // };
 
   //====GET THE SELECTED DOCUMENT CATEGORY====//
-  function useQuery() {
-    return new URLSearchParams(useLocation().search);
-  }
-  let query = useQuery();
-  const selectedCategory = query.get("category");
+  // function useQuery() {
+  //   return new URLSearchParams(useLocation().search);
+  // }
+  // let query = useQuery();
+  // const selectedCategory = query.get("category");
 
-  useEffect(() => {
-    dispatch(fetchCategoryDetails(selectedCategory));
+  // useEffect(() => {
+  //   dispatch(fetchCategoryDetails(selectedCategory));
 
-    // eslint-disable-next-line
-  }, [selectedCategory]);
+  //   // eslint-disable-next-line
+  // }, [selectedCategory]);
   const [editorState, setEditorState] = useState(() =>
     convertHTMLToDraftState(category.description)
   );
@@ -157,7 +173,7 @@ const EditCategory = (props) => {
   };
 
   const RegisterFormSubmitHandler = async (e) => {
-    setIsLoading(true);
+    setIsEditing(true);
     e.preventDefault();
 
     if (values.name.length < 1) {
@@ -191,7 +207,7 @@ const EditCategory = (props) => {
         selectedImage: values.selectedImage,
       };
       await DAV_APIS.editCategory(data, category.id);
-      setIsLoading(false);
+      setIsEditing(false);
       setMessage(`Changes to ${category.name} saved Successfully`);
       toast.success("Changes saved Successfully");
       navigate("/dashboard/manage-tour-categories");
@@ -205,7 +221,7 @@ const EditCategory = (props) => {
         selectedImage: "",
       });
     } catch (error) {
-      setIsLoading(false);
+      setIsEditing(false);
       toast.error("Failed to save changes!");
       setError("Tour Registration Failed");
     }

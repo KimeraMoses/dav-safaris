@@ -1,13 +1,15 @@
 import React from "react";
 import classes from "./CountryHeader.module.css";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
-import { selectAllCategories } from "../../store/Slices/fetchCategoriesSlice";
+// import { selectAllCategories } from "../../store/Slices/fetchCategoriesSlice";
+import { useAllCategories } from "../../hooks";
 
 const CountryHeader = (props) => {
-  const fetchedCategories = useSelector(selectAllCategories);
-  let categories = fetchedCategories.categories;
+  // const fetchedCategories = useSelector(selectAllCategories);
+  // let categories = fetchedCategories.categories;
+  const { categories } = useAllCategories();
   let tourCategories = categories?.filter(
     (category) => category?.country?.id === props.Country?.id
   );

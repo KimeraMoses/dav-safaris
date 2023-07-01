@@ -298,6 +298,20 @@ const requestAdapter = (requestor) => ({
     });
     return response;
   },
+  /**
+   * @name deleteCategoryById
+   * @description Function used to make request to delete a category
+   * @param {string} categoryId
+   * @returns {object} response
+   */
+  deleteCategoryById: async (categoryId) => {
+    const url = `/api/v1/categories/deleteTourCategory/${categoryId}`;
+    const response = await requestor({
+      method: "DELETE",
+      url,
+    });
+    return response;
+  },
 
   /**
    * @name get - handle all get requests for estimate
@@ -418,6 +432,48 @@ const requestAdapter = (requestor) => ({
      */
     getCountryById: async (countryId) => {
       const url = `/api/v1/countries/${countryId}`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+      return response;
+    },
+    /**
+     * @name getAllCategories
+     * @description Function used to get all categories
+     * @returns {object} response
+     */
+    getAllCategories: async () => {
+      const url = `/api/v1/categories/getAllTourCategories`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+
+      return response;
+    },
+    /**
+     * @name getCategoryById
+     * @description Function used to make request to get a category by an id
+     * @param {string} id
+     * @returns {Promise<any>} response
+     */
+    getCategoryById: async (categoryId) => {
+      const url = `/api/v1/categories/${categoryId}`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+      return response;
+    },
+    /**
+     * @name getCategoryBySlug
+     * @description Function used to make request to get a category by slug
+     * @param {string} slug
+     * @returns {Promise<any>} response
+     */
+    getCategoryBySlug: async (slug) => {
+      const url = `/api/v1/categories/getTourCategoryBySlug/${slug}`;
       const response = await requestor({
         method: "GET",
         url,

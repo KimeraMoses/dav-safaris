@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 import { EditorState, convertToRaw } from "draft-js";
 import { convertToHTML } from "draft-convert";
 import { toast } from "react-toastify";
@@ -27,25 +27,26 @@ import styles from "./NewTour.module.css";
 
 import ImageUpload from "./ImageUpload";
 import { useEffect } from "react";
-import { createNewTourCategory } from "../../store/Actions/TourCategoriesActions";
+// import { createNewTourCategory } from "../../store/Actions/TourCategoriesActions";
 
 import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
 import { useNavigate } from "react-router";
 import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
-import { selectAllCountries } from "../../store/Slices/countrySlice";
-import { fetchAllCountrys } from "../../store/Actions/CountryActions";
-import { fetchAllCategories } from "../../store/Actions/TourCategoriesActions";
+// import { selectAllCountries } from "../../store/Slices/countrySlice";
+// import { fetchAllCountrys } from "../../store/Actions/CountryActions";
+// import { fetchAllCategories } from "../../store/Actions/TourCategoriesActions";
 import { DAV_APIS } from "../../Adapter";
-
+import { useAllCountries } from "../../hooks";
 const NewTourCategory = () => {
+  const { countries } = useAllCountries();
   const DarkMode = false;
-  const isLoading = useSelector((state) => state.newCategory.isLoading);
-  const Tour = useSelector((state) => state.tour.tourDetails);
-  const CountryList = useSelector(selectAllCountries);
-  const [countryArray, setCountryArray] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  // const Tour = useSelector((state) => state.tour.tourDetails);
+  // const CountryList = useSelector(selectAllCountries);
+  // const [countryArray, setCountryArray] = useState([]);
   const [keys, setKeys] = useState([]);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
@@ -64,12 +65,12 @@ const NewTourCategory = () => {
     selectedImage: "",
   });
   useEffect(() => {}, [values]);
-  useEffect(() => {
-    dispatch(fetchAllCountrys());
-  }, [dispatch]);
-  useEffect(() => {
-    setCountryArray(CountryList?.countries);
-  }, [CountryList]);
+  // useEffect(() => {
+  //   dispatch(fetchAllCountrys());
+  // }, [dispatch]);
+  // useEffect(() => {
+  //   setCountryArray(CountryList?.countries);
+  // }, [CountryList]);
 
   //====TOUR COVER IMAGE HANDLER====//
   const tourImageHandler = async (e) => {
@@ -101,6 +102,7 @@ const NewTourCategory = () => {
 
   const RegisterFormSubmitHandler = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     if (values.name.length < 1) {
       window.scrollTo(0, 0);
@@ -133,6 +135,8 @@ const NewTourCategory = () => {
         selectedImage: values.selectedImage,
       };
       await DAV_APIS.createCategory(data);
+      setIsLoading(false);
+      console.log("category value", values);
       toast.success(`${values.name} Created Successfully`);
       setMessage(`${values.name} Created Successfully`);
       setValues({
@@ -143,7 +147,7 @@ const NewTourCategory = () => {
         cover_image: "",
         selectedImage: "",
       });
-      dispatch(fetchAllCategories());
+      // dispatch(fetchAllCategories());
       navigate("/dashboard/manage-tour-categories/");
 
       setKeys([]);
@@ -231,7 +235,7 @@ const NewTourCategory = () => {
                       name="country"
                       onChange={onChangeHandler}
                     >
-                      {countryArray?.map((country) => {
+                      {countries.map((country) => {
                         return (
                           <MenuItem key={country?.id} value={country?.id}>
                             {country?.name}

@@ -1,17 +1,19 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router";
-import {
-  TourCategories_Kenya,
-  TourCategories_Rwanda,
-  TourCategories_Tanzania,
-  TourCategories_Uganda,
-} from "../../../containers/Countries/TourCategories";
+// import {
+//   TourCategories_Kenya,
+//   TourCategories_Rwanda,
+//   TourCategories_Tanzania,
+//   TourCategories_Uganda,
+// } from "../../../containers/Countries/TourCategories";
 import classes from "../CountrySingle.module.css";
 import PopularTours from "../../HomePage/PopularTours/PopularTours";
 import SectionTitle from "../../HomePage/SectionTitle/SectionTitle";
 import SEO from "../../../containers/SEO/SEO";
 import DescriptionSection from "../DescriptionSection";
 import { useCountryTours } from "../../../hooks";
+import { useCategoryBySlug } from "../../../hooks";
+import { useCountry, useAllCategories } from "../../../hooks";
 
 const categoryMeta = {
   "tanzania-wildlife-safaris": {
@@ -36,7 +38,12 @@ const categoryMeta = {
 
 const Category = () => {
   const { countryName, tourCategory } = useParams();
-  const currentCountry = countryName.split("-")[0];
+  const { category } = useCategoryBySlug(tourCategory);
+  // const { categories } = useAllCategories();
+  const { country } = useCountry(countryName);
+
+  const currentCountry = country.name;
+  // const currentCountry = countryName.split("-")[0];
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -44,14 +51,12 @@ const Category = () => {
   }, [tourCategory]);
 
   const { tours, isLoading } = useCountryTours(currentCountry);
+  console.log("country", country, "category", category, "Tours", tours);
 
-  const SelectedCategory = TourCategories_Uganda.concat(
-    TourCategories_Kenya,
-    TourCategories_Rwanda,
-    TourCategories_Tanzania
-  ).filter(
-    (category) => category.value.toLowerCase() === tourCategory.toLowerCase()
-  )[0];
+  // const SelectedCategory = categories?.filter(
+  //   (category) => category.value.toLowerCase() === tourCategory.toLowerCase()
+  // )[0];
+  const SelectedCategory = category;
   const FilteredTours = tours.filter((tour) => tour.category === tourCategory);
 
   return (

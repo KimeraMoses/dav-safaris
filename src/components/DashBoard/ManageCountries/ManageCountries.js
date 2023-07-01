@@ -4,7 +4,7 @@ import DashTourCard from "./DashTourCard";
 import classes from "./ManageTours.module.css";
 import { List } from "@material-ui/core";
 import Filters from "./Filters";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 import { useNavigate } from "react-router";
@@ -12,17 +12,18 @@ import DeleteModal from "./delete/DeleteModal";
 import Loader from "../../../containers/Loader/Loader";
 
 import NewCountry from "../../NewItems/NewCountry";
-import {
-  selectAllCountries,
-  selectIsLoading,
-} from "../../../store/Slices/countrySlice";
-import { fetchAllCountrys } from "../../../store/Actions/CountryActions";
+// import {
+//   selectAllCountries,
+//   selectIsLoading,
+// } from "../../../store/Slices/countrySlice";
+// import { fetchAllCountrys } from "../../../store/Actions/CountryActions";
 
 import { useAllCountries } from "../../../hooks";
 
 const ManageTours = () => {
   const { countries, isLoading: isFetching } = useAllCountries();
-  const isLoading = useSelector((state) => state.country.isLoading);
+  const isLoading = isFetching;
+  // const isLoading = useSelector((state) => state.country.isLoading);
 
   // const isFetching = useSelector(selectIsLoading);
   // const CountryList = useSelector(selectAllCountries);
@@ -32,14 +33,14 @@ const ManageTours = () => {
   const [addNew, setAddNew] = useState(false);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchAllCountrys());
+    // dispatch(fetchAllCountrys());
 
     window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(countries);
+  // console.log(countries);
   let FilteredCountries = countries;
 
   // const onAddNewClick =()=>{

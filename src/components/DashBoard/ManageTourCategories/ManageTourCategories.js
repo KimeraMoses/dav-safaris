@@ -15,12 +15,14 @@ import {
   selectAllCategories,
 } from "../../../store/Slices/fetchCategoriesSlice";
 import { fetchAllCategories } from "../../../store/Actions/TourCategoriesActions";
+import { useAllCategories } from "../../../hooks";
 
 const ManageTourCategories = () => {
-  const isLoading = useSelector((state) => state.tour.isLoading);
+  const { categories, isLoading: isFetching } = useAllCategories();
+  const isLoading = isFetching;
 
-  const isFetching = useSelector(selectCategoriesFetchIsLoading);
-  const categoryList = useSelector(selectAllCategories);
+  // const isFetching = useSelector(selectCategoriesFetchIsLoading);
+  // const categoryList = useSelector(selectAllCategories);
 
   const [country, setCountry] = useState("Filter by country");
   const [searchTerm, setSearchTerm] = useState("");
@@ -29,15 +31,15 @@ const ManageTourCategories = () => {
   const [addNew, setAddNew] = useState(false);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchAllCategories());
+    // dispatch(fetchAllCategories());
 
     window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  let FilteredCategories = categoryList?.categories;
+  let FilteredCategories = categories;
 
   const onEditClick = (cat_Id) => {
     navigate(`/dashboard/manage-tour-categories/edit?category=${cat_Id}`);
