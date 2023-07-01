@@ -336,6 +336,22 @@ const requestAdapter = (requestor) => ({
     },
 
     /**
+     * @name getTourById
+     * @description Function used to get tour by id
+     * @param {string} tourId
+     * @returns {Promise<any>} response
+     */
+    getTourById: async (tourId) => {
+      const url = `/api/v1/tours/${tourId}`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+
+      return response;
+    },
+
+    /**
      * @name getAllPosts
      * @description Function used to get all posts
      * @param {string} type

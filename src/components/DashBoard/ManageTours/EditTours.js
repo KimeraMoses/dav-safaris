@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { convertToRaw } from "draft-js";
 import { convertToHTML } from "draft-convert";
@@ -35,12 +34,6 @@ import {
 import ImageUpload from "../../NewItems/ImageUpload";
 import NewItinary from "../../NewItems/NewItinary";
 import { useLocation, useNavigate } from "react-router";
-import {
-  fetchTourFail,
-  fetchTourPending,
-  fetchTourSuccess,
-} from "../../../store/Slices/tourSlice";
-import { baseUrl } from "../../../store";
 import EditItinaryModal from "./Itinary/EditItinary";
 import { Link } from "react-router-dom";
 import Loader from "../../../containers/Loader/Loader";
@@ -53,16 +46,15 @@ let dayActivityDescription = [];
 
 const EditTour = () => {
   const DarkMode = false;
-  const isEditing = useSelector((state) => state.editTour.isLoading);
-  const isFetching = useSelector((state) => state.tour.isLoading);
+  // const isLoading = useSelector((state) => state.editTour.isLoading);
   const [isLoading, setIsLoading] = useState(false);
+  const [fetching, setFetching] = useState(false);
   const [Tour, setTour] = useState({});
   const [keys, setKeys] = useState([]);
   const [open, setOpen] = useState(false);
   const [Itinary, setItinary] = useState({});
   const [EditedItinary, setEditedItinary] = useState("");
   const [type, setType] = useState("Edit");
-  const dispatch = useDispatch();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -73,20 +65,19 @@ const EditTour = () => {
   const [message, setMessage] = useState("");
   const [TourCategories, setTourCategories] = useState([]);
 
-  const fetchTourDetails = (tour_id) => async (dispatch) => {
-    dispatch(fetchTourPending());
+  const fetchTourDetails = async (tour_id) => {
+    setFetching(true);
     try {
-      const response = await fetch(`${baseUrl}/api/v1/tours/${tour_id}`);
-      const fetchedTour = await response.json();
-      dispatch(fetchTourSuccess(fetchedTour.tour));
-      setTour(fetchedTour?.tour);
+      const res = await DAV_APIS.get.getTourById(tour_id);
+      setTour(res.data.tour);
       dayActivityDescription = [];
 
-      fetchedTour?.tour.dayActivityDescription.forEach((tour) => {
+      res.data.tour.dayActivityDescription.forEach((tour) => {
         dayActivityDescription.push(tour);
       });
+      setFetching(false);
     } catch (error) {
-      dispatch(fetchTourFail(error.message));
+      setFetching(false);
     }
   };
 
@@ -95,13 +86,13 @@ const EditTour = () => {
     return new URLSearchParams(useLocation().search);
   }
   let query = useQuery();
-  const selectedCategory = query.get("tour");
+  const tourId = query.get("tour");
 
   useEffect(() => {
-    dispatch(fetchTourDetails(selectedCategory));
+    fetchTourDetails(tourId);
 
     // eslint-disable-next-line
-  }, [selectedCategory]);
+  }, [tourId]);
 
   let tourHighLights = "";
   Tour && Tour?.tourActivities?.map((el) => (tourHighLights += el + "\n"));
@@ -250,7 +241,6 @@ const EditTour = () => {
   };
 
   const RegisterFormSubmitHandler = async (e) => {
-    setIsLoading(true);
     e.preventDefault();
     if (values.itinaryTitle.length > 0) {
       ItinaryHandler();
@@ -268,7 +258,7 @@ const EditTour = () => {
     if (values.description.length < 1) {
       return setError("University Description required");
     }
-
+    setIsLoading(true);
     try {
       const data = {
         name: values.name,
@@ -364,7 +354,7 @@ const EditTour = () => {
                 <Alert severity="success">{message}</Alert>
               </div>
             )}
-            {isFetching ? (
+            {fetching ? (
               <Loader />
             ) : (
               <Form onSubmit={RegisterFormSubmitHandler}>
@@ -576,7 +566,7 @@ const EditTour = () => {
                 <Row>
                   <Col xs={{ span: 8, offset: 2 }}>
                     <Button
-                      // disabled={isLoading || values.logo.length < 1}
+                      disabled={isLoading}
                       variant="contained"
                       color="primary"
                       type="submit"
@@ -584,8 +574,8 @@ const EditTour = () => {
                         DarkMode ? styles.gpa__dark_mode : ""
                       }`}
                     >
-                      {isEditing ? "Saving changes..." : "Save changes"}
-                      {isLoading | isEditing ? (
+                      {isLoading ? "Saving changes..." : "Save changes"}
+                      {isLoading ? (
                         <Spinner
                           thickness={2}
                           size={20}
