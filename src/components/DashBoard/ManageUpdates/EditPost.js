@@ -146,7 +146,6 @@ const EditPost = () => {
   };
 
   const RegisterFormSubmitHandler = async (e) => {
-    setIsLoading(true);
     e.preventDefault();
     if (values.blockTitle.length > 0) {
       PostBlockHandler();
@@ -161,6 +160,7 @@ const EditPost = () => {
     if (values.description.length < 1) {
       return setError("Post Description required");
     }
+    setIsLoading(true);
     try {
       const data = {
         name: values.name,
@@ -318,7 +318,7 @@ const EditPost = () => {
                 <Row>
                   <Col xs={{ span: 8, offset: 2 }}>
                     <Button
-                      disabled={!values?.description}
+                      disabled={isLoading}
                       variant="contained"
                       color="primary"
                       type="submit"
