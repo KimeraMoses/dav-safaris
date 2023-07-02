@@ -15,7 +15,7 @@ const requestAdapter = (requestor) => ({
      * @returns
      */
     register: async (data, role) => {
-      const url = `/api/v1/users/signup${
+      const url = `/users/signup${
         role === DAV_ROLES.AGENT ? `?role=${DAV_ROLES.AGENT}` : ""
       }`;
       const response = await requestor({
@@ -33,7 +33,7 @@ const requestAdapter = (requestor) => ({
      * @returns {Promise<any>} response
      */
     login: async (data) => {
-      const url = `/api/v1/users/login`;
+      const url = `/users/login`;
       const response = await requestor({
         method: "POST",
         url,
@@ -41,27 +41,60 @@ const requestAdapter = (requestor) => ({
       });
       return response;
     },
-  },
 
-  /**
-   * @name activateDeactivateAgent
-   * @description Function used to make request to activate or deactivate an agent
-   * @param {string} agentId
-   * @param {string} action
-   * @returns {Promise<any>} response
-   */
-  activateDeactivateAgent: async (agentId, action) => {
-    const data = { agentId };
-    const url =
-      action === "activate"
-        ? `/api/v1/users/activateAgent`
-        : `/api/v1/users/deactivateAgent`;
-    const response = await requestor({
-      method: "POST",
-      url,
-      data,
-    });
-    return response;
+    /**
+     * @name activateDeactivateAgent
+     * @description Function used to make request to activate or deactivate an agent
+     * @param {string} agentId
+     * @param {string} action
+     * @returns {Promise<any>} response
+     */
+    activateDeactivateAgent: async (agentId, action) => {
+      const data = { agentId };
+      const url =
+        action === "activate"
+          ? `/users/activateAgent`
+          : `/users/deactivateAgent`;
+      const response = await requestor({
+        method: "POST",
+        url,
+        data,
+      });
+      return response;
+    },
+
+    /**
+     * @name forgotPassword
+     * @description Function used to make request to reset user password
+     * @param {string} email
+     * @returns {Promise<any>} response
+     */
+    forgotPassword: async (email) => {
+      const url = `/users/forgotPassword`;
+      const response = await requestor({
+        method: "POST",
+        url,
+        data: { email },
+      });
+      return response;
+    },
+
+    /**
+     * @name resetPassword
+     * @description Function used to make request to reset user password
+     * @param {string} token
+     * @param {string} password
+     * @returns {Promise<any>} response
+     */
+    resetPassword: async (token, password) => {
+      const url = `/users/resetPassword/${token}`;
+      const response = await requestor({
+        method: "PATCH",
+        url,
+        data: { password },
+      });
+      return response;
+    },
   },
 
   /**
@@ -84,7 +117,7 @@ const requestAdapter = (requestor) => ({
     formData.append("dayActivityDescription", data.dayActivityDescription);
     formData.append("key_words", data.key_words);
 
-    const url = `/api/v1/tours/create`;
+    const url = `/tours/create`;
     const response = await requestor({
       method: "POST",
       url,
@@ -114,7 +147,7 @@ const requestAdapter = (requestor) => ({
     formData.append("dayActivityDescription", data.dayActivityDescription);
     formData.append("key_words", data.key_words);
 
-    const url = `/api/v1/tours/updateTour/${tourId}`;
+    const url = `/tours/updateTour/${tourId}`;
     const response = await requestor({
       method: "PATCH",
       url,
@@ -139,7 +172,7 @@ const requestAdapter = (requestor) => ({
     formData.append("post_blocks", data.post_blocks);
     formData.append("key_words", data.key_words);
 
-    const url = `/api/v1/${
+    const url = `/${
       type === "language" ? "languagePost" : "posts"
     }/updatePost/${postId}`;
 
@@ -158,7 +191,7 @@ const requestAdapter = (requestor) => ({
    * @returns {object} response
    */
   deleteTourById: async (tourId) => {
-    const url = `/api/v1/tours/deleteTour/${tourId}`;
+    const url = `/tours/deleteTour/${tourId}`;
     const response = await requestor({
       method: "DELETE",
       url,
@@ -173,7 +206,7 @@ const requestAdapter = (requestor) => ({
    * @returns {object} response
    */
   deletePostById: async (postId, type) => {
-    const url = `/api/v1/${
+    const url = `/${
       type === "language" ? "languagePost" : "posts"
     }/deletePost/${postId}`;
     const response = await requestor({
@@ -190,7 +223,7 @@ const requestAdapter = (requestor) => ({
    * @returns {Promise<any>} response
    */
   createCountry: async (data) => {
-    const url = `/api/v1/countries/create`;
+    const url = `/countries/create`;
     // TODO: if formData, then check tour creation for the format of formData
     const response = await requestor({
       method: "POST",
@@ -208,7 +241,7 @@ const requestAdapter = (requestor) => ({
    * @returns {Promise<any>} response
    */
   editCountry: async (data, countryId) => {
-    const url = `/api/v1/countries/updateCountry/${countryId}`;
+    const url = `/countries/updateCountry/${countryId}`;
     // TODO: if formData, then check tour creation for the format of formData
     const response = await requestor({
       method: "PATCH",
@@ -225,7 +258,7 @@ const requestAdapter = (requestor) => ({
    * @returns {Promise<any>} response
    */
   getCountryBySlug: async (slug) => {
-    const url = `/api/v1/countries/getCountryBySlug/${slug}`;
+    const url = `/countries/getCountryBySlug/${slug}`;
     const response = await requestor({
       method: "GET",
       url,
@@ -240,7 +273,7 @@ const requestAdapter = (requestor) => ({
    * @returns {Promise<any>} response
    */
   createCategory: async (data) => {
-    const url = `/api/v1/categories/create`;
+    const url = `/categories/create`;
     // TODO: if formData, then check tour creation for the format of formData
     const response = await requestor({
       method: "POST",
@@ -259,7 +292,7 @@ const requestAdapter = (requestor) => ({
    * @todo check if formData is needed and switch to it
    */
   editCategory: async (data, categoryId) => {
-    const url = `/api/v1/categories/updateCategory/${categoryId}`;
+    const url = `/categories/updateCategory/${categoryId}`;
     // TODO: if formData, then check tour creation for the format of formData
     const response = await requestor({
       method: "PATCH",
@@ -279,7 +312,7 @@ const requestAdapter = (requestor) => ({
      * @returns {object} response
      */
     getAllAgents: async () => {
-      const url = `/api/v1/users/getAllAgents`;
+      const url = `/users/getAllAgents`;
       const response = await requestor({
         method: "GET",
         url,
@@ -294,7 +327,7 @@ const requestAdapter = (requestor) => ({
      * @returns {object} response
      */
     getAllTours: async () => {
-      const url = `/api/v1/tours/getAllTours`;
+      const url = `/tours/getAllTours`;
       const response = await requestor({
         method: "GET",
         url,
@@ -310,7 +343,7 @@ const requestAdapter = (requestor) => ({
      * @returns {object} response
      */
     getAllToursByCountry: async (country) => {
-      const url = `/api/v1/tours/getAllTours/${country}`;
+      const url = `/tours/getAllTours/${country}`;
       const response = await requestor({
         method: "GET",
         url,
@@ -326,7 +359,7 @@ const requestAdapter = (requestor) => ({
      * @returns {Promise<any>} response
      */
     getTourByName: async (tourName) => {
-      const url = `/api/v1/tours/getTourByName/${tourName}`;
+      const url = `/tours/getTourByName/${tourName}`;
       const response = await requestor({
         method: "GET",
         url,
@@ -342,7 +375,7 @@ const requestAdapter = (requestor) => ({
      * @returns {Promise<any>} response
      */
     getTourById: async (tourId) => {
-      const url = `/api/v1/tours/${tourId}`;
+      const url = `/tours/${tourId}`;
       const response = await requestor({
         method: "GET",
         url,
@@ -358,7 +391,7 @@ const requestAdapter = (requestor) => ({
      * @returns {object} response
      */
     getAllPosts: async (type) => {
-      const url = `/api/v1/${
+      const url = `/${
         type === "language" ? "languagePost" : "posts"
       }/getAllPosts`;
       const response = await requestor({
@@ -377,7 +410,7 @@ const requestAdapter = (requestor) => ({
      * @returns {Promise<any} response
      */
     getPostByName: async (postName, type) => {
-      const url = `/api/v1/${
+      const url = `/${
         type === "language" ? "languagePost" : "posts"
       }/getPostByName/${postName}`;
       const response = await requestor({
@@ -396,7 +429,7 @@ const requestAdapter = (requestor) => ({
      * @returns {Promise<any} response
      */
     getPostById: async (postId, type) => {
-      const url = `/api/v1/${
+      const url = `/${
         type === "language" ? "languagePost" : "posts"
       }/${postId}`;
       const response = await requestor({

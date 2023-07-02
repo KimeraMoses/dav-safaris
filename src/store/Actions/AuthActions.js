@@ -28,7 +28,7 @@ import {
 export const login = (email, password, navigate) => {
   return async (dispatch) => {
     dispatch(authenticationPending());
-    const response = await fetch(`${baseUrl}/api/v1/users/login`, {
+    const response = await fetch(`${baseUrl}/users/login`, {
       method: "POST",
       body: JSON.stringify({
         email,
@@ -78,7 +78,7 @@ export const login = (email, password, navigate) => {
  */
 export const signup = async (data, role) => {
   const response = await fetch(
-    `${baseUrl}/api/v1/users/signup${
+    `${baseUrl}/users/signup${
       role === DAV_ROLES.AGENT ? `?role=${DAV_ROLES.AGENT}` : ""
     }`,
     {
@@ -94,31 +94,23 @@ export const signup = async (data, role) => {
 };
 
 export const updateProfile = (
-  // course,
   email,
   first_name,
   image,
   last_name,
   phone_number,
   AuthToken
-  // university,
-  // password,
-  // role,
 ) => {
   return async (dispatch) => {
     dispatch(updateProfilePending());
-    const response = await fetch(`${baseUrl}/api/v1/users/updateMe`, {
+    const response = await fetch(`${baseUrl}/users/updateMe`, {
       method: "PATCH",
       body: JSON.stringify({
-        // course,
         email,
         first_name,
         image,
         last_name,
         phone_number,
-        // university,
-        // password,
-        // role,
       }),
       headers: new Headers({
         "Content-type": "application/json",
@@ -138,7 +130,7 @@ export const updateProfile = (
 export const forgotPassword = (email) => {
   return async (dispatch) => {
     dispatch(forgotPasswordPending());
-    const response = await fetch(`${baseUrl}/api/v1/users/forgotPassword`, {
+    const response = await fetch(`${baseUrl}/users/forgotPassword`, {
       method: "POST",
       body: JSON.stringify({
         email,
@@ -156,60 +148,12 @@ export const forgotPassword = (email) => {
     dispatch(forgotPasswordSuccess(data));
   };
 };
-export const RequestAccountVerification = (email) => {
-  return async (dispatch) => {
-    dispatch(requestVerificationPending());
-    const response = await fetch(
-      `${baseUrl}/api/v1/users/requestAccountVerification`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email,
-        }),
-        headers: new Headers({
-          "Content-type": "application/json",
-        }),
-      }
-    );
 
-    if (!response.ok) {
-      const error = await response.json();
-      dispatch(requestVerificationFail(error));
-    }
-    const data = await response.json();
-    dispatch(requestVerificationSuccess(data));
-  };
-};
-export const VerifyAccount = (verificationToken) => {
-  return async (dispatch) => {
-    dispatch(verificationPending());
-    const response = await fetch(
-      `${baseUrl}/api/v1/users/verifyAccount/${verificationToken}`,
-      {
-        method: "PATCH",
-      }
-    );
-
-    if (!response.ok) {
-      const error = await response.json();
-      dispatch(verificationFail(error));
-    }
-    const data = await response.json();
-    dispatch(
-      verificationSuccess({
-        data,
-        user: data.user,
-        token: data.token,
-      })
-    );
-    SaveTokenInLocalStorage(dispatch, data);
-  };
-};
 export const passwordReset = (password, pwdResetToken) => {
   return async (dispatch) => {
     dispatch(UpdatePasswordPending());
     const response = await fetch(
-      `${baseUrl}/api/v1/users/resetPassword/${pwdResetToken}`,
+      `${baseUrl}/users/resetPassword/${pwdResetToken}`,
       {
         method: "PATCH",
         body: JSON.stringify({
@@ -229,26 +173,6 @@ export const passwordReset = (password, pwdResetToken) => {
   };
 };
 
-// export const validateToken = (Token) => {
-//   return async (dispatch) => {
-//     // dispatch(validateTokenPending())
-//     const response = await fetch(`${baseUrl}/api/v1/users/validate`, {
-//       method: "GET",
-//       headers: new Headers({
-//         Authorization: "Bearer " + Token,
-//       }),
-//     });
-//     if (!response.ok) {
-//       const error = await response.json();
-//       // dispatch(logout());
-//       // console.log("auto auth", error);
-//     }
-//     const data = await response.json();
-//     // console.log("auto auth", data);
-//     // dispatch(autoAuthenticationSuccess(CurrentUser));
-//   };
-// };
-
 export const SaveTokenInLocalStorage = (dispatch, userDetails) => {
   logOutTimer(dispatch, userDetails.expiresIn);
   let AuthTokenDetails = {
@@ -266,7 +190,7 @@ export const logOutTimer = (dispatch, timer) => {
   }, timer);
 };
 
-export const AutoAuthenticate = (dispatch, history) => {
+export const AutoAuthenticate = (dispatch) => {
   const AuthToken = localStorage.getItem("AuthToken");
   const CurrentUser = localStorage.getItem("CurrentUser");
   let UserToken = "";
