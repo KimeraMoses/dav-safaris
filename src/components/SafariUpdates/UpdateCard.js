@@ -11,7 +11,7 @@ import classes from "./UpdateCard.module.css";
 import { Link } from "react-router-dom";
 
 export default function UpdateCard(props) {
-  const { Post, isAdmin, onDeleteClick, language } = props;
+  const { Post, isAdmin, onDeleteClick, isLanguage } = props;
   return (
     <Card className={classes.dav__update_card_wrapper}>
       <CardActionArea>
@@ -23,7 +23,7 @@ export default function UpdateCard(props) {
         <CardContent>
           <Link
             to={
-              language
+              isLanguage
                 ? `/safari-updates/languages/${Post && Post.slug}`
                 : `/safari-updates/${Post && Post.slug}`
             }
@@ -40,12 +40,9 @@ export default function UpdateCard(props) {
           <Typography
             variant="body2"
             color="textSecondary"
-            // component="p"
             className={classes.dav__update_card_description}
             dangerouslySetInnerHTML={{ __html: Post && Post.post_content }}
-          >
-            {/* {Post && Post.post_content} */}
-          </Typography>
+          ></Typography>
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.post_card_actions_wrapper}>
@@ -54,11 +51,10 @@ export default function UpdateCard(props) {
           color="primary"
           component={Link}
           to={
-            language
+            isLanguage
               ? `/safari-updates/languages/${Post && Post.slug}`
               : `/safari-updates/${Post && Post.slug}`
           }
-          // to={`/safari-updates/${Post && Post.slug}`}
         >
           Read More
         </Button>

@@ -283,7 +283,7 @@ const requestAdapter = (requestor) => ({
    * @todo check if formData is needed and switch to it
    */
   editCategory: async (data, categoryId) => {
-    const url = `/api/v1/categories/updateCategory/${categoryId}`;
+    const url = `/api/v1/categories/updateTourCategory/${categoryId}`;
     // TODO: if formData, then check tour creation for the format of formData
     const formData = new FormData();
     formData.append("name", data.name);
@@ -380,6 +380,22 @@ const requestAdapter = (requestor) => ({
     },
 
     /**
+     * @name getTourById
+     * @description Function used to get tour by id
+     * @param {string} tourId
+     * @returns {Promise<any>} response
+     */
+    getTourById: async (tourId) => {
+      const url = `/api/v1/tours/${tourId}`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+
+      return response;
+    },
+
+    /**
      * @name getAllPosts
      * @description Function used to get all posts
      * @param {string} type
@@ -403,6 +419,25 @@ const requestAdapter = (requestor) => ({
      */
     getAllCountries: async () => {
       const url = `/api/v1/countries/getAllCountries`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+
+      return response;
+    },
+
+    /**
+     * @name getPostByName
+     * @description Function used to get post by name
+     * @param {string} type
+     * @param {string} postName
+     * @returns {Promise<any} response
+     */
+    getPostByName: async (postName, type) => {
+      const url = `/api/v1/${
+        type === "language" ? "languagePost" : "posts"
+      }/getPostByName/${postName}`;
       const response = await requestor({
         method: "GET",
         url,
@@ -445,6 +480,25 @@ const requestAdapter = (requestor) => ({
      */
     getAllCategories: async () => {
       const url = `/api/v1/categories/getAllTourCategories`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+
+      return response;
+    },
+
+    /**
+     * @name getPostById
+     * @description Function used to get post by id
+     * @param {string} type
+     * @param {string} postId
+     * @returns {Promise<any} response
+     */
+    getPostById: async (postId, type) => {
+      const url = `/api/v1/${
+        type === "language" ? "languagePost" : "posts"
+      }/${postId}`;
       const response = await requestor({
         method: "GET",
         url,

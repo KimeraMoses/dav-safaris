@@ -6,9 +6,9 @@ const useCategoryById = (categoryId) => {
   const [category, setCategory] = useState({});
   const fetchCategory = async () => {
     setIsLoading(true);
-    const res = DAV_APIS.get.getCategoryById(categoryId);
+    const res = await DAV_APIS.get.getCategoryById(categoryId);
     if (res.status === 200) {
-      setCategory(res.data.category);
+      setCategory(res.data.tourCategory);
     }
 
     setIsLoading(false);

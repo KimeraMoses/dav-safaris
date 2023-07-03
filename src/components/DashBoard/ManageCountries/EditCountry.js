@@ -26,27 +26,27 @@ import { useEffect } from "react";
 // } from "../../../containers/Countries/TourCategories";
 import ImageUpload from "../../NewItems/ImageUpload";
 
-import {
-  // fetchCountryDetails,
-  editCountryDetails,
-} from "../../../store/Actions/CountryActions";
+// import {
+//   // fetchCountryDetails,
+//   editCountryDetails,
+// } from "../../../store/Actions/CountryActions";
 import { useLocation, useNavigate } from "react-router";
 
-import { baseUrl } from "../../../store";
+// import { baseUrl } from "../../../store";
 import { Link } from "react-router-dom";
 import Loader from "../../../containers/Loader/Loader";
 import NewKeyWord from "./Keywords/NewKeyWord";
 import { ConfigurationEditor } from "../../CustomEditor/SMTPEditor.component";
 import { convertHTMLToDraftState } from "../../../utils/Utils";
 
-import { countryEditIsLoading } from "../../../store/Slices/editCountrySlice";
-import {
-  countryFetchIsLoading,
-  selectCountryDetails,
-  fetchCountryFail,
-  fetchCountryPending,
-  fetchCountrySuccess,
-} from "../../../store/Slices/fetchCountryDetailsSlice";
+// import { countryEditIsLoading } from "../../../store/Slices/editCountrySlice";
+// import {
+//   countryFetchIsLoading,
+//   selectCountryDetails,
+//   fetchCountryFail,
+//   fetchCountryPending,
+//   fetchCountrySuccess,
+// } from "../../../store/Slices/fetchCountryDetailsSlice";
 import { useCountryById } from "../../../hooks";
 import { DAV_APIS } from "../../../Adapter";
 
@@ -205,7 +205,7 @@ const EditCountry = (props) => {
         key_words: JSON.stringify(keys),
       };
       await DAV_APIS.editCountry(data, country.id);
-      console.log("edit response", DAV_APIS);
+
       setIsEditing(false);
       toast.success("Changes saved Successfully");
       setMessage(`Changes to ${country.name} saved Successfully`);

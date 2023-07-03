@@ -221,8 +221,8 @@ const Footer = () => {
           >
             <div className={classes.dav__footer__menu}>
               <ul>
-                {user && (
-                  <li>
+                <li>
+                  {user?.role ? (
                     <Link
                       to={
                         user?.role === DAV_ROLES.AGENT
@@ -232,8 +232,10 @@ const Footer = () => {
                     >
                       DashBoard
                     </Link>
-                  </li>
-                )}
+                  ) : (
+                    <Link to="/login">Login</Link>
+                  )}
+                </li>
                 <li>
                   <Link to="/terms-of-services">Terms of Services</Link>
                 </li>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { convertToRaw } from "draft-js";
 import { convertToHTML } from "draft-convert";
@@ -26,21 +25,15 @@ import { Col, Container, Row, Form } from "react-bootstrap";
 //===COMPONENT IMPORTS===
 import styles from "../../NewItems/NewTour.module.css";
 import { useEffect } from "react";
-import {
-  TourCategories_Kenya,
-  TourCategories_Rwanda,
-  TourCategories_Tanzania,
-  TourCategories_Uganda,
-} from "../../../containers/Countries/TourCategories";
+// import {
+//   TourCategories_Kenya,
+//   TourCategories_Rwanda,
+//   TourCategories_Tanzania,
+//   TourCategories_Uganda,
+// } from "../../../containers/Countries/TourCategories";
 import ImageUpload from "../../NewItems/ImageUpload";
 import NewItinary from "../../NewItems/NewItinary";
 import { useLocation, useNavigate } from "react-router";
-import {
-  fetchTourFail,
-  fetchTourPending,
-  fetchTourSuccess,
-} from "../../../store/Slices/tourSlice";
-import { baseUrl } from "../../../store";
 import EditItinaryModal from "./Itinary/EditItinary";
 import { Link } from "react-router-dom";
 import Loader from "../../../containers/Loader/Loader";
@@ -48,21 +41,23 @@ import NewKeyWord from "./Keywords/NewKeyWord";
 import { ConfigurationEditor } from "../../CustomEditor/SMTPEditor.component";
 import { convertHTMLToDraftState } from "../../../utils/Utils";
 import { DAV_APIS } from "../../../Adapter";
+import { useAllCategories, useAllCountries } from "../../../hooks";
 
 let dayActivityDescription = [];
 
 const EditTour = () => {
   const DarkMode = false;
-  const isEditing = useSelector((state) => state.editTour.isLoading);
-  const isFetching = useSelector((state) => state.tour.isLoading);
+  // const isLoading = useSelector((state) => state.editTour.isLoading);
   const [isLoading, setIsLoading] = useState(false);
+  const [fetching, setFetching] = useState(false);
   const [Tour, setTour] = useState({});
   const [keys, setKeys] = useState([]);
   const [open, setOpen] = useState(false);
   const [Itinary, setItinary] = useState({});
   const [EditedItinary, setEditedItinary] = useState("");
   const [type, setType] = useState("Edit");
-  const dispatch = useDispatch();
+  const { categories } = useAllCategories();
+  const { countries } = useAllCountries();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -73,20 +68,19 @@ const EditTour = () => {
   const [message, setMessage] = useState("");
   const [TourCategories, setTourCategories] = useState([]);
 
-  const fetchTourDetails = (tour_id) => async (dispatch) => {
-    dispatch(fetchTourPending());
+  const fetchTourDetails = async (tour_id) => {
+    setFetching(true);
     try {
-      const response = await fetch(`${baseUrl}/api/v1/tours/${tour_id}`);
-      const fetchedTour = await response.json();
-      dispatch(fetchTourSuccess(fetchedTour.tour));
-      setTour(fetchedTour?.tour);
+      const res = await DAV_APIS.get.getTourById(tour_id);
+      setTour(res.data.tour);
       dayActivityDescription = [];
 
-      fetchedTour?.tour.dayActivityDescription.forEach((tour) => {
+      res.data.tour.dayActivityDescription.forEach((tour) => {
         dayActivityDescription.push(tour);
       });
+      setFetching(false);
     } catch (error) {
-      dispatch(fetchTourFail(error.message));
+      setFetching(false);
     }
   };
 
@@ -95,13 +89,13 @@ const EditTour = () => {
     return new URLSearchParams(useLocation().search);
   }
   let query = useQuery();
-  const selectedCategory = query.get("tour");
+  const tourId = query.get("tour");
 
   useEffect(() => {
-    dispatch(fetchTourDetails(selectedCategory));
+    fetchTourDetails(tourId);
 
     // eslint-disable-next-line
-  }, [selectedCategory]);
+  }, [tourId]);
 
   let tourHighLights = "";
   Tour && Tour?.tourActivities?.map((el) => (tourHighLights += el + "\n"));
@@ -159,24 +153,27 @@ const EditTour = () => {
 
     // eslint-disable-next-line
   }, [Tour]);
-
+  const selectedCountry = categories?.filter(
+    (category) => values.country === category.country?.id
+  );
   useEffect(() => {
     switch (values.country) {
-      case "uganda":
-        setTourCategories(TourCategories_Uganda);
+      case `${values.country}`:
+        setTourCategories(selectedCountry);
         break;
-      case "kenya":
-        setTourCategories(TourCategories_Kenya);
-        break;
-      case "rwanda":
-        setTourCategories(TourCategories_Rwanda);
-        break;
-      case "tanzania":
-        setTourCategories(TourCategories_Tanzania);
-        break;
+      // case "Kenya":
+      //   setTourCategories(TourCategories_Kenya);
+      //   break;
+      // case "Rwanda":
+      //   setTourCategories(TourCategories_Rwanda);
+      //   break;
+      // case "Tanzania":
+      //   setTourCategories(TourCategories_Tanzania);
+      //   break;
       default:
         break;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values.country]);
 
   //====FORMATING THE TOUR HIGHLIGHTS====//
@@ -250,7 +247,6 @@ const EditTour = () => {
   };
 
   const RegisterFormSubmitHandler = async (e) => {
-    setIsLoading(true);
     e.preventDefault();
     if (values.itinaryTitle.length > 0) {
       ItinaryHandler();
@@ -268,7 +264,7 @@ const EditTour = () => {
     if (values.description.length < 1) {
       return setError("University Description required");
     }
-
+    setIsLoading(true);
     try {
       const data = {
         name: values.name,
@@ -364,7 +360,7 @@ const EditTour = () => {
                 <Alert severity="success">{message}</Alert>
               </div>
             )}
-            {isFetching ? (
+            {fetching ? (
               <Loader />
             ) : (
               <Form onSubmit={RegisterFormSubmitHandler}>
@@ -456,15 +452,21 @@ const EditTour = () => {
                     >
                       <InputLabel>Country</InputLabel>
                       <Select
-                        id="gpa__level_select_input"
                         value={values.country}
                         name="country"
                         onChange={onChangeHandler}
                       >
-                        <MenuItem value="uganda">Uganda</MenuItem>
-                        <MenuItem value="kenya">Kenya</MenuItem>
-                        <MenuItem value="tanzania">Tanzania</MenuItem>
-                        <MenuItem value="rwanda">Rwanda</MenuItem>
+                        {countries?.map((country) => {
+                          return (
+                            <MenuItem key={country?.id} value={country?.id}>
+                              {country?.name}
+                            </MenuItem>
+                          );
+                        })}
+                        {/* <MenuItem value="uganda">Uganda</MenuItem>
+                      <MenuItem value="kenya">Kenya</MenuItem>
+                      <MenuItem value="tanzania">Tanzania</MenuItem>
+                      <MenuItem value="rwanda">Rwanda</MenuItem> */}
                       </Select>
                     </FormControl>
                   </div>
@@ -476,15 +478,14 @@ const EditTour = () => {
                     >
                       <InputLabel>Tour Category</InputLabel>
                       <Select
-                        id="gpa__level_select_input"
                         value={values.category}
                         name="category"
                         onChange={onChangeHandler}
                       >
-                        {TourCategories.length > 0 ? (
+                        {TourCategories?.length > 0 ? (
                           TourCategories.map((category, index) => {
                             return (
-                              <MenuItem key={index} value={category.value}>
+                              <MenuItem key={index} value={category.name}>
                                 {category.name}
                               </MenuItem>
                             );
@@ -492,7 +493,10 @@ const EditTour = () => {
                         ) : (
                           <MenuItem>
                             <Alert severity="error">
-                              Please choose a country first!
+                              {values.country === "" &&
+                              selectedCountry?.length === 0
+                                ? "Please choose a country first!"
+                                : "Ooops... No categories found"}
                             </Alert>
                           </MenuItem>
                         )}
@@ -576,7 +580,7 @@ const EditTour = () => {
                 <Row>
                   <Col xs={{ span: 8, offset: 2 }}>
                     <Button
-                      // disabled={isLoading || values.logo.length < 1}
+                      disabled={isLoading}
                       variant="contained"
                       color="primary"
                       type="submit"
@@ -584,8 +588,8 @@ const EditTour = () => {
                         DarkMode ? styles.gpa__dark_mode : ""
                       }`}
                     >
-                      {isEditing ? "Saving changes..." : "Save changes"}
-                      {isLoading | isEditing ? (
+                      {isLoading ? "Saving changes..." : "Save changes"}
+                      {isLoading ? (
                         <Spinner
                           thickness={2}
                           size={20}

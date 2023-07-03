@@ -13,7 +13,7 @@ import SEO from "../../../containers/SEO/SEO";
 import DescriptionSection from "../DescriptionSection";
 import { useCountryTours } from "../../../hooks";
 import { useCategoryBySlug } from "../../../hooks";
-import { useCountry, useAllCategories } from "../../../hooks";
+import { useCountry } from "../../../hooks";
 
 const categoryMeta = {
   "tanzania-wildlife-safaris": {

@@ -4,14 +4,12 @@ import DateIcon from "@material-ui/icons/DateRangeOutlined";
 import { isEmptyObject, SingleHero } from "../../Tours/SingleTour/SingleTour";
 import classes from "./Update.module.css";
 import { Col, Container, Row } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchAllPosts,
-  fetchPostDetails,
-} from "../../../store/Actions/PostActions";
+import { Link, useLocation, useParams } from "react-router-dom";
 import SEO from "../../../containers/SEO/SEO";
 import UpdateCard from "../UpdateCard";
+import usePost from "../../../hooks/usePost";
+import usePosts from "../../../hooks/usePosts";
+import { Skeleton } from "@material-ui/lab";
 
 const defaultMeta = {
   title:
@@ -30,33 +28,30 @@ export const formattedDate = (date) => {
   return PDate.toLocaleDateString("en-US", options);
 };
 
-const Update = ({ type }) => {
-  const Posts = useSelector((state) => state.post.posts);
-  const languagePosts = useSelector((state) => state.post.languagePosts);
-  const Post = useSelector((state) => state.post.post);
+const Update = () => {
+  const location = useLocation();
+
+  const isLanguage = location.pathname.includes("languages");
   const { postTitle } = useParams();
-  const dispatch = useDispatch();
+
+  const { post, loading } = usePost(postTitle, isLanguage ? "language" : "");
+  const { posts, loading: isLoadingPosts } = usePosts(
+    isLanguage ? "language" : ""
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(fetchPostDetails(postTitle, type));
-    dispatch(fetchAllPosts(type === "language" ? "language" : ""));
-    dispatch(fetchAllPosts());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [postTitle, dispatch]);
+  }, [postTitle]);
 
-  const FIlteredPosts =
-    type === "language"
-      ? languagePosts?.filter((post) => post.slug !== postTitle)
-      : Posts?.filter((post) => post.slug !== postTitle);
+  const FilteredPosts = posts?.filter((post) => post.slug !== postTitle);
 
-  let title = isEmptyObject(Post)
+  let title = isEmptyObject(post)
     ? defaultMeta.title
-    : `${Post?.name} - Dav Safaris`;
+    : `${post?.name} - Dav Safaris`;
 
-  let description = isEmptyObject(Post)
+  let description = isEmptyObject(post)
     ? defaultMeta.description
-    : Post?.post_content?.substr(0, 268);
+    : post?.post_content?.substr(0, 268);
 
   if (postTitle === "best-places-to-visit-in-rwanda") {
     description =
@@ -65,16 +60,16 @@ const Update = ({ type }) => {
 
   return (
     <>
-      {Post?.name && (
+      {post?.name && (
         <SEO
           title={title}
           description={description}
-          keywords={Post && Post.key_words?.join()}
-          image={Post && Post.postImage}
+          keywords={post && post.key_words?.join()}
+          image={post && post.postImage}
         />
       )}
       <div>
-        <SingleHero title={Post && Post.name} image={Post && Post.postImage} />
+        <SingleHero title={post && post.name} image={post && post.postImage} />
         <Container fluid className={classes.dav__single_update_wrapper}>
           <Row style={{ alignItems: "flex-start" }}>
             <Col
@@ -82,61 +77,91 @@ const Update = ({ type }) => {
               sm={12}
               className={classes.dav__single_update_details_wrapper}
             >
-              <div className={classes.dav__post_header}>
-                <h1>{Post && Post.name}</h1>
-                <div className={classes.dav__post_meta}>
-                  <span className={classes.dav__date_posted}>
-                    <DateIcon /> {formattedDate(Post && Post.createdAt)}
-                  </span>
-                  <span className={classes.dav__safari_updates_tag}>
-                    <SafariTag />{" "}
-                    <Link to="/safari-updates">Safari Updates</Link>
-                  </span>
-                </div>
-              </div>
-              <div className={classes.dav__post_content_wrapper}>
+              {loading ? (
                 <div
-                  className="dav__single_tour_description"
-                  dangerouslySetInnerHTML={{
-                    __html: Post && Post.post_content,
+                  style={{
+                    margin: "20px 0",
                   }}
-                ></div>
-                {Post &&
-                  Post.post_blocks &&
-                  Post.post_blocks.map((block, index) => {
-                    return (
-                      <div key={index}>
-                        <h3>
-                          <strong>{block.title}</strong>
-                        </h3>
-                        <div
-                          className="dav__single_tour_description"
-                          dangerouslySetInnerHTML={{
-                            __html: block.description,
-                          }}
-                        ></div>
-                      </div>
-                    );
-                  })}
-              </div>
-              {type === "language" && (
+                >
+                  <h1>
+                    <Skeleton width="100%" height={30}></Skeleton>
+                  </h1>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                      margin: "10px 0",
+                    }}
+                  >
+                    <Skeleton width="20%" height={20}></Skeleton>
+                    <Skeleton width="20%" height={20}></Skeleton>
+                  </div>
+                  <br />
+                  <Skeleton width="100%" height={50}></Skeleton>
+                  <br />
+                  <Skeleton width="100%" height={50}></Skeleton>
+                </div>
+              ) : (
+                <>
+                  <div className={classes.dav__post_header}>
+                    <h1>{post && post.name}</h1>
+
+                    <div className={classes.dav__post_meta}>
+                      <span className={classes.dav__date_posted}>
+                        <DateIcon /> {formattedDate(post && post.createdAt)}
+                      </span>
+                      <span className={classes.dav__safari_updates_tag}>
+                        <SafariTag />{" "}
+                        <Link to="/safari-updates">Safari Updates</Link>
+                      </span>
+                    </div>
+                  </div>
+                  <div className={classes.dav__post_content_wrapper}>
+                    <div
+                      className="dav__single_tour_description"
+                      dangerouslySetInnerHTML={{
+                        __html: post && post.post_content,
+                      }}
+                    ></div>
+                    {post &&
+                      post.post_blocks &&
+                      post.post_blocks.map((block, index) => {
+                        return (
+                          <div key={index}>
+                            <h3>
+                              <strong>{block.title}</strong>
+                            </h3>
+                            <div
+                              className="dav__single_tour_description"
+                              dangerouslySetInnerHTML={{
+                                __html: block.description,
+                              }}
+                            ></div>
+                          </div>
+                        );
+                      })}
+                  </div>
+                </>
+              )}
+              {!isLoadingPosts && (
                 <div style={{ margin: "20px 0" }}>
                   <div className={classes.dav__single_recent_title}>
                     <h1>Related Updates</h1>
                   </div>
                   <div className={classes.related_posts}>
-                    {Posts?.slice()
+                    {posts
+                      ?.slice()
                       ?.sort(() => Math.random() - 0.5)
                       ?.slice(0, 3)
                       ?.map((post) => (
-                        <UpdateCard Post={post} />
+                        <UpdateCard Post={post} isLanguage={isLanguage} />
                       ))}
                   </div>
                 </div>
               )}
             </Col>
             <Col lg={3} sm={12}>
-              {FIlteredPosts?.length > 0 && (
+              {FilteredPosts?.length > 0 && (
                 <div
                   className={classes.dav__single_update_recent_posts_wrapper}
                 >
@@ -145,8 +170,8 @@ const Update = ({ type }) => {
                   </div>
                   <div className={classes.dav__single_recent_posts}>
                     <ul>
-                      {FIlteredPosts &&
-                        FIlteredPosts?.slice()
+                      {FilteredPosts &&
+                        FilteredPosts?.slice()
                           ?.sort((a, b) => {
                             return (
                               new Date(a.createdAt).getTime() -
@@ -160,7 +185,7 @@ const Update = ({ type }) => {
                               <li key={post.id}>
                                 <Link
                                   to={
-                                    type === "language"
+                                    isLanguage
                                       ? `/safari-updates/languages/${post.slug}`
                                       : `/safari-updates/${post.slug}`
                                   }

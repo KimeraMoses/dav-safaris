@@ -25,7 +25,7 @@ const CountryHeader = (props) => {
           return (
             <Link
               key={index}
-              to={`/${Country?.slug}/${category.value}`}
+              to={`/${Country?.slug}/${category.slug}`}
               className={classes.dav__category_card}
             >
               <img src={category.tourCategoryImage} alt={category.name} />

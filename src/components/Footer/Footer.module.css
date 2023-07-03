@@ -45,6 +45,7 @@
 .dav__footer__menu_wrapper {
   display: flex;
   align-items: center;
+  gap: 20px;
 }
 .dav__footer__menu ul {
   padding: 0;
@@ -59,7 +60,7 @@
 .dav__footer__menu ul li a {
   color: #fff;
 }
-.dav__footer__menu ul li::after {
+.dav__footer__menu ul li:not(:last-child):after {
   content: "|";
   color: #fff;
   padding: 0 10px;
@@ -110,6 +111,9 @@
 @media screen and (max-width: 689px) {
   .dav__footer {
     padding: 30px 10px 0;
+  }
+  .dav__footer__menu_wrapper {
+    flex-direction: column;
   }
   .dav__copyright_wrapper {
     padding: 20px 10px 100px;

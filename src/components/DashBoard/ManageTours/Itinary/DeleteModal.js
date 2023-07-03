@@ -8,8 +8,7 @@ import { DAV_APIS } from "../../../../Adapter";
 import classes from "./ModalComponent.module.css";
 
 const DeleteModal = (props) => {
-  const { open, setOpen, Id, setSearchTerm, source, language, callback } =
-    props;
+  const { open, setOpen, Id, setSearchTerm, source, language } = props;
   const [loading, setLoading] = useState(false);
 
   const handleClose = () => {
@@ -28,7 +27,6 @@ const DeleteModal = (props) => {
       await DAV_APIS.deletePostById(Id, language ? "language" : "");
       toast.success("Post deleted Successfully");
     }
-    callback && callback();
     setLoading(false);
     setOpen(false);
     setSearchTerm("");

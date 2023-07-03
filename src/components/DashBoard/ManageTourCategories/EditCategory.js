@@ -57,12 +57,12 @@ const EditCategory = (props) => {
   const selectedCategory = query.get("category");
 
   const { category, isLoading: isFetching } = useCategoryById(selectedCategory);
-  // console.log(
-  //   "selected category",
-  //   selectedCategory,
-  //   "Fetched category",
-  //   category
-  // );
+  console.log(
+    "selected category",
+    selectedCategory,
+    "Fetched category",
+    category
+  );
   const isLoading = isFetching;
   const { countries } = useAllCountries();
   const DarkMode = false;
@@ -120,20 +120,20 @@ const EditCategory = (props) => {
   );
 
   const [values, setValues] = useState({
-    name: category.name,
-    description: category.description,
-    country: JSON.stringify(category?.country?.name),
-    value: category.value,
+    name: category?.name,
+    description: category?.description,
+    country: category?.country?.name,
+    value: category?.slug,
     cover_image: "",
     selectedImage: "",
   });
 
   useEffect(() => {
     setValues({
-      name: category.name,
+      name: category?.name,
       description: category.description,
-      country: JSON.stringify(category?.country?.name),
-      value: category.value,
+      country: category?.country?.name,
+      value: category?.slug,
       cover_image: category.tourCategoryImage,
       selectedImage: category.tourCategoryImage,
     });
@@ -141,8 +141,6 @@ const EditCategory = (props) => {
     setEditorState(convertHTMLToDraftState(category.description));
     // eslint-disable-next-line
   }, [category]);
-  console.log("Value of country", category?.country, values.country);
-  console.log("country Array", countryArray);
 
   //====TOUR COVER IMAGE HANDLER====//
   const tourImageHandler = async (e) => {
@@ -180,10 +178,10 @@ const EditCategory = (props) => {
       window.scrollTo(0, 0);
       return setError("Tour category title is required");
     }
-    if (values.value.length < 1) {
-      window.scrollTo(0, 0);
-      return setError("Tour category slug is required");
-    }
+    // if (values.value.length < 1) {
+    //   window.scrollTo(0, 0);
+    //   return setError("Tour category slug is required");
+    // }
     if (values.country.length < 1) {
       window.scrollTo(0, 0);
       return setError("Country is required");
@@ -206,11 +204,14 @@ const EditCategory = (props) => {
         value: values.value,
         selectedImage: values.selectedImage,
       };
+
       await DAV_APIS.editCategory(data, category.id);
+
       setIsEditing(false);
       setMessage(`Changes to ${category.name} saved Successfully`);
-      toast.success("Changes saved Successfully");
+      toast.success(`Changes to ${category.name} saved Successfully`);
       navigate("/dashboard/manage-tour-categories");
+      console.log("Category id ", category.id, values);
 
       setValues({
         name: "",
@@ -333,6 +334,7 @@ const EditCategory = (props) => {
                   </div>
                   <div className="col-xs-12 col-sm-5">
                     <TextField
+                      disabled
                       fullWidth
                       label="Category Slug"
                       variant="filled"

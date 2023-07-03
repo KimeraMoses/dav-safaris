@@ -33,16 +33,17 @@ import { useEffect } from "react";
 //   TourCategories_Tanzania,
 //   TourCategories_Uganda,
 // } from "../../containers/Countries/TourCategories";
-import { fetchAllCategories } from "../../store/Actions/TourCategoriesActions";
+// import { fetchAllCategories } from "../../store/Actions/TourCategoriesActions";
 import { AddDays } from "../../store/Slices/newTourSlice";
 import EditItinaryModal from "../DashBoard/ManageTours/Itinary/EditItinary";
 import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
 import { useNavigate } from "react-router";
 import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
-import { selectAllCountries } from "../../store/Slices/countrySlice";
-import { fetchAllCountrys } from "../../store/Actions/CountryActions";
-import { selectAllCategories } from "../../store/Slices/fetchCategoriesSlice";
+// import { selectAllCountries } from "../../store/Slices/countrySlice";
+// import { fetchAllCountrys } from "../../store/Actions/CountryActions";
+// import { selectAllCategories } from "../../store/Slices/fetchCategoriesSlice";
 import { DAV_APIS } from "../../Adapter";
+import { useAllCategories, useAllCountries } from "../../hooks";
 
 let dayActivityDescription = [];
 
@@ -50,10 +51,13 @@ const NewTour = () => {
   const DarkMode = false;
   const isLoading = useSelector((state) => state.newTour.isLoading);
   const Tour = useSelector((state) => state.tour.tourDetails);
-  const CountryList = useSelector(selectAllCountries);
-  const Categories = useSelector(selectAllCategories);
+  const { countries } = useAllCountries();
+  const { categories } = useAllCategories();
+  // const CountryList = useSelector(selectAllCountries);
+  // const Categories = useSelector(selectAllCategories);
+  console.log(countries, categories);
 
-  const [countryArray, setCountryArray] = useState([]);
+  // const [countryArray, setCountryArray] = useState([]);
   const [open, setOpen] = useState(false);
   const [keys, setKeys] = useState([]);
   const [Itinary, setItinary] = useState({});
@@ -92,15 +96,15 @@ const NewTour = () => {
     accomodation_plan: "",
   });
   useEffect(() => {}, [values]);
-  useEffect(() => {
-    dispatch(fetchAllCountrys());
-    dispatch(fetchAllCategories());
-  }, []);
-  useEffect(() => {
-    setCountryArray(CountryList?.countries);
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchAllCountrys());
+  //   dispatch(fetchAllCategories());
+  // }, []);
+  // useEffect(() => {
+  //   setCountryArray(countries);
+  // }, []);
 
-  const selectedCountry = Categories?.categories?.filter(
+  const selectedCountry = categories?.filter(
     (category) => values.country === category.country?.id
   );
 
@@ -121,6 +125,7 @@ const NewTour = () => {
       default:
         break;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values.country]);
 
   //====FORMATING THE TOUR HIGHLIGHTS====//
@@ -383,7 +388,7 @@ const NewTour = () => {
                       name="country"
                       onChange={onChangeHandler}
                     >
-                      {countryArray?.map((country) => {
+                      {countries?.map((country) => {
                         return (
                           <MenuItem key={country?.id} value={country?.id}>
                             {country?.name}
@@ -412,7 +417,7 @@ const NewTour = () => {
                       {TourCategories?.length > 0 ? (
                         TourCategories.map((category, index) => {
                           return (
-                            <MenuItem key={index} value={category.value}>
+                            <MenuItem key={index} value={category.slug}>
                               {category.name}
                             </MenuItem>
                           );

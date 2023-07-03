@@ -182,7 +182,7 @@ const App = () => {
             <Route
               path="/safari-updates/languages/:postTitle"
               exact
-              element={<Update type="language" />}
+              element={<Update />}
             />
             <Route
               path="/safari-updates/:postTitle"

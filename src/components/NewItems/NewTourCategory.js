@@ -108,10 +108,10 @@ const NewTourCategory = () => {
       window.scrollTo(0, 0);
       return setError("Tour category title is required");
     }
-    if (values.value.length < 1) {
-      window.scrollTo(0, 0);
-      return setError("Tour category slug is required");
-    }
+    // if (values.value.length < 1) {
+    //   window.scrollTo(0, 0);
+    //   return setError("Tour category slug is required");
+    // }
     if (values.country.length < 1) {
       window.scrollTo(0, 0);
       return setError("Country is required");

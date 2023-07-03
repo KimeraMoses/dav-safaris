@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { convertToRaw } from "draft-js";
 import { convertToHTML } from "draft-convert";
@@ -14,12 +14,6 @@ import BackIcon from "@material-ui/icons/Reply";
 import { Col, Container, Row, Form } from "react-bootstrap";
 
 //===REDUX IMPORTS===
-import {
-  fetchPostFail,
-  fetchPostPending,
-  fetchPostSuccess,
-} from "../../../store/Slices/postSlice";
-import { baseUrl } from "../../../store";
 
 //===COMPONENT IMPORTS===
 import styles from "../../NewItems/NewTour.module.css";
@@ -47,7 +41,6 @@ const EditPost = () => {
   const [type, setType] = useState("Edit");
   const [post, setPost] = useState({});
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -82,20 +75,17 @@ const EditPost = () => {
 
   useEffect(() => {}, [values]);
 
-  const fetchPostDetails = (postId) => async (dispatch) => {
+  const fetchPostDetails = async (postId) => {
     setIsFetching(true);
-    dispatch(fetchPostPending());
     try {
-      const response = await fetch(
-        `${baseUrl}/api/v1/${language ? "languagePost" : "posts"}/${postId}`
+      const res = await DAV_APIS.get.getPostById(
+        postId,
+        language ? "language" : ""
       );
-      const fetchedPost = await response.json();
-      dispatch(fetchPostSuccess(fetchedPost.post));
-      setPost(fetchedPost?.post);
-      setPostBlocks(fetchedPost?.post.post_blocks);
+      setPost(res.data.post);
+      setPostBlocks(res.data.post.post_blocks);
       setIsFetching(false);
     } catch (error) {
-      dispatch(fetchPostFail(error.message));
       setIsFetching(false);
     }
   };
@@ -108,7 +98,7 @@ const EditPost = () => {
   const selectedPostId = query.get("post");
 
   useEffect(() => {
-    dispatch(fetchPostDetails(selectedPostId));
+    fetchPostDetails(selectedPostId);
 
     // eslint-disable-next-line
   }, [selectedPostId]);
@@ -156,7 +146,6 @@ const EditPost = () => {
   };
 
   const RegisterFormSubmitHandler = async (e) => {
-    setIsLoading(true);
     e.preventDefault();
     if (values.blockTitle.length > 0) {
       PostBlockHandler();
@@ -171,6 +160,7 @@ const EditPost = () => {
     if (values.description.length < 1) {
       return setError("Post Description required");
     }
+    setIsLoading(true);
     try {
       const data = {
         name: values.name,
@@ -328,7 +318,7 @@ const EditPost = () => {
                 <Row>
                   <Col xs={{ span: 8, offset: 2 }}>
                     <Button
-                      disabled={!values?.description}
+                      disabled={isLoading}
                       variant="contained"
                       color="primary"
                       type="submit"
