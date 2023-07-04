@@ -105,7 +105,8 @@ const NewTour = () => {
   // }, []);
 
   const selectedCountry = categories?.filter(
-    (category) => values.country === category.country?.id
+    (category) =>
+      values.country?.toLowerCase() === category.country?.name?.toLowerCase()
   );
 
   useEffect(() => {
@@ -390,7 +391,10 @@ const NewTour = () => {
                     >
                       {countries?.map((country) => {
                         return (
-                          <MenuItem key={country?.id} value={country?.id}>
+                          <MenuItem
+                            key={country?.id}
+                            value={country?.name.toLowerCase()}
+                          >
                             {country?.name}
                           </MenuItem>
                         );
