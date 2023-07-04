@@ -85,6 +85,7 @@
 
 .more:hover .dav__dropdown_wrapper {
   display: block;
+  animation: slideInUp 0.5s ease-in-out;
 }
 
 .dav_dropdown li {
@@ -136,6 +137,16 @@
   visibility: visible;
 }
 
+@keyframes slideInUp {
+  0% {
+    transform: translateY(10%);
+    /* visibility: visible; */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 @media screen and (min-width: 886px) {
   .dav__dropdown_wrapper {
     position: absolute;
@@ -144,7 +155,8 @@
 /** END DROPDOWN CSS */
 
 @media screen and (max-width: 906px) {
-  .nav_link {
+  .nav_link,
+  .dav_dropdown li a {
     font-size: 10px;
     padding-left: 10px;
     padding-right: 0px;
