@@ -57,12 +57,12 @@ const EditCategory = (props) => {
   const selectedCategory = query.get("category");
 
   const { category, isLoading: isFetching } = useCategoryById(selectedCategory);
-  console.log(
-    "selected category",
-    selectedCategory,
-    "Fetched category",
-    category
-  );
+  // console.log(
+  //   "selected category",
+  //   selectedCategory,
+  //   "Fetched category",
+  //   category
+  // );
   const isLoading = isFetching;
   const { countries } = useAllCountries();
   const DarkMode = false;
@@ -195,15 +195,19 @@ const EditCategory = (props) => {
       window.scrollTo(0, 0);
       return setError("Tour Category Description required");
     }
+    const countryId = countries.find(
+      (country) => country.name === values.country
+    )?.id;
 
     try {
       const data = {
         name: values.name,
         description: values.description,
-        country: values.country,
+        country: countryId,
         value: values.value,
         selectedImage: values.selectedImage,
       };
+      // console.log("Category data", data);
 
       await DAV_APIS.editCategory(data, category.id);
 
@@ -211,7 +215,6 @@ const EditCategory = (props) => {
       setMessage(`Changes to ${category.name} saved Successfully`);
       toast.success(`Changes to ${category.name} saved Successfully`);
       navigate("/dashboard/manage-tour-categories");
-      console.log("Category id ", category.id, values);
 
       setValues({
         name: "",
@@ -320,8 +323,8 @@ const EditCategory = (props) => {
                         name="country"
                         onChange={onChangeHandler}
                       >
-                        {countryArray?.map((country) => (
-                          <MenuItem key={country?.id} value={country?.name}>
+                        {countryArray?.map((country, index) => (
+                          <MenuItem key={index} value={country?.name}>
                             {country?.name}
                           </MenuItem>
                         ))}
