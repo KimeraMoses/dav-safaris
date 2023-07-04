@@ -131,7 +131,11 @@ const NavigationMenu = (props) => {
                   ) : (
                     <Slide easing="ease" arrows={false} duration={2000}>
                       {countries?.slice(4).map((country) => (
-                        <Link to={country.slug} key={country.id}>
+                        <Link
+                          to={country.slug}
+                          key={country.id}
+                          onClick={closeDropDown}
+                        >
                           <div
                             className={classes.dropdown_slide}
                             style={{
