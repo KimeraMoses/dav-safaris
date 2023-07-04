@@ -32,7 +32,6 @@ const Home = () => {
     duration: "",
     departure: "",
   });
-  console.log("All tours", tours);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

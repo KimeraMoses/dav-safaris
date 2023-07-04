@@ -275,7 +275,7 @@ const requestAdapter = (requestor) => ({
    * @returns {object} response
    */
   deleteCountryById: async (countryId) => {
-    const url = `/api/v1/countries/deleteCountry/${countryId}`;
+    const url = `/countries/deleteCountry/${countryId}`;
     const response = await requestor({
       method: "DELETE",
       url,
@@ -296,7 +296,7 @@ const requestAdapter = (requestor) => ({
 
     formData.append("name", data.name);
     formData.append("value", data.value);
-    formData.append("file", data.image);
+    formData.append("file", data.selectedImage);
     formData.append("description", data.description);
     formData.append("country", data.country);
     const response = await requestor({
@@ -316,7 +316,7 @@ const requestAdapter = (requestor) => ({
    * @todo check if formData is needed and switch to it
    */
   editCategory: async (data, categoryId) => {
-    const url = `/api/v1/categories/updateTourCategory/${categoryId}`;
+    const url = `/categories/updateTourCategory/${categoryId}`;
     // TODO: if formData, then check tour creation for the format of formData
     const formData = new FormData();
     formData.append("name", data.name);
@@ -338,7 +338,7 @@ const requestAdapter = (requestor) => ({
    * @returns {object} response
    */
   deleteCategoryById: async (categoryId) => {
-    const url = `/api/v1/categories/deleteTourCategory/${categoryId}`;
+    const url = `/categories/deleteTourCategory/${categoryId}`;
     const response = await requestor({
       method: "DELETE",
       url,
@@ -451,7 +451,7 @@ const requestAdapter = (requestor) => ({
      * @returns {object} response
      */
     getAllCountries: async () => {
-      const url = `/api/v1/countries/getAllCountries`;
+      const url = `/countries/getAllCountries`;
       const response = await requestor({
         method: "GET",
         url,
@@ -485,7 +485,7 @@ const requestAdapter = (requestor) => ({
      * @returns {Promise<any>} response
      */
     getCountryBySlug: async (slug) => {
-      const url = `/api/v1/countries/getCountryBySlug/${slug}`;
+      const url = `/countries/getCountryBySlug/${slug}`;
       const response = await requestor({
         method: "GET",
         url,
@@ -499,7 +499,7 @@ const requestAdapter = (requestor) => ({
      * @returns {Promise<any>} response
      */
     getCountryById: async (countryId) => {
-      const url = `/api/v1/countries/${countryId}`;
+      const url = `/countries/${countryId}`;
       const response = await requestor({
         method: "GET",
         url,
@@ -512,7 +512,7 @@ const requestAdapter = (requestor) => ({
      * @returns {object} response
      */
     getAllCategories: async () => {
-      const url = `/api/v1/categories/getAllTourCategories`;
+      const url = `/categories/getAllTourCategories`;
       const response = await requestor({
         method: "GET",
         url,
@@ -546,7 +546,7 @@ const requestAdapter = (requestor) => ({
      * @returns {Promise<any>} response
      */
     getCategoryById: async (categoryId) => {
-      const url = `/api/v1/categories/${categoryId}`;
+      const url = `/categories/${categoryId}`;
       const response = await requestor({
         method: "GET",
         url,
@@ -560,7 +560,7 @@ const requestAdapter = (requestor) => ({
      * @returns {Promise<any>} response
      */
     getCategoryBySlug: async (slug) => {
-      const url = `/api/v1/categories/getTourCategoryBySlug/${slug}`;
+      const url = `/categories/getTourCategoryBySlug/${slug}`;
       const response = await requestor({
         method: "GET",
         url,
