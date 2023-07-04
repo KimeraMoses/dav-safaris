@@ -16,7 +16,7 @@ const ManageTours = () => {
   const { tours, isLoading: isFetching } = useAllTours();
 
   const isLoading = useSelector((state) => state.tour.isLoading);
-  const [country, setCountry] = useState("uganda");
+  const [country, setCountry] = useState("Filter by country");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedTour, setSelectedTour] = useState("");
