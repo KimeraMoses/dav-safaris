@@ -120,8 +120,8 @@ const EditTour = () => {
     tourActivities: tourHighLights,
     cover_image: "",
     selectedImage: "",
-    country: Tour.country,
-    category: Tour.category,
+    country: Tour?.country,
+    category: Tour?.category,
     duration: Tour.duration,
     price: Tour.price,
 
@@ -142,8 +142,8 @@ const EditTour = () => {
       tourActivities: tourHighLights,
       cover_image: Tour.imageCover,
       selectedImage: Tour.imageCover,
-      country: Tour.country,
-      category: Tour.category,
+      country: Tour?.country,
+      category: Tour?.category,
       duration: Tour.duration,
       price: Tour.price,
       includes: tourIncludes,
@@ -154,7 +154,8 @@ const EditTour = () => {
     // eslint-disable-next-line
   }, [Tour]);
   const selectedCountry = categories?.filter(
-    (category) => values.country === category.country?.id
+    (category) =>
+      values.country?.toLowerCase() === category.country?.name?.toLowerCase()
   );
   useEffect(() => {
     switch (values.country) {
@@ -175,6 +176,8 @@ const EditTour = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values.country]);
+
+  console.log(values);
 
   //====FORMATING THE TOUR HIGHLIGHTS====//
   let tourActivities = [];
@@ -458,7 +461,10 @@ const EditTour = () => {
                       >
                         {countries?.map((country) => {
                           return (
-                            <MenuItem key={country?.id} value={country?.id}>
+                            <MenuItem
+                              key={country?.id}
+                              value={country?.name.toLowerCase()}
+                            >
                               {country?.name}
                             </MenuItem>
                           );
@@ -485,7 +491,7 @@ const EditTour = () => {
                         {TourCategories?.length > 0 ? (
                           TourCategories.map((category, index) => {
                             return (
-                              <MenuItem key={index} value={category.name}>
+                              <MenuItem key={index} value={category.slug}>
                                 {category.name}
                               </MenuItem>
                             );
