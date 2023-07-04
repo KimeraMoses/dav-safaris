@@ -5,14 +5,14 @@ import DescriptionSection from "./DescriptionSection";
 import classes from "./CountrySingle.module.css";
 import CountryTours from "./CountryTours";
 
-import { fetchAllCountryTours } from "../../store/Actions/TourActions";
-import { useDispatch } from "react-redux";
+// import { fetchAllCountryTours } from "../../store/Actions/TourActions";
+// import { useDispatch } from "react-redux";
 // import { CountriesData } from "../../containers/Countries/CountriesData";
-import { useSelector } from "react-redux";
-import { selectAllCountries } from "../../store/Slices/countrySlice";
+// import { useSelector } from "react-redux";
+// import { selectAllCountries } from "../../store/Slices/countrySlice";
 
 import SEO from "../../containers/SEO/SEO";
-import { fetchAllCountrys } from "../../store/Actions/CountryActions";
+// import { fetchAllCountrys } from "../../store/Actions/CountryActions";
 import { useCountry } from "../../hooks";
 
 const countryMeta = {
@@ -51,14 +51,14 @@ const CountrySingle = () => {
   const { country } = useCountry(countryName);
   useEffect(() => {
     window.scrollTo(0, 0);
+    if (countryName === "more-safaris") {
+      navigate("/");
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countryName]);
 
   const SelectedCountry = country;
-  useEffect(() => {
-    if (!SelectedCountry) {
-      navigate("/");
-    }
-  }, [SelectedCountry]);
 
   return (
     <>
