@@ -1,19 +1,41 @@
-.dav__country_tour_section_wrapper{
-    padding: 30px 40px;
+.dav__country_tour_section_wrapper {
+  padding: 30px 0;
 }
-.dav__country_tour_section_row{
-    padding:20px 30px
-
+.dav__country_tour_section_row {
+  padding: 20px 30px;
+  margin: 0 !important;
 }
-
-@media screen and (max-width: 689px){
-    .dav__country_tour_section_wrapper{
-        padding:30px 10px;
-    }
-    .dav__country_tour_section_row{
-        padding: 20px 10px;
-    }
-    .dav__country_tour_card_wrapper{
-        margin: 15px 0;
-    }
+.dav__country_tour_card_wrapper div button {
+  background-color: var(--dav__primary_color) !important;
+}
+.dav__country_tour_card_wrapper div button svg {
+  font-size: 20px !important;
+  color: #fff !important;
+}
+.dav__country_tour_card_wrapper ul li {
+  margin: 0 5px !important;
+}
+.dav__country_tour_card_wrapper ul li button::before {
+  background-color: var(--dav__primary_color) !important;
+  color: #fff !important;
+  padding: 5px !important;
+}
+@media screen and (max-width: 689px) {
+  .dav__country_tour_section_wrapper {
+    padding: 30px 0;
+  }
+  .dav__country_tour_section_row {
+    padding: 20px 0;
+  }
+  .dav__country_tour_card_wrapper {
+    margin: 15px 0;
+  }
+  .dav__country_tour_card_wrapper ul li {
+    margin: 0 1px !important;
+  }
+  .dav__country_tour_card_wrapper ul li button::before {
+    background-color: var(--dav__primary_color) !important;
+    color: #fff !important;
+    padding: 5px !important;
+  }
 }

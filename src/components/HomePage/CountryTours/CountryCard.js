@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import classes from "./CountryCard.module.css";
 
 const CountryCard = (props) => {
-  const { countryImage, countryTitle, countyDescription } = props;
+  const { countryImage, countryTitle, countyDescription, countrySlug } = props;
   return (
-    <Link to={`/${countryTitle.toLowerCase()}`}>
+    <Link to={`${countrySlug}`}>
       <Paper
         className={classes.dav__country_card}
         style={{
