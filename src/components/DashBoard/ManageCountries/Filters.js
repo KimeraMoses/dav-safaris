@@ -6,9 +6,9 @@ import AddIcon from "@material-ui/icons/Add";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import BackIcon from "@material-ui/icons/Reply";
 import { useDispatch } from "react-redux";
-import { fetchAllTours } from "../../../store/Actions/TourActions";
+
 import { useSelector } from "react-redux";
-import { fetchAllPosts } from "../../../store/Actions/PostActions";
+
 import { setIsLanguage } from "../../../store/Slices/postSlice";
 
 const Filters = (props) => {
@@ -22,15 +22,12 @@ const Filters = (props) => {
     SearchHandler,
     language,
     type,
+    onClick,
   } = props;
   const isLoading = useSelector((state) => state.tours.isLoading);
   const isFetchingPosts = useSelector((state) => state.post.isLoading);
   const RefreshHandler = () => {
-    if (type === "posts") {
-      dispatch(fetchAllPosts(language ? "language" : ""));
-    } else {
-      dispatch(fetchAllTours());
-    }
+    onClick(Math.random());
   };
 
   return (
@@ -91,14 +88,17 @@ const Filters = (props) => {
                 }`}
               />
             </Fab>
-            <div
-              className={classes.language_post_btn}
-              onClick={() => {
-                dispatch(setIsLanguage(language ? false : true));
-              }}
-            >
-              {language ? "Safari Posts" : "Language Posts"}
-            </div>
+            {type === "posts" ||
+              (type === "language" && (
+                <div
+                  className={classes.language_post_btn}
+                  onClick={() => {
+                    dispatch(setIsLanguage(language ? false : true));
+                  }}
+                >
+                  {language ? "Safari Posts" : "Language Posts"}
+                </div>
+              ))}
           </div>
         </>
       )}

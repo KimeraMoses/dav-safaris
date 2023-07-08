@@ -5,24 +5,18 @@ import classes from "./ManageTours.module.css";
 import { List } from "@material-ui/core";
 import TourFilters from "./TourFilters";
 import NewTourCategory from "../../NewItems/NewTourCategory";
-import { useDispatch, useSelector } from "react-redux";
+
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import DeleteModal from "./delete/DeleteModal";
 import Loader from "../../../containers/Loader/Loader";
-import {
-  selectCategoriesFetchIsLoading,
-  selectAllCategories,
-} from "../../../store/Slices/fetchCategoriesSlice";
-import { fetchAllCategories } from "../../../store/Actions/TourCategoriesActions";
+
 import { useAllCategories } from "../../../hooks";
 
 const ManageTourCategories = () => {
-  const { categories, isLoading: isFetching } = useAllCategories();
+  const [refresh, setRefresh] = useState(null);
+  const { categories, isLoading: isFetching } = useAllCategories(refresh);
   const isLoading = isFetching;
-
-  // const isFetching = useSelector(selectCategoriesFetchIsLoading);
-  // const categoryList = useSelector(selectAllCategories);
 
   const [country, setCountry] = useState("Filter by country");
   const [searchTerm, setSearchTerm] = useState("");
@@ -31,9 +25,9 @@ const ManageTourCategories = () => {
   const [addNew, setAddNew] = useState(false);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+
   useEffect(() => {
-    // dispatch(fetchAllCategories());
+    
 
     window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -64,11 +58,6 @@ const ManageTourCategories = () => {
       setSearchResults(Results);
     }
   };
-
-  // useEffect(() => {
-  //   setSearchTerm("");
-  //   setSearchResults([]);
-  // }, [country]);
 
   const isSearching = searchTerm.length < 1 ? true : false;
   useEffect(() => {
@@ -107,10 +96,15 @@ const ManageTourCategories = () => {
         setCountry={setCountry}
         searchTerm={searchTerm}
         SearchHandler={SearchHandler}
+        onClick={setRefresh}
       />
       {addNew ? (
         <div className={classes.dav__new_tour_form_wrapper}>
-          {isLoading ? <Spinner /> : <NewTourCategory setAddNew={setAddNew} />}
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <NewTourCategory setAddNew={setAddNew} onSubmit={setRefresh} />
+          )}
         </div>
       ) : (
         <Row>{isFetching ? <Loader /> : RenderedList}</Row>

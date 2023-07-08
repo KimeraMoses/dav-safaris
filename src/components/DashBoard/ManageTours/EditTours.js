@@ -25,12 +25,7 @@ import { Col, Container, Row, Form } from "react-bootstrap";
 //===COMPONENT IMPORTS===
 import styles from "../../NewItems/NewTour.module.css";
 import { useEffect } from "react";
-// import {
-//   TourCategories_Kenya,
-//   TourCategories_Rwanda,
-//   TourCategories_Tanzania,
-//   TourCategories_Uganda,
-// } from "../../../containers/Countries/TourCategories";
+
 import ImageUpload from "../../NewItems/ImageUpload";
 import NewItinary from "../../NewItems/NewItinary";
 import { useLocation, useNavigate } from "react-router";
@@ -162,22 +157,12 @@ const EditTour = () => {
       case `${values.country}`:
         setTourCategories(selectedCountry);
         break;
-      // case "Kenya":
-      //   setTourCategories(TourCategories_Kenya);
-      //   break;
-      // case "Rwanda":
-      //   setTourCategories(TourCategories_Rwanda);
-      //   break;
-      // case "Tanzania":
-      //   setTourCategories(TourCategories_Tanzania);
-      //   break;
+
       default:
         break;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values.country]);
-
-  console.log(values);
 
   //====FORMATING THE TOUR HIGHLIGHTS====//
   let tourActivities = [];
@@ -282,6 +267,7 @@ const EditTour = () => {
         country: values.country,
         key_words: JSON.stringify(keys),
       };
+
       const res = await DAV_APIS.editTour(data, Tour.id);
       setIsLoading(false);
       if (res.status === 200) {

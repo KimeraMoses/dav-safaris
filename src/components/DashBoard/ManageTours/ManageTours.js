@@ -13,7 +13,8 @@ import Loader from "../../../containers/Loader/Loader";
 import { useAllTours } from "../../../hooks";
 
 const ManageTours = () => {
-  const { tours, isLoading: isFetching } = useAllTours();
+  const [refresh, setRefresh] = useState(null);
+  const { tours, isLoading: isFetching } = useAllTours(refresh);
 
   const isLoading = useSelector((state) => state.tour.isLoading);
   const [country, setCountry] = useState("Filter by country");
@@ -102,10 +103,15 @@ const ManageTours = () => {
         setCountry={setCountry}
         searchTerm={searchTerm}
         SearchHandler={SearchHandler}
+        onClick={setRefresh}
       />
       {addNew ? (
         <div className={classes.dav__new_tour_form_wrapper}>
-          {isLoading ? <Spinner /> : <NewTour setAddNew={setAddNew} />}
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <NewTour setAddNew={setAddNew} onSubmit={setRefresh} />
+          )}
         </div>
       ) : (
         <Row>{isFetching ? <Loader /> : RenderedList}</Row>

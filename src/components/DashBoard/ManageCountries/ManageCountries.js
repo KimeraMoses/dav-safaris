@@ -4,7 +4,7 @@ import DashTourCard from "./DashTourCard";
 import classes from "./ManageTours.module.css";
 import { List } from "@material-ui/core";
 import Filters from "./Filters";
-// import { useDispatch, useSelector } from "react-redux";
+
 import { useEffect } from "react";
 
 import { useNavigate } from "react-router";
@@ -12,27 +12,21 @@ import DeleteModal from "./delete/DeleteModal";
 import Loader from "../../../containers/Loader/Loader";
 
 import NewCountry from "../../NewItems/NewCountry";
-// import {
-//   selectAllCountries,
-//   selectIsLoading,
-// } from "../../../store/Slices/countrySlice";
-// import { fetchAllCountrys } from "../../../store/Actions/CountryActions";
 
 import { useAllCountries } from "../../../hooks";
 
 const ManageTours = () => {
-  const { countries, isLoading: isFetching } = useAllCountries();
+  const [refresh, setRefresh] = useState(null);
+  const { countries, isLoading: isFetching } = useAllCountries(refresh);
   const isLoading = isFetching;
-  // const isLoading = useSelector((state) => state.country.isLoading);
 
-  // const isFetching = useSelector(selectIsLoading);
-  // const CountryList = useSelector(selectAllCountries);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [addNew, setAddNew] = useState(false);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+
   // const dispatch = useDispatch();
   useEffect(() => {
     // dispatch(fetchAllCountrys());
@@ -42,10 +36,6 @@ const ManageTours = () => {
   }, []);
   // console.log(countries);
   let FilteredCountries = countries;
-
-  // const onAddNewClick =()=>{
-  //   setAddNew(true)
-  // }
 
   const onEditClick = (countryId) => {
     navigate(`/dashboard/manage-countries/edit?country=${countryId}`);
@@ -70,11 +60,6 @@ const ManageTours = () => {
       setSearchResults(Results);
     }
   };
-
-  // useEffect(() => {
-  //   setSearchTerm("");
-  //   setSearchResults([]);
-  // }, [country]);
 
   const isSearching = searchTerm.length < 1 ? true : false;
   useEffect(() => {
@@ -111,10 +96,15 @@ const ManageTours = () => {
         setAddNew={setAddNew}
         searchTerm={searchTerm}
         SearchHandler={SearchHandler}
+        onClick={setRefresh}
       />
       {addNew ? (
         <div className={classes.dav__new_tour_form_wrapper}>
-          {isLoading ? <Spinner /> : <NewCountry setAddNew={setAddNew} />}
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <NewCountry setAddNew={setAddNew} onSubmit={setRefresh} />
+          )}
         </div>
       ) : (
         <Row>{isFetching ? <Loader /> : RenderedList}</Row>
