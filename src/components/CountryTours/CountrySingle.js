@@ -97,18 +97,29 @@ const CountrySingle = () => {
               <Skeleton variant="rounded"></Skeleton>
             </Typography>
           </div>
-          <div style={{ margin: "15px" }}>
-            <Skeleton
-              variant="rounded"
-              width={150}
-              height={150}
-              style={{
-                marginTop: "0",
-                marginLeft: "auto",
-                marginBottom: "0",
-                marginRight: "auto",
-              }}
-            ></Skeleton>
+          <div
+            style={{
+              margin: "15px",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            {[...Array(2).keys()].map(() => (
+              <div style={{ margin: "5px" }}>
+                <Skeleton
+                  variant="rounded"
+                  width={200}
+                  height={200}
+                  style={{
+                    marginTop: "0",
+                    marginLeft: "auto",
+                    marginBottom: "0",
+                    marginRight: "auto",
+                    borderRadius: "15px",
+                  }}
+                ></Skeleton>
+              </div>
+            ))}
           </div>
 
           <div
