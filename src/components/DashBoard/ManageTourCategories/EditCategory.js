@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { useSelector, useDispatch } from "react-redux";
+
 import { toast } from "react-toastify";
 import { convertToRaw } from "draft-js";
 import { convertToHTML } from "draft-convert";
@@ -28,17 +28,8 @@ import styles from "../../NewItems/NewTour.module.css";
 import { useEffect } from "react";
 import ImageUpload from "../../NewItems/ImageUpload";
 
-// import { editCategoryDetails } from "../../../store/Actions/TourCategoriesActions";
 import { useLocation, useNavigate } from "react-router";
-// import { fetchAllCountrys } from "../../../store/Actions/CountryActions";
-// import {
-//   fetchCategoryPending,
-//   fetchCategorySuccess,
-//   fetchCategoryFail,
-//   categoryFetchIsLoading,
-// } from "../../../store/Slices/fetchCategorySlice";
-// import { selectAllCountries } from "../../../store/Slices/countrySlice";
-// import { baseUrl } from "../../../store";
+
 import { Link } from "react-router-dom";
 import Loader from "../../../containers/Loader/Loader";
 import NewKeyWord from "./Keywords/NewKeyWord";
@@ -57,24 +48,15 @@ const EditCategory = (props) => {
   const selectedCategory = query.get("category");
 
   const { category, isLoading: isFetching } = useCategoryById(selectedCategory);
-  // console.log(
-  //   "selected category",
-  //   selectedCategory,
-  //   "Fetched category",
-  //   category
-  // );
+
   const isLoading = isFetching;
   const { countries } = useAllCountries();
   const DarkMode = false;
   const [isEditing, setIsEditing] = useState(false);
-  // const isFetching = useSelector(categoryFetchIsLoading);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const CountryList = useSelector(selectAllCountries);
-  const countryArray = countries;
-  // const [category, setCategory] = useState({});
-  const [keys, setKeys] = useState([]);
 
-  // const dispatch = useDispatch();
+  const countryArray = countries;
+
+  const [keys, setKeys] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -83,38 +65,7 @@ const EditCategory = (props) => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  // useEffect(() => {
-  //   dispatch(fetchAllCountrys());
-  // }, [dispatch]);
-  // useEffect(() => {
-  //   setCountryArray(CountryList?.countries);
-  // }, [CountryList]);
 
-  // const fetchCategoryDetails = (cat_id) => async (dispatch) => {
-  //   dispatch(fetchCategoryPending());
-  //   try {
-  //     const response = await fetch(`${baseUrl}/api/v1/categories/${cat_id}`);
-  //     const fetchedCategory = await response.json();
-  //     console.log("Fetched", fetchedCategory);
-  //     dispatch(fetchCategorySuccess(fetchedCategory.tourCategory));
-  //     setCategory(fetchedCategory?.tourCategory);
-  //   } catch (error) {
-  //     dispatch(fetchCategoryFail(error.message));
-  //   }
-  // };
-
-  //====GET THE SELECTED DOCUMENT CATEGORY====//
-  // function useQuery() {
-  //   return new URLSearchParams(useLocation().search);
-  // }
-  // let query = useQuery();
-  // const selectedCategory = query.get("category");
-
-  // useEffect(() => {
-  //   dispatch(fetchCategoryDetails(selectedCategory));
-
-  //   // eslint-disable-next-line
-  // }, [selectedCategory]);
   const [editorState, setEditorState] = useState(() =>
     convertHTMLToDraftState(category.description)
   );
@@ -178,10 +129,7 @@ const EditCategory = (props) => {
       window.scrollTo(0, 0);
       return setError("Tour category title is required");
     }
-    // if (values.value.length < 1) {
-    //   window.scrollTo(0, 0);
-    //   return setError("Tour category slug is required");
-    // }
+
     if (values.country.length < 1) {
       window.scrollTo(0, 0);
       return setError("Country is required");
@@ -207,7 +155,6 @@ const EditCategory = (props) => {
         value: values.value,
         selectedImage: values.selectedImage,
       };
-      // console.log("Category data", data);
 
       await DAV_APIS.editCategory(data, category.id);
 
@@ -328,10 +275,6 @@ const EditCategory = (props) => {
                             {country?.name}
                           </MenuItem>
                         ))}
-                        {/* <MenuItem value="uganda">Uganda</MenuItem>
-                        <MenuItem value="kenya">Kenya</MenuItem>
-                        <MenuItem value="tanzania">Tanzania</MenuItem>
-                        <MenuItem value="rwanda">Rwanda</MenuItem> */}
                       </Select>
                     </FormControl>
                   </div>
@@ -361,16 +304,11 @@ const EditCategory = (props) => {
                 </div>
                 <div className="row"></div>
                 <div className="row"></div>
-                <NewKeyWord
-                  setKeys={setKeys}
-                  keys={keys}
-                  // key_words={Tour && Tour.key_words}
-                />
+                <NewKeyWord setKeys={setKeys} keys={keys} />
 
                 <Row>
                   <Col xs={{ span: 8, offset: 2 }}>
                     <Button
-                      // disabled={isLoading || values.logo.length < 1}
                       variant="contained"
                       color="primary"
                       type="submit"

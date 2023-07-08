@@ -5,17 +5,12 @@ import { toast } from "react-toastify";
 import { Box, Button, Modal } from "@material-ui/core";
 //===COMPONENTS IMPORTS===
 import classes from "./ModalComponent.module.css";
-// import { useDispatch } from "react-redux";
-// import {
-//   DeleteCategory,
-//   fetchAllCategories,
-// } from "../../../../store/Actions/TourCategoriesActions";
+
 import { DAV_APIS } from "../../../../Adapter";
 
 const DeleteModal = (props) => {
-  const { open, setOpen, Id, setSearchTerm, source, language } = props;
+  const { open, setOpen, Id, setSearchTerm, source } = props;
   const [loading, setLoading] = useState(false);
-  // const dispatch = useDispatch();
 
   const handleClose = () => {
     setOpen(false);
@@ -28,14 +23,10 @@ const DeleteModal = (props) => {
     setLoading(true);
     if (source === "category") {
       await DAV_APIS.deleteCategoryById(Id);
-      // await dispatch(DeleteCategory(Id));
+
       toast.success("Category deleted Successfully");
-      // dispatch(fetchAllCategories());
     }
-    // else {
-    //   await dispatch(DeletePost(Id, language ? "language" : ""));
-    //   toast.success("Post deleted Successfully");
-    // }
+
     setLoading(false);
     setOpen(false);
     setSearchTerm("");

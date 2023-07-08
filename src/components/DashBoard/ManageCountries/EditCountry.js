@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+
 import { toast } from "react-toastify";
 import { convertToRaw } from "draft-js";
 import { convertToHTML } from "draft-convert";
@@ -18,35 +18,17 @@ import { Col, Container, Row, Form } from "react-bootstrap";
 //===COMPONENT IMPORTS===
 import styles from "../../NewItems/NewTour.module.css";
 import { useEffect } from "react";
-// import {
-//   TourCategories_Kenya,
-//   TourCategories_Rwanda,
-//   TourCategories_Tanzania,
-//   TourCategories_Uganda,
-// } from "../../../containers/Countries/TourCategories";
+
 import ImageUpload from "../../NewItems/ImageUpload";
 
-// import {
-//   // fetchCountryDetails,
-//   editCountryDetails,
-// } from "../../../store/Actions/CountryActions";
 import { useLocation, useNavigate } from "react-router";
 
-// import { baseUrl } from "../../../store";
 import { Link } from "react-router-dom";
 import Loader from "../../../containers/Loader/Loader";
 import NewKeyWord from "./Keywords/NewKeyWord";
 import { ConfigurationEditor } from "../../CustomEditor/SMTPEditor.component";
 import { convertHTMLToDraftState } from "../../../utils/Utils";
 
-// import { countryEditIsLoading } from "../../../store/Slices/editCountrySlice";
-// import {
-//   countryFetchIsLoading,
-//   selectCountryDetails,
-//   fetchCountryFail,
-//   fetchCountryPending,
-//   fetchCountrySuccess,
-// } from "../../../store/Slices/fetchCountryDetailsSlice";
 import { useCountryById } from "../../../hooks";
 import { DAV_APIS } from "../../../Adapter";
 
@@ -60,13 +42,8 @@ const EditCountry = (props) => {
   const { country, isLoading: isFetching } = useCountryById(selectedCountry);
   const isLoading = isFetching;
   const [isEditing, setIsEditing] = useState(false);
-  // const isFetching = useSelector(countryFetchIsLoading);
-  // const fetchedCountry = useSelector(selectCountryDetails);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [country, setCountry] = useState({});
-  const [keys, setKeys] = useState([]);
 
-  const dispatch = useDispatch();
+  const [keys, setKeys] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -75,30 +52,6 @@ const EditCountry = (props) => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-
-  // const fetchCountryDetails = (country_id) => async (dispatch) => {
-  //   dispatch(fetchCountryPending());
-  //   try {
-  //     const response = await fetch(`${baseUrl}/api/v1/countries/${country_id}`);
-  //     const fetchedCountry = await response.json();
-  //     dispatch(fetchCountrySuccess(fetchedCountry.country));
-  //     setCountry(fetchedCountry?.country);
-  //   } catch (error) {
-  //     dispatch(fetchCountryFail(error.message));
-  //   }
-  // };
-  // console.log(country);
-
-  //====GET THE SELECTED DOCUMENT CATEGORY====//
-  // function useQuery() {
-  //   return new URLSearchParams(useLocation().search);
-  // }
-  // let query = useQuery();
-  // const selectedCountry = query.get("country");
-  // useEffect(() => {
-  //   dispatch(fetchCountryDetails(selectedCountry));
-  //   // eslint-disable-next-li
-  // }, [dispatch, selectedCountry]);
 
   const [editorState, setEditorState] = useState(() =>
     convertHTMLToDraftState(country.description)
@@ -170,7 +123,7 @@ const EditCountry = (props) => {
       return setError("Country title is required");
     }
 
-    if (values.selectedImage.length < 1) {
+    if (values.cover_image.length < 1) {
       window.scrollTo(0, 0);
       return setError("Country cover image required");
     }
@@ -339,7 +292,6 @@ const EditCountry = (props) => {
                   >
                     <ImageUpload
                       tourImage={values.cover_image}
-                      // Image={Tour.imageCover}
                       uploaded={true}
                       tourImageHandler={tourImageHandler}
                     />
@@ -359,6 +311,7 @@ const EditCountry = (props) => {
                   </div>
                   <div className="col-xs-12 col-sm-6">
                     <TextField
+                      disabled
                       fullWidth
                       label="Country Slug"
                       variant="filled"
@@ -380,7 +333,6 @@ const EditCountry = (props) => {
                 <Row>
                   <Col xs={{ span: 8, offset: 2 }}>
                     <Button
-                      // disabled={isLoading || values.logo.length < 1}
                       variant="contained"
                       color="primary"
                       type="submit"
