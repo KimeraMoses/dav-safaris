@@ -1,18 +1,14 @@
 import React, { useEffect } from "react";
+import { Skeleton } from "@material-ui/lab";
+import { Typography } from "@material-ui/core";
 import { useNavigate, useParams } from "react-router";
 import CountryHeader from "./CountryHeader";
 import DescriptionSection from "./DescriptionSection";
 import classes from "./CountrySingle.module.css";
 import CountryTours from "./CountryTours";
 
-// import { fetchAllCountryTours } from "../../store/Actions/TourActions";
-// import { useDispatch } from "react-redux";
-// import { CountriesData } from "../../containers/Countries/CountriesData";
-// import { useSelector } from "react-redux";
-// import { selectAllCountries } from "../../store/Slices/countrySlice";
-
 import SEO from "../../containers/SEO/SEO";
-// import { fetchAllCountrys } from "../../store/Actions/CountryActions";
+
 import { useCountry } from "../../hooks";
 
 const countryMeta = {
@@ -48,7 +44,7 @@ const countryMeta = {
 const CountrySingle = () => {
   const navigate = useNavigate();
   const { countryName } = useParams();
-  const { country } = useCountry(countryName);
+  const { country, isLoading } = useCountry(countryName);
   useEffect(() => {
     window.scrollTo(0, 0);
     if (countryName === "more-safaris") {
@@ -91,26 +87,92 @@ const CountrySingle = () => {
             : countryMeta.RW.keywords
         }
       />
-      <div className={classes.dav__country_single_wrapper}>
-        <div
-          className={classes.dav__single_tour_hero}
-          style={{
-            backgroundImage: `url(${
-              SelectedCountry && SelectedCountry.countryImage
-            })`,
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
-          }}
-        >
-          <h1>{SelectedCountry?.title}</h1>
+      {isLoading ? (
+        <div className={classes.dav__country_single_wrapper}>
+          <div className={classes.dav__single_tour_hero}>
+            <Skeleton variant="rounded" width="100%" height={360}></Skeleton>
+          </div>
+          <div style={{ margin: "15px" }}>
+            <Typography variant="h2">
+              <Skeleton variant="rounded"></Skeleton>
+            </Typography>
+          </div>
+          <div style={{ margin: "15px" }}>
+            <Skeleton
+              variant="rounded"
+              width={150}
+              height={150}
+              style={{
+                marginTop: "0",
+                marginLeft: "auto",
+                marginBottom: "0",
+                marginRight: "auto",
+              }}
+            ></Skeleton>
+          </div>
+
+          <div
+            className={classes.dav__country_tours_wrapper}
+            style={{ margin: "15px" }}
+          >
+            <div
+              style={{
+                margin: "5px",
+              }}
+            >
+              {" "}
+              <div
+                style={{
+                  margin: "5px",
+                }}
+              >
+                <Skeleton variant="rounded" width="80%" height={40}></Skeleton>
+              </div>
+              <div
+                style={{
+                  margin: "5px",
+                }}
+              >
+                <Skeleton variant="rounded" width="60%" height={20}></Skeleton>
+              </div>
+              <div
+                style={{
+                  margin: "5px",
+                }}
+              >
+                <Skeleton
+                  variant="rectangular"
+                  width="40%"
+                  height={10}
+                ></Skeleton>
+              </div>
+            </div>
+
+            <CountryTours Country={SelectedCountry && SelectedCountry.name} />
+          </div>
         </div>
-        <CountryHeader Country={SelectedCountry} />
-        <DescriptionSection
-          description={SelectedCountry?.description}
-          specialist={SelectedCountry?.specialist}
-        />
-        <CountryTours Country={SelectedCountry && SelectedCountry.name} />
-      </div>
+      ) : (
+        <div className={classes.dav__country_single_wrapper}>
+          <div
+            className={classes.dav__single_tour_hero}
+            style={{
+              backgroundImage: `url(${
+                SelectedCountry && SelectedCountry.countryImage
+              })`,
+              backgroundSize: "cover",
+              backgroundPosition: "center center",
+            }}
+          >
+            <h1>{SelectedCountry?.title}</h1>
+          </div>
+          <CountryHeader Country={SelectedCountry} />
+          <DescriptionSection
+            description={SelectedCountry?.description}
+            specialist={SelectedCountry?.specialist}
+          />
+          <CountryTours Country={SelectedCountry && SelectedCountry.name} />
+        </div>
+      )}
     </>
   );
 };

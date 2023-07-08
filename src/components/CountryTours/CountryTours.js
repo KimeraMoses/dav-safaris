@@ -11,6 +11,7 @@ const CountryTours = ({ Country }) => {
       <SectionTitle
         subTitle="Take a look at our"
         Title={`Popular tours in ${Country}`}
+        isLoading={isLoading}
       />
       <PopularTours tours={tours} isLoading={isLoading} />
     </div>

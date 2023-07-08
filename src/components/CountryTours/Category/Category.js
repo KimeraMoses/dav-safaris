@@ -1,11 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router";
-// import {
-//   TourCategories_Kenya,
-//   TourCategories_Rwanda,
-//   TourCategories_Tanzania,
-//   TourCategories_Uganda,
-// } from "../../../containers/Countries/TourCategories";
+import { Skeleton } from "@material-ui/lab";
 import classes from "../CountrySingle.module.css";
 import PopularTours from "../../HomePage/PopularTours/PopularTours";
 import SectionTitle from "../../HomePage/SectionTitle/SectionTitle";
@@ -38,12 +33,13 @@ const categoryMeta = {
 
 const Category = () => {
   const { countryName, tourCategory } = useParams();
-  const { category } = useCategoryBySlug(tourCategory);
-  // const { categories } = useAllCategories();
+  const { category, isLoading: categoryIsLoading } =
+    useCategoryBySlug(tourCategory);
+
   const { country } = useCountry(countryName);
 
   const currentCountry = country.name;
-  // const currentCountry = countryName.split("-")[0];
+
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -51,11 +47,7 @@ const Category = () => {
   }, [tourCategory]);
 
   const { tours, isLoading } = useCountryTours(currentCountry);
-  console.log("country", country, "category", category, "Tours", tours);
 
-  // const SelectedCategory = categories?.filter(
-  //   (category) => category.value.toLowerCase() === tourCategory.toLowerCase()
-  // )[0];
   const SelectedCategory = category;
   const FilteredTours = tours.filter((tour) => tour.category === tourCategory);
 
@@ -68,33 +60,90 @@ const Category = () => {
           keywords={categoryMeta[tourCategory]?.keywords}
         />
       )}
-      <div className={classes.dav__country_single_wrapper}>
-        <div
-          className={classes.dav__single_tour_hero}
-          style={{
-            backgroundImage: `url(${
-              SelectedCategory && SelectedCategory.tourCategoryImage
-            })`,
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
-          }}
-        >
-          <h1>{SelectedCategory?.name}</h1>
+      {categoryIsLoading ? (
+        <div className={classes.dav__country_single_wrapper}>
+          <div className={classes.dav__single_tour_hero}>
+            <Skeleton
+              variant="rectangular"
+              width="100%"
+              height={360}
+            ></Skeleton>
+          </div>
+          <div className={classes.dav__country_tours_wrapper}>
+            <div
+              style={{
+                margin: "5px",
+              }}
+            >
+              {" "}
+              <div
+                style={{
+                  margin: "5px",
+                }}
+              >
+                <Skeleton
+                  variant="rectangular"
+                  width="80%"
+                  height={40}
+                ></Skeleton>
+              </div>
+              <div
+                style={{
+                  margin: "5px",
+                }}
+              >
+                <Skeleton
+                  variant="rectangular"
+                  width="60%"
+                  height={20}
+                ></Skeleton>
+              </div>
+              <div
+                style={{
+                  margin: "5px",
+                }}
+              >
+                <Skeleton
+                  variant="rectangular"
+                  width="40%"
+                  height={10}
+                ></Skeleton>
+              </div>
+            </div>
+
+            <PopularTours tours={FilteredTours} isLoading={isLoading} />
+          </div>
         </div>
-        <div className={classes.dav__country_tours_wrapper}>
-          {SelectedCategory?.description && (
-            <DescriptionSection
-              description={SelectedCategory.description}
-              specialist="+256757795781"
+      ) : (
+        <div className={classes.dav__country_single_wrapper}>
+          <div
+            className={classes.dav__single_tour_hero}
+            style={{
+              backgroundImage: `url(${
+                SelectedCategory && SelectedCategory.tourCategoryImage
+              })`,
+              backgroundSize: "cover",
+              backgroundPosition: "center center",
+            }}
+          >
+            <h1>{SelectedCategory?.name}</h1>
+          </div>
+          <div className={classes.dav__country_tours_wrapper}>
+            {SelectedCategory?.description && (
+              <DescriptionSection
+                description={SelectedCategory.description}
+                specialist="+256757795781"
+              />
+            )}
+            <SectionTitle
+              subTitle="Exciting tours in "
+              Title={`${SelectedCategory && SelectedCategory.name} Category`}
+              isLoading={isLoading}
             />
-          )}
-          <SectionTitle
-            subTitle="Exciting tours in "
-            Title={`${SelectedCategory && SelectedCategory.name} Category`}
-          />
-          <PopularTours tours={FilteredTours} isLoading={isLoading} />
+            <PopularTours tours={FilteredTours} isLoading={isLoading} />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
