@@ -1,18 +1,10 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+
 import { EditorState, convertToRaw } from "draft-js";
 import { convertToHTML } from "draft-convert";
 import { toast } from "react-toastify";
 //===MUI IMPORTS===
-import {
-  Button,
-  Paper,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@material-ui/core";
+import { Button, Paper, TextField } from "@material-ui/core";
 
 import Spinner from "@material-ui/core/CircularProgress";
 import { Alert } from "@material-ui/lab";
@@ -26,21 +18,19 @@ import { Col, Container, Row, Form } from "react-bootstrap";
 import styles from "./NewTour.module.css";
 import ImageUpload from "./ImageUpload";
 import { useEffect } from "react";
-import { fetchAllCountrys } from "../../store/Actions/CountryActions";
 
 import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
-import { useNavigate } from "react-router";
+
 import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
 import { DAV_APIS } from "../../Adapter";
 
-const NewCountry = () => {
+const NewCountry = (props) => {
+  const { setAddNew, onSubmit } = props;
   const DarkMode = false;
-  const isLoading = useSelector((state) => state.country.isLoading);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [keys, setKeys] = useState([]);
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
@@ -57,7 +47,7 @@ const NewCountry = () => {
     cover_image: "",
     countrySummary: "",
     specialist: "",
-    slug: "",
+
     selectedImage: "",
   });
   useEffect(() => {}, [values]);
@@ -118,13 +108,9 @@ const NewCountry = () => {
     }
     if (values.specialist.length < 1) {
       window.scrollTo(0, 0);
-      return setError("Specialist required");
+      return setError("Specialist contact required");
     }
-    if (values.slug.length < 1) {
-      window.scrollTo(0, 0);
-      return setError("Country slug required");
-    }
-
+    setIsLoading(true);
     try {
       const data = {
         name: values.name,
@@ -133,14 +119,15 @@ const NewCountry = () => {
         countrySummary: values.countrySummary,
         specialist: values.specialist,
         selectedImage: values.selectedImage,
-        slug: values.slug,
+
         key_words: JSON.stringify(keys),
       };
       await DAV_APIS.createCountry(data);
 
       toast.success(`${values.name} Created Successfully`);
       setMessage(`${values.name} Created Successfully`);
-      navigate("/dashboard/manage-countries");
+      setAddNew(false);
+      onSubmit(Math.random());
       setValues({
         name: "",
         title: "",
@@ -151,10 +138,11 @@ const NewCountry = () => {
         slug: "",
         selectedImage: "",
       });
-      // dispatch(fetchAllCountrys());
 
       setKeys([]);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       toast.error("Country Registration Failed!");
       window.scrollTo(0, 0);
       setError("Country Registration Failed");
@@ -266,25 +254,13 @@ const NewCountry = () => {
                 </div>
               </div>
               <div className="row">
-                <div className="col-xs-12 col-sm-6">
+                <div className="col-xs-12 col-sm-12">
                   <TextField
                     fullWidth
-                    label="Country Specialist"
+                    label="Country Specialist Contact"
                     variant="filled"
                     name="specialist"
                     value={values.specialist}
-                    onChange={onChangeHandler}
-                    className={styles.gpa__register_form_right_wrapper}
-                  />
-                </div>
-                <div className="col-xs-12 col-sm-6">
-                  <TextField
-                    fullWidth
-                    label="Country Slug"
-                    variant="filled"
-                    type="text"
-                    name="slug"
-                    value={values.slug}
                     onChange={onChangeHandler}
                     className={styles.gpa__register_form_right_wrapper}
                   />
@@ -299,6 +275,7 @@ const NewCountry = () => {
                     variant="contained"
                     color="primary"
                     type="submit"
+                    disabled={isLoading}
                     className={styles.gpa__register_submit_button}
                   >
                     {isLoading ? "Creating Country..." : "Create Country"}

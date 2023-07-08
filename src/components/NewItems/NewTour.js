@@ -27,43 +27,32 @@ import styles from "./NewTour.module.css";
 import NewItinary from "./NewItinary";
 import ImageUpload from "./ImageUpload";
 import { useEffect } from "react";
-// import {
-//   TourCategories_Kenya,
-//   TourCategories_Rwanda,
-//   TourCategories_Tanzania,
-//   TourCategories_Uganda,
-// } from "../../containers/Countries/TourCategories";
-// import { fetchAllCategories } from "../../store/Actions/TourCategoriesActions";
+
 import { AddDays } from "../../store/Slices/newTourSlice";
 import EditItinaryModal from "../DashBoard/ManageTours/Itinary/EditItinary";
 import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
-import { useNavigate } from "react-router";
+
 import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
-// import { selectAllCountries } from "../../store/Slices/countrySlice";
-// import { fetchAllCountrys } from "../../store/Actions/CountryActions";
-// import { selectAllCategories } from "../../store/Slices/fetchCategoriesSlice";
+
 import { DAV_APIS } from "../../Adapter";
 import { useAllCategories, useAllCountries } from "../../hooks";
 
 let dayActivityDescription = [];
 
-const NewTour = () => {
+const NewTour = (props) => {
+  const { setAddNew, onSubmit } = props;
   const DarkMode = false;
-  const isLoading = useSelector((state) => state.newTour.isLoading);
+  const [isLoading, setIsLoading] = useState(false);
   const Tour = useSelector((state) => state.tour.tourDetails);
   const { countries } = useAllCountries();
   const { categories } = useAllCategories();
-  // const CountryList = useSelector(selectAllCountries);
-  // const Categories = useSelector(selectAllCategories);
-  console.log(countries, categories);
 
-  // const [countryArray, setCountryArray] = useState([]);
   const [open, setOpen] = useState(false);
   const [keys, setKeys] = useState([]);
   const [Itinary, setItinary] = useState({});
   const [EditedItinary, setEditedItinary] = useState("");
   const [type, setType] = useState("Edit");
-  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -96,13 +85,6 @@ const NewTour = () => {
     accomodation_plan: "",
   });
   useEffect(() => {}, [values]);
-  // useEffect(() => {
-  //   dispatch(fetchAllCountrys());
-  //   dispatch(fetchAllCategories());
-  // }, []);
-  // useEffect(() => {
-  //   setCountryArray(countries);
-  // }, []);
 
   const selectedCountry = categories?.filter(
     (category) =>
@@ -114,15 +96,7 @@ const NewTour = () => {
       case `${values.country}`:
         setTourCategories(selectedCountry);
         break;
-      // case "Kenya":
-      //   setTourCategories(TourCategories_Kenya);
-      //   break;
-      // case "Rwanda":
-      //   setTourCategories(TourCategories_Rwanda);
-      //   break;
-      // case "Tanzania":
-      //   setTourCategories(TourCategories_Tanzania);
-      //   break;
+
       default:
         break;
     }
@@ -212,19 +186,19 @@ const NewTour = () => {
       return setError("Tour price is required");
     }
 
-    if (values.selectedImage.length < 1) {
+    if (values.cover_image.length < 1) {
       return setError("Tour cover image required");
     }
     if (values.description.length < 1) {
       return setError("Tour Description required");
     }
-
+    setIsLoading(true);
     try {
       const data = {
         name: values.name,
         description: values.description,
         tourActivities: JSON.stringify(tourActivities),
-        file: values.cover_image,
+        file: values.selectedImage,
         country: values.country,
         category: values.category,
         duration: values.duration,
@@ -239,8 +213,8 @@ const NewTour = () => {
 
       toast.success(`${values.name} Created Successfully`);
       setMessage(`${values.name} Created Successfully`);
-      navigate("/dashboard/manage-tours");
-      setTourCategories([]);
+      setAddNew(false);
+      onSubmit(Math.random());
       setValues({
         name: "",
         description: "",
@@ -264,7 +238,9 @@ const NewTour = () => {
       priceIncludes = [];
       priceExcludes = [];
       setKeys([]);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       toast.error("Tour Registration Failed!");
       setError("Tour Registration Failed");
     }
@@ -399,10 +375,6 @@ const NewTour = () => {
                           </MenuItem>
                         );
                       })}
-                      {/* <MenuItem value="uganda">Uganda</MenuItem>
-                      <MenuItem value="kenya">Kenya</MenuItem>
-                      <MenuItem value="tanzania">Tanzania</MenuItem>
-                      <MenuItem value="rwanda">Rwanda</MenuItem> */}
                     </Select>
                   </FormControl>
                 </div>
@@ -514,6 +486,7 @@ const NewTour = () => {
                     variant="contained"
                     color="primary"
                     type="submit"
+                    disabled={isLoading}
                     className={styles.gpa__register_submit_button}
                   >
                     {isLoading ? "Creating Tour..." : "Create Tour"}

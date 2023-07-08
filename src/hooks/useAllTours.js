@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { DAV_APIS } from "../Adapter";
 
-const useAllTours = () => {
+const useAllTours = (refresh = null) => {
   const [tours, setTours] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -18,7 +18,7 @@ const useAllTours = () => {
     fetchAllTours();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [refresh]);
 
   return { tours, isLoading };
 };

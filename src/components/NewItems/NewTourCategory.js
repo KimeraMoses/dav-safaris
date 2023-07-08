@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { useSelector, useDispatch } from "react-redux";
+
 import { EditorState, convertToRaw } from "draft-js";
 import { convertToHTML } from "draft-convert";
 import { toast } from "react-toastify";
@@ -27,26 +27,21 @@ import styles from "./NewTour.module.css";
 
 import ImageUpload from "./ImageUpload";
 import { useEffect } from "react";
-// import { createNewTourCategory } from "../../store/Actions/TourCategoriesActions";
 
 import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
-import { useNavigate } from "react-router";
+
 import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
-// import { selectAllCountries } from "../../store/Slices/countrySlice";
-// import { fetchAllCountrys } from "../../store/Actions/CountryActions";
-// import { fetchAllCategories } from "../../store/Actions/TourCategoriesActions";
+
 import { DAV_APIS } from "../../Adapter";
 import { useAllCountries } from "../../hooks";
-const NewTourCategory = () => {
+const NewTourCategory = (props) => {
+  const { setAddNew, onSubmit } = props;
   const { countries } = useAllCountries();
   const DarkMode = false;
   const [isLoading, setIsLoading] = useState(false);
-  // const Tour = useSelector((state) => state.tour.tourDetails);
-  // const CountryList = useSelector(selectAllCountries);
-  // const [countryArray, setCountryArray] = useState([]);
+
   const [keys, setKeys] = useState([]);
-  const navigate = useNavigate();
-  // const dispatch = useDispatch();
+
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
@@ -60,17 +55,11 @@ const NewTourCategory = () => {
     name: "",
     description: "",
     country: "",
-    value: "",
+
     cover_image: "",
     selectedImage: "",
   });
   useEffect(() => {}, [values]);
-  // useEffect(() => {
-  //   dispatch(fetchAllCountrys());
-  // }, [dispatch]);
-  // useEffect(() => {
-  //   setCountryArray(CountryList?.countries);
-  // }, [CountryList]);
 
   //====TOUR COVER IMAGE HANDLER====//
   const tourImageHandler = async (e) => {
@@ -102,16 +91,12 @@ const NewTourCategory = () => {
 
   const RegisterFormSubmitHandler = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
 
     if (values.name.length < 1) {
       window.scrollTo(0, 0);
       return setError("Tour category title is required");
     }
-    // if (values.value.length < 1) {
-    //   window.scrollTo(0, 0);
-    //   return setError("Tour category slug is required");
-    // }
+
     if (values.country.length < 1) {
       window.scrollTo(0, 0);
       return setError("Country is required");
@@ -125,33 +110,34 @@ const NewTourCategory = () => {
       window.scrollTo(0, 0);
       return setError("Tour Category Description required");
     }
-
+    setIsLoading(true);
     try {
       const data = {
         name: values.name,
         description: values.description,
         country: values.country,
-        value: values.value,
+
         selectedImage: values.selectedImage,
       };
       await DAV_APIS.createCategory(data);
-      setIsLoading(false);
-      console.log("category value", values);
+
       toast.success(`${values.name} Created Successfully`);
       setMessage(`${values.name} Created Successfully`);
+      setAddNew(false);
+      onSubmit(Math.random());
       setValues({
         name: "",
         description: "",
         country: "",
-        value: "",
+
         cover_image: "",
         selectedImage: "",
       });
-      // dispatch(fetchAllCategories());
-      navigate("/dashboard/manage-tour-categories/");
 
       setKeys([]);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       toast.error("Tour Category Registration Failed!");
       setError("Tour Category Registration Failed");
     }
@@ -223,7 +209,7 @@ const NewTourCategory = () => {
               />
 
               <div className="row">
-                <div className="col-xs-12 col-sm-4">
+                <div className="col-xs-12 col-sm-8">
                   <FormControl
                     variant="filled"
                     fullWidth
@@ -242,27 +228,12 @@ const NewTourCategory = () => {
                           </MenuItem>
                         );
                       })}
-                      {/* <MenuItem value="uganda">Uganda</MenuItem>
-                      <MenuItem value="kenya">Kenya</MenuItem>
-                      <MenuItem value="tanzania">Tanzania</MenuItem>
-                      <MenuItem value="rwanda">Rwanda</MenuItem> */}
                     </Select>
                   </FormControl>
                 </div>
-                <div className="col-xs-12 col-sm-5">
-                  <TextField
-                    fullWidth
-                    label="Category Slug"
-                    variant="filled"
-                    name="value"
-                    value={values.value}
-                    onChange={onChangeHandler}
-                    className={styles.gpa__register_form_right_wrapper}
-                  />
-                </div>
 
                 <div
-                  className={`col-xs-12 col-sm-3 ${styles.gpa__register_form_right_wrapper}`}
+                  className={`col-xs-12 col-sm-4 ${styles.gpa__register_form_right_wrapper}`}
                 >
                   <ImageUpload
                     tourImage={values.cover_image}
@@ -281,6 +252,7 @@ const NewTourCategory = () => {
                     variant="contained"
                     color="primary"
                     type="submit"
+                    disabled={isLoading}
                     className={styles.gpa__register_submit_button}
                   >
                     {isLoading

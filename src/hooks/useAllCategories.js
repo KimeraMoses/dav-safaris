@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { DAV_APIS } from "../Adapter";
 
-const useAllCategories = () => {
+const useAllCategories = (refresh = null) => {
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const fetchCategories = async () => {
@@ -14,7 +14,7 @@ const useAllCategories = () => {
   };
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [refresh]);
   return { categories, isLoading };
 };
 export default useAllCategories;
