@@ -119,6 +119,7 @@
 .tour__read_more a:hover {
   background-color: var(--dav__secondary_color);
   color: #fff;
+  /* color: #fff; */
 }
 .tour__read_more a::before {
   position: absolute;
