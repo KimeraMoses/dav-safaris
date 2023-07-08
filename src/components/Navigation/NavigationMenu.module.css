@@ -1,5 +1,5 @@
 .dav__navbar_wrapper {
-  margin-right: 20px;
+  margin-right: 10px;
   position: relative;
 }
 .nav_menu {
@@ -12,8 +12,8 @@
   font-size: 15px;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
   font-weight: 500;
   text-decoration: none;
   color: #000000;
@@ -72,9 +72,12 @@
   overflow: hidden;
   z-index: 10;
 }
+.dav_dropdown .nav_link:after {
+  display: none;
+}
 .more {
   font-size: 15px;
-
+  cursor: pointer;
   font-weight: 500;
   color: #000000;
 }
@@ -101,6 +104,9 @@
   margin-bottom: 0;
   width: 100%;
 }
+/* .dropdown_slider {
+  display: none;
+} */
 
 .dropdown_slide {
   display: flex;
@@ -116,6 +122,7 @@
   font-family: "Merriweather", serif;
   font-style: italic;
   color: #fff;
+  text-align: center;
 }
 .dropdown_slide__paragraph {
   position: absolute;
@@ -147,22 +154,37 @@
   }
 }
 
-@media screen and (min-width: 886px) {
+@media screen and (min-width: 599px) {
   .dav__dropdown_wrapper {
     position: absolute;
   }
 }
 /** END DROPDOWN CSS */
 
-@media screen and (max-width: 906px) {
-  .nav_link,
-  .dav_dropdown li a {
-    font-size: 10px;
-    padding-left: 10px;
+@media screen and (max-width: 1000px) {
+  .nav_link {
+    font-size: 12px;
+    padding-left: 5px;
     padding-right: 0px;
   }
+  .dav_dropdown li a {
+    font-size: 10px;
+    padding-left: 6px;
+    padding-right: 0px;
+  }
+  .dropdown_slide span h2 {
+    font-size: 18px;
+  }
+  .dropdown_slide__paragraph {
+    font-size: 12px;
+  }
 }
-
+@media screen and (max-width: 800px) {
+  .nav_link {
+    font-size: 9px;
+    padding-left: 2px;
+  }
+}
 @media screen and (max-width: 599px) {
   .dav__navbar_wrapper {
     position: absolute;
