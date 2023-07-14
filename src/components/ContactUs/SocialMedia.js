@@ -14,6 +14,7 @@ export const SocialIcon = (props) => {
       href={props.socialLink}
       target="_blank"
       rel="noreferrer"
+      rel="nofollow"
       className={classes.dav__social_icon_link}
     >
       {props.socialIcon}
