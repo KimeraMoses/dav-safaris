@@ -12,11 +12,9 @@ import { Alert, Rating } from "@material-ui/lab";
 import { Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import {
-  fetchAllCountries,
-  fetchTourReviews,
-  ReviewTour,
-} from "../../../../../store/Actions/TourActions";
+import { fetchAllCountries } from "../../../../../store/Actions/TourActions";
+import { toast } from "react-toastify";
+import { DAV_APIS } from "../../../../../Adapter";
 import CustomTextField from "../../../../CountryInputField/CustomTextField";
 import { Button } from "../../../../UI/Button/Button";
 import classes from "./ReviewForm.module.css";
@@ -42,7 +40,7 @@ const ReviewForm = (props) => {
     dispatch(fetchAllCountries());
   }, [dispatch]);
   const countryList = useSelector((state) => state.countries.countryList);
-  const isLoading = useSelector((state) => state.tour.isReviewing);
+  const [isLoading, setIsLoading] = useState(false);
   const Tour = useSelector((state) => state.tour.tourDetails);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -64,6 +62,7 @@ const ReviewForm = (props) => {
     visit_year: "",
     email: "",
   });
+  const { onSubmit, userNameRef } = props;
   useEffect(() => {}, [tourTitle]);
 
   const keyWordHandler = (e) => {
@@ -125,18 +124,19 @@ const ReviewForm = (props) => {
       }
     }
     try {
-      await dispatch(
-        ReviewTour(
-          Tour.id,
-          values.review,
-          values.rating,
-          values.user_name,
-          values.country_of_residence,
-          values.visit_month,
-          values.visit_year,
-          values.email
-        )
-      );
+      const data = {
+        tour: Tour.id,
+        review: values.review,
+        rating: values.rating,
+        user_name: values.user_name,
+        country_of_residence: values.country_of_residence,
+        visit_month: values.visit_month,
+        visit_year: values.visit_year,
+        email: values.email,
+      };
+      setIsLoading(true);
+
+      await DAV_APIS.reviewTour(data);
 
       setValues({
         user_name: "",
@@ -152,8 +152,12 @@ const ReviewForm = (props) => {
       });
       setSearchTerm("");
       setMessage("Review successfully sent. Thank you");
-      dispatch(fetchTourReviews(Tour.id));
+      toast.success("Review successfully sent. Thank you");
+      // refresh tour reviews
+      onSubmit(Math.random());
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       return setError(
         "Failed to send your review now, please check your connection and try again later"
       );
@@ -176,7 +180,7 @@ const ReviewForm = (props) => {
         )}
         <Form onSubmit={ReviewFormSubmitHandler}>
           <TextField
-            inputRef={props.userNameRef}
+            inputRef={userNameRef}
             size="small"
             variant="filled"
             fullWidth
@@ -252,6 +256,7 @@ const ReviewForm = (props) => {
                   name="visit_year"
                   onChange={handleOnChange}
                 >
+                  <MenuItem value="2023">2023</MenuItem>
                   <MenuItem value="2022">2022</MenuItem>
                   <MenuItem value="2021">2021</MenuItem>
                   <MenuItem value="2020">2020</MenuItem>

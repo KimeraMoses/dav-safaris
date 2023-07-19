@@ -1,23 +1,22 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { Button, Paper } from "@material-ui/core";
 import RatingCount from "./TourRatings/RatingCount";
 import classes from "./Reviews.module.css";
 import ReviewForm from "./ReviewForm/ReviewForm";
 import ReviewsList from "./ReviewsList/ReviewsList";
-import { useDispatch } from "react-redux";
-import { fetchTourReviews } from "../../../../store/Actions/TourActions";
+import { useTourReviews } from "../../../../hooks";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Reviews = ({ Tour }) => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchTourReviews(Tour && Tour.id));
-  }, [Tour, dispatch]);
+  const [refresh, setRefresh] = useState(false);
   const userNameRef = useRef(null);
 
   const ReviewTour = () => {
     userNameRef.current.focus();
   };
+
+  const { reviews, isLoading } = useTourReviews(Tour?.id, refresh);
 
   return (
     <div className={classes.dav__tour_reviews}>
@@ -31,18 +30,22 @@ const Reviews = ({ Tour }) => {
         <div className={classes.dav__reviews_inner_wrapper}>
           <div className={classes.dav__review_count_wrapper}>
             <RatingCount
-              ratingsAverage={Tour && Tour.ratingsAverage}
-              ratingsQuantity={Tour && Tour.ratingsQuantity}
+              ratingsAverage={Tour?.ratingsAverage}
+              ratingsQuantity={Tour?.ratingsQuantity}
             />
           </div>
           <div className={classes.dav__reviews_list}>
             <h5>Customer Reviews</h5>
-            <ReviewsList ReviewTour={ReviewTour} />
+            <ReviewsList
+              ReviewTour={ReviewTour}
+              reviews={reviews}
+              isLoading={isLoading}
+            />
           </div>
         </div>
       </Paper>
       <div className={classes.dav__rate_tour_wrapper}>
-        <ReviewForm userNameRef={userNameRef} />
+        <ReviewForm userNameRef={userNameRef} onSubmit={setRefresh} />
         <Paper className={classes.dav__inquire_about_tour}>
           <strong>Got questions about this tour? </strong>
           <br />{" "}

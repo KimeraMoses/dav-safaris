@@ -1,23 +1,20 @@
 import { Button } from "@material-ui/core";
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import ReviewCardSkeleton from "../ReviewCard/ReviewCardSkeleton";
 import classes from "./ReviewsList.module.css";
 
 const ReviewsList = (props) => {
-  const { isLoading, Reviews } = useSelector((state) => state.reviews);
-  useEffect(() => {}, [Reviews]);
-  const { ReviewTour } = props;
-  const ReviewsList = Reviews && Reviews.reviews;
+  const { ReviewTour, reviews, isLoading } = props;
+
   return (
     <>
       {isLoading ? (
         [...Array(4).keys()].map((index) => {
           return <ReviewCardSkeleton key={index} />;
         })
-      ) : ReviewsList && ReviewsList.length > 0 ? (
-        ReviewsList.map((review) => {
+      ) : reviews && reviews.length > 0 ? (
+        reviews.map((review) => {
           return (
             <ReviewCard
               key={review.id}

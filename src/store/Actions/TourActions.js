@@ -24,11 +24,7 @@ import {
   NewTourPending,
   NewTourSuccess,
 } from "../Slices/newTourSlice";
-import {
-  fetchTourReviewsFail,
-  fetchTourReviewsPending,
-  fetchTourReviewsSuccess,
-} from "../Slices/reviewSlice";
+
 import {
   bookTourFail,
   bookTourPending,
@@ -91,21 +87,6 @@ export const fetchTourDetails = (tour_id) => async (dispatch) => {
     dispatch(fetchTourSuccess(fetchedTour.tour));
   } catch (error) {
     dispatch(fetchTourFail(error.message));
-  }
-};
-
-export const fetchTourReviews = (tour_id) => async (dispatch) => {
-  dispatch(fetchTourReviewsPending());
-  if (tour_id) {
-    try {
-      const response = await fetch(
-        `${baseUrl}/api/v1/tours/${tour_id}/reviews/getAllReviews`
-      );
-      const fetchedReviews = await response.json();
-      dispatch(fetchTourReviewsSuccess(fetchedReviews));
-    } catch (error) {
-      dispatch(fetchTourReviewsFail(error.message));
-    }
   }
 };
 

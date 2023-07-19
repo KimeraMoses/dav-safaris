@@ -1,17 +1,9 @@
 import { Rating } from "@material-ui/lab";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import classes from "./RatingCount.module.css";
 
 const RatingCount = (props) => {
-  const { Reviews } = useSelector((state) => state.reviews);
-  const [average, setAverage] = useState(0);
-  const ratingsAverage = Reviews && Reviews.tour && Reviews.tour.ratingsAverage;
-  const ratingsQuantity =
-    Reviews && Reviews.tour && Reviews.tour.ratingsQuantity;
-  useEffect(() => {
-    setAverage(ratingsAverage);
-  }, [ratingsAverage]);
+  const { ratingsAverage, ratingsQuantity } = props;
 
   return (
     <>
@@ -19,11 +11,11 @@ const RatingCount = (props) => {
 
       <div className={classes.dav__rating_count_wrapper}>
         <div className={classes.dav__rating_overall}>
-          Average Ratings <span>{average}</span>{" "}
+          Average Ratings <span>{ratingsAverage}</span>{" "}
         </div>
         <Rating
           name="read-only"
-          value={average * 1.0}
+          value={ratingsAverage * 1.0}
           precision={0.5}
           readOnly
         />

@@ -8,7 +8,6 @@ import newTourReducer from "./Slices/newTourSlice";
 import tourReducer from "./Slices/tourSlice";
 import countrySlice from "./Slices/countrySlice";
 import toursReducer from "./Slices/toursSlice";
-import reviewReducer from "./Slices/reviewSlice";
 import editTourReducer from "./Slices/editTourSlice";
 import messageReducer from "./Slices/messageSlice";
 import postReducer from "./Slices/postSlice";
@@ -22,7 +21,6 @@ const store = configureStore({
     registration: userRegistrationReducer,
     tours: toursReducer,
     tour: tourReducer,
-    reviews: reviewReducer,
     newTour: newTourReducer,
     editTour: editTourReducer,
     countries: countrySlice,

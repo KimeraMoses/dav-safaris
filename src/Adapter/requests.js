@@ -252,6 +252,22 @@ const requestAdapter = (requestor) => ({
   },
 
   /**
+   * @name reviewTour
+   * @description Function used to make request to review a tour
+   * @param {object} data
+   * @returns {Promise<any>} response
+   */
+  reviewTour: async (data) => {
+    const url = `/reviews/create`;
+    const response = await requestor({
+      method: "POST",
+      url,
+      data,
+    });
+    return response;
+  },
+
+  /**
    * @name getCountryBySlug
    * @description Function used to make request to get a country by slug
    * @param {string} slug
@@ -394,6 +410,23 @@ const requestAdapter = (requestor) => ({
       const url = `/${
         type === "language" ? "languagePost" : "posts"
       }/getAllPosts`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+
+      return response;
+    },
+
+    /**
+     * @name getTourReviews
+     * @description Function used to get all posts
+     * @param {string} tour_id
+     * @returns {object} response
+     */
+    getTourReviews: async (tour_id) => {
+      const url = `/tours/${tour_id}/reviews/getAllReviews`;
+
       const response = await requestor({
         method: "GET",
         url,
