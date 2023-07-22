@@ -187,7 +187,7 @@ const NewCountry = (props) => {
               />
               <TextField
                 fullWidth
-                label="Country Title"
+                label="Country Headline"
                 variant="filled"
                 value={values.title}
                 name="title"
