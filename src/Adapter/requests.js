@@ -567,6 +567,19 @@ const requestAdapter = (requestor) => ({
       });
       return response;
     },
+    /**
+     * @name getPopularDestinations
+     * @description Function used to make request to get popular destinations
+     * @returns {Promise<any>} response
+     */
+    getPopularDestinations: async () => {
+      const url = `/tours/getPopularDestinations`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+      return response;
+    },
   },
 });
 
