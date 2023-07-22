@@ -37,7 +37,6 @@ const Category = () => {
     useCategoryBySlug(tourCategory);
 
   const { country } = useCountry(countryName);
-
   const currentCountry = country.name;
 
   useEffect(() => {
@@ -46,10 +45,12 @@ const Category = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tourCategory]);
 
-  const { tours, isLoading } = useCountryTours(currentCountry);
+  const { countryTours, isLoading } = useCountryTours(currentCountry);
 
   const SelectedCategory = category;
-  const FilteredTours = tours.filter((tour) => tour.category === tourCategory);
+  const FilteredTours = countryTours.filter(
+    (tour) => tour.category === tourCategory
+  );
 
   return (
     <>
