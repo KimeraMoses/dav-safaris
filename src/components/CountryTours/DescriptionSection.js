@@ -19,7 +19,6 @@ const AboutCountry = (props) => {
               __html: description,
             }}
           ></div>
-          {/* <p>{description}</p> */}
         </Col>
         <Col md={4} sm={12} className={classes.dav__contact_country_expert}>
           <div
@@ -46,7 +45,8 @@ const AboutCountry = (props) => {
                 <strong>
                   <span className={classes.dav__contact_country_expert_contact}>
                     <a href={`tel:${specialist}`}>{specialist}</a>
-                    {/* <a href="tel:+256757795781">+256757795781</a> */}
+                    <a href="tel:+256757795781">+256757795781</a>
+                    <a href="tel:+256701412430">+256701412430</a>
                   </span>
                 </strong>
               </li>
