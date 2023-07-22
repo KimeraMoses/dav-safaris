@@ -42,7 +42,7 @@ let dayActivityDescription = [];
 
 const EditTour = () => {
   const DarkMode = false;
-  // const isLoading = useSelector((state) => state.editTour.isLoading);
+
   const [isLoading, setIsLoading] = useState(false);
   const [fetching, setFetching] = useState(false);
   const [Tour, setTour] = useState({});
@@ -394,17 +394,7 @@ const EditTour = () => {
                     }
                   }}
                 />
-                {/* <TextField
-                  className={styles.gpa__form_input_field}
-                  label="Tour Description"
-                  multiline
-                  value={values.description}
-                  name="description"
-                  onChange={onChangeHandler}
-                  rows={6}
-                  fullWidth
-                  variant="filled"
-                /> */}
+
                 <div className="row">
                   <div className="col-xs-12 col-sm-9">
                     <TextField

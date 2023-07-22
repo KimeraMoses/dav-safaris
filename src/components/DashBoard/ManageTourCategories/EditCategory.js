@@ -74,7 +74,7 @@ const EditCategory = (props) => {
     name: category?.name,
     description: category?.description,
     country: category?.country?.name,
-    value: category?.slug,
+
     cover_image: "",
     selectedImage: "",
   });
@@ -84,7 +84,7 @@ const EditCategory = (props) => {
       name: category?.name,
       description: category.description,
       country: category?.country?.name,
-      value: category?.slug,
+
       cover_image: category.tourCategoryImage,
       selectedImage: category.tourCategoryImage,
     });
@@ -152,7 +152,7 @@ const EditCategory = (props) => {
         name: values.name,
         description: values.description,
         country: countryId,
-        value: values.value,
+
         selectedImage: values.selectedImage,
       };
 
@@ -166,8 +166,7 @@ const EditCategory = (props) => {
       setValues({
         name: "",
         description: "",
-        country: "",
-        value: "",
+
         cover_image: "",
         selectedImage: "",
       });
@@ -277,18 +276,6 @@ const EditCategory = (props) => {
                         ))}
                       </Select>
                     </FormControl>
-                  </div>
-                  <div className="col-xs-12 col-sm-5">
-                    <TextField
-                      disabled
-                      fullWidth
-                      label="Category Slug"
-                      variant="filled"
-                      name="value"
-                      value={values.value}
-                      onChange={onChangeHandler}
-                      className={styles.gpa__register_form_right_wrapper}
-                    />
                   </div>
 
                   <div

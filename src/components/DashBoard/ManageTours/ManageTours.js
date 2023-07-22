@@ -10,14 +10,17 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import DeleteModal from "./Itinary/DeleteModal";
 import Loader from "../../../containers/Loader/Loader";
-import { useAllTours } from "../../../hooks";
+import { useCountryTours } from "../../../hooks";
 
 const ManageTours = () => {
   const [refresh, setRefresh] = useState(null);
-  const { tours, isLoading: isFetching } = useAllTours(refresh);
 
   const isLoading = useSelector((state) => state.tour.isLoading);
-  const [country, setCountry] = useState("Filter by country");
+  const [country, setCountry] = useState("uganda");
+  const { countryTours, isLoading: isFetching } = useCountryTours(
+    country,
+    refresh
+  );
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedTour, setSelectedTour] = useState("");
@@ -25,7 +28,7 @@ const ManageTours = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  let FilteredTours = tours;
+  let FilteredTours = countryTours;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,12 +41,6 @@ const ManageTours = () => {
     setOpen(true);
     setSelectedTour(tourId);
   };
-
-  if (country === "Filter by country") {
-    FilteredTours = tours;
-  } else {
-    FilteredTours = tours.filter((tour) => tour.country === country);
-  }
 
   const SearchHandler = (e) => {
     const { value } = e.target;

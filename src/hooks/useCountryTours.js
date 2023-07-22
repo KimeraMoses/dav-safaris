@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { DAV_APIS } from "../Adapter";
 
-const useCountryTours = (country) => {
+const useCountryTours = (country, refresh) => {
   const [countryTours, setCountryTours] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -18,9 +18,9 @@ const useCountryTours = (country) => {
     fetchCountryTours();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [country]);
+  }, [country, refresh]);
 
-  return { tours: countryTours, isLoading };
+  return { countryTours, isLoading };
 };
 
 export default useCountryTours;

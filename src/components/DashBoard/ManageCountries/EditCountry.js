@@ -63,7 +63,7 @@ const EditCountry = (props) => {
     cover_image: "",
     countrySummary: country.summary,
     specialist: country.specialist,
-    slug: country.slug,
+
     selectedImage: "",
   });
 
@@ -75,7 +75,7 @@ const EditCountry = (props) => {
       cover_image: country.countryImage,
       countrySummary: country.summary,
       specialist: country.specialist,
-      slug: country.slug,
+
       selectedImage: country.countryImage,
     });
     setEditorState(convertHTMLToDraftState(country.description));
@@ -141,10 +141,6 @@ const EditCountry = (props) => {
       window.scrollTo(0, 0);
       return setError("Specialist required");
     }
-    if (values.slug.length < 1) {
-      window.scrollTo(0, 0);
-      return setError("Country slug required");
-    }
 
     try {
       const data = {
@@ -154,7 +150,7 @@ const EditCountry = (props) => {
         countrySummary: values.countrySummary,
         specialist: values.specialist,
         selectedImage: values.selectedImage,
-        slug: values.slug,
+
         key_words: JSON.stringify(keys),
       };
       await DAV_APIS.editCountry(data, country.id);
@@ -231,7 +227,7 @@ const EditCountry = (props) => {
                 />
                 <TextField
                   fullWidth
-                  label="Country Title"
+                  label="Country Headline"
                   variant="filled"
                   value={values.title}
                   name="title"
@@ -298,26 +294,13 @@ const EditCountry = (props) => {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-xs-12 col-sm-6">
+                  <div className="col-xs-12 col-sm-12">
                     <TextField
                       fullWidth
                       label="Country Specialist"
                       variant="filled"
                       name="specialist"
                       value={values.specialist}
-                      onChange={onChangeHandler}
-                      className={styles.gpa__register_form_right_wrapper}
-                    />
-                  </div>
-                  <div className="col-xs-12 col-sm-6">
-                    <TextField
-                      disabled
-                      fullWidth
-                      label="Country Slug"
-                      variant="filled"
-                      type="text"
-                      name="slug"
-                      value={values.slug}
                       onChange={onChangeHandler}
                       className={styles.gpa__register_form_right_wrapper}
                     />

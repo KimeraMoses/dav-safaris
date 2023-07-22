@@ -41,9 +41,7 @@ const DashTourCard = (props) => {
       </ListItemAvatar>
       <ListItemText
         primary={category.name}
-        // secondary={
-        //   course.university && course.university.name.replace(/-/g, ' ')
-        // }
+     
       />
       <ListItemSecondaryAction>
         <Tooltip title="Edit" placement="left">

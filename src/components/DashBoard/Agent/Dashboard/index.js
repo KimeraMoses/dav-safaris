@@ -37,7 +37,7 @@ const AgentDashboard = () => {
   const { countryTours, isLoading: countyTourIsLoading } =
     useCountryTours(country);
   const { countries } = useAllCountries();
-  console.log(countryTours);
+
   const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {

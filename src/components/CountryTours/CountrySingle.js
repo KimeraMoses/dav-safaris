@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Skeleton } from "@material-ui/lab";
 import { Typography } from "@material-ui/core";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import CountryHeader from "./CountryHeader";
 import DescriptionSection from "./DescriptionSection";
 import classes from "./CountrySingle.module.css";
@@ -42,17 +42,8 @@ const countryMeta = {
 };
 
 const CountrySingle = () => {
-  const navigate = useNavigate();
   const { countryName } = useParams();
   const { country, isLoading } = useCountry(countryName);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    if (countryName === "more-safaris") {
-      navigate("/");
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [countryName]);
 
   const SelectedCountry = country;
 

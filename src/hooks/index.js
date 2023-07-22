@@ -8,3 +8,4 @@ export { default as useCountryById } from "./useCountryById";
 export { default as useAllCategories } from "./useAllCategories";
 export { default as useCategoryBySlug } from "./useCategoryBySlug";
 export { default as useCategoryById } from "./useCategoryById";
+export { default as usePopularDestinations } from "./usePopularDestinations";

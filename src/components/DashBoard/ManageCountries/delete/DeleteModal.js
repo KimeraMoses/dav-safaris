@@ -6,10 +6,7 @@ import { Box, Button, Modal } from "@material-ui/core";
 //===COMPONENTS IMPORTS===
 import classes from "./ModalComponent.module.css";
 import { useDispatch } from "react-redux";
-// import {
-//   DeleteCountry,
-//   fetchAllCountrys,
-// } from "../../../../store/Actions/CountryActions";
+
 import { DeletePost } from "../../../../store/Actions/PostActions";
 import { DAV_APIS } from "../../../../Adapter";
 
@@ -30,7 +27,6 @@ const DeleteModal = (props) => {
     if (source === "country") {
       await DAV_APIS.deleteCountryById(Id);
       toast.success("Country deleted Successfully");
-      // dispatch(fetchAllCountrys());
     } else {
       await dispatch(DeletePost(Id, language ? "language" : ""));
       toast.success("Post deleted Successfully");

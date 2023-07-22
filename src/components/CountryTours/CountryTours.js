@@ -4,7 +4,7 @@ import SectionTitle from "../HomePage/SectionTitle/SectionTitle";
 import { useCountryTours } from "../../hooks";
 
 const CountryTours = ({ Country }) => {
-  const { tours, isLoading } = useCountryTours(Country);
+  const { countryTours, isLoading } = useCountryTours(Country);
 
   return (
     <div>
@@ -13,7 +13,7 @@ const CountryTours = ({ Country }) => {
         Title={`Popular tours in ${Country}`}
         isLoading={isLoading}
       />
-      <PopularTours tours={tours} isLoading={isLoading} />
+      <PopularTours tours={countryTours} isLoading={isLoading} />
     </div>
   );
 };

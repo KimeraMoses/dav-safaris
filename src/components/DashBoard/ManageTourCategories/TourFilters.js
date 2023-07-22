@@ -50,11 +50,6 @@ const TourFilters = (props) => {
                 <Hidden xsDown>Add new</Hidden>
               </div>
             </span>
-            {/* {type !== "posts" ? (
-              <div className={classes.dav__country_dropdown_wrapper}>
-                <Dropdown selected={Country} setSelected={setCountry} />
-              </div>
-            ) : null} */}
           </div>
           <div className={classes.dav__tour_filter_item_wrapper}>
             <div className={classes.dav__tour_search_wrapper}>
