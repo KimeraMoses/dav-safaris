@@ -11,6 +11,7 @@ import { Paper } from "@material-ui/core";
 
 //===REDUX STORE IMPORTS===
 import { ToastContainer } from "react-toastify";
+import "react-slideshow-image/dist/styles.css";
 import "react-toastify/dist/ReactToastify.css";
 
 //===COMPONENT IMPORTS===
@@ -35,16 +36,12 @@ import ManageTours from "./DashBoard/ManageTours/ManageTours";
 import ManageCountries from "./DashBoard/ManageCountries/ManageCountries";
 import ManageTourCategories from "./DashBoard/ManageTourCategories/ManageTourCategories";
 import { AutoAuthenticate } from "../store/Actions/AuthActions";
-import { fetchAllTours } from "../store/Actions/TourActions";
 import Tours from "./Tours/AllTours/Tours";
 import Category from "./CountryTours/Category/Category";
 import Terms from "../containers/PrivacyPolicies/Terms";
 import Policies from "../containers/PrivacyPolicies/Policies";
 import Updates from "./SafariUpdates/Updates";
 import ManageUpdates from "./DashBoard/ManageUpdates/ManageUpdates";
-import { fetchAllPosts } from "../store/Actions/PostActions";
-import { fetchAllCountrys } from "../store/Actions/CountryActions";
-import { fetchAllCategories } from "../store/Actions/TourCategoriesActions";
 import Update from "./SafariUpdates/SingleUpdate/Update";
 import Feature from "./DashBoard/Feature";
 import AboutUs from "./AboutUs/AboutUs";
@@ -72,10 +69,6 @@ const App = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     AutoAuthenticate(dispatch);
-    dispatch(fetchAllTours());
-    dispatch(fetchAllPosts());
-    dispatch(fetchAllCountrys());
-    dispatch(fetchAllCategories());
 
     //====SEND DATA TO GOOGLE ANALYTICS===
     ReactGA.initialize(TRACKING_ID);

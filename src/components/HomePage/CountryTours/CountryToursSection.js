@@ -2,12 +2,11 @@ import React, { useRef } from "react";
 import { Row } from "react-bootstrap";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import CountryCard from "./CountryCard";
-
-import classes from "./CountyToursSection.module.css";
 import { useAllCountries } from "../../../hooks";
 import { Slide } from "react-slideshow-image";
-import "react-slideshow-image/dist/styles.css";
 import { ArrowBackIos, ArrowForwardIos } from "@material-ui/icons";
+import classes from "./CountyToursSection.module.css";
+
 const NavigationButton = (props) => <button>{props.children}</button>;
 
 const CountryToursSection = () => {
