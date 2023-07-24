@@ -361,6 +361,70 @@ const requestAdapter = (requestor) => ({
   },
 
   /**
+   * @name bookTour
+   * @description Function used to make request to book a tour
+   * @param {object} data
+   * @returns {<Promise>} response
+   */
+  bookTour: async (data) => {
+    const url = `/bookings/create`;
+    const response = await requestor({
+      method: "POST",
+      url,
+      data,
+    });
+    return response;
+  },
+
+  /**
+   * @name chatWithUs
+   * @description Function used to make request to book a tour
+   * @param {object} data
+   * @returns {<Promise>} response
+   */
+  chatWithUs: async (data) => {
+    const url = `/subscribers/create`;
+    const response = await requestor({
+      method: "POST",
+      url,
+      data,
+    });
+    return response;
+  },
+
+  /**
+   * @name newsLetter
+   * @description Function used to make request to book a tour
+   * @param {object} data
+   * @returns {<Promise>} response
+   */
+  newsLetter: async (data) => {
+    const url = `/subscribers/joinNewsLetter`;
+    const response = await requestor({
+      method: "POST",
+      url,
+      data,
+    });
+    return response;
+  },
+
+  /**
+   * @name contactUs
+   * @description Function used to make request to book a tour
+   * @param {object} data
+   * @returns {<Promise>} response
+   */
+  contactUs: async (data) => {
+    const url = `/subscribers/contactUs`;
+    const response = await requestor({
+      method: "POST",
+      url,
+      data,
+    });
+    return response;
+  },
+
+  /**
    * @name get - handle all get requests for estimate
    */
   get: {

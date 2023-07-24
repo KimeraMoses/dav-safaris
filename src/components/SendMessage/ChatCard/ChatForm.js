@@ -3,13 +3,12 @@ import SendIcon from "@material-ui/icons/Send";
 import { Alert } from "@material-ui/lab";
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
 import Progress from "@material-ui/core/CircularProgress";
 import classes from "./ChatForm.module.css";
-import { chatWithUs } from "../../../store/Actions/TourActions";
+import { DAV_APIS } from "../../../Adapter";
+import { toast } from "react-toastify";
 
 const ChatForm = () => {
-  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState({
     name: "",
@@ -61,16 +60,15 @@ const ChatForm = () => {
       }
     }
     try {
-      await dispatch(
-        chatWithUs(
-          values.name,
-          values.email,
-          values.phone,
-          values.message,
-          parseInt(values.travellers),
-          values.is_add_to_news_letter
-        )
-      );
+      const data = {
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        message: values.message,
+        travellers: parseInt(values.travellers),
+        is_add_to_news_letter: values.is_add_to_news_letter,
+      };
+      await DAV_APIS.chatWithUs(data);
       setIsLoading(false);
       setMessage(
         "Message Sent Successfully, Our team will contact you shortly"
@@ -83,6 +81,9 @@ const ChatForm = () => {
         travellers: "",
         is_add_to_news_letter: false,
       });
+      toast.success(
+        "Thank you for contacting us, Our team will get back to you shortly"
+      );
     } catch (error) {
       setIsLoading(false);
       return setError("Failed to send message, Please try again later");

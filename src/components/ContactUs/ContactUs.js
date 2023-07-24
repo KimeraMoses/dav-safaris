@@ -10,22 +10,21 @@ import { EmailOutlined } from "@material-ui/icons";
 import OfficeIcon from "@material-ui/icons/QueryBuilder";
 import SocialMedia from "./SocialMedia";
 import { Form } from "react-bootstrap";
-import { NewsLetters } from "../../store/Actions/UserActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Alert } from "@material-ui/lab";
 import SEO from "../../containers/SEO/SEO";
-// import RichTextEditor from "../NewItems/RichTextEditor";
+import { DAV_APIS } from "../../Adapter";
+import { toast } from "react-toastify";
 
 const ContactUs = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const isLoading = useSelector((state) => state.message.subcribing);
+  const [isLoading, setIsLoading] = useState(false);
   const message = useSelector((state) => state.message.message);
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const dispatch = useDispatch();
   const handleChange = (e) => {
     const { value } = e.target;
     setEmail(value);
@@ -48,11 +47,16 @@ const ContactUs = () => {
     }
 
     try {
+      setIsLoading(true);
       setError("");
-      await dispatch(NewsLetters(email));
+      await DAV_APIS.newsLetter({ email });
 
       setEmail("");
+      toast.success("You have successfully subscribed to our Newsletter");
+      setIsLoading(false);
     } catch {
+      setIsLoading(false);
+      toast.error("Failed to subscribe to the newsletter");
       return setError("Failed to subscribe to the newsletter");
     }
   };
@@ -253,7 +257,12 @@ const ContactUs = () => {
                     placeholder="Email"
                     className={classes.dav__subscribe_form_field}
                   />
-                  <Button variant="outlined" color="primary" type="submit">
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    type="submit"
+                    disabled={isLoading}
+                  >
                     {isLoading ? "Subscribing..." : "Subscribe"}
                   </Button>
                 </Form>

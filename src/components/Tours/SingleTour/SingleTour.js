@@ -92,22 +92,26 @@ const SingleTour = () => {
               className="dav__single_tour_description"
               dangerouslySetInnerHTML={{ __html: tour.description }}
             ></div>
-            <h2>Tour highlights</h2>
-            <div className={classes.dav__tour_highlights_list}>
-              <ul>
-                {tour &&
-                  tour.tourActivities &&
-                  tour.tourActivities
-                    .filter((item) => item.length > 0)
-                    .map((item, index) => {
-                      return (
-                        <li key={index}>
-                          <p>{item}</p>
-                        </li>
-                      );
-                    })}
-              </ul>
-            </div>
+            {tour?.tourActivities?.length ? (
+              <>
+                <h2>Tour highlights</h2>
+                <div className={classes.dav__tour_highlights_list}>
+                  <ul>
+                    {tour &&
+                      tour.tourActivities &&
+                      tour.tourActivities
+                        .filter((item) => item.length > 0)
+                        .map((item, index) => {
+                          return (
+                            <li key={index}>
+                              <p>{item}</p>
+                            </li>
+                          );
+                        })}
+                  </ul>
+                </div>
+              </>
+            ) : null}
 
             {tour?.packageDetails?.price_excludes.length &&
             tour?.packageDetails?.price_inludes.length ? (

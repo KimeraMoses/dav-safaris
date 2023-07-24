@@ -11,14 +11,14 @@ import {
 } from "@material-ui/core";
 import classes from "./BookingForm.module.css";
 import CustomTextField from "../../../CountryInputField/CustomTextField";
-import { useDispatch, useSelector } from "react-redux";
-import { BookTour } from "../../../../store/Actions/TourActions";
+import { useSelector } from "react-redux";
 import { Alert } from "@material-ui/lab";
+import { DAV_APIS } from "../../../../Adapter";
+import { toast } from "react-toastify";
 
 const BookingForm = ({ tour }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const countryList = useSelector((state) => state.countries.countryList);
-  const isLoading = useSelector((state) => state.tour.isBooking);
-  // const Tour = useSelector((state) => state.tour.tourDetails);
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -28,7 +28,6 @@ const BookingForm = ({ tour }) => {
     name: "",
     flag: "",
   });
-  const dispatch = useDispatch();
   const [values, setValues] = useState({
     user_name: "",
     country_of_residence: "",
@@ -105,19 +104,21 @@ const BookingForm = ({ tour }) => {
       }
     }
     try {
+      setIsLoading(true);
       setError("");
-      await dispatch(
-        BookTour(
-          tour.id,
-          values.user_name,
-          values.country_of_residence,
-          values.phone,
-          values.email,
-          parseInt(values.travellers),
-          values.travel_plans,
-          values.budget
-        )
-      );
+      const data = {
+        tour: tour.id,
+        user_name: values.user_name,
+        country_of_residence: values.country_of_residence,
+        phone: values.phone,
+        email: values.email,
+        travellers: parseInt(values.travellers),
+        travel_plans: values.travel_plans,
+        budget: values.budget,
+      };
+
+      await DAV_APIS.bookTour(data);
+
       setValues({
         user_name: "",
         country_of_residence: "",
@@ -135,7 +136,13 @@ const BookingForm = ({ tour }) => {
       setMessage(
         "Booking sent successfully, Our travel agent will get back to you shortly"
       );
+      toast.success(
+        "Booking sent successfully, Our travel agent will get back to you shortly"
+      );
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
+      toast.error("Failed to book tour, try again later");
       return setError("Failed to book tour, try again later");
     }
   };
@@ -235,18 +242,12 @@ const BookingForm = ({ tour }) => {
           placeholder="Tell us about the Number of traveller, duration,travel dates,overall budget, level of acomodation, etc(it's ok to be detailed)"
           className={classes.dav__booking_form_field}
         />
-        {/* <FormControlLabel
-          fullWidth
-          control={<Checkbox defaultChecked color="primary" />}
-          label="Easily monitor booking status"
-          className={classes.dav__book_tour_account_creation_prompt}
-        /> */}
-
         <Button
           className="btns"
           type="submit"
           buttonStyle="btn--primary"
           buttonSize="Btn--fullWidth"
+          disabled={isLoading}
         >
           {isLoading ? "Booking..." : "Book Tour"}
         </Button>

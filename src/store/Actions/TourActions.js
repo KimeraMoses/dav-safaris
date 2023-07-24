@@ -227,6 +227,7 @@ export const BookTour = (
     dispatch(bookTourPending());
     const response = await fetch(`${baseUrl}/api/v1/bookings/create`, {
       method: "POST",
+
       body: JSON.stringify({
         tour,
         user_name,

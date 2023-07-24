@@ -4,13 +4,12 @@ import { Button } from "../../../UI/Button/Button";
 import { Paper, TextField } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import classes from "./BookingForm.module.css";
-import { useDispatch } from "react-redux";
-import { contactUs } from "../../../../store/Actions/TourActions";
 import { Alert } from "@material-ui/lab";
+import { DAV_APIS } from "../../../../Adapter";
+import { toast } from "react-toastify";
 
-const ContactForm = (props) => {
+const ContactForm = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [values, setValues] = useState({
@@ -55,11 +54,14 @@ const ContactForm = (props) => {
       }
     }
     try {
-      await dispatch(
-        contactUs(values.name, values.email, values.phone, values.message)
-      );
+      const data = {
+        name: values.name,
+        email: values.email,
+        contact: values.phone,
+        message: values.message,
+      };
+      await DAV_APIS.contactUs(data);
       setIsLoading(false);
-      // return <Link to="/thank-you" />
       setMessage(
         "Message Sent Successfully, Dav Safaris will contact you shortly"
       );
@@ -69,11 +71,14 @@ const ContactForm = (props) => {
         phone: "",
         message: "",
       });
+      toast.success(
+        "Thank you for contacting us, we will get back to you soon"
+      );
       navigate("/thank-you");
     } catch (error) {
       setIsLoading(false);
       return setError(
-        "Failed to send message, Please reflesh the page and try again!"
+        "Failed to send message, Please refresh the page and try again!"
       );
     }
   };
@@ -144,6 +149,7 @@ const ContactForm = (props) => {
           type="submit"
           buttonStyle="btn--primary"
           buttonSize="Btn--fullWidth"
+          disabled={isLoading}
         >
           {isLoading ? "Sending..." : "Send"}
         </Button>
