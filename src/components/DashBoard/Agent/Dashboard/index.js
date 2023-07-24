@@ -66,6 +66,7 @@ const AgentDashboard = () => {
       </div>
       <div className={classes.dav__agent_country_cards_section}>
         <h4>Filter packages by Country</h4>
+
         <div className={classes.dav__agent_country_cards_wrapper}>
           {countries.map((c) => {
             return (
@@ -95,11 +96,11 @@ const AgentDashboard = () => {
           <h4>
             {filterTours().length > 1
               ? country
-                ? `Filtered results for ${country}`
-                : "All tours"
+                ? `Filtered results for ${country} `
+                : ""
               : "No tours found!"}
 
-            {filterTours().length > 1 && (
+            {filterTours().length > 1 && country && (
               <span className={classes.dav_country_package_count}>
                 {filterTours().length}
               </span>
