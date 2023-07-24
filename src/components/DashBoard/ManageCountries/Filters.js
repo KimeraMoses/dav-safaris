@@ -1,6 +1,5 @@
 import { Fab, Hidden, TextField } from "@material-ui/core";
 import React from "react";
-// import Dropdown from "../../UI/Dropdown/Dropdown";
 import classes from "./Filters.module.css";
 import AddIcon from "@material-ui/icons/Add";
 import RefreshIcon from "@material-ui/icons/Refresh";
@@ -16,8 +15,6 @@ const Filters = (props) => {
   const {
     addNew,
     setAddNew,
-    // Country,
-    // setCountry,
     searchTerm,
     SearchHandler,
     language,
@@ -51,11 +48,6 @@ const Filters = (props) => {
                 <Hidden xsDown>Add new</Hidden>
               </div>
             </span>
-            {/* {type !== "posts" ? (
-              <div className={classes.dav__country_dropdown_wrapper}>
-                <Dropdown selected={Country} setSelected={setCountry} />
-              </div>
-            ) : null} */}
           </div>
           <div className={classes.dav__tour_filter_item_wrapper}>
             <div className={classes.dav__tour_search_wrapper}>

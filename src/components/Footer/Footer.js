@@ -62,7 +62,9 @@ const Footer = () => {
                     key={index}
                     className={classes.dav__footer_safaris_destinations_item}
                   >
-                    <Link to={destination.active ? `${destination.slug}` : "#"}>
+                    <Link
+                      to={destination.active ? `/${destination.slug}` : "#"}
+                    >
                       {destination.country.charAt(0).toUpperCase() +
                         destination.country.slice(1)}
                     </Link>

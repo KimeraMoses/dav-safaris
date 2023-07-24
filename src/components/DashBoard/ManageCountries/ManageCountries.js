@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import DashTourCard from "./DashTourCard";
 import classes from "./ManageTours.module.css";
 import { List } from "@material-ui/core";
 import Filters from "./Filters";
-
-import { useEffect } from "react";
-
-import { useNavigate } from "react-router";
 import DeleteModal from "./delete/DeleteModal";
 import Loader from "../../../containers/Loader/Loader";
 
@@ -17,8 +14,7 @@ import { useAllCountries } from "../../../hooks";
 
 const ManageTours = () => {
   const [refresh, setRefresh] = useState(null);
-  const { countries, isLoading: isFetching } = useAllCountries(refresh);
-  const isLoading = isFetching;
+  const { countries, isLoading } = useAllCountries(refresh);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -27,15 +23,11 @@ const ManageTours = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  // const dispatch = useDispatch();
   useEffect(() => {
-    // dispatch(fetchAllCountrys());
-
     window.scrollTo(0, 0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // console.log(countries);
-  let FilteredCountries = countries;
+
+  const FilteredCountries = countries;
 
   const onEditClick = (countryId) => {
     navigate(`/dashboard/manage-countries/edit?country=${countryId}`);
@@ -107,7 +99,7 @@ const ManageTours = () => {
           )}
         </div>
       ) : (
-        <Row>{isFetching ? <Loader /> : RenderedList}</Row>
+        <Row>{isLoading ? <Loader /> : RenderedList}</Row>
       )}
       <DeleteModal
         source="country"

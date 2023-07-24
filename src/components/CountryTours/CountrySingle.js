@@ -4,12 +4,11 @@ import { Typography } from "@material-ui/core";
 import { useParams } from "react-router";
 import CountryHeader from "./CountryHeader";
 import DescriptionSection from "./DescriptionSection";
-import classes from "./CountrySingle.module.css";
 import CountryTours from "./CountryTours";
-
 import SEO from "../../containers/SEO/SEO";
-
 import { useCountry } from "../../hooks";
+
+import classes from "./CountrySingle.module.css";
 
 const countryMeta = {
   UG: {
