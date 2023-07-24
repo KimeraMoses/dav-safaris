@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Skeleton } from "@material-ui/lab";
 import { Typography } from "@material-ui/core";
 import { useParams } from "react-router";
@@ -45,6 +45,10 @@ const CountrySingle = () => {
   const { country, isLoading } = useCountry(countryName);
 
   const SelectedCountry = country;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [countryName]);
 
   return (
     <>

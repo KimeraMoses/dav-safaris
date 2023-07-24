@@ -37,8 +37,6 @@ export const createNewTourCategory = (
     data.append("file", image);
     data.append("description", description);
     data.append("country", country);
-    // data.append("key_words", key_words);
-    console.log(name, description, country, value, image);
     const response = await fetch(`${baseUrl}/api/v1/categories/create`, {
       method: "POST",
       body: data,

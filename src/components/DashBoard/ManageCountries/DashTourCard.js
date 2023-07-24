@@ -3,7 +3,6 @@ import React from "react";
 //===MUI IMPORTS===
 import {
   Avatar,
-  Badge,
   IconButton,
   ListItem,
   ListItemAvatar,
@@ -24,22 +23,13 @@ const DashTourCard = (props) => {
   return (
     <ListItem className={classes.gpa__university_card_wrapper_paper}>
       <ListItemAvatar>
-        <Badge
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "right",
-          }}
-          badgeContent={Country.name}
-          color="error"
-        >
-          <Avatar
-            className={classes.gpa__dashboard_course_manager_course_id}
-            variant="square"
-            src={Country.countryImage}
-          />
-        </Badge>
+        <Avatar
+          className={classes.gpa__dashboard_course_manager_course_id}
+          variant="square"
+          src={Country.countryImage}
+        />
       </ListItemAvatar>
-      <ListItemText primary={Country.slug} />
+      <ListItemText primary={Country.name} />
       <ListItemSecondaryAction>
         <Tooltip title="Edit" placement="left">
           <IconButton

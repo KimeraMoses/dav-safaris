@@ -32,7 +32,7 @@ import { convertHTMLToDraftState } from "../../../utils/Utils";
 import { useCountryById } from "../../../hooks";
 import { DAV_APIS } from "../../../Adapter";
 
-const EditCountry = (props) => {
+const EditCountry = () => {
   let DarkMode = false;
   function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -75,7 +75,6 @@ const EditCountry = (props) => {
       cover_image: country.countryImage,
       countrySummary: country.summary,
       specialist: country.specialist,
-
       selectedImage: country.countryImage,
     });
     setEditorState(convertHTMLToDraftState(country.description));
@@ -137,10 +136,6 @@ const EditCountry = (props) => {
       window.scrollTo(0, 0);
       return setError("Country Summary required");
     }
-    if (values.specialist.length < 1) {
-      window.scrollTo(0, 0);
-      return setError("Specialist required");
-    }
 
     try {
       const data = {
@@ -150,7 +145,6 @@ const EditCountry = (props) => {
         countrySummary: values.countrySummary,
         specialist: values.specialist,
         selectedImage: values.selectedImage,
-
         key_words: JSON.stringify(keys),
       };
       await DAV_APIS.editCountry(data, country.id);
@@ -166,7 +160,6 @@ const EditCountry = (props) => {
         cover_image: "",
         countrySummary: "",
         specialist: "",
-        slug: "",
         selectedImage: "",
       });
 

@@ -106,10 +106,7 @@ const NewCountry = (props) => {
       window.scrollTo(0, 0);
       return setError("Country Summary required");
     }
-    if (values.specialist.length < 1) {
-      window.scrollTo(0, 0);
-      return setError("Specialist contact required");
-    }
+
     setIsLoading(true);
     try {
       const data = {
@@ -119,7 +116,6 @@ const NewCountry = (props) => {
         countrySummary: values.countrySummary,
         specialist: values.specialist,
         selectedImage: values.selectedImage,
-
         key_words: JSON.stringify(keys),
       };
       await DAV_APIS.createCountry(data);
@@ -135,7 +131,6 @@ const NewCountry = (props) => {
         cover_image: "",
         countrySummary: "",
         specialist: "",
-        slug: "",
         selectedImage: "",
       });
 

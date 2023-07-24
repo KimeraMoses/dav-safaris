@@ -232,7 +232,6 @@ const requestAdapter = (requestor) => ({
     formData.append("specialist", data.specialist);
     formData.append("title", data.title);
     formData.append("file", data.selectedImage);
-    formData.append("slug", data.slug);
     formData.append("key_words", data.key_words);
     const response = await requestor({
       method: "POST",
@@ -259,7 +258,6 @@ const requestAdapter = (requestor) => ({
     formData.append("specialist", data.specialist);
     formData.append("title", data.title);
     formData.append("file", data.selectedImage);
-    formData.append("slug", data.slug);
     formData.append("key_words", data.key_words);
     const response = await requestor({
       method: "PATCH",

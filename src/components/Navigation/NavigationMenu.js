@@ -84,7 +84,7 @@ const NavigationMenu = (props) => {
                           key={index}
                           id={index}
                           itemTitle={country.name}
-                          itemLink={country.slug}
+                          itemLink={`/${country.slug}`}
                         />
                       </Col>
                     ))}
@@ -108,7 +108,7 @@ const NavigationMenu = (props) => {
                     >
                       {countries?.slice(4).map((country, index) => (
                         <Link
-                          to={country.slug}
+                          to={`/${country.slug}`}
                           key={index}
                           onClick={closeDropDown}
                         >
