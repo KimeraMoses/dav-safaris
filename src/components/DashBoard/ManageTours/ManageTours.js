@@ -10,13 +10,17 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import DeleteModal from "./Itinary/DeleteModal";
 import Loader from "../../../containers/Loader/Loader";
-import { useAllTours } from "../../../hooks";
+import { useCountryTours } from "../../../hooks";
 
 const ManageTours = () => {
-  const { tours, isLoading: isFetching } = useAllTours();
+  const [refresh, setRefresh] = useState(null);
 
   const isLoading = useSelector((state) => state.tour.isLoading);
   const [country, setCountry] = useState("uganda");
+  const { countryTours, isLoading: isFetching } = useCountryTours(
+    country,
+    refresh
+  );
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedTour, setSelectedTour] = useState("");
@@ -24,7 +28,7 @@ const ManageTours = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  let FilteredTours = tours;
+  let FilteredTours = countryTours;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,12 +41,6 @@ const ManageTours = () => {
     setOpen(true);
     setSelectedTour(tourId);
   };
-
-  if (country === "Filter by country") {
-    FilteredTours = tours;
-  } else {
-    FilteredTours = tours.filter((tour) => tour.country === country);
-  }
 
   const SearchHandler = (e) => {
     const { value } = e.target;
@@ -102,10 +100,15 @@ const ManageTours = () => {
         setCountry={setCountry}
         searchTerm={searchTerm}
         SearchHandler={SearchHandler}
+        onClick={setRefresh}
       />
       {addNew ? (
         <div className={classes.dav__new_tour_form_wrapper}>
-          {isLoading ? <Spinner /> : <NewTour setAddNew={setAddNew} />}
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <NewTour setAddNew={setAddNew} onSubmit={setRefresh} />
+          )}
         </div>
       ) : (
         <Row>{isFetching ? <Loader /> : RenderedList}</Row>

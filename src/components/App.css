@@ -55,7 +55,7 @@ a {
 
 /****************************
   COURSE UNIT CAROUSEL
-  ****************************/
+****************************/
 
 .rec-carousel-wrapper {
   position: relative !important;
@@ -83,5 +83,3 @@ a {
 .MuiSkeleton-text {
   transform: none !important;
 }
-
-

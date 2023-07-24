@@ -73,7 +73,7 @@ const SingleTour = () => {
     description =
       "Mgahinga Gorilla National Park is the biggest reason to visit Uganda. So what are you thinking? Choose 3 Days Gorilla Trekking in Mgahinga Gorilla National Park Uganda and enjoy your trip.";
   }
-
+  // console.log(tour.imageCover);
   return (
     <>
       <SEO

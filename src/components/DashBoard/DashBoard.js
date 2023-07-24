@@ -68,6 +68,20 @@ const DashBoard = () => {
             </li>
             <li>
               <DashBoardMenuItem
+                menuItemLink="manage-countries"
+                menuItemTitle="Manage Countries"
+                menuItemIcon={<AddLocationIcon />}
+              />
+            </li>
+            <li>
+              <DashBoardMenuItem
+                menuItemLink="manage-tour-categories"
+                menuItemTitle="Manage Tour Categories"
+                menuItemIcon={<AddLocationIcon />}
+              />
+            </li>
+            <li>
+              <DashBoardMenuItem
                 menuItemLink="manage-safari-updates"
                 menuItemTitle="Manage Safari Updates"
                 menuItemIcon={<AddLocationIcon />}

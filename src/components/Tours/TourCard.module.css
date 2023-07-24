@@ -119,6 +119,7 @@
 .tour__read_more a:hover {
   background-color: var(--dav__secondary_color);
   color: #fff;
+  /* color: #fff; */
 }
 .tour__read_more a::before {
   position: absolute;
@@ -160,4 +161,16 @@
   opacity: 1;
   right: -5px;
   margin-bottom: 2px;
+}
+
+@media screen and (max-width: 301px) {
+  .tour__read_more:hover span {
+    padding-right: 0;
+  }
+  .tour__read_more:hover span:after {
+    opacity: 0;
+  }
+  .tour__read_more span:after {
+    display: none;
+  }
 }

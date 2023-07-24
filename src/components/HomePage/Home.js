@@ -32,7 +32,6 @@ const Home = () => {
     duration: "",
     departure: "",
   });
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

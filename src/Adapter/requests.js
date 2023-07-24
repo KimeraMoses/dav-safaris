@@ -225,10 +225,19 @@ const requestAdapter = (requestor) => ({
   createCountry: async (data) => {
     const url = `/countries/create`;
     // TODO: if formData, then check tour creation for the format of formData
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("summary", data.countrySummary);
+    formData.append("description", data.description);
+    formData.append("specialist", data.specialist);
+    formData.append("title", data.title);
+    formData.append("file", data.selectedImage);
+    formData.append("slug", data.slug);
+    formData.append("key_words", data.key_words);
     const response = await requestor({
       method: "POST",
       url,
-      data,
+      data: formData,
     });
     return response;
   },
@@ -243,14 +252,22 @@ const requestAdapter = (requestor) => ({
   editCountry: async (data, countryId) => {
     const url = `/countries/updateCountry/${countryId}`;
     // TODO: if formData, then check tour creation for the format of formData
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("summary", data.countrySummary);
+    formData.append("description", data.description);
+    formData.append("specialist", data.specialist);
+    formData.append("title", data.title);
+    formData.append("file", data.selectedImage);
+    formData.append("slug", data.slug);
+    formData.append("key_words", data.key_words);
     const response = await requestor({
       method: "PATCH",
       url,
-      data,
+      data: formData,
     });
     return response;
   },
-
   /**
    * @name reviewTour
    * @description Function used to make request to review a tour
@@ -268,15 +285,15 @@ const requestAdapter = (requestor) => ({
   },
 
   /**
-   * @name getCountryBySlug
-   * @description Function used to make request to get a country by slug
-   * @param {string} slug
-   * @returns {Promise<any>} response
+   * @name deleteCountryById
+   * @description Function used to make request to delete a country
+   * @param {string} countryId
+   * @returns {object} response
    */
-  getCountryBySlug: async (slug) => {
-    const url = `/countries/getCountryBySlug/${slug}`;
+  deleteCountryById: async (countryId) => {
+    const url = `/countries/deleteCountry/${countryId}`;
     const response = await requestor({
-      method: "GET",
+      method: "DELETE",
       url,
     });
     return response;
@@ -291,10 +308,17 @@ const requestAdapter = (requestor) => ({
   createCategory: async (data) => {
     const url = `/categories/create`;
     // TODO: if formData, then check tour creation for the format of formData
+    const formData = new FormData();
+
+    formData.append("name", data.name);
+    formData.append("value", data.value);
+    formData.append("file", data.selectedImage);
+    formData.append("description", data.description);
+    formData.append("country", data.country);
     const response = await requestor({
       method: "POST",
       url,
-      data,
+      data: formData,
     });
     return response;
   },
@@ -308,12 +332,32 @@ const requestAdapter = (requestor) => ({
    * @todo check if formData is needed and switch to it
    */
   editCategory: async (data, categoryId) => {
-    const url = `/categories/updateCategory/${categoryId}`;
+    const url = `/categories/updateTourCategory/${categoryId}`;
     // TODO: if formData, then check tour creation for the format of formData
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("country", data.country);
+    formData.append("file", data.selectedImage);
+    formData.append("value", data.value);
     const response = await requestor({
       method: "PATCH",
       url,
       data,
+    });
+    return response;
+  },
+  /**
+   * @name deleteCategoryById
+   * @description Function used to make request to delete a category
+   * @param {string} categoryId
+   * @returns {object} response
+   */
+  deleteCategoryById: async (categoryId) => {
+    const url = `/categories/deleteTourCategory/${categoryId}`;
+    const response = await requestor({
+      method: "DELETE",
+      url,
     });
     return response;
   },
@@ -417,6 +461,20 @@ const requestAdapter = (requestor) => ({
 
       return response;
     },
+    /**
+     * @name getAllCountries
+     * @description Function used to get all countries
+     * @returns {object} response
+     */
+    getAllCountries: async () => {
+      const url = `/countries/getAllCountries`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+
+      return response;
+    },
 
     /**
      * @name getTourReviews
@@ -453,6 +511,48 @@ const requestAdapter = (requestor) => ({
 
       return response;
     },
+    /**
+     * @name getCountryBySlug
+     * @description Function used to make request to get a country by slug
+     * @param {string} slug
+     * @returns {Promise<any>} response
+     */
+    getCountryBySlug: async (slug) => {
+      const url = `/countries/getCountryBySlug/${slug}`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+      return response;
+    },
+    /**
+     * @name getCountryById
+     * @description Function used to make request to get a country by an id
+     * @param {string} id
+     * @returns {Promise<any>} response
+     */
+    getCountryById: async (countryId) => {
+      const url = `/countries/${countryId}`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+      return response;
+    },
+    /**
+     * @name getAllCategories
+     * @description Function used to get all categories
+     * @returns {object} response
+     */
+    getAllCategories: async () => {
+      const url = `/categories/getAllTourCategories`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+
+      return response;
+    },
 
     /**
      * @name getPostById
@@ -470,6 +570,47 @@ const requestAdapter = (requestor) => ({
         url,
       });
 
+      return response;
+    },
+    /**
+     * @name getCategoryById
+     * @description Function used to make request to get a category by an id
+     * @param {string} id
+     * @returns {Promise<any>} response
+     */
+    getCategoryById: async (categoryId) => {
+      const url = `/categories/${categoryId}`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+      return response;
+    },
+    /**
+     * @name getCategoryBySlug
+     * @description Function used to make request to get a category by slug
+     * @param {string} slug
+     * @returns {Promise<any>} response
+     */
+    getCategoryBySlug: async (slug) => {
+      const url = `/categories/getTourCategoryBySlug/${slug}`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
+      return response;
+    },
+    /**
+     * @name getPopularDestinations
+     * @description Function used to make request to get popular destinations
+     * @returns {Promise<any>} response
+     */
+    getPopularDestinations: async () => {
+      const url = `/tours/getPopularDestinations`;
+      const response = await requestor({
+        method: "GET",
+        url,
+      });
       return response;
     },
   },

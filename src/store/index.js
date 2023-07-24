@@ -11,6 +11,15 @@ import toursReducer from "./Slices/toursSlice";
 import editTourReducer from "./Slices/editTourSlice";
 import messageReducer from "./Slices/messageSlice";
 import postReducer from "./Slices/postSlice";
+import allCountrySlice from "./Slices/allCountrySlice";
+import editCountryReducer from "./Slices/editCountrySlice";
+import fetchCountryReducer from "./Slices/fetchCountryDetailsSlice";
+import deleteCountryReducer from "./Slices/deleteCountrySlice";
+import newCategoryReducer from "./Slices/newTourCategorySlice";
+import fetchAllCategoriesReducer from "./Slices/fetchCategoriesSlice";
+import fetchCategoryReducer from "./Slices/fetchCategorySlice";
+import editCategoryReducer from "./Slices/editCategorySlice";
+import deleteCategoryReducer from "./Slices/deleteCategorySlice";
 
 const store = configureStore({
   reducer: {
@@ -26,6 +35,15 @@ const store = configureStore({
     countries: countrySlice,
     message: messageReducer,
     post: postReducer,
+    country: allCountrySlice,
+    editCountry: editCountryReducer,
+    fetchCountry: fetchCountryReducer,
+    deleteCountry: deleteCountryReducer,
+    newCategory: newCategoryReducer,
+    fetchAllCategories: fetchAllCategoriesReducer,
+    fetchCategory: fetchCategoryReducer,
+    editCategory: editCategoryReducer,
+    deleteCategory: deleteCategoryReducer,
   },
 });
 

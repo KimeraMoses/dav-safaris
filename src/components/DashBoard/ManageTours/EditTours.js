@@ -25,12 +25,7 @@ import { Col, Container, Row, Form } from "react-bootstrap";
 //===COMPONENT IMPORTS===
 import styles from "../../NewItems/NewTour.module.css";
 import { useEffect } from "react";
-import {
-  TourCategories_Kenya,
-  TourCategories_Rwanda,
-  TourCategories_Tanzania,
-  TourCategories_Uganda,
-} from "../../../containers/Countries/TourCategories";
+
 import ImageUpload from "../../NewItems/ImageUpload";
 import NewItinary from "../../NewItems/NewItinary";
 import { useLocation, useNavigate } from "react-router";
@@ -41,12 +36,13 @@ import NewKeyWord from "./Keywords/NewKeyWord";
 import { ConfigurationEditor } from "../../CustomEditor/SMTPEditor.component";
 import { convertHTMLToDraftState } from "../../../utils/Utils";
 import { DAV_APIS } from "../../../Adapter";
+import { useAllCategories, useAllCountries } from "../../../hooks";
 
 let dayActivityDescription = [];
 
 const EditTour = () => {
   const DarkMode = false;
-  // const isLoading = useSelector((state) => state.editTour.isLoading);
+
   const [isLoading, setIsLoading] = useState(false);
   const [fetching, setFetching] = useState(false);
   const [Tour, setTour] = useState({});
@@ -55,6 +51,8 @@ const EditTour = () => {
   const [Itinary, setItinary] = useState({});
   const [EditedItinary, setEditedItinary] = useState("");
   const [type, setType] = useState("Edit");
+  const { categories } = useAllCategories();
+  const { countries } = useAllCountries();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -117,8 +115,8 @@ const EditTour = () => {
     tourActivities: tourHighLights,
     cover_image: "",
     selectedImage: "",
-    country: Tour.country,
-    category: Tour.category,
+    country: Tour?.country,
+    category: Tour?.category,
     duration: Tour.duration,
     price: Tour.price,
 
@@ -139,8 +137,8 @@ const EditTour = () => {
       tourActivities: tourHighLights,
       cover_image: Tour.imageCover,
       selectedImage: Tour.imageCover,
-      country: Tour.country,
-      category: Tour.category,
+      country: Tour?.country,
+      category: Tour?.category,
       duration: Tour.duration,
       price: Tour.price,
       includes: tourIncludes,
@@ -150,24 +148,20 @@ const EditTour = () => {
 
     // eslint-disable-next-line
   }, [Tour]);
-
+  const selectedCountry = categories?.filter(
+    (category) =>
+      values.country?.toLowerCase() === category.country?.name?.toLowerCase()
+  );
   useEffect(() => {
     switch (values.country) {
-      case "uganda":
-        setTourCategories(TourCategories_Uganda);
+      case `${values.country}`:
+        setTourCategories(selectedCountry);
         break;
-      case "kenya":
-        setTourCategories(TourCategories_Kenya);
-        break;
-      case "rwanda":
-        setTourCategories(TourCategories_Rwanda);
-        break;
-      case "tanzania":
-        setTourCategories(TourCategories_Tanzania);
-        break;
+
       default:
         break;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values.country]);
 
   //====FORMATING THE TOUR HIGHLIGHTS====//
@@ -273,6 +267,7 @@ const EditTour = () => {
         country: values.country,
         key_words: JSON.stringify(keys),
       };
+
       const res = await DAV_APIS.editTour(data, Tour.id);
       setIsLoading(false);
       if (res.status === 200) {
@@ -399,17 +394,7 @@ const EditTour = () => {
                     }
                   }}
                 />
-                {/* <TextField
-                  className={styles.gpa__form_input_field}
-                  label="Tour Description"
-                  multiline
-                  value={values.description}
-                  name="description"
-                  onChange={onChangeHandler}
-                  rows={6}
-                  fullWidth
-                  variant="filled"
-                /> */}
+
                 <div className="row">
                   <div className="col-xs-12 col-sm-9">
                     <TextField
@@ -446,15 +431,24 @@ const EditTour = () => {
                     >
                       <InputLabel>Country</InputLabel>
                       <Select
-                        id="gpa__level_select_input"
                         value={values.country}
                         name="country"
                         onChange={onChangeHandler}
                       >
-                        <MenuItem value="uganda">Uganda</MenuItem>
-                        <MenuItem value="kenya">Kenya</MenuItem>
-                        <MenuItem value="tanzania">Tanzania</MenuItem>
-                        <MenuItem value="rwanda">Rwanda</MenuItem>
+                        {countries?.map((country) => {
+                          return (
+                            <MenuItem
+                              key={country?.id}
+                              value={country?.name.toLowerCase()}
+                            >
+                              {country?.name}
+                            </MenuItem>
+                          );
+                        })}
+                        {/* <MenuItem value="uganda">Uganda</MenuItem>
+                      <MenuItem value="kenya">Kenya</MenuItem>
+                      <MenuItem value="tanzania">Tanzania</MenuItem>
+                      <MenuItem value="rwanda">Rwanda</MenuItem> */}
                       </Select>
                     </FormControl>
                   </div>
@@ -466,15 +460,14 @@ const EditTour = () => {
                     >
                       <InputLabel>Tour Category</InputLabel>
                       <Select
-                        id="gpa__level_select_input"
                         value={values.category}
                         name="category"
                         onChange={onChangeHandler}
                       >
-                        {TourCategories.length > 0 ? (
+                        {TourCategories?.length > 0 ? (
                           TourCategories.map((category, index) => {
                             return (
-                              <MenuItem key={index} value={category.value}>
+                              <MenuItem key={index} value={category.slug}>
                                 {category.name}
                               </MenuItem>
                             );
@@ -482,7 +475,10 @@ const EditTour = () => {
                         ) : (
                           <MenuItem>
                             <Alert severity="error">
-                              Please choose a country first!
+                              {values.country === "" &&
+                              selectedCountry?.length === 0
+                                ? "Please choose a country first!"
+                                : "Ooops... No categories found"}
                             </Alert>
                           </MenuItem>
                         )}

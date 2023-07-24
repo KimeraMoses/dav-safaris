@@ -20,46 +20,12 @@ import { SocialIcon } from "../ContactUs/SocialMedia";
 import classes from "./Footer.module.css";
 import { DAV_ROLES } from "../../constants";
 
-const MORE_DESTINATIONS = [
-  {
-    name: "Ethiopia",
-    slug: "ethiopia",
-  },
-  {
-    name: "Egypt",
-    slug: "egypt",
-  },
-  {
-    name: "Botswana",
-    slug: "botswana",
-  },
-  {
-    name: "Kenya",
-    slug: "kenya",
-    active: true,
-  },
-  {
-    name: "Uganda",
-    slug: "uganda",
-    active: true,
-  },
-  {
-    name: "Madagascar",
-    slug: "madagascar",
-  },
-  {
-    name: "Mozambique",
-    slug: "mozambique",
-  },
-  {
-    name: "Zambia",
-    slug: "zambia",
-  },
-];
+import { usePopularDestinations } from "../../hooks";
 
 const Footer = () => {
   const user = useSelector((state) => state.auth.user);
   let getCurrentYear = new Date().getFullYear();
+  const { popularDestinations } = usePopularDestinations();
 
   return (
     <Container fluid className={classes.dav__footer}>
@@ -90,20 +56,15 @@ const Footer = () => {
             <h5>Popular Destinations</h5>
 
             <div className={classes.dav__footer_safaris_destinations}>
-              {MORE_DESTINATIONS.map((destination) => {
+              {popularDestinations?.map((destination, index) => {
                 return (
                   <div
-                    key={destination.slug}
+                    key={index}
                     className={classes.dav__footer_safaris_destinations_item}
                   >
-                    <Link
-                      to={
-                        destination.active
-                          ? `/${destination.slug}-safaris`
-                          : "#"
-                      }
-                    >
-                      {destination.name}
+                    <Link to={destination.active ? `${destination.slug}` : "#"}>
+                      {destination.country.charAt(0).toUpperCase() +
+                        destination.country.slice(1)}
                     </Link>
                   </div>
                 );

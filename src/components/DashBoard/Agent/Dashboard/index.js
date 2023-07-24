@@ -4,10 +4,15 @@ import classes from "./styles.module.css";
 import { useEffect } from "react";
 import TourCard from "../../../Tours/TourCard";
 import TourCardSkeleton from "../../../Tours/TourCardSkeleton";
-import { useAllTours } from "../../../../hooks";
-import { CountriesData } from "../../../../containers/Countries/CountriesData";
+import {
+  useAllTours,
+  useCountryTours,
+  useAllCountries,
+} from "../../../../hooks";
+
 import { useState } from "react";
 import LogOutButton from "../../../Membership/Logout/Logout";
+import { Skeleton } from "@material-ui/lab";
 
 function getGreeting(name) {
   const currentTime = new Date();
@@ -29,6 +34,9 @@ function getGreeting(name) {
 const AgentDashboard = () => {
   const { tours, isLoading } = useAllTours();
   const [country, setCountry] = useState("");
+  const { countryTours, isLoading: countyTourIsLoading } =
+    useCountryTours(country);
+  const { countries } = useAllCountries();
 
   const user = useSelector((state) => state.auth.user);
 
@@ -38,9 +46,7 @@ const AgentDashboard = () => {
 
   const filterTours = () => {
     if (!country) return tours;
-    const filteredTours = tours.filter(
-      (tour) => tour.country.toLowerCase() === country.toLowerCase()
-    );
+    const filteredTours = countryTours;
     return filteredTours;
   };
 
@@ -61,7 +67,7 @@ const AgentDashboard = () => {
       <div className={classes.dav__agent_country_cards_section}>
         <h4>Filter packages by Country</h4>
         <div className={classes.dav__agent_country_cards_wrapper}>
-          {CountriesData.map((c) => {
+          {countries.map((c) => {
             return (
               <div
                 onClick={() => setCountry(c.name)}
@@ -74,7 +80,7 @@ const AgentDashboard = () => {
                       : "none",
                 }}
               >
-                <img src={c.imageCover} alt={c.name} />
+                <img src={c.countryImage} alt={c.name} />
                 <h5>{c.name}</h5>
               </div>
             );
@@ -83,12 +89,21 @@ const AgentDashboard = () => {
       </div>
 
       <div className={classes.dav_agent_dashboard_content_wrapper}>
-        {country && (
+        {countyTourIsLoading ? (
+          <Skeleton variant="rectangular"></Skeleton>
+        ) : (
           <h4>
-            Filtered results for {country}{" "}
-            <span className={classes.dav_country_package_count}>
-              {filterTours().length}
-            </span>
+            {filterTours().length > 1
+              ? country
+                ? `Filtered results for ${country}`
+                : "All tours"
+              : "No tours found!"}
+
+            {filterTours().length > 1 && (
+              <span className={classes.dav_country_package_count}>
+                {filterTours().length}
+              </span>
+            )}
           </h4>
         )}
         <Container fluid className={classes.dav__tours_wrapper}>
@@ -106,7 +121,8 @@ const AgentDashboard = () => {
                     </Col>
                   );
                 })
-              : filterTours().map((tour) => {
+              : filterTours().length > 1 &&
+                filterTours().map((tour) => {
                   return (
                     <Col
                       key={tour.id}

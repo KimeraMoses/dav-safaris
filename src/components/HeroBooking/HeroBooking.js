@@ -9,9 +9,11 @@ import {
 import SearchIcon from "@material-ui/icons/Search";
 import { Button } from "../UI/Button/Button";
 import classes from "./HeroBooking.module.css";
+import { useAllCountries } from "../../hooks";
 
 const HeroBooking = (props) => {
   const { values, handleOnChange, TourSearchHandler, error } = props;
+  const { countries } = useAllCountries();
 
   return (
     <div className={classes.herobooking__wrapper}>
@@ -35,10 +37,16 @@ const HeroBooking = (props) => {
               name="destination"
               onChange={handleOnChange}
             >
-              <MenuItem value="uganda">Uganda</MenuItem>
+              {" "}
+              {countries.map((country, index) => (
+                <MenuItem key={index} value={country.name.toLowerCase()}>
+                  {country.name}
+                </MenuItem>
+              ))}
+              {/* <MenuItem value="uganda">Uganda</MenuItem>
               <MenuItem value="kenya">Kenya</MenuItem>
               <MenuItem value="tanzania">Tanzania</MenuItem>
-              <MenuItem value="rwanda">Rwanda</MenuItem>
+              <MenuItem value="rwanda">Rwanda</MenuItem> */}
             </Select>
           </FormControl>
         </div>

@@ -27,31 +27,32 @@ import styles from "./NewTour.module.css";
 import NewItinary from "./NewItinary";
 import ImageUpload from "./ImageUpload";
 import { useEffect } from "react";
-import {
-  TourCategories_Kenya,
-  TourCategories_Rwanda,
-  TourCategories_Tanzania,
-  TourCategories_Uganda,
-} from "../../containers/Countries/TourCategories";
+
 import { AddDays } from "../../store/Slices/newTourSlice";
 import EditItinaryModal from "../DashBoard/ManageTours/Itinary/EditItinary";
 import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
-import { useNavigate } from "react-router";
+
 import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
+
 import { DAV_APIS } from "../../Adapter";
+import { useAllCategories, useAllCountries } from "../../hooks";
 
 let dayActivityDescription = [];
 
-const NewTour = () => {
+const NewTour = (props) => {
+  const { setAddNew, onSubmit } = props;
   const DarkMode = false;
-  const isLoading = useSelector((state) => state.newTour.isLoading);
+  const [isLoading, setIsLoading] = useState(false);
   const Tour = useSelector((state) => state.tour.tourDetails);
+  const { countries } = useAllCountries();
+  const { categories } = useAllCategories();
+
   const [open, setOpen] = useState(false);
   const [keys, setKeys] = useState([]);
   const [Itinary, setItinary] = useState({});
   const [EditedItinary, setEditedItinary] = useState("");
   const [type, setType] = useState("Edit");
-  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -85,23 +86,21 @@ const NewTour = () => {
   });
   useEffect(() => {}, [values]);
 
+  const selectedCountry = categories?.filter(
+    (category) =>
+      values.country?.toLowerCase() === category.country?.name?.toLowerCase()
+  );
+
   useEffect(() => {
     switch (values.country) {
-      case "uganda":
-        setTourCategories(TourCategories_Uganda);
+      case `${values.country}`:
+        setTourCategories(selectedCountry);
         break;
-      case "kenya":
-        setTourCategories(TourCategories_Kenya);
-        break;
-      case "rwanda":
-        setTourCategories(TourCategories_Rwanda);
-        break;
-      case "tanzania":
-        setTourCategories(TourCategories_Tanzania);
-        break;
+
       default:
         break;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values.country]);
 
   //====FORMATING THE TOUR HIGHLIGHTS====//
@@ -187,19 +186,19 @@ const NewTour = () => {
       return setError("Tour price is required");
     }
 
-    if (values.selectedImage.length < 1) {
+    if (values.cover_image.length < 1) {
       return setError("Tour cover image required");
     }
     if (values.description.length < 1) {
       return setError("Tour Description required");
     }
-
+    setIsLoading(true);
     try {
       const data = {
         name: values.name,
         description: values.description,
         tourActivities: JSON.stringify(tourActivities),
-        file: values.cover_image,
+        file: values.selectedImage,
         country: values.country,
         category: values.category,
         duration: values.duration,
@@ -214,8 +213,8 @@ const NewTour = () => {
 
       toast.success(`${values.name} Created Successfully`);
       setMessage(`${values.name} Created Successfully`);
-      navigate("/dashboard/manage-tours");
-      setTourCategories([]);
+      setAddNew(false);
+      onSubmit(Math.random());
       setValues({
         name: "",
         description: "",
@@ -239,7 +238,9 @@ const NewTour = () => {
       priceIncludes = [];
       priceExcludes = [];
       setKeys([]);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       toast.error("Tour Registration Failed!");
       setError("Tour Registration Failed");
     }
@@ -364,10 +365,16 @@ const NewTour = () => {
                       name="country"
                       onChange={onChangeHandler}
                     >
-                      <MenuItem value="uganda">Uganda</MenuItem>
-                      <MenuItem value="kenya">Kenya</MenuItem>
-                      <MenuItem value="tanzania">Tanzania</MenuItem>
-                      <MenuItem value="rwanda">Rwanda</MenuItem>
+                      {countries?.map((country) => {
+                        return (
+                          <MenuItem
+                            key={country?.id}
+                            value={country?.name.toLowerCase()}
+                          >
+                            {country?.name}
+                          </MenuItem>
+                        );
+                      })}
                     </Select>
                   </FormControl>
                 </div>
@@ -383,10 +390,10 @@ const NewTour = () => {
                       name="category"
                       onChange={onChangeHandler}
                     >
-                      {TourCategories.length > 0 ? (
+                      {TourCategories?.length > 0 ? (
                         TourCategories.map((category, index) => {
                           return (
-                            <MenuItem key={index} value={category.value}>
+                            <MenuItem key={index} value={category.slug}>
                               {category.name}
                             </MenuItem>
                           );
@@ -394,7 +401,10 @@ const NewTour = () => {
                       ) : (
                         <MenuItem>
                           <Alert severity="error">
-                            Please choose a country first!
+                            {values.country === "" &&
+                            selectedCountry?.length === 0
+                              ? "Please choose a country first!"
+                              : "Ooops... No categories found"}
                           </Alert>
                         </MenuItem>
                       )}
@@ -476,6 +486,7 @@ const NewTour = () => {
                     variant="contained"
                     color="primary"
                     type="submit"
+                    disabled={isLoading}
                     className={styles.gpa__register_submit_button}
                   >
                     {isLoading ? "Creating Tour..." : "Create Tour"}

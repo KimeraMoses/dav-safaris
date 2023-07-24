@@ -1,0 +1,108 @@
+.gpa__manage_items_wrapper {
+    display: flex;
+    padding-top:10px;
+    justify-content: space-between;
+  
+  }
+  .gpa__manage_university_details_wrapper {
+    min-width: 200px;
+    background-color: #eaeaea;
+    overflow-y: auto;
+    width: 100%;
+    background: linear-gradient(
+      to top,
+      var(--gpa__primary_color),
+      #eaeaea,
+      var(--gpa__primary_color)
+    );
+    box-shadow: var(--gpa__box_shadow);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  
+  }
+  li{
+    list-style: none;
+  }
+  .gpa__dark_mode.gpa__manage_university_details_wrapper {
+    background: -webkit-linear-gradient(to top, #24243e, #302b63, #0f0c29);
+    background: linear-gradient(to top, #24243e, #302b63, #0f0c29);
+  }
+  .gpa__list_item_actions button{
+    margin-right: -10px;
+  }
+  @media (min-width: 756px) {
+    .gpa__manage_university_details_wrapper {
+      min-height: 52.4vh;
+    }
+  }
+  .gpa__dashboard_menu_list_item {
+    width: "100%";
+  }
+  .gpa__dashboard_menu_item_list_wrapper {
+    margin-right: 8px;
+    padding: 10px;
+    height: 44vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: #6969dd #e0e0e0;
+    scrollbar-width: 1rem;
+    transition: scrollbar-color 0.3s ease-out;
+  }
+  .gpa__dashboard_menu_item_list_wrapper::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .gpa__dashboard_menu_item_list_wrapper::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+  }
+  
+  .gpa__dashboard_menu_item_list_wrapper::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
+    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+    border-radius: 100px;
+  }
+  .gpa__dashboard_menu_item_list_wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: #5749d2;
+  }
+  
+  .gpa__dashboard_search_field {
+    font-size: 12px;
+  }
+  
+  .gpa__dashboard_course_manager_course_id {
+    width: 50px !important;
+    text-transform: uppercase;
+    border-radius: 4px!important;
+  }
+  .gpa__text_avarter_wrapper{
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  @media (max-width: 756px) {
+    .gpa__dashboard_menu_item_list_wrapper {
+      height: 25vh;
+      margin-right: 0px;
+      padding: 0px;
+      padding-bottom: 10px;
+    }
+    .gpa__manage_items_wrapper {
+      flex-direction: column;
+      padding: 0!important;
+    }
+  }
+  @media screen and (min-width: 756px) {
+    .gpa__manage_university_list_wrapper {
+      padding-right: 10px;
+    }
+  }
+  
+  @media screen and (max-width: 756px) {
+    .gpa__manage_university_list_wrapper{
+      width: 100%;
+    }
+  }
+ 
