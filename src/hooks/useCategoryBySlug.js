@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import { DAV_APIS } from "../Adapter";
+import { useEffect, useState } from 'react';
+import { DAV_APIS } from '../Adapter';
 const useCategoryBySlug = (slug) => {
   const [isLoading, setIsLoading] = useState(false);
   const [category, setCategory] = useState({});
   const fetchCategoryBySlug = async () => {
+    if (!slug) return;
     setIsLoading(true);
     const res = await DAV_APIS.get.getCategoryBySlug(slug);
     if (res.status === 200) {

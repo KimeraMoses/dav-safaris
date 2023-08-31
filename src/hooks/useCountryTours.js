@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
-import { DAV_APIS } from "../Adapter";
+import { useState, useEffect } from 'react';
+import { DAV_APIS } from '../Adapter';
 
 const useCountryTours = (country, refresh) => {
   const [countryTours, setCountryTours] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchCountryTours = async () => {
+    if (!country) return;
     setIsLoading(true);
     const res = await DAV_APIS.get.getAllToursByCountry(country);
     if (res.status === 200) {

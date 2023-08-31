@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { EditorState, convertToRaw } from "draft-js";
-import { convertToHTML } from "draft-convert";
-import { toast } from "react-toastify";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { EditorState, convertToRaw } from 'draft-js';
+import { convertToHTML } from 'draft-convert';
+import { toast } from 'react-toastify';
 //===MUI IMPORTS===
 import {
   Button,
@@ -12,30 +12,30 @@ import {
   InputLabel,
   Select,
   MenuItem,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import Spinner from "@material-ui/core/CircularProgress";
-import { Alert } from "@material-ui/lab";
+import Spinner from '@material-ui/core/CircularProgress';
+import { Alert } from '@material-ui/lab';
 
 //===BOOTSTRAP IMPORTS===
-import { Col, Container, Row, Form } from "react-bootstrap";
+import { Col, Container, Row, Form } from 'react-bootstrap';
 
 //===REDUX IMPORTS===
 
 //===COMPONENT IMPORTS===
-import styles from "./NewTour.module.css";
-import NewItinary from "./NewItinary";
-import ImageUpload from "./ImageUpload";
-import { useEffect } from "react";
+import styles from './NewTour.module.css';
+import NewItinary from './NewItinary';
+import ImageUpload from './ImageUpload';
+import { useEffect } from 'react';
 
-import { AddDays } from "../../store/Slices/newTourSlice";
-import EditItinaryModal from "../DashBoard/ManageTours/Itinary/EditItinary";
-import NewKeyWord from "../DashBoard/ManageTours/Keywords/NewKeyWord";
+import { AddDays } from '../../store/Slices/newTourSlice';
+import EditItinaryModal from '../DashBoard/ManageTours/Itinary/EditItinary';
+import NewKeyWord from '../DashBoard/ManageTours/Keywords/NewKeyWord';
 
-import { ConfigurationEditor } from "../CustomEditor/SMTPEditor.component";
+import { ConfigurationEditor } from '../CustomEditor/SMTPEditor.component';
 
-import { DAV_APIS } from "../../Adapter";
-import { useAllCategories, useAllCountries } from "../../hooks";
+import { DAV_APIS } from '../../Adapter';
+import { useAllCategories, useAllCountries } from '../../hooks';
 
 let dayActivityDescription = [];
 
@@ -50,12 +50,12 @@ const NewTour = (props) => {
   const [open, setOpen] = useState(false);
   const [keys, setKeys] = useState([]);
   const [Itinary, setItinary] = useState({});
-  const [EditedItinary, setEditedItinary] = useState("");
-  const [type, setType] = useState("Edit");
+  const [EditedItinary, setEditedItinary] = useState('');
+  const [type, setType] = useState('Edit');
 
   const dispatch = useDispatch();
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
   const [TourCategories, setTourCategories] = useState([]);
 
   useEffect(() => {
@@ -65,24 +65,24 @@ const NewTour = (props) => {
     EditorState.createEmpty()
   );
   const [values, setValues] = useState({
-    name: "",
-    description: "",
-    tourActivities: "",
-    cover_image: "",
-    selectedImage: "",
-    country: "",
-    category: "",
-    duration: "",
-    price: "",
+    name: '',
+    description: '',
+    tourActivities: '',
+    cover_image: '',
+    selectedImage: '',
+    country: '',
+    category: '',
+    duration: '',
+    price: '',
 
-    includes: "",
-    excludes: "",
-    day: "",
-    itinaryTitle: "",
-    itinaryDesc: "",
+    includes: '',
+    excludes: '',
+    day: '',
+    itinaryTitle: '',
+    itinaryDesc: '',
     itinaryBodyText: EditorState.createEmpty(),
-    meal_plan: "",
-    accomodation_plan: "",
+    meal_plan: '',
+    accomodation_plan: '',
   });
   useEffect(() => {}, [values]);
 
@@ -107,17 +107,17 @@ const NewTour = (props) => {
   let tourActivities = [];
 
   values.tourActivities &&
-    values.tourActivities.split("\n").map((item) => tourActivities.push(item));
+    values.tourActivities.split('\n').map((item) => tourActivities.push(item));
 
   //====FORMATING THE PRICE INCLUDES AND EXCLUDES====//
   let priceIncludes = [];
   let priceExcludes = [];
 
   values.includes &&
-    values.includes.split("\n").map((item) => priceIncludes.push(item));
+    values.includes.split('\n').map((item) => priceIncludes.push(item));
 
   values.excludes &&
-    values.excludes.split("\n").map((item) => priceExcludes.push(item));
+    values.excludes.split('\n').map((item) => priceExcludes.push(item));
 
   const packageDetails = {
     price_inludes: priceIncludes,
@@ -148,8 +148,8 @@ const NewTour = (props) => {
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
-    setMessage("");
-    setError("");
+    setMessage('');
+    setError('');
   };
 
   const ItinaryHandler = () => {
@@ -166,11 +166,11 @@ const NewTour = (props) => {
 
     setValues({
       ...values,
-      day: "",
-      itinaryTitle: "",
-      itinaryDesc: "",
-      meal_plan: "",
-      accomodation_plan: "",
+      day: '',
+      itinaryTitle: '',
+      itinaryDesc: '',
+      meal_plan: '',
+      accomodation_plan: '',
     });
   };
 
@@ -180,17 +180,17 @@ const NewTour = (props) => {
       ItinaryHandler();
     }
     if (values.name.length < 1) {
-      return setError("Tour title is required");
+      return setError('Tour title is required');
     }
     if (values.price.length < 1) {
-      return setError("Tour price is required");
+      return setError('Tour price is required');
     }
 
     if (values.cover_image.length < 1) {
-      return setError("Tour cover image required");
+      return setError('Tour cover image required');
     }
     if (values.description.length < 1) {
-      return setError("Tour Description required");
+      return setError('Tour Description required');
     }
     setIsLoading(true);
     try {
@@ -216,22 +216,22 @@ const NewTour = (props) => {
       setAddNew(false);
       onSubmit(Math.random());
       setValues({
-        name: "",
-        description: "",
-        tourActivities: "",
-        cover_image: "",
-        selectedImage: "",
-        country: "",
-        category: "",
-        duration: "",
-        price: "",
-        includes: "",
-        excludes: "",
-        day: "",
-        itinaryTitle: "",
-        itinaryDesc: "",
-        meal_plan: "",
-        accomodation_plan: "",
+        name: '',
+        description: '',
+        tourActivities: '',
+        cover_image: '',
+        selectedImage: '',
+        country: '',
+        category: '',
+        duration: '',
+        price: '',
+        includes: '',
+        excludes: '',
+        day: '',
+        itinaryTitle: '',
+        itinaryDesc: '',
+        meal_plan: '',
+        accomodation_plan: '',
       });
       dayActivityDescription = [];
       tourActivities = [];
@@ -241,13 +241,13 @@ const NewTour = (props) => {
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-      toast.error("Tour Registration Failed!");
-      setError("Tour Registration Failed");
+      toast.error('Tour Registration Failed!');
+      setError('Tour Registration Failed');
     }
   };
 
   const onEditClick = (id) => {
-    setType("Edit");
+    setType('Edit');
     const Activity = dayActivityDescription[id];
 
     setItinary(Activity);
@@ -255,7 +255,7 @@ const NewTour = (props) => {
     setOpen(true);
   };
   const onDeleteClick = (id) => {
-    setType("Delete");
+    setType('Delete');
     setOpen(true);
     setEditedItinary(id);
   };
@@ -265,7 +265,7 @@ const NewTour = (props) => {
       <section className={styles.gpa__registration_section}>
         <h1
           className={`${styles.gpa__membership_section_title} ${
-            DarkMode ? styles.gpa__dark_mode : ""
+            DarkMode ? styles.gpa__dark_mode : ''
           }`}
         >
           Create New Tour
@@ -275,38 +275,38 @@ const NewTour = (props) => {
         >
           <div className={styles.gpa__register_wrapper_inner}>
             {error && (
-              <div className="d-flex justify-content-center mb-3">
-                <Alert severity="error">{error}</Alert>
+              <div className='d-flex justify-content-center mb-3'>
+                <Alert severity='error'>{error}</Alert>
               </div>
             )}
             {message && (
-              <div className="d-flex justify-content-center mb-3">
-                <Alert severity="success">{message}</Alert>
+              <div className='d-flex justify-content-center mb-3'>
+                <Alert severity='success'>{message}</Alert>
               </div>
             )}
 
             <Form onSubmit={RegisterFormSubmitHandler}>
               <TextField
                 fullWidth
-                label="Tour Title"
-                variant="filled"
+                label='Tour Title'
+                variant='filled'
                 value={values.name}
-                name="name"
-                size="small"
+                name='name'
+                size='small'
                 onChange={onChangeHandler}
                 className={styles.gpa__form_input_field}
               />
               <ConfigurationEditor
-                placeholder="Type tour description here..."
+                placeholder='Type tour description here...'
                 editorState={editorState}
                 onEditorStateChange={(state) => {
                   setEditorState(state);
                   const currentContentAsHTML = convertToHTML({
                     entityToHTML: (entity, originalText) => {
-                      if (entity.type === "IMAGE") {
+                      if (entity.type === 'IMAGE') {
                         return `<img src="${entity.data.src}" />`;
                       }
-                      if (entity.type === "LINK") {
+                      if (entity.type === 'LINK') {
                         return ` <a href="${entity.data.url}">${originalText}</a> `;
                       }
                       return originalText;
@@ -316,28 +316,28 @@ const NewTour = (props) => {
                     convertToRaw(state.getCurrentContent()).blocks.length ===
                       1 &&
                     convertToRaw(state.getCurrentContent()).blocks[0].text ===
-                      ""
+                      ''
                   ) {
-                    setValues({ ...values, description: "" });
+                    setValues({ ...values, description: '' });
                   } else {
                     setValues({ ...values, description: currentContentAsHTML });
                   }
                 }}
               />
 
-              <div className="row">
-                <div className="col-xs-12 col-sm-9">
+              <div className='row'>
+                <div className='col-xs-12 col-sm-9'>
                   <TextField
                     className={styles.gpa__form_input_field}
-                    label="Tour Highlights"
-                    placeholder="Write each highlight on a new line"
+                    label='Tour Highlights'
+                    placeholder='Write each highlight on a new line'
+                    name='tourActivities'
                     multiline
                     value={values.tourActivities}
-                    name="tourActivities"
                     onChange={onChangeHandler}
                     rows={4}
                     fullWidth
-                    variant="filled"
+                    variant='filled'
                   />
                 </div>
 
@@ -352,17 +352,17 @@ const NewTour = (props) => {
                   />
                 </div>
               </div>
-              <div className="row">
-                <div className="col-xs-12 col-sm-3">
+              <div className='row'>
+                <div className='col-xs-12 col-sm-3'>
                   <FormControl
-                    variant="filled"
+                    variant='filled'
                     fullWidth
                     className={`${styles.gpa__form_input_field}`}
                   >
                     <InputLabel>Country</InputLabel>
                     <Select
                       value={values.country}
-                      name="country"
+                      name='country'
                       onChange={onChangeHandler}
                     >
                       {countries?.map((country) => {
@@ -378,16 +378,16 @@ const NewTour = (props) => {
                     </Select>
                   </FormControl>
                 </div>
-                <div className="col-xs-12 col-sm-3">
+                <div className='col-xs-12 col-sm-3'>
                   <FormControl
-                    variant="filled"
+                    variant='filled'
                     fullWidth
                     className={`${styles.gpa__form_input_field}`}
                   >
                     <InputLabel>Tour Category</InputLabel>
                     <Select
                       value={values.category}
-                      name="category"
+                      name='category'
                       onChange={onChangeHandler}
                     >
                       {TourCategories?.length > 0 ? (
@@ -400,54 +400,54 @@ const NewTour = (props) => {
                         })
                       ) : (
                         <MenuItem>
-                          <Alert severity="error">
-                            {values.country === "" &&
+                          <Alert severity='error'>
+                            {values.country === '' &&
                             selectedCountry?.length === 0
-                              ? "Please choose a country first!"
-                              : "Ooops... No categories found"}
+                              ? 'Please choose a country first!'
+                              : 'Ooops... No categories found'}
                           </Alert>
                         </MenuItem>
                       )}
                     </Select>
                   </FormControl>
                 </div>
-                <div className="col-xs-12 col-sm-3">
+                <div className='col-xs-12 col-sm-3'>
                   <TextField
                     fullWidth
-                    label="Number of Days"
-                    variant="filled"
-                    name="duration"
+                    label='Number of Days'
+                    variant='filled'
+                    name='duration'
                     value={values.duration}
                     onChange={onChangeHandler}
                     className={styles.gpa__register_form_right_wrapper}
                   />
                 </div>
-                <div className="col-xs-12 col-sm-3">
+                <div className='col-xs-12 col-sm-3'>
                   <TextField
                     fullWidth
-                    label="Minimum Price($)"
-                    variant="filled"
-                    type="number"
-                    name="price"
+                    label='Minimum Price($)'
+                    variant='filled'
+                    type='number'
+                    name='price'
                     value={values.price}
                     onChange={onChangeHandler}
                     className={styles.gpa__register_form_right_wrapper}
                   />
                 </div>
               </div>
-              <div className="row">
-                <div className="col-xs-12 col-sm-6">
+              <div className='row'>
+                <div className='col-xs-12 col-sm-6'>
                   <TextField
                     className={styles.gpa__form_input_field}
-                    label="Price Includes"
-                    placeholder="Write each item on a new line"
+                    label='Price Includes'
+                    placeholder='Write each item on a new line'
                     multiline
                     value={values.includes}
-                    name="includes"
+                    name='includes'
                     onChange={onChangeHandler}
                     rows={4}
                     fullWidth
-                    variant="filled"
+                    variant='filled'
                   />
                 </div>
 
@@ -456,15 +456,15 @@ const NewTour = (props) => {
                 >
                   <TextField
                     className={styles.gpa__form_input_field}
-                    label="Price Excludes"
-                    placeholder="Write each item on a new line"
+                    label='Price Excludes'
+                    placeholder='Write each item on a new line'
                     multiline
                     value={values.excludes}
-                    name="excludes"
+                    name='excludes'
                     onChange={onChangeHandler}
                     rows={4}
                     fullWidth
-                    variant="filled"
+                    variant='filled'
                   />
                 </div>
               </div>
@@ -483,13 +483,13 @@ const NewTour = (props) => {
               <Row>
                 <Col xs={{ span: 8, offset: 2 }}>
                   <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
+                    variant='contained'
+                    color='primary'
+                    type='submit'
                     disabled={isLoading}
                     className={styles.gpa__register_submit_button}
                   >
-                    {isLoading ? "Creating Tour..." : "Create Tour"}
+                    {isLoading ? 'Creating Tour...' : 'Create Tour'}
                     {isLoading ? (
                       <Spinner
                         thickness={2}

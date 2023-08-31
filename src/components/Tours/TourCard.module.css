@@ -37,7 +37,7 @@
   position: absolute;
   top: -5px;
   left: 0;
-  content: "";
+  content: '';
   width: 0;
   height: 0;
   border-style: solid;
@@ -125,7 +125,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  content: "";
+  content: '';
   width: 0;
   height: 0;
   border-top: 20px solid transparent;
@@ -145,7 +145,7 @@
 }
 
 .tour__read_more span:after {
-  content: "»";
+  content: '»';
   position: absolute;
   opacity: 0;
   top: -2px;

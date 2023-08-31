@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { DAV_APIS } from "../Adapter";
+import { useEffect, useState } from 'react';
+import { DAV_APIS } from '../Adapter';
 
 const usePost = (postName, type) => {
   const [post, setPost] = useState({});
@@ -7,6 +7,7 @@ const usePost = (postName, type) => {
 
   useEffect(() => {
     const getPost = async () => {
+      if (!postName) return;
       setLoading(true);
       const res = await DAV_APIS.get.getPostByName(postName, type);
       if (res.status === 200) {
