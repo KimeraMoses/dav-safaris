@@ -5,6 +5,15 @@ const useAllCountries = (refresh = null) => {
   const [isLoading, setIsLoading] = useState(false);
   const [countries, setCountries] = useState([]);
   const fetchAllCountries = async () => {
+    if (!navigator.onLine) {
+      return;
+    }
+
+    if (countries.length > 0 && !refresh) {
+      setCountries(countries);
+      return;
+    }
+
     setIsLoading(true);
     const res = await DAV_APIS.get.getAllCountries();
     if (res.status === 200) {

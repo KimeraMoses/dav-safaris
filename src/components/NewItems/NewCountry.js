@@ -47,7 +47,6 @@ const NewCountry = (props) => {
     cover_image: "",
     countrySummary: "",
     specialist: "",
-
     selectedImage: "",
   });
   useEffect(() => {}, [values]);
@@ -135,7 +134,7 @@ const NewCountry = (props) => {
         cover_image: "",
         countrySummary: "",
         specialist: "",
-        slug: "",
+
         selectedImage: "",
       });
 

@@ -6,6 +6,15 @@ const usePopularDestinations = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const getPopularDestinations = async () => {
+    if (!navigator.onLine) {
+      return;
+    }
+
+    if (popularDestinations.length > 0) {
+      setPopularDestinations(popularDestinations);
+      return;
+    }
+
     setIsLoading(true);
     const res = await DAV_APIS.get.getPopularDestinations();
     if (res.status === 200) {

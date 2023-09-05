@@ -319,6 +319,7 @@ const EditCountry = (props) => {
                       variant="contained"
                       color="primary"
                       type="submit"
+                      disabled={isEditing}
                       className={`${styles.gpa__register_submit_button} ${
                         DarkMode ? styles.gpa__dark_mode : ""
                       }`}

@@ -6,6 +6,15 @@ const useAllTours = (refresh = null) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchAllTours = async () => {
+    if (!navigator.onLine) {
+      return;
+    }
+
+    if (tours.length > 0) {
+      setTours(tours);
+      return;
+    }
+
     setIsLoading(true);
     const res = await DAV_APIS.get.getAllTours();
     if (res.status === 200) {
