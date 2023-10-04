@@ -73,8 +73,6 @@ const Home = () => {
     });
   };
 
-  console.log('Tours', tours);
-
   return (
     <Wrapper>
       <SEO
