@@ -1,8 +1,8 @@
-import React from "react";
-import classes from "./CountryHeader.module.css";
+import React from 'react';
+import classes from './CountryHeader.module.css';
 
-import { Link } from "react-router-dom";
-import { useAllCategories } from "../../hooks";
+import { Link } from 'react-router-dom';
+import { useAllCategories } from '../../hooks';
 
 const CountryHeader = (props) => {
   const { categories } = useAllCategories();

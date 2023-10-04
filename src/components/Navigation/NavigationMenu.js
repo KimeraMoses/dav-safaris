@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { Slide } from "react-slideshow-image";
-import "react-slideshow-image/dist/styles.css";
-import classes from "./NavigationMenu.module.css";
-import { Col, Row } from "react-bootstrap";
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { Slide } from 'react-slideshow-image';
+import classes from './NavigationMenu.module.css';
+import { Col, Row } from 'react-bootstrap';
+import 'react-slideshow-image/dist/styles.css';
 
-import { useAllCountries } from "../../hooks";
-import { ArrowDropDown } from "@material-ui/icons";
+import { useAllCountries } from '../../hooks';
+import { ArrowDropDown } from '@material-ui/icons';
 
 const NavigationMenu = (props) => {
   const { countries } = useAllCountries();
@@ -31,7 +31,7 @@ const NavigationMenu = (props) => {
         <NavLink
           to={itemLink}
           className={({ isActive }) =>
-            classes.nav_link + (isActive ? ` ${classes.active}` : "")
+            classes.nav_link + (isActive ? ` ${classes.active}` : '')
           }
           id={id}
           onMouseEnter={(event) => {
@@ -49,18 +49,26 @@ const NavigationMenu = (props) => {
     setDropDownOpen(false);
   };
 
+  const otherDestinations = countries.filter(
+    (country) =>
+      country.name.toLowerCase() !== 'uganda' &&
+      country.name.toLowerCase() !== 'kenya' &&
+      country.name.toLowerCase() !== 'tanzania' &&
+      country.name.toLowerCase() !== 'rwanda'
+  );
+
   return (
     <div
       className={`${classes.dav__navbar_wrapper} ${
-        menuOpen ? classes.menuOpen : ""
+        menuOpen ? classes.menuOpen : ''
       }`}
     >
-      <ul className={`${classes.nav_menu} ${menuOpen ? classes.active : ""}`}>
-        <NavMenuItem itemTitle="Home" itemLink="/" />
-        <NavMenuItem itemTitle="Uganda" itemLink="/uganda-safaris" />
-        <NavMenuItem itemTitle="Kenya" itemLink="/kenya-safaris" />
-        <NavMenuItem itemTitle="Tanzania" itemLink="/tanzania-safaris" />
-        <NavMenuItem itemTitle="Rwanda" itemLink="/rwanda-safaris" />
+      <ul className={`${classes.nav_menu} ${menuOpen ? classes.active : ''}`}>
+        <NavMenuItem itemTitle='Home' itemLink='/' />
+        <NavMenuItem itemTitle='Uganda' itemLink='/uganda-safaris' />
+        <NavMenuItem itemTitle='Kenya' itemLink='/kenya-safaris' />
+        <NavMenuItem itemTitle='Tanzania' itemLink='/tanzania-safaris' />
+        <NavMenuItem itemTitle='Rwanda' itemLink='/rwanda-safaris' />
         <li className={classes.more}>
           <span className={classes.nav_link}>
             Other Destinations <ArrowDropDown />
@@ -70,7 +78,7 @@ const NavigationMenu = (props) => {
               <Row className={classes.dav_dropdown}>
                 <Col lg={8} md={6} sm={7} xs={12}>
                   <Row>
-                    {countries?.slice(4).map((country, index) => (
+                    {otherDestinations?.map((country, index) => (
                       <Col
                         lg={3}
                         md={4}
@@ -98,15 +106,15 @@ const NavigationMenu = (props) => {
                   sm={5}
                   xs={0}
                 >
-                  {countries?.length > 0 && (
+                  {otherDestinations?.length > 0 && (
                     <Slide
-                      easing="ease"
+                      easing='ease'
                       arrows={false}
                       duration={2000}
                       ref={slideShowRef}
                       autoplay={true}
                     >
-                      {countries?.slice(4).map((country, index) => (
+                      {otherDestinations.map((country, index) => (
                         <Link
                           to={`/${country.slug}`}
                           key={index}
@@ -116,8 +124,8 @@ const NavigationMenu = (props) => {
                             className={classes.dropdown_slide}
                             style={{
                               backgroundImage: `url(${country.countryImage})`,
-                              backgroundPosition: "center center",
-                              backgroundSize: "cover",
+                              backgroundPosition: 'center center',
+                              backgroundSize: 'cover',
                             }}
                           >
                             <span>
@@ -137,10 +145,10 @@ const NavigationMenu = (props) => {
           )}
         </li>
 
-        <NavMenuItem itemTitle="About Us" itemLink="/about-us" />
-        <NavMenuItem itemTitle="Safari Updates" itemLink="/safari-updates" />
-        <NavMenuItem itemTitle="Community" itemLink="/community-support" />
-        <NavMenuItem itemTitle="Contact us" itemLink="/contact-us" />
+        <NavMenuItem itemTitle='About Us' itemLink='/about-us' />
+        <NavMenuItem itemTitle='Safari Updates' itemLink='/safari-updates' />
+        <NavMenuItem itemTitle='Community' itemLink='/community-support' />
+        <NavMenuItem itemTitle='Contact us' itemLink='/contact-us' />
       </ul>
     </div>
   );

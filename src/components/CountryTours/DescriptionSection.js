@@ -1,10 +1,10 @@
-import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { Button } from "@material-ui/core";
-import Expert from "../../assets/davLogo.png";
-import classes from "./AboutCountry.module.css";
-import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
+import { Button } from '@material-ui/core';
+import Expert from '../../assets/davLogo.png';
+import classes from './AboutCountry.module.css';
+import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const AboutCountry = (props) => {
   const { countryName } = useParams();
@@ -14,7 +14,7 @@ const AboutCountry = (props) => {
       <Row className={classes.dav__country_tours_wrapper}>
         <Col md={8} sm={12} className={classes.dav__about_country_section}>
           <div
-            style={{ fontSize: "18px" }}
+            style={{ fontSize: '18px' }}
             dangerouslySetInnerHTML={{
               __html: description,
             }}
@@ -24,19 +24,19 @@ const AboutCountry = (props) => {
           <div
             className={`${classes.dav__contact_country_expert_card} bg-light`}
           >
-            <h2 className="h3">
+            <h2 className='h3'>
               Speak to an expert
               <br /> who's is there
             </h2>
 
             <div className={classes.specialist__text}>
-              <img src={Expert} alt="" />
+              <img src={Expert} alt='' />
 
               <p>
-                Start planning your trip by contacting one of our{" "}
-                <span style={{ textTransform: "capitalize" }}>
-                  {countryName.replace(/-/g, " ")}
-                </span>{" "}
+                Start planning your trip by contacting one of our{' '}
+                <span style={{ textTransform: 'capitalize' }}>
+                  {countryName.replace(/-/g, ' ')}
+                </span>{' '}
                 specialists
               </p>
             </div>
@@ -45,18 +45,18 @@ const AboutCountry = (props) => {
                 <strong>
                   <span className={classes.dav__contact_country_expert_contact}>
                     <a href={`tel:${specialist}`}>{specialist}</a>
-                    <a href="tel:+256757795781">+256757795781</a>
-                    <a href="tel:+256701412430">+256701412430</a>
+                    <a href='tel:+256757795781'>+256757795781</a>
+                    <a href='tel:+256701412430'>+256701412430</a>
                   </span>
                 </strong>
               </li>
               <li>
                 <Button
-                  variant="contained"
-                  color="primary"
-                  className="w-100"
+                  variant='contained'
+                  color='primary'
+                  className='w-100'
                   component={Link}
-                  to="/contact-us"
+                  to='/contact-us'
                 >
                   Make an enquiry
                 </Button>

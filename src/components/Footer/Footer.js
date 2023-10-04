@@ -1,29 +1,26 @@
-import React from "react";
+import React from 'react';
 import {
   EmailOutlined,
   Instagram,
   PhoneOutlined,
   RoomOutlined,
-} from "@material-ui/icons";
-import WhatsAppIcon from "@material-ui/icons/WhatsApp";
-import LinkedInIcon from "@material-ui/icons/LinkedIn";
-import MenuIcon from "@material-ui/icons/ArrowForward";
-import { Col, Container, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { Fb } from "../../containers/Icons/Icons";
-import InstagramIcon from "@material-ui/icons/Instagram";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import YouTubeIcon from "@material-ui/icons/YouTube";
-import { SocialIcon } from "../ContactUs/SocialMedia";
+} from '@material-ui/icons';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import MenuIcon from '@material-ui/icons/ArrowForward';
+import { Col, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Fb } from '../../containers/Icons/Icons';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import YouTubeIcon from '@material-ui/icons/YouTube';
+import { SocialIcon } from '../ContactUs/SocialMedia';
 
-import classes from "./Footer.module.css";
-import { DAV_ROLES } from "../../constants";
+import classes from './Footer.module.css';
 
-import { usePopularDestinations } from "../../hooks";
+import { usePopularDestinations } from '../../hooks';
 
 const Footer = () => {
-  const user = useSelector((state) => state.auth.user);
   let getCurrentYear = new Date().getFullYear();
   const { popularDestinations } = usePopularDestinations();
 
@@ -64,7 +61,7 @@ const Footer = () => {
                   >
                     <Link
                       to={`/${destination?.country
-                        ?.replace(/ /g, "-")
+                        ?.replace(/ /g, '-')
                         ?.toLowerCase()}-safaris`}
                     >
                       {destination.country.charAt(0).toUpperCase() +
@@ -75,7 +72,7 @@ const Footer = () => {
               })}
             </div>
             <div className={classes.dav_link_to_language_updates}>
-              <Link to="/safari-updates/languages">
+              <Link to='/safari-updates/languages'>
                 <MenuIcon />
                 Click to view more updates
               </Link>
@@ -92,29 +89,29 @@ const Footer = () => {
             <h5>Follow Us</h5>
             <div className={classes.dav__footer_socials}>
               <SocialIcon
-                socialLink="https://www.instagram.com/davsafaris/?hl=en"
+                socialLink='https://www.instagram.com/davsafaris/?hl=en'
                 socialIcon={<InstagramIcon />}
               />
               <SocialIcon
-                socialLink="https://ug.linkedin.com/in/david-mukasa-78a38a1a3"
+                socialLink='https://ug.linkedin.com/in/david-mukasa-78a38a1a3'
                 socialIcon={<LinkedInIcon />}
               />
               <SocialIcon
-                socialLink="https://www.facebook.com/klaebb/"
+                socialLink='https://www.facebook.com/klaebb/'
                 socialIcon={<Fb />}
               />
             </div>
             <div className={classes.dav__footer_socials}>
               <SocialIcon
-                socialLink="https://wa.link/barf5j"
+                socialLink='https://wa.link/barf5j'
                 socialIcon={<WhatsAppIcon />}
               />
               <SocialIcon
-                socialLink="https://mobile.twitter.com/davsafaris"
+                socialLink='https://mobile.twitter.com/davsafaris'
                 socialIcon={<TwitterIcon />}
               />
               <SocialIcon
-                socialLink="https://www.youtube.com/channel/UCYZIcOaxLXheJ5ejwNUz7Ug"
+                socialLink='https://www.youtube.com/channel/UCYZIcOaxLXheJ5ejwNUz7Ug'
                 socialIcon={<YouTubeIcon />}
               />
             </div>
@@ -135,24 +132,24 @@ const Footer = () => {
               </li>
               <li>
                 <WhatsAppIcon />
-                <a href="https://wa.link/barf5j">+256701412430</a>{" "}
+                <a href='https://wa.link/barf5j'>+256701412430</a>{' '}
               </li>
               <li>
                 <PhoneOutlined />
                 <a
-                  href="https://wa.link/0v0s1w"
-                  target="_blank"
-                  rel="noreferrer"
+                  href='https://wa.link/0v0s1w'
+                  target='_blank'
+                  rel='noreferrer'
                 >
                   +256757795781
-                </a>{" "}
+                </a>{' '}
               </li>
               <li>
                 <EmailOutlined />
                 <a
-                  href="mailto:info@davsafaris.com"
-                  target="_blank"
-                  rel="noreferrer"
+                  href='mailto:info@davsafaris.com'
+                  target='_blank'
+                  rel='noreferrer'
                 >
                   info@davsafaris.com
                 </a>
@@ -160,9 +157,9 @@ const Footer = () => {
               <li>
                 <EmailOutlined />
                 <a
-                  href="mailto:davsafaris@gmail.com"
-                  target="_blank"
-                  rel="noreferrer"
+                  href='mailto:davsafaris@gmail.com'
+                  target='_blank'
+                  rel='noreferrer'
                 >
                   davsafaris@gmail.com
                 </a>
@@ -187,47 +184,32 @@ const Footer = () => {
             <div className={classes.dav__footer__menu}>
               <ul>
                 <li>
-                  {user?.role ? (
-                    <Link
-                      to={
-                        user?.role === DAV_ROLES.AGENT
-                          ? "/agent-dashboard"
-                          : "/dashboard/user"
-                      }
-                    >
-                      DashBoard
-                    </Link>
-                  ) : (
-                    <Link to="/login">Login</Link>
-                  )}
+                  <Link to='/terms-of-services'>Terms of Services</Link>
                 </li>
                 <li>
-                  <Link to="/terms-of-services">Terms of Services</Link>
-                </li>
-                <li>
-                  <Link to="/privacy-policies">Privacy</Link>
+                  <Link to='/privacy-policies'>Privacy</Link>
                 </li>
               </ul>
             </div>
             <div className={classes.dav__footer_socials}>
               <a
-                href="https://www.instagram.com/davsafaris/?hl=en"
-                target="_blank"
-                rel="noreferrer"
+                href='https://www.instagram.com/davsafaris/?hl=en'
+                target='_blank'
+                rel='noreferrer'
               >
                 <Instagram />
               </a>
               <a
-                href="https://ug.linkedin.com/in/david-mukasa-78a38a1a3"
-                target="_blank"
-                rel="noreferrer"
+                href='https://ug.linkedin.com/in/david-mukasa-78a38a1a3'
+                target='_blank'
+                rel='noreferrer'
               >
                 <LinkedInIcon />
               </a>
               <a
-                href="https://www.facebook.com/klaebb/"
-                target="_blank"
-                rel="noreferrer"
+                href='https://www.facebook.com/klaebb/'
+                target='_blank'
+                rel='noreferrer'
               >
                 <Fb />
               </a>
